@@ -21,6 +21,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.modelmapper:modelmapper:3.1.0'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -35,6 +36,7 @@ sourceSets {
     main {
         resources {
             srcDirs = ["$webappDir/build", "$projectDir/src/main/resources"]
+//            srcDirs = ["$webappDir/build", "$projectDir/build/resources/main/static"]
         }
     }
 }
@@ -47,6 +49,7 @@ task copyWebApp(type: Copy) {
     dependsOn "buildReact"
     from "$webappDir/build"
     into "$projectDir/src/main/resources/static"
+//    into "$projectDir/build/resources/main/static/"
 }
 
 task buildReact(type: Exec) {
