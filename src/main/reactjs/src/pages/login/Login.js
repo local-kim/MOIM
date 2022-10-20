@@ -13,17 +13,17 @@ const Login = () => {
 
     axios.post("/user/login", {id, password})
     .then(res => {
-      if(res.data === 0){
+      if(res.data == null){
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
       else{
-        alert("로그인 성공");
+        // alert("로그인 성공");
 
-        // TODO: 로그인 유지
-        // localStorage.loginok = "yes";
-        // localStorage.myid = id;
-        // navi("/login");
-        // window.location.reload();
+        // 로그인 유지
+        localStorage.setItem("user", JSON.stringify(res.data));
+        // user 정보를 다시 객체로
+        // console.log(JSON.parse(localStorage.getItem("user")));
+        navigate("/");
       }
     }).catch(err => console.log(err))
   }

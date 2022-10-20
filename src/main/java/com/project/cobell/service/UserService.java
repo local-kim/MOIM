@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -29,10 +30,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public int login(LoginDto loginDto){
-//		ModelMapper modelMapper = new ModelMapper();
-//		User userEntity = modelMapper.map(loginDto, User.class);
-
+	public Optional<User> login(LoginDto loginDto){
 		return userRepository.findByIdAndPassword(loginDto.getId(), loginDto.getPassword());
 	}
 }
