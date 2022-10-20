@@ -3,7 +3,7 @@ import React from 'react';
 const Challenge = () => {
   return (
     <div>
-      <h1>Challenge 상세 페이지</h1>
+      <h1>챌린지 상세</h1>
     </div>
   );
 };

@@ -32,8 +32,8 @@ const Login = () => {
     <div>
       <h1>로그인</h1>
 
-      <form className="form-inline" onSubmit={login}>
-        <table className="table">
+      <form onSubmit={login}>
+        <table>
           <tbody>
             <tr>
               <th>ID</th>
