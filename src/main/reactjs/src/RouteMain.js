@@ -16,7 +16,7 @@ const RouteMain = () => {
 
         {/* 라운지 */}
         <Route path="/lounge" element={<ChallengeList/>} />
-        <Route path="/lounge/:challengeNum" element={<Challenge/>} />
+        <Route path="/lounge/:challengeId" element={<Challenge/>} />
         <Route path="/lounge/new" element={<NewChallenge/>} />
 
         {/* 마이페이지 */}

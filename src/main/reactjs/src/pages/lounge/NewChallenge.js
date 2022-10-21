@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const NewChallenge = () => {
+  const navigate = useNavigate();
+
   // TODO: 로그인한 유저만 챌린지 생성 가능
 
   // 현재 로그인한 사람을 챌린지 작성자로
@@ -28,7 +31,8 @@ const NewChallenge = () => {
 
     axios.post('/challenge/new', challenge)
     .then(res => {
-      alert("성공")
+      // console.log("challenge id: " + res.data);
+      navigate(`/lounge/${res.data}`);
     }).catch(err => console.log(err));
   }
 

@@ -1,21 +1,25 @@
 package com.project.cobell.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Data
+//@Data
+@Getter
+@Setter
 public class Challenge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne  // Challenge : User = Many : One
-	@JoinColumn(name = "leader_id")
-	private User user;
+	@ManyToOne(fetch = FetchType.LAZY)  // Challenge : User = Many : One
+	@JoinColumn(name = "leader_id", referencedColumnName = "id")
+	private User leader;
 //	private Long leaderId;
 
 	private String title;

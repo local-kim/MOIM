@@ -16,15 +16,11 @@ public class ChallengeController {
 	private ChallengeService challengeService;
 
 	@PostMapping("/new")
-	public void createChallenge(
+	public Long createChallenge(
 			@RequestBody ChallengeDto challengeDto
 			){
-//		LocalDateTime now = LocalDateTime.now();
-//		System.out.println(now.toString());
-		System.out.println(challengeDto);
-		challengeService.createChallenge(challengeDto);
-
-		// 챌린지 만든 유저를 join_challenge 테이블에 insert
+//		System.out.println(challengeDto);
+		return challengeService.createChallenge(challengeDto);
 
 		// 만들어진 챌린지 id를 반환
 	}
@@ -32,5 +28,12 @@ public class ChallengeController {
 	@GetMapping("/list")
 	public List<ChallengeDto> getList(){
 		return challengeService.getChallengeList();
+	}
+
+	@GetMapping("/{challengeId}")
+	public ChallengeDto getChallenge(
+			@PathVariable Long challengeId
+	){
+		return challengeService.getChallenge(challengeId);
 	}
 }
