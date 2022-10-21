@@ -19,10 +19,14 @@ public class ChallengeController {
 	public void createChallenge(
 			@RequestBody ChallengeDto challengeDto
 			){
-		LocalDateTime now = LocalDateTime.now();
-		System.out.println(now.toString());
+//		LocalDateTime now = LocalDateTime.now();
+//		System.out.println(now.toString());
 		System.out.println(challengeDto);
 		challengeService.createChallenge(challengeDto);
+
+		// 챌린지 만든 유저를 join_challenge 테이블에 insert
+
+		// 만들어진 챌린지 id를 반환
 	}
 
 	@GetMapping("/list")

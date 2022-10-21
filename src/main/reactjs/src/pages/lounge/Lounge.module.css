@@ -1,0 +1,37 @@
+.box{
+  width: 400px;
+  border: 1px solid lightgray;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
+}
+
+.photo{
+  width: 50px;
+  background-color: lightpink;
+}
+
+.like{
+  color: white;
+  cursor: pointer;
+}
+
+.wrap{
+  padding: 10px;
+}
+
+.title{
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.info{
+  font-size: 15px;
+  color: gray;
+}
+
+.icon{
+  font-size: 15px;
+  color: gray;
+}

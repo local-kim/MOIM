@@ -47,4 +47,9 @@ public class ChallengeService {
 				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
 				.collect(Collectors.toList());
 	}
+
+	@Transactional
+	public void joinChallenge(){
+
+	}
 }
