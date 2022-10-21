@@ -31,6 +31,6 @@ public class UserService {
 
 	@Transactional
 	public Optional<User> login(LoginDto loginDto){
-		return userRepository.findByIdAndPassword(loginDto.getId(), loginDto.getPassword());
+		return userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
 	}
 }

@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
 const Login = () => {
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const login = (e) => {
     e.preventDefault();
 
-    axios.post("/user/login", {id, password})
+    axios.post("/user/login", {email, password})
     .then(res => {
       if(res.data == null){
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -36,10 +36,10 @@ const Login = () => {
         <table>
           <tbody>
             <tr>
-              <th>ID</th>
+              <th>email</th>
               <td>
                 <input type='text' required onChange={(e) => {
-                  setId(e.target.value);
+                  setEmail(e.target.value);
                 }}/>
               </td>
             </tr>

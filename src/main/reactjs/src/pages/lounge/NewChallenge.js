@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const NewChallenge = () => {
-  // TODO: 현재 로그인한 사람을 챌린지 작성자로
+  // TODO: 로그인한 유저만 챌린지 생성 가능
 
-  const [challenge, setChallenge] = useState({});
+  // 현재 로그인한 사람을 챌린지 작성자로
+  const [challenge, setChallenge] = useState({
+    leader_id: JSON.parse(localStorage.getItem("user")).id,
+    age: 0,
+    gender: 0,
+    limit: 1
+  });
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -14,12 +20,12 @@ const NewChallenge = () => {
       [name]: value
     });
 
-    console.log(challenge);
+    // console.log(challenge);
   }
 
   const createChallenge = (e) => {
     e.preventDefault();
-    
+
     axios.post('/challenge/new', challenge)
     .then(res => {
       alert("성공")
@@ -54,7 +60,7 @@ const NewChallenge = () => {
             <tr>
               <th>날짜</th>
               <td>
-                <input type='datetime-local' name="time" required onChange={handleChange}/>
+                <input type='datetime-local' name="planned_at" required onChange={handleChange}/>
               </td>
             </tr>
             <tr>
@@ -78,6 +84,7 @@ const NewChallenge = () => {
               <th>연령대</th>
               <td>
                 <select name='age' onChange={handleChange}>
+                  <option value={'0'} defaultValue>무관</option>
                   <option value={'20'}>20대</option>
                   <option value={'30'}>30대</option>
                   <option value={'40'}>40대</option>
@@ -85,23 +92,23 @@ const NewChallenge = () => {
               </td>
             </tr>
             <tr>
-              <th>성별구성</th>
+              <th>성별</th>
               <td>
                 <label>
-                  <input type='radio' name="gender" value='0' required onChange={handleChange}/>남성
+                  <input type='radio' name="gender" value='0' defaultChecked required onChange={handleChange}/>혼성
                 </label>
                 <label>
-                  <input type='radio' name="gender" value='1' required onChange={handleChange}/>여성
+                  <input type='radio' name="gender" value='1' required onChange={handleChange}/>남성
                 </label>
                 <label>
-                  <input type='radio' name="gender" value='2' required onChange={handleChange}/>혼성
+                  <input type='radio' name="gender" value='2' required onChange={handleChange}/>여성
                 </label>
               </td>
             </tr>
             <tr>
-              <th>최대인원</th>
+              <th>최대 인원</th>
               <td>
-                <input type='number' name="limit" required onChange={handleChange}/>명
+                <input type='number' name="limit" defaultValue={'1'} required onChange={handleChange}/>명
               </td>
             </tr>
             <tr>

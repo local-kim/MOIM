@@ -7,10 +7,9 @@ const Join = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    id: '',
+    email: '',
     password: '',
     nickname: '',
-    email: '',
     gender: '',
     age: '',
     goal: '',
@@ -53,9 +52,9 @@ const Join = () => {
         <table>
           <tbody>
             <tr>
-              <th>아이디</th>
+              <th>E-mail</th>
               <td>
-                <input type='text' name='id' onChange={handleChange} required />
+                <input type='email' name='email' required onChange={handleChange}/>
               </td>
             </tr>
             <tr>
@@ -71,12 +70,6 @@ const Join = () => {
               <th>Nickname</th>
               <td>
                 <input type='text' name="nickname" required onChange={handleChange}/>
-              </td>
-            </tr>
-            <tr>
-              <th>E-mail</th>
-              <td>
-                <input type='email' name='email' required onChange={handleChange}/>
               </td>
             </tr>
             <tr>
