@@ -1,17 +1,22 @@
 package com.project.cobell.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 //@Data
 @Getter
 @Setter
+//@ToString
 public class Challenge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +36,15 @@ public class Challenge {
 	private int limit;
 	private int gender;
 	private int online;
+	private int status;
+	private Timestamp createdAt;
+
+	@OneToMany
+	@JoinColumn(name = "challenge_id")
+	@JsonIgnore
+	private Set<JoinChallenge> joinChallenges;
+
+//	@Transient
+	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
+	private int joinedUsers;
 }

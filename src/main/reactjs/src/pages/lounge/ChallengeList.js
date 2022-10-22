@@ -43,8 +43,8 @@ const ChallengeList = () => {
                 <span>&nbsp;&nbsp;&nbsp;</span>
                 <span>
                   <span className={`material-icons ${styles.icon}`}>group</span>
-                  {/* TODO: 참여중인 사람 수 받아오기 */}
-                  1/{challenge.limit}
+                  {/* 참여중인 사람 수 받아오기 */}
+                  {challenge.joined_users}/{challenge.limit}
                 </span>
               </div>
             </div>

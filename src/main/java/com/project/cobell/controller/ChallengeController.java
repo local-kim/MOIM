@@ -27,7 +27,10 @@ public class ChallengeController {
 
 	@GetMapping("/list")
 	public List<ChallengeDto> getList(){
-		return challengeService.getChallengeList();
+		List<ChallengeDto> l = challengeService.getCountedList();
+		System.out.println(l.get(0));
+		return challengeService.getCountedList();
+//		return challengeService.getChallengeList();
 	}
 
 	@GetMapping("/{challengeId}")

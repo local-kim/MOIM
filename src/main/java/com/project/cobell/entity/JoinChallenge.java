@@ -22,5 +22,5 @@ public class JoinChallenge {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	private int status;
+//	private int status;
 }

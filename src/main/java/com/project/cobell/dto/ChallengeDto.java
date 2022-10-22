@@ -22,4 +22,8 @@ public class ChallengeDto {
 	private int limit;
 	private int gender;
 	private int online;
+	private int status;
+	private Timestamp createdAt;
+
+	private int joinedUsers;
 }

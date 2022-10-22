@@ -21,10 +21,11 @@ const Challenge = () => {
       <div >{challenge.title}</div>
       <div>
         <span className={`material-icons ${styles.icon}`}>group</span>
-        {/* TODO: 챌린지에 참여한 유저수 */}
-        1/{challenge.limit}
+        {/* 챌린지에 참여한 유저수 */}
+        {challenge.joined_users}/{challenge.limit}
       </div>
       <div>{challenge.content}</div>
+      {/* TODO: 챌린지에 참여한 유저 목록 */}
     </div>
   );
 };

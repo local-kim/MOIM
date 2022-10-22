@@ -83,4 +83,19 @@ public class ChallengeService {
 
 		return challengeDto;
 	}
+
+	@Transactional
+	public List<ChallengeDto> getCountedList(){
+//		System.out.println(challengeRepository.getCountedList().get(0).toString());
+//		List<Challenge> challenges = challengeRepository.findAll();
+		ModelMapper modelMapper = new ModelMapper();
+
+		return challengeRepository.findAll().stream()
+				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+				.collect(Collectors.toList());
+
+//		return challengeRepository.getCountedList().stream()
+//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+//				.collect(Collectors.toList());
+	}
 }
