@@ -10,6 +10,7 @@ import org.hibernate.annotations.Formula;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -39,10 +40,11 @@ public class Challenge {
 	private int status;
 	private Timestamp createdAt;
 
-	@OneToMany
-	@JoinColumn(name = "challenge_id")
+	// Challenge : JoinChallenge = 1 : N
+	@OneToMany(mappedBy = "challenge")
+//	@JoinColumn(name = "challenge_id")
 	@JsonIgnore
-	private Set<JoinChallenge> joinChallenges;
+	private Set<JoinChallenge> joinChallenges = new HashSet<>();
 
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")

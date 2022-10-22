@@ -1,6 +1,7 @@
 package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
+import com.project.cobell.dto.UserDto;
 import com.project.cobell.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,12 @@ public class ChallengeController {
 			@PathVariable Long challengeId
 	){
 		return challengeService.getChallenge(challengeId);
+	}
+
+	@GetMapping("/users/{challengeId}")
+	public List<UserDto> getUserList(
+			@PathVariable Long challengeId
+	){
+		return challengeService.getUserList(challengeId);
 	}
 }

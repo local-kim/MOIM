@@ -31,7 +31,13 @@ public class User {
 	private String title;
 	private String content;
 
-	@JsonIgnore
+	// User : Challenges = 1 : N
 	@OneToMany(mappedBy = "leader")
+	@JsonIgnore
 	private Set<Challenge> challenges = new HashSet<>();
+
+	// User : JoinChallenge = 1 : N
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private Set<JoinChallenge> joinChallenges = new HashSet<>();
 }

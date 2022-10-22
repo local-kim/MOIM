@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
-import styles from './Lounge.module.css';
+import styles from './ChallengeList.module.css';
 
 const ChallengeList = () => {
   const navigate = useNavigate();

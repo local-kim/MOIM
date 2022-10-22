@@ -1,6 +1,7 @@
 package com.project.cobell.service;
 
 import com.project.cobell.dto.ChallengeDto;
+import com.project.cobell.dto.UserDto;
 import com.project.cobell.entity.Challenge;
 import com.project.cobell.entity.JoinChallenge;
 import com.project.cobell.entity.User;
@@ -97,5 +98,17 @@ public class ChallengeService {
 //		return challengeRepository.getCountedList().stream()
 //				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
 //				.collect(Collectors.toList());
+	}
+
+	@Transactional
+	public List<UserDto> getUserList(Long challengeId) {
+//		System.out.println(joinChallengeRepository.findJoinedUsers(challengeId));
+
+//		return null;
+		ModelMapper modelMapper = new ModelMapper();
+
+		return joinChallengeRepository.findJoinedUsers(challengeId).stream()
+				.map(user -> modelMapper.map(user, UserDto.class))
+				.collect(Collectors.toList());
 	}
 }
