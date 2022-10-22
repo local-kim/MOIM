@@ -12,7 +12,7 @@ const NewChallenge = () => {
     leader_id: JSON.parse(localStorage.getItem("user")).id,
     age: 0,
     gender: 0,
-    limit: 1
+    limit: 2
   });
 
   const handleChange = (e) => {
@@ -58,7 +58,7 @@ const NewChallenge = () => {
             <tr>
               <th>내용</th>
               <td>
-                <input type='text' name="content" required onChange={handleChange}/>
+                <textarea></textarea>
               </td>
             </tr>
             <tr>
@@ -112,7 +112,7 @@ const NewChallenge = () => {
             <tr>
               <th>최대 인원</th>
               <td>
-                <input type='number' name="limit" defaultValue={'1'} required onChange={handleChange}/>명
+                <input type='number' name="limit" defaultValue={2} min={2} required onChange={handleChange}/>명
               </td>
             </tr>
             <tr>
