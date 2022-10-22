@@ -24,7 +24,7 @@ public class Challenge {
 
 	private String title;
 	private String content;
-	@Column(name = "planned_at")    // TODO: 나중에 Camel -> snake 자동 변환되게
+//	@Column(name = "planned_at")    // TODO: 나중에 Camel -> snake 자동 변환되게
 	private Timestamp plannedAt;
 	private String area;
 	private int age;
