@@ -28,8 +28,8 @@ public class ChallengeController {
 
 	@GetMapping("/list")
 	public List<ChallengeDto> getList(){
-		List<ChallengeDto> l = challengeService.getCountedList();
-		System.out.println(l.get(0));
+//		List<ChallengeDto> l = challengeService.getCountedList();
+//		System.out.println(l.get(0));
 		return challengeService.getCountedList();
 //		return challengeService.getChallengeList();
 	}
@@ -46,5 +46,13 @@ public class ChallengeController {
 			@PathVariable Long challengeId
 	){
 		return challengeService.getUserList(challengeId);
+	}
+
+	@GetMapping("/joined/{challengeId}/{userId}")
+	public int isJoined(
+			@PathVariable Long challengeId, @PathVariable Long userId
+	){
+		System.out.println("joined");
+		return challengeService.isJoined(challengeId, userId);
 	}
 }

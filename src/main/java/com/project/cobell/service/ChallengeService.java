@@ -11,6 +11,7 @@ import com.project.cobell.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -110,5 +111,10 @@ public class ChallengeService {
 		return joinChallengeRepository.findJoinedUsers(challengeId).stream()
 				.map(user -> modelMapper.map(user, UserDto.class))
 				.collect(Collectors.toList());
+	}
+
+	@Transactional
+	public int isJoined(Long challengeId, Long userId){
+		return joinChallengeRepository.countByChallengeIdAndUserId(challengeId, userId);
 	}
 }
