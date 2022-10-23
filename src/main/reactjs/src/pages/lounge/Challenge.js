@@ -10,11 +10,25 @@ const Challenge = () => {
   const loggedId = JSON.parse(localStorage.getItem("user")).id;
   const [isJoined, setIsJoined] = useState();
 
+  const [comment, setComment] = useState();
+
   const joinUser = () => {
     axios.get(`/challenge/join/${challengeId}/${loggedId}`)
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
+    }).catch(err => console.log(err));
+  }
+
+  const insertComment = () => {
+    setComment('');
+    axios.post(`/challenge/comment/new`, {
+      challenge_id: challengeId,
+      user_id: loggedId,
+      content: comment
+    })
+    .then(res => {
+      console.log(res.data);
     }).catch(err => console.log(err));
   }
 
@@ -57,13 +71,14 @@ const Challenge = () => {
       </div>
       <hr/>
       <div className={styles.subtitle}>클럽 소개</div>
-      <div>{challenge.content}</div>
+      <div><pre>{challenge.content}</pre></div>
       {/* 챌린지에 참여한 유저 목록 */}
       <hr/>
       <div className={styles.subtitle}>가입 멤버</div>
       {
         users && users.map((user, index) => (
           <div key={index}>
+            {index == 0 && '*'}
             {user.nickname}
           </div>
         ))
@@ -81,6 +96,12 @@ const Challenge = () => {
       {
         users.length < challenge.limit && isJoined && <button type='button'>참여중</button>
       }
+      <hr/>
+      <div className={styles.subtitle}>
+        댓글 
+      </div>
+      <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
+      <button type='button' onClick={insertComment}>등록</button>
     </div>
   );
 };

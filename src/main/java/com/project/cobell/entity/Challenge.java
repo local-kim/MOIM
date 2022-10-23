@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 //@ToString
+@DynamicInsert
 public class Challenge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +44,12 @@ public class Challenge {
 
 	// Challenge : JoinChallenge = 1 : N
 	@OneToMany(mappedBy = "challenge")
-//	@JoinColumn(name = "challenge_id")
 	@JsonIgnore
 	private Set<JoinChallenge> joinChallenges = new HashSet<>();
+
+	@OneToMany(mappedBy = "challenge")
+	@JsonIgnore
+	private Set<CommentChallenge> commentChallenges = new HashSet<>();
 
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")

@@ -1,11 +1,14 @@
 package com.project.cobell.service;
 
 import com.project.cobell.dto.ChallengeDto;
+import com.project.cobell.dto.CommentChallengeDto;
 import com.project.cobell.dto.UserDto;
 import com.project.cobell.entity.Challenge;
+import com.project.cobell.entity.CommentChallenge;
 import com.project.cobell.entity.JoinChallenge;
 import com.project.cobell.entity.User;
 import com.project.cobell.repository.ChallengeRepository;
+import com.project.cobell.repository.CommentChallengeRepository;
 import com.project.cobell.repository.JoinChallengeRepository;
 import com.project.cobell.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -30,6 +33,9 @@ public class ChallengeService {
 
 	@Autowired
 	private JoinChallengeRepository joinChallengeRepository;
+
+	@Autowired
+	private CommentChallengeRepository commentChallengeRepository;
 
 	@Transactional
 	public Long createChallenge(ChallengeDto challengeDto){
@@ -116,5 +122,18 @@ public class ChallengeService {
 	@Transactional
 	public int isJoined(Long challengeId, Long userId){
 		return joinChallengeRepository.countByChallengeIdAndUserId(challengeId, userId);
+	}
+
+	@Transactional
+	public void createComment(CommentChallengeDto commentChallengeDto){
+		ModelMapper modelMapper = new ModelMapper();
+
+		CommentChallenge commentChallenge = modelMapper.map(commentChallengeDto, CommentChallenge.class);
+		commentChallenge.setChallenge(challengeRepository.findById(commentChallengeDto.getChallengeId()).get());
+		commentChallenge.setUser(userRepository.findById(commentChallengeDto.getUserId()).get());
+
+//		System.out.println(commentChallenge.toString());
+
+		commentChallengeRepository.save(commentChallenge);
 	}
 }

@@ -58,7 +58,7 @@ const NewChallenge = () => {
             <tr>
               <th>내용</th>
               <td>
-                <textarea></textarea>
+                <textarea name='content' onChange={handleChange}></textarea>
               </td>
             </tr>
             <tr>

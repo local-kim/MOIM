@@ -40,4 +40,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private Set<JoinChallenge> joinChallenges = new HashSet<>();
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private Set<CommentChallenge> commentChallenges = new HashSet<>();
 }
