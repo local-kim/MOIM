@@ -27,6 +27,7 @@ const Challenge = () => {
       <h1>챌린지 상세</h1>
       <div className={styles.photo}>사진</div>
       <div className={styles.title}>{challenge.title}</div>
+      <div>클럽장 {users[0].nickname}</div>
       <div>
         <span className={`material-icons ${styles.icon}`}>group</span>
         {/* 챌린지에 참여한 유저수 */}
@@ -35,7 +36,7 @@ const Challenge = () => {
       <hr/>
       <div className={styles.subtitle}>클럽 소개</div>
       <div>{challenge.content}</div>
-      {/* TODO: 챌린지에 참여한 유저 목록 */}
+      {/* 챌린지에 참여한 유저 목록 */}
       <hr/>
       <div className={styles.subtitle}>가입 멤버</div>
       {
