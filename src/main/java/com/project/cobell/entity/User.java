@@ -21,6 +21,7 @@ public class User {
 	private Long id;   // null값 사용 가능한 Long 타입 사용
 
 	private String email;
+	@JsonIgnore // 제외하고 SELECT
 	private String password;
 	private String nickname;
 	private int gender;
