@@ -1,8 +1,10 @@
 package com.project.cobell.repository;
 
 import com.project.cobell.entity.Challenge;
+import com.project.cobell.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +19,10 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
 //	@Query(value = "select * from Challenge, JoinChallenge where Challenge.id=JoinChallenge.challenge.id group by id", nativeQuery = true)
 //	List<Challenge> getCountedList();
 
+	// 내가 만든 챌린지
 	List<Challenge> findByLeaderId(Long userId);
+
+	// 내가 참여한 챌린지
+	@Query(value = "select c from JoinChallenge jc , Challenge c where c.id=jc.challenge.id and jc.user.id=:userId")
+	List<Challenge> findJoinedChallenges(@Param("userId") Long userId);
 }

@@ -23,4 +23,11 @@ public class MypageController {
 	){
 		return mypageService.getMyChallengeList(userId);
 	}
+
+	@GetMapping("/joined/{userId}")
+	public List<ChallengeDto> getJoinedChallengeList(
+			@PathVariable Long userId
+	){
+		return mypageService.getJoinedChallengeList(userId);
+	}
 }

@@ -5,12 +5,19 @@ import styles from './Mypage.module.css';
 const Mypage = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [created, setCreated] = useState([]);
+  const [joined, setJoined] = useState([]);
 
   useEffect(() => {
     axios.get(`/mypage/created/${user.id}`)
     .then(res => {
       console.log(res.data);
       setCreated(res.data);
+    }).catch(err => console.log(err));
+
+    axios.get(`/mypage/joined/${user.id}`)
+    .then(res => {
+      console.log(res.data);
+      setJoined(res.data);
     }).catch(err => console.log(err));
   }, []);
 
@@ -37,6 +44,15 @@ const Mypage = () => {
       <hr/>
       <div className={styles.subtitle}>
         내가 참여한 챌린지(진행중, 완료)
+      </div>
+      <div>
+        {
+          joined && joined.map((challenge, index) => (
+            <div key={index}>
+              {challenge.title}
+            </div>
+          ))
+        }
       </div>
       <hr/>
       <div className={styles.subtitle}>
