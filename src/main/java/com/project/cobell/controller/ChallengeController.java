@@ -55,4 +55,14 @@ public class ChallengeController {
 		System.out.println("joined");
 		return challengeService.isJoined(challengeId, userId);
 	}
+
+	@GetMapping("/join/{challengeId}/{userId}")
+	public List<UserDto> joinUser(
+			@PathVariable Long challengeId, @PathVariable Long userId
+	){
+		challengeService.joinChallenge(challengeId, userId);
+
+		// 새로운 참여중 유저 리스트 반환
+		return challengeService.getUserList(challengeId);
+	}
 }

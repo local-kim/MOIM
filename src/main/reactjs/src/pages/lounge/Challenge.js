@@ -10,6 +10,14 @@ const Challenge = () => {
   const loggedId = JSON.parse(localStorage.getItem("user")).id;
   const [isJoined, setIsJoined] = useState();
 
+  const joinUser = () => {
+    axios.get(`/challenge/join/${challengeId}/${loggedId}`)
+    .then(res => {
+      // 챌린지에 참여 중인 유저 정보 다시 받아오기
+      setUsers(res.data);
+    }).catch(err => console.log(err));
+  }
+
   useEffect(() => {
     // 챌린지 정보
     axios.get(`/challenge/${challengeId}`)
@@ -23,8 +31,6 @@ const Challenge = () => {
     .then(res => {
       console.log(res.data);
       setUsers(res.data);
-
-      // if(loggedId in res)
     }).catch(err => console.log(err));
 
     // 로그인한 유저의 챌린지 참여 여부 -> 유저 리스트에 있는지?
@@ -47,7 +53,7 @@ const Challenge = () => {
       <div>
         <span className={`material-icons ${styles.icon}`}>group</span>
         {/* 챌린지에 참여한 유저수 */}
-        {challenge.joined_users}/{challenge.limit}명
+        {users.length}/{challenge.limit}명
       </div>
       <hr/>
       <div className={styles.subtitle}>클럽 소개</div>
@@ -64,10 +70,16 @@ const Challenge = () => {
       }
       <hr/>
       {
-        !isJoined && <button type='button'>참여하기</button>
+        users.length == challenge.limit && !isJoined && <button type='button'>모집완료</button>
       }
       {
-        isJoined && <button type='button'>참여중</button>
+        users.length == challenge.limit && isJoined && <button type='button'>참여중</button>
+      }
+      {
+        users.length < challenge.limit && !isJoined && <button type='button' onClick={joinUser}>참여하기</button>
+      }
+      {
+        users.length < challenge.limit && isJoined && <button type='button'>참여중</button>
       }
     </div>
   );
