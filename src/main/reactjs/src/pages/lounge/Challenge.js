@@ -11,6 +11,7 @@ const Challenge = () => {
   const [isJoined, setIsJoined] = useState();
 
   const [comment, setComment] = useState();
+  const [commentList, setCommmentList] = useState();
 
   const joinUser = () => {
     axios.get(`/challenge/join/${challengeId}/${loggedId}`)
@@ -29,6 +30,7 @@ const Challenge = () => {
     })
     .then(res => {
       console.log(res.data);
+      setCommmentList(res.data);
     }).catch(err => console.log(err));
   }
 
@@ -40,14 +42,14 @@ const Challenge = () => {
       setChallenge(res.data);
     }).catch(err => console.log(err));
 
-    // 챌린지에 참여 중인 유저 정보
+    // 챌린지에 참여 중인 유저 리스트
     axios.get(`/challenge/users/${challengeId}`)
     .then(res => {
       console.log(res.data);
       setUsers(res.data);
     }).catch(err => console.log(err));
 
-    // 로그인한 유저의 챌린지 참여 여부 -> 유저 리스트에 있는지?
+    // 로그인한 유저의 챌린지 참여 여부
     axios.get(`/challenge/joined/${challengeId}/${loggedId}`)
     .then(res => {
       console.log(res.data);
@@ -55,6 +57,13 @@ const Challenge = () => {
         setIsJoined(false);
       else
         setIsJoined(true);
+    }).catch(err => console.log(err));
+
+    // 댓글 리스트
+    axios.get(`/challenge/comment/list/${challengeId}`)
+    .then(res => {
+      console.log(res.data);
+      setCommmentList(res.data);
     }).catch(err => console.log(err));
   }, []);
 
@@ -98,8 +107,15 @@ const Challenge = () => {
       }
       <hr/>
       <div className={styles.subtitle}>
-        댓글 
+        댓글 {commentList && commentList.length}
       </div>
+      {
+        commentList && commentList.map((comment, index) => (
+          <div key={index}>
+            {comment.content}
+          </div>
+        ))
+      }
       <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
       <button type='button' onClick={insertComment}>등록</button>
     </div>

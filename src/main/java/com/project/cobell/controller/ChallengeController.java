@@ -67,10 +67,19 @@ public class ChallengeController {
 	}
 
 	@PostMapping("/comment/new")
-	public void createComment(
+	public List<CommentChallengeDto> createComment(
 			@RequestBody CommentChallengeDto commentChallengeDto
 			){
 //		System.out.println(commentChallengeDto.toString());
 		challengeService.createComment(commentChallengeDto);
+
+		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
+	}
+
+	@GetMapping("/comment/list/{challengeId}")
+	public List<CommentChallengeDto> getCommentList(
+			@PathVariable Long challengeId
+	){
+		return challengeService.getCommentList(challengeId);
 	}
 }

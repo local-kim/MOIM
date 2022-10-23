@@ -136,4 +136,13 @@ public class ChallengeService {
 
 		commentChallengeRepository.save(commentChallenge);
 	}
+
+	@Transactional
+	public List<CommentChallengeDto> getCommentList(Long challengeId){
+		ModelMapper modelMapper = new ModelMapper();
+
+		return commentChallengeRepository.findByChallengeId(challengeId).stream()
+				.map(comment -> modelMapper.map(comment, CommentChallengeDto.class))
+				.collect(Collectors.toList());
+	}
 }
