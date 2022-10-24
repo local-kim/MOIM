@@ -9,6 +9,7 @@ const Challenge = () => {
   const [users, setUsers] = useState([]);
   const loggedId = JSON.parse(localStorage.getItem("user")).id;
   const [isJoined, setIsJoined] = useState();
+  const [isLiked, setIsLiked] = useState();
 
   const [comment, setComment] = useState();
   const [commentList, setCommmentList] = useState();
@@ -19,6 +20,34 @@ const Challenge = () => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
     }).catch(err => console.log(err));
+  }
+
+  const handleLike = () => {
+    if(isLiked){
+      // 좋아요 눌린 상태: delete
+      axios.delete(`/challenge/like/delete`, {
+        data: {
+          challenge_id: challengeId,
+          user_id: loggedId
+        }
+      })
+      .then(res => {
+        console.log(res.data);
+        setIsLiked(false);
+      })
+      .catch(err => console.log(err));
+    }
+    else{
+      // 좋아요 안눌린 상태: insert
+      axios.post(`/challenge/like/insert`, {
+        challenge_id: challengeId,
+        user_id: loggedId
+      })
+      .then(res => {
+        console.log(res.data);
+        setIsLiked(true);
+      }).catch(err => console.log(err));
+    }
   }
 
   const insertComment = () => {
@@ -65,12 +94,33 @@ const Challenge = () => {
       console.log(res.data);
       setCommmentList(res.data);
     }).catch(err => console.log(err));
+
+    // 좋아요 여부
+    axios.get(`/challenge/like/${challengeId}/${loggedId}`)
+    .then(res => {
+      console.log(res.data);
+      if(res.data == 0)
+        setIsLiked(false);
+      else
+        setIsLiked(true);
+    }).catch(err => console.log(err));
+
   }, []);
 
   return (
     <div>
       <h1>챌린지 상세</h1>
-      <div className={styles.photo}>사진</div>
+      <div className={styles.photo}>
+        {/* 사진 */}
+        {
+          // 빨간색 하트로
+          isLiked && <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span>
+        }
+        {
+          !isLiked && <span className={`material-icons ${styles.like}`} onClick={handleLike}>favorite_border</span>
+        }
+        
+      </div>
       <div className={styles.title}>{challenge.title}</div>
       <div>클럽장 {users[0] && users[0].nickname}</div>
       <div>

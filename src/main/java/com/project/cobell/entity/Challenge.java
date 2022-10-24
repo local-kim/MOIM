@@ -51,6 +51,10 @@ public class Challenge {
 	@JsonIgnore
 	private Set<CommentChallenge> commentChallenges = new HashSet<>();
 
+	@OneToMany(mappedBy = "challenge")
+	@JsonIgnore
+	private Set<LikeChallenge> likeChallenges = new HashSet<>();
+
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
 	private int joinedUsers;

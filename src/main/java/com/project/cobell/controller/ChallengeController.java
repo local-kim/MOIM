@@ -2,12 +2,12 @@ package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.CommentChallengeDto;
+import com.project.cobell.dto.LikeChallengeDto;
 import com.project.cobell.dto.UserDto;
 import com.project.cobell.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -81,5 +81,27 @@ public class ChallengeController {
 			@PathVariable Long challengeId
 	){
 		return challengeService.getCommentList(challengeId);
+	}
+
+	@PostMapping("/like/insert")
+	public void insertLike(
+			@RequestBody LikeChallengeDto likeChallengeDto
+			){
+		challengeService.insertLike(likeChallengeDto);
+	}
+
+	@GetMapping("/like/{challengeId}/{userId}")
+	public int getLike(
+			@PathVariable Long challengeId, @PathVariable Long userId
+	){
+//		System.out.println(challengeService.getLike(challengeId, userId));
+		return challengeService.getLike(challengeId, userId);
+	}
+
+	@DeleteMapping("/like/delete")
+	public void deleteLike(
+			@RequestBody LikeChallengeDto likeChallengeDto
+	){
+		challengeService.deleteLike(likeChallengeDto);
 	}
 }

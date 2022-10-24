@@ -45,5 +45,9 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
+	private Set<LikeChallenge> likeChallenges = new HashSet<>();
+
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private Set<Weight> weights = new HashSet<>();
 }

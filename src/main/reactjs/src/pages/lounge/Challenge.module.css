@@ -18,3 +18,13 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.like{
+  cursor: pointer;
+  color: white;
+}
+
+.like_on{
+  cursor: pointer;
+  color: red;
+}

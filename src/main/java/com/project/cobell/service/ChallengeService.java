@@ -2,22 +2,15 @@ package com.project.cobell.service;
 
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.CommentChallengeDto;
+import com.project.cobell.dto.LikeChallengeDto;
 import com.project.cobell.dto.UserDto;
-import com.project.cobell.entity.Challenge;
-import com.project.cobell.entity.CommentChallenge;
-import com.project.cobell.entity.JoinChallenge;
-import com.project.cobell.entity.User;
-import com.project.cobell.repository.ChallengeRepository;
-import com.project.cobell.repository.CommentChallengeRepository;
-import com.project.cobell.repository.JoinChallengeRepository;
-import com.project.cobell.repository.UserRepository;
+import com.project.cobell.entity.*;
+import com.project.cobell.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +29,9 @@ public class ChallengeService {
 
 	@Autowired
 	private CommentChallengeRepository commentChallengeRepository;
+
+	@Autowired
+	private LikeChallengeRepository likeChallengeRepository;
 
 	@Transactional
 	public Long createChallenge(ChallengeDto challengeDto){
@@ -144,5 +140,26 @@ public class ChallengeService {
 		return commentChallengeRepository.findByChallengeId(challengeId).stream()
 				.map(comment -> modelMapper.map(comment, CommentChallengeDto.class))
 				.collect(Collectors.toList());
+	}
+
+	@Transactional
+	public void insertLike(LikeChallengeDto likeChallengeDto){
+//		ModelMapper modelMapper = new ModelMapper();
+//		LikeChallenge likeChallenge = modelMapper.map(likeChallengeDto, LikeChallenge.class);
+		LikeChallenge likeChallenge = new LikeChallenge();
+		likeChallenge.setChallenge(challengeRepository.findById(likeChallengeDto.getChallengeId()).get());
+		likeChallenge.setUser(userRepository.findById(likeChallengeDto.getUserId()).get());
+
+		likeChallengeRepository.save(likeChallenge);
+	}
+
+	@Transactional
+	public int getLike(Long challengeId, Long userId){
+		return likeChallengeRepository.countByChallengeIdAndUserId(challengeId, userId);
+	}
+
+	@Transactional
+	public void deleteLike(LikeChallengeDto likeChallengeDto){
+		likeChallengeRepository.deleteByChallengeIdAndUserId(likeChallengeDto.getChallengeId(), likeChallengeDto.getUserId());
 	}
 }
