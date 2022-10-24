@@ -11,8 +11,8 @@ public class UserDto {
 	private int gender;
 	private int age;
 	private int goal;
-	private int height;
-	private int weight;
+	private float height;
+	private float weight;
 	private String title;
 	private String content;
 }

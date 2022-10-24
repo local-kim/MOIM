@@ -12,4 +12,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "select * from user where email = :email and password = :password", nativeQuery = true)
 	Optional<User> findByIdAndPassword(@Param("email") String email, @Param("password") String password);
+
+	// 방금 insert한 user의 id 얻기
+	@Query(value = "select max(u.id) from User u")
+	public Long getInsertedId();
+//	public Long findTopById();
 }

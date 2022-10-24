@@ -19,6 +19,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private WeightService weightService;
+
 	@Transactional
 	public void join(UserDto userDto){
 		// UserDto -> User entity
@@ -27,6 +30,9 @@ public class UserService {
 
 		// insert
 		userRepository.save(userEntity);
+
+		// 생성된 user_id 이용하여 weight 인서트
+		weightService.insertWeight(userDto.getWeight(), userRepository.getInsertedId());
 	}
 
 	@Transactional
