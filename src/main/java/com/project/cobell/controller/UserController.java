@@ -49,4 +49,13 @@ public class UserController {
 	){
 		return weightService.getWeightList(userId);
 	}
+
+	@PostMapping("/weight/new")
+	public List<WeightDto> insertWeight(
+			@RequestBody WeightDto weightDto
+	){
+//		System.out.println(weightDto);
+		weightService.insertWeight(weightDto);
+		return weightService.getWeightList(weightDto.getUserId());
+	}
 }

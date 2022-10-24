@@ -109,6 +109,8 @@ const Challenge = () => {
       <div className={styles.subtitle}>
         댓글 {commentList && commentList.length}
       </div>
+      <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
+      <button type='button' onClick={insertComment}>등록</button>
       {
         commentList && commentList.map((comment, index) => (
           <div key={index}>
@@ -116,8 +118,6 @@ const Challenge = () => {
           </div>
         ))
       }
-      <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
-      <button type='button' onClick={insertComment}>등록</button>
     </div>
   );
 };

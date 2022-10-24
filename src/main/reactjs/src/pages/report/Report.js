@@ -12,6 +12,21 @@ const Report = () => {
   const [bmi, setBmi] = useState();
   const [weights, setWeights] = useState();
 
+  const [newWeight, setNewWeight] = useState();
+
+  const addWeight = () => {
+    setNewWeight('');
+
+    axios.post(`/user/weight/new`, {
+      weight: newWeight,
+      user_id: user.id
+    })
+    .then(res => {
+      console.log(res.data);
+      setWeights(res.data);
+    })
+  }
+
   useEffect(() => {
     if(loggedIn){
       axios.get(`/user/weight/${user.id}`)
@@ -77,6 +92,8 @@ const Report = () => {
               </div>
             ))
           }
+          <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
+          <button type='button' onClick={addWeight}>몸무게 추가</button>
         </div>
       }
       

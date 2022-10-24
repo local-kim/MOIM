@@ -38,4 +38,12 @@ public class WeightService {
 				.map(weight -> modelMapper.map(weight, WeightDto.class))
 				.collect(Collectors.toList());
 	}
+
+	@Transactional
+	public void insertWeight(WeightDto weightDto){
+		ModelMapper modelMapper = new ModelMapper();
+		Weight weight = modelMapper.map(weightDto, Weight.class);
+
+		weightRepository.save(weight);
+	}
 }
