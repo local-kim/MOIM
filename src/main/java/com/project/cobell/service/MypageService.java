@@ -32,4 +32,12 @@ public class MypageService {
 				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
 				.collect(Collectors.toList());
 	}
+
+	public List<ChallengeDto> getLikedChallengeList(Long userId){
+		ModelMapper modelMapper = new ModelMapper();
+
+		return challengeRepository.findLikedChallenges(userId).stream()
+				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+				.collect(Collectors.toList());
+	}
 }

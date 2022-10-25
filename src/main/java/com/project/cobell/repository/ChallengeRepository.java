@@ -25,4 +25,8 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
 	// 내가 참여한 챌린지
 	@Query(value = "select c from JoinChallenge jc , Challenge c where c.id=jc.challenge.id and jc.user.id=:userId")
 	List<Challenge> findJoinedChallenges(@Param("userId") Long userId);
+
+	// 내가 좋아요 누른 챌린지
+	@Query(value = "select c from Challenge c, LikeChallenge lc where c.id=lc.challenge.id and lc.user.id=:userId")
+	List<Challenge> findLikedChallenges(@Param("userId") Long userId);
 }

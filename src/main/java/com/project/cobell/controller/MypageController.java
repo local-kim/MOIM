@@ -30,4 +30,11 @@ public class MypageController {
 	){
 		return mypageService.getJoinedChallengeList(userId);
 	}
+
+	@GetMapping("/liked/{userId}")
+	public List<ChallengeDto> getLikedChallengeList(
+			@PathVariable Long userId
+	){
+		return mypageService.getLikedChallengeList(userId);
+	}
 }

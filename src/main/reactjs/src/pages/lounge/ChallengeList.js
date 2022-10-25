@@ -13,6 +13,7 @@ const ChallengeList = () => {
   const [likeList, setLikeList] = useState([]);
 
   const handleLike = (challengeId, isLiked) => {
+    // 로그인한 상태에서만
     if(user){
       if(isLiked){
         // 좋아요 눌린 상태: delete

@@ -6,6 +6,7 @@ const Mypage = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [created, setCreated] = useState([]);
   const [joined, setJoined] = useState([]);
+  const [liked, setLiked] = useState([]);
 
   useEffect(() => {
     axios.get(`/mypage/created/${user.id}`)
@@ -18,6 +19,12 @@ const Mypage = () => {
     .then(res => {
       console.log(res.data);
       setJoined(res.data);
+    }).catch(err => console.log(err));
+
+    axios.get(`/mypage/liked/${user.id}`)
+    .then(res => {
+      console.log(res.data);
+      setLiked(res.data);
     }).catch(err => console.log(err));
   }, []);
 
@@ -57,6 +64,15 @@ const Mypage = () => {
       <hr/>
       <div className={styles.subtitle}>
         좋아요 누른 챌린지
+      </div>
+      <div>
+        {
+          liked && liked.map((challenge, index) => (
+            <div key={index}>
+              {challenge.title}
+            </div>
+          ))
+        }
       </div>
     </div>
   );
