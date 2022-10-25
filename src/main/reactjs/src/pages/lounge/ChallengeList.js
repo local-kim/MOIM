@@ -12,32 +12,47 @@ const ChallengeList = () => {
   const [challenges, setChallenges] = useState();
   const [likeList, setLikeList] = useState([]);
 
-  const handleLike = () => {
-    // if(isLiked){
-    //   // 좋아요 눌린 상태: delete
-    //   axios.delete(`/challenge/like/delete`, {
-    //     data: {
-    //       challenge_id: challengeId,
-    //       user_id: loggedId
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log(res.data);
-    //     setIsLiked(false);
-    //   })
-    //   .catch(err => console.log(err));
-    // }
-    // else{
-    //   // 좋아요 안눌린 상태: insert
-    //   axios.post(`/challenge/like/insert`, {
-    //     challenge_id: challengeId,
-    //     user_id: loggedId
-    //   })
-    //   .then(res => {
-    //     console.log(res.data);
-    //     setIsLiked(true);
-    //   }).catch(err => console.log(err));
-    // }
+  const handleLike = (challengeId, isLiked) => {
+    if(user){
+      if(isLiked){
+        // 좋아요 눌린 상태: delete
+        axios.delete(`/challenge/like/delete`, {
+          data: {
+            challenge_id: challengeId,
+            user_id: user.id
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+          // setIsLiked(false);
+          // 좋아요 목록에서 삭제
+          // setLikeList(likeList.filter(id => id != challengeId));
+          getLikeList();
+        })
+        .catch(err => console.log(err));
+      }
+      else{
+        // 좋아요 안눌린 상태: insert
+        axios.post(`/challenge/like/insert`, {
+          challenge_id: challengeId,
+          user_id: user.id
+        })
+        .then(res => {
+          console.log(res.data);
+          // setIsLiked(true);
+          // likeList.push(challengeId);
+          getLikeList();
+        }).catch(err => console.log(err));
+      }
+    }
+  }
+
+  const getLikeList = () => {
+    axios.get(`/challenge/like/list/${user.id}`)
+    .then(res => {
+      console.log(res.data);
+      setLikeList(res.data);
+    }).catch(err => console.log(err));
   }
 
   useEffect(() => {
@@ -49,11 +64,12 @@ const ChallengeList = () => {
 
     // 로그인한 상태에서만
     if(user){
-      axios.get(`/challenge/like/list/${user.id}`)
-      .then(res => {
-        console.log(res.data);
-        setLikeList(res.data);
-      }).catch(err => console.log(err));
+      // axios.get(`/challenge/like/list/${user.id}`)
+      // .then(res => {
+      //   console.log(res.data);
+      //   setLikeList(res.data);
+      // }).catch(err => console.log(err));
+      getLikeList();
     }
   }, []);
 
@@ -70,8 +86,8 @@ const ChallengeList = () => {
               {/* 사진 */}
               {
                 likeList.includes(challenge.id) ? 
-                <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
-                <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
+                <span className={`material-icons ${styles.like_on}`} onClick={() => handleLike(challenge.id, true)}>favorite</span> : 
+                <span className={`material-icons ${styles.like_off}`} onClick={() => handleLike(challenge.id, false)}>favorite_border</span>
               }
             </div>
             <div className={styles.wrap}>
