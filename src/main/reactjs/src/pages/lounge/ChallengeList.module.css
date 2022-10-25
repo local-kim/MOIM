@@ -12,11 +12,6 @@
   background-color: lavender;
 }
 
-.like{
-  color: white;
-  cursor: pointer;
-}
-
 .wrap{
   padding: 10px;
 }
@@ -34,4 +29,14 @@
 .icon{
   font-size: 15px;
   color: gray;
+}
+
+.like_off{
+  cursor: pointer;
+  color: white;
+}
+
+.like_on{
+  cursor: pointer;
+  color: red;
 }

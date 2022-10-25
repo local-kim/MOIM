@@ -58,4 +58,8 @@ public class Challenge {
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
 	private int joinedUsers;
+
+	// 로그인 유저의 좋아요 여부 -> user_id를 엔티티에 넘길 수 없음
+//	@Formula("(select count(*) from like_challenge lc where lc.challenge_id=id and lc.user_id=1)")
+//	private int likeOn;
 }

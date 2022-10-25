@@ -104,4 +104,11 @@ public class ChallengeController {
 	){
 		challengeService.deleteLike(likeChallengeDto);
 	}
+
+	@GetMapping("/like/list/{userId}")
+	public List<Long> getLikeList(
+			@PathVariable Long userId
+	){
+		return challengeService.getLikeList(userId);
+	}
 }

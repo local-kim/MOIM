@@ -117,7 +117,7 @@ const Challenge = () => {
           isLiked && <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span>
         }
         {
-          !isLiked && <span className={`material-icons ${styles.like}`} onClick={handleLike}>favorite_border</span>
+          !isLiked && <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
         }
         
       </div>

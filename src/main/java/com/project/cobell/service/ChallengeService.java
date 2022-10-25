@@ -9,6 +9,7 @@ import com.project.cobell.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -161,5 +162,10 @@ public class ChallengeService {
 	@Transactional
 	public void deleteLike(LikeChallengeDto likeChallengeDto){
 		likeChallengeRepository.deleteByChallengeIdAndUserId(likeChallengeDto.getChallengeId(), likeChallengeDto.getUserId());
+	}
+
+	@Transactional
+	public List<Long> getLikeList(Long userId){
+		return likeChallengeRepository.findChallengeIdByUserId(userId);
 	}
 }
