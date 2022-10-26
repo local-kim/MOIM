@@ -55,6 +55,10 @@ public class Challenge {
 	@JsonIgnore
 	private Set<LikeChallenge> likeChallenges = new HashSet<>();
 
+	@OneToOne(mappedBy = "challenge")   // 1:1 연관 관계의 주인
+//	@JoinColumn(name = "id")
+	private PhotoChallenge photoChallenge;
+
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
 	private int joinedUsers;

@@ -5,9 +5,14 @@ import com.project.cobell.dto.CommentChallengeDto;
 import com.project.cobell.dto.LikeChallengeDto;
 import com.project.cobell.dto.UserDto;
 import com.project.cobell.service.ChallengeService;
+import com.project.cobell.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,12 +24,23 @@ public class ChallengeController {
 
 	@PostMapping("/new")
 	public Long createChallenge(
-			@RequestBody ChallengeDto challengeDto
+//			@RequestBody ChallengeDto challengeDto
+			@RequestPart("data") ChallengeDto challengeDto, @RequestPart MultipartFile file,
+			HttpServletRequest request
 			){
 		System.out.println(challengeDto);
-		return challengeService.createChallenge(challengeDto);
 
-		// 만들어진 챌린지 id를 반환
+		// 사진 업로드
+		String fileName = challengeService.uploadImage(file);
+
+		// 챌린지 insert
+		Long challengeId = challengeService.createChallenge(challengeDto);
+
+		// 파일명 insert
+		challengeService.insertFileName(challengeId, fileName);
+
+		// 챌린지 id 반환
+		return challengeId;
 	}
 
 	@GetMapping("/list")

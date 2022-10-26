@@ -6,14 +6,17 @@ import com.project.cobell.dto.LikeChallengeDto;
 import com.project.cobell.dto.UserDto;
 import com.project.cobell.entity.*;
 import com.project.cobell.repository.*;
+import com.project.cobell.util.FileUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,6 +37,9 @@ public class ChallengeService {
 	@Autowired
 	private LikeChallengeRepository likeChallengeRepository;
 
+	@Autowired
+	private PhotoChallengeRepository photoChallengeRepository;
+
 	@Transactional
 	public Long createChallenge(ChallengeDto challengeDto){
 		// DTO to Entity
@@ -41,9 +47,9 @@ public class ChallengeService {
 		Challenge challengeEntity = modelMapper.map(challengeDto, Challenge.class);
 //		System.out.println(challengeEntity.toString());
 
-		Optional<User> user = userRepository.findById(challengeDto.getLeaderId());
-		challengeEntity.setLeader(user.get());
-		user.get().getChallenges().add(challengeEntity);
+//		Optional<User> user = userRepository.findById(challengeDto.getLeaderId());
+		challengeEntity.setLeader(userRepository.findById(challengeDto.getLeaderId()).get());
+//		user.get().getChallenges().add(challengeEntity);
 
 		challengeRepository.save(challengeEntity);
 
@@ -53,6 +59,38 @@ public class ChallengeService {
 
 		// 만들어진 챌린지 id를 반환
 		return insertedId;
+	}
+
+	// 업로드 경로
+	@Value("${custom.path.uploadImage}")
+	private String uploadPath;
+
+	@Transactional
+	public String uploadImage(MultipartFile file){
+		// 파일명 변환
+		String fileName = FileUtil.convertFileName(file.getOriginalFilename());
+
+		// 업로드할 폴더 위치
+//		String path = request.getServletContext().getRealPath("/save");
+		String path = uploadPath + "challenge_photo" + File.separator;
+
+		// save 폴더에 업로드
+		try {
+			file.transferTo(new File(path + fileName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return fileName;
+	}
+
+	@Transactional
+	public void insertFileName(Long challengeId, String fileName){
+		PhotoChallenge photoChallenge = new PhotoChallenge();
+		photoChallenge.setChallenge(challengeRepository.findById(challengeId).get());
+		photoChallenge.setFileName(fileName);
+
+		photoChallengeRepository.save(photoChallenge);
 	}
 
 	@Transactional

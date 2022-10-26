@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './NewChallenge.module.css';
 
 const NewChallenge = () => {
   const navigate = useNavigate();
@@ -29,11 +30,41 @@ const NewChallenge = () => {
   const createChallenge = (e) => {
     e.preventDefault();
 
-    axios.post('/challenge/new', challenge)
+    const form = new FormData();
+    form.append("file", image);
+    form.append("data", new Blob([JSON.stringify(challenge)], {
+      type: "application/json"
+    }));
+
+    // axios.post('/challenge/new', challenge)
+    axios.post('/challenge/new', form, {
+      headers: {'Content-Type' : 'multipart/form-data'}
+    })
     .then(res => {
       // console.log("challenge id: " + res.data);
       navigate(`/lounge/${res.data}`);
     }).catch(err => console.log(err));
+  }
+
+  // 이미지 미리보기
+  const [imageSrc, setImageSrc] = useState('');
+
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  };
+
+  // 이미지 업로드
+  const [image, setImage] = useState();
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
   }
 
   return (
@@ -46,7 +77,13 @@ const NewChallenge = () => {
             <tr>
               <th>사진 업로드</th>
               <td>
-                <input type='file' name='photo' onChange={handleChange} />
+                <input type='file' name='photo' required onChange={(e) => {
+                  encodeFileToBase64(e.target.files[0]);
+                  handleImage(e);
+                }} />
+                <div className={styles.preview}>
+                  {imageSrc && <img src={imageSrc} alt="미리보기" />}
+                </div>
               </td>
             </tr>
             <tr>

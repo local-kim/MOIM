@@ -110,7 +110,8 @@ const Challenge = () => {
   return (
     <div>
       <h1>챌린지 상세</h1>
-      <div className={styles.photo}>
+      <div className={styles.photo} style={{
+        backgroundImage:`url(http://localhost:8080/resources/challenge_photo/20221026102224.png)`}}>
         {/* 사진 */}
         {
           // 빨간색 하트로
