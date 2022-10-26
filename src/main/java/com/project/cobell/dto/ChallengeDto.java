@@ -26,4 +26,6 @@ public class ChallengeDto {
 	private Timestamp createdAt;
 
 	private int joinedUsers;
+
+	private String photo;
 }

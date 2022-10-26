@@ -123,6 +123,7 @@ public class ChallengeService {
 
 		ModelMapper modelMapper = new ModelMapper();
 		ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+		challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
 
 		return challengeDto;
 	}
