@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,9 +101,19 @@ public class ChallengeService {
 
 		ModelMapper modelMapper = new ModelMapper();
 
-		return challenges.stream()
-				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-				.collect(Collectors.toList());
+		List<ChallengeDto> challengeDtos = new ArrayList<>();
+
+		for(Challenge challenge : challenges){
+			ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+			challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
+			challengeDtos.add(challengeDto);
+		}
+
+		return challengeDtos;
+
+//		return challenges.stream()
+//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+//				.collect(Collectors.toList());
 	}
 
 	@Transactional
@@ -130,15 +141,25 @@ public class ChallengeService {
 
 	@Transactional
 	public List<ChallengeDto> getCountedList(){
-//		System.out.println(challengeRepository.getCountedList().get(0).toString());
-//		List<Challenge> challenges = challengeRepository.findAll();
+		List<Challenge> challenges = challengeRepository.findAll();
+//		System.out.println(challenges);
+
 		ModelMapper modelMapper = new ModelMapper();
 
-		return challengeRepository.findAll().stream()
-				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-				.collect(Collectors.toList());
+		List<ChallengeDto> challengeDtos = new ArrayList<>();
 
-//		return challengeRepository.getCountedList().stream()
+		for(Challenge challenge : challenges){
+			ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+			challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
+			challengeDtos.add(challengeDto);
+		}
+
+		return challengeDtos;
+//		System.out.println(challengeRepository.getCountedList().get(0).toString());
+//		List<Challenge> challenges = challengeRepository.findAll();
+//		ModelMapper modelMapper = new ModelMapper();
+
+//		return challengeRepository.findAll().stream()
 //				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
 //				.collect(Collectors.toList());
 	}

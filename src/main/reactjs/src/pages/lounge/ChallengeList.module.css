@@ -1,15 +1,29 @@
+.maintitle{
+  font-size: 25px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.subtitle{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
 .box{
-  width: 400px;
+  width: 100%;
   border: 1px solid lightgray;
-  margin: 10px;
-  border-radius: 10px;
+  margin: 10px 0;
+  /* border-radius: 10px; */
   display: flex;
   overflow: hidden;
 }
 
 .photo{
-  width: 50px;
-  background-color: lavender;
+  width: 80px;
+  /* background-color: lavender; */
+  background-size: cover;
+  background-position: center center;
 }
 
 .wrap{
@@ -31,12 +45,16 @@
   color: gray;
 }
 
-.like_off{
+.like{
   cursor: pointer;
-  color: white;
+  padding: 2px;
+  font-size: 18px;
+}
+
+.like_off{
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .like_on{
-  cursor: pointer;
-  color: red;
+  color: rgba(255, 0, 0, 0.85);
 }
