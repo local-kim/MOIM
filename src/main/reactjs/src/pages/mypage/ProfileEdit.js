@@ -1,7 +1,50 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './ProfileEdit.module.css';
+import axios from 'axios';
 
 const ProfileEdit = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const [bio, setBio] = useState();
+
+  const handleBio = (e) => {
+    setBio(e.target.value);
+    console.log(bio);
+  }
+
+  const insertChanges = () => {
+    // 이미지가 변경되었으면
+    if(imageSrc){
+      console.log("update image");
+
+      const form = new FormData();
+      form.append("file", image);
+
+      axios.post(`/mypage/update/photo/${user.id}`, form, {
+        headers: {'Content-Type' : 'multipart/form-data'}
+      })
+      .then(res => {
+        
+      }).catch(err => console.log(err));
+    }
+
+    // 소개가 변경되었으면
+    if(bio){
+      console.log("update bio");
+
+      axios.post(`/mypage/update/bio/${user.id}`, {
+        bio: bio
+      })
+      .then(res => {
+
+      }).catch(err => console.log(err));
+    }
+
+    navigate("/profile");
+  }
+
   // 이미지 미리보기
   const [imageSrc, setImageSrc] = useState('');
 
@@ -26,15 +69,19 @@ const ProfileEdit = () => {
   return (
     <div className={styles.wrap}>
       <div className={styles.title_box}>
-        <div><span className={`material-icons ${styles.back_icon}`}>arrow_back_ios</span></div>
+        <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/profile')}>arrow_back_ios</span>
         <div className={styles.title}>프로필 편집</div>
-        <div>완료</div>
+        <div onClick={insertChanges}>완료</div>
       </div>
 
       <div className={styles.photo_box}>
         <label for="upload">
           {
-            !imageSrc && 
+            !imageSrc && user.photo &&
+            <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" />
+          }
+          {
+            !imageSrc && !user.photo &&
             <div className={styles.photo}>
               <span className={`material-icons ${styles.photo_icon}`}>person</span>
             </div>
@@ -54,7 +101,7 @@ const ProfileEdit = () => {
 
       <div className={styles.bio_box}>
         <div className={styles.subtitle}>소개</div>
-        <textarea></textarea>
+        <textarea onChange={(e) => handleBio(e)}></textarea>
       </div>
     </div>
   );

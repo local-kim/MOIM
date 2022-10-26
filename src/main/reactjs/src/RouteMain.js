@@ -6,6 +6,7 @@ import { Report } from "./pages/report";
 import { Mypage, ProfileEdit } from "./pages/mypage";
 import "./App.css";
 import { Settings } from "./pages/settings";
+import { MenuBar } from "./components";
 
 const RouteMain = () => {
  
@@ -31,6 +32,8 @@ const RouteMain = () => {
         {/* 설정 */}
         <Route path="/settings" element={<Settings/>} />
       </Routes>
+
+      <MenuBar/>
     </div>
   )
 }

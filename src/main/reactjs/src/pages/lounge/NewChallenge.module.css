@@ -1,0 +1,26 @@
+.wrap{
+  /* margin: 20px 30px; */
+  margin-bottom: 20px;
+}
+
+.title_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.back_icon{
+  color: gray;
+}
+
+.submit_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0;
+}

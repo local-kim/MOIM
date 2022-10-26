@@ -1,8 +1,12 @@
+.wrap{
+  margin-bottom: 50px;
+}
+
 .title_box{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px 10px;
+  padding: 15px 20px;
 }
 
 .title{
@@ -21,6 +25,10 @@
   background-size: cover;
   background-position: center center;
   padding: 10px;
+}
+
+.info_wrap{
+  padding: 20px;
 }
 
 .challenge_title{
@@ -46,4 +54,31 @@
 .like_on{
   cursor: pointer;
   color: rgba(255, 0, 0, 0.85);
+}
+
+.btn_box{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.join_btn{
+  width: 70%;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.gray_btn{
+  background-color: rgb(240, 240, 240);
+}
+
+.green_btn{
+  background-color: rgb(113, 213, 152);
+  color: white;
 }

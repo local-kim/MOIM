@@ -1,12 +1,11 @@
 package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
+import com.project.cobell.dto.UpdateProfileDto;
 import com.project.cobell.service.MypageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,5 +35,27 @@ public class MypageController {
 			@PathVariable Long userId
 	){
 		return mypageService.getLikedChallengeList(userId);
+	}
+
+	@PostMapping("/update/photo/{userId}")
+	public void updatePhoto(
+			@PathVariable Long userId, @RequestParam MultipartFile file
+	){
+		// userId 받기
+
+		// 사진 업로드
+		String fileName = mypageService.uploadImage(file);
+
+		// 파일명 insert
+		mypageService.insertFileName(userId, fileName);
+	}
+
+	@PostMapping("/update/bio/{userId}")
+	public void updateBio(
+			@PathVariable Long userId, @RequestBody UpdateProfileDto updateProfileDto
+			){
+		// userId 받기
+		
+
 	}
 }

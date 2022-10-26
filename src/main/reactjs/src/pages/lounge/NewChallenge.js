@@ -68,10 +68,15 @@ const NewChallenge = () => {
   }
 
   return (
-    <div>
-      <h1>챌린지 만들기</h1>
-
+    <div className={styles.wrap}>
       <form onSubmit={createChallenge}>
+        <div className={styles.title_box}>
+          <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
+          <div className={styles.title}>챌린지 개설</div>
+          {/* <div>완료</div> */}
+          <button type="submit" className={styles.submit_btn}>완료</button>
+        </div>
+
         <table>
           <tbody>
             <tr>
@@ -152,11 +157,11 @@ const NewChallenge = () => {
                 <input type='number' name="limit" defaultValue={2} min={2} required onChange={handleChange}/>명
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td colSpan='2'>
                 <button type="submit">만들기</button>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </form>

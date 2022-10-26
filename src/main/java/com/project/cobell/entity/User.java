@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -51,5 +52,9 @@ public class User {
 	private Set<Weight> weights = new HashSet<>();
 
 	@OneToOne(mappedBy = "user")
+//	@JsonIgnore
 	private PhotoUser photoUser;
+
+//	@Formula("(select fileName from photo_user pu where pu.user_id=id)")
+//	private String fileName;
 }

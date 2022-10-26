@@ -1,5 +1,6 @@
 .wrap{
   padding: 20px;
+  margin-bottom: 60px;
 }
 
 .profile_box{
@@ -7,7 +8,7 @@
   padding: 10px;
 }
 
-.photo{
+.no_photo{
   width: 70px;
   height: 70px;
   background-color: rgb(230, 230, 230);
@@ -18,9 +19,16 @@
   align-items: center;
 }
 
-.photo_icon{
+.no_photo_icon{
   font-size: 45px;
   color: white;
+}
+
+.photo{
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
 .info_box{

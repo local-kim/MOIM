@@ -36,7 +36,13 @@ public class UserService {
 	}
 
 	@Transactional
-	public Optional<User> login(LoginDto loginDto){
-		return userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
+	public UserDto login(LoginDto loginDto){
+//		return userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
+		ModelMapper modelMapper = new ModelMapper();
+		User user = userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword()).get();
+		UserDto userDto = modelMapper.map(user, UserDto.class);
+		userDto.setPhoto(user.getPhotoUser().getFileName());
+
+		return userDto;
 	}
 }

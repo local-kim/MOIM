@@ -20,6 +20,7 @@ const Challenge = () => {
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
+      isJoined(true);
     }).catch(err => console.log(err));
   }
 
@@ -109,7 +110,7 @@ const Challenge = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <div className={styles.title_box}>
         <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
         <div className={styles.title}>챌린지</div>
@@ -121,61 +122,63 @@ const Challenge = () => {
         }}>
         {/* 사진 */}
         {
-          // 빨간색 하트로
-          isLiked && <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span>
+          isLiked ? 
+          <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
+          <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
+        }
+      </div>
+
+      <div className={styles.info_wrap}>
+        <div className={styles.challenge_title}>{challenge.title}</div>
+        <div>클럽장 {users[0] && users[0].nickname}</div>
+        <div>
+          <span className={`material-icons ${styles.icon}`}>group</span>
+          {/* 챌린지에 참여한 유저수 */}
+          {users.length}/{challenge.limit}명
+        </div>
+        <hr/>
+        <div className={styles.subtitle}>클럽 소개</div>
+        <div><pre>{challenge.content}</pre></div>
+        {/* 챌린지에 참여한 유저 목록 */}
+        <hr/>
+        <div className={styles.subtitle}>가입 멤버</div>
+        {
+          users && users.map((user, index) => (
+            <div key={index}>
+              {index == 0 && '*'}
+              {user.nickname}
+            </div>
+          ))
+        }
+        <hr/>
+        <div className={styles.subtitle}>
+          댓글 {commentList && commentList.length}
+        </div>
+        <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
+        <button type='button' onClick={insertComment}>등록</button>
+        {
+          commentList && commentList.map((comment, index) => (
+            <div key={index}>
+              {comment.content}
+            </div>
+          ))
+        }
+      </div>
+      
+      <div className={styles.btn_box}>
+        {
+          users.length == challenge.limit && !isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>모집완료</button>
         }
         {
-          !isLiked && <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
+          users.length == challenge.limit && isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button>
         }
-        
+        {
+          users.length < challenge.limit && !isJoined && <button type='button' className={`${styles.join_btn} ${styles.green_btn}`} onClick={joinUser}>참여하기</button>
+        }
+        {
+          users.length < challenge.limit && isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button>
+        }
       </div>
-      <div className={styles.challenge_title}>{challenge.title}</div>
-      <div>클럽장 {users[0] && users[0].nickname}</div>
-      <div>
-        <span className={`material-icons ${styles.icon}`}>group</span>
-        {/* 챌린지에 참여한 유저수 */}
-        {users.length}/{challenge.limit}명
-      </div>
-      <hr/>
-      <div className={styles.subtitle}>클럽 소개</div>
-      <div><pre>{challenge.content}</pre></div>
-      {/* 챌린지에 참여한 유저 목록 */}
-      <hr/>
-      <div className={styles.subtitle}>가입 멤버</div>
-      {
-        users && users.map((user, index) => (
-          <div key={index}>
-            {index == 0 && '*'}
-            {user.nickname}
-          </div>
-        ))
-      }
-      <hr/>
-      {
-        users.length == challenge.limit && !isJoined && <button type='button'>모집완료</button>
-      }
-      {
-        users.length == challenge.limit && isJoined && <button type='button'>참여중</button>
-      }
-      {
-        users.length < challenge.limit && !isJoined && <button type='button' onClick={joinUser}>참여하기</button>
-      }
-      {
-        users.length < challenge.limit && isJoined && <button type='button'>참여중</button>
-      }
-      <hr/>
-      <div className={styles.subtitle}>
-        댓글 {commentList && commentList.length}
-      </div>
-      <input type='text' value={comment} onChange={(e) => setComment(e.target.value)}/>
-      <button type='button' onClick={insertComment}>등록</button>
-      {
-        commentList && commentList.map((comment, index) => (
-          <div key={index}>
-            {comment.content}
-          </div>
-        ))
-      }
     </div>
   );
 };

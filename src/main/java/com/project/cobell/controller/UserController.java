@@ -30,12 +30,10 @@ public class UserController {
 //		System.out.println(user);
 
 		userService.join(user);
-
-
 	}
 
 	@PostMapping("/login")
-	public Optional<User> login(
+	public UserDto login(
 			@RequestBody LoginDto login
 			){
 //		System.out.println(login);
