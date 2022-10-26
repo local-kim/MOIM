@@ -40,60 +40,45 @@ const Report = () => {
   }, []);
 
   return (
-    <div>
-      <h1>메인 페이지</h1>
-      {
-        loggedIn && <button type='button' onClick={() => {
-          localStorage.removeItem("user");
-          setLoggedIn(false);
-        }}>로그아웃</button>
-      }
-      {
-        !loggedIn && 
-        <div>
-          <button type='button' onClick={() => navigate('/login')}>로그인</button>
-          <button type='button' onClick={() => navigate('/join')}>회원가입</button>
-        </div>
-      }
-
-      <button type='button' onClick={() => navigate('/lounge')}>라운지(챌린지 목록)</button>
-
-      <button type='button' onClick={() => navigate('/mypage')}>마이페이지</button>
-
-      <hr/>
+    <div className={styles.wrap}>
+      <div className={styles.title}>Report</div>
       
       {
         loggedIn && 
-        <div>
-          <div className={styles.subtitle}>내 BMI</div>
-          <div>{weights && weights[weights.length - 1].weight}kg</div>
-          <div>{user.height}cm</div>
-          <div>{bmi} BMI</div>
-          {
-            bmi <= 18.5 ? (
-              <div>저체중</div>
-            ) : bmi <= 22.9 ? (
-              <div>정상</div>
-            ) : bmi <= 24.9 ? (
-              <div>과체중</div>
-            ) : (
-              <div>비만</div>
-            )
-          }
-          <hr/>
-          <div className={styles.subtitle}>몸무게 변화</div>
-          {
-            weights && weights.map((weight, index) => (
-              <div key={index}>
-                <span>{weight.weight}kg</span>
-                (
-                <span>{format(new Date(weight.created_at), "MM/dd HH:mm", {locale: ko})}</span>
-                )
-              </div>
-            ))
-          }
-          <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
-          <button type='button' onClick={addWeight}>몸무게 추가</button>
+        <div className={styles.health_box}>
+          <div>
+            <div className={styles.subtitle}>건강 점수</div>
+            <div></div>
+            <div>{user.height}cm, {weights && weights[weights.length - 1].weight}kg</div>
+            <div>BMI {bmi}</div>
+            {
+              bmi <= 18.5 ? (
+                <div>저체중</div>
+              ) : bmi <= 22.9 ? (
+                <div>정상</div>
+              ) : bmi <= 24.9 ? (
+                <div>과체중</div>
+              ) : (
+                <div>비만</div>
+              )
+            }
+          </div>
+          
+          <div className={styles.weight_box}>
+            <div className={styles.subtitle}>몸무게 변화</div>
+            {
+              weights && weights.map((weight, index) => (
+                <div key={index}>
+                  <span>{weight.weight}kg</span>
+                  (
+                  <span>{format(new Date(weight.created_at), "MM/dd HH:mm", {locale: ko})}</span>
+                  )
+                </div>
+              ))
+            }
+            <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
+            <button type='button' onClick={addWeight}>몸무게 추가</button>
+          </div>
         </div>
       }
       

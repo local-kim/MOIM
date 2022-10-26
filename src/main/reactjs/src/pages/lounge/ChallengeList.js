@@ -75,11 +75,11 @@ const ChallengeList = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <div className={styles.maintitle}>Lounge</div>
 
-      <div className={styles.subtitle}>
-        <span>진행중인 챌린지</span>
+      <div className={styles.subtitle_box}>
+        <span className={styles.subtitle}>진행중인 챌린지</span>
         <span className={`material-icons ${styles.add_btn}`} onClick={() => navigate('/lounge/new')}>add</span>
       </div>
       
@@ -88,7 +88,7 @@ const ChallengeList = () => {
         challenges && challenges.map((challenge, index) => (
           <div key={index} className={styles.box}>
             <div className={styles.photo} style={{
-              backgroundImage:`url(http://localhost:8080/resources/challenge_photo/${challenge.photo})`
+              backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
             }}>
               {/* 사진 */}
               {
@@ -97,18 +97,16 @@ const ChallengeList = () => {
                 <span className={`material-icons ${styles.like} ${styles.like_off}`} onClick={() => handleLike(challenge.id, false)}>favorite_border</span>
               }
             </div>
-            <div className={styles.wrap}>
-              <span className={styles.title} onClick={() => navigate(`${challenge.id}`)}>{challenge.title}</span>
+            <div className={styles.info_wrap}>
+              <div className={styles.title} onClick={() => navigate(`${challenge.id}`)}>{challenge.title}</div>
               <div className={styles.info}>
-                <span>
-                  <span className={`material-icons ${styles.icon}`}>place</span>
-                  {challenge.area}
-                </span>
-                <span> ・ </span>
+                <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
+                <span>{challenge.area}</span>
+                <span>&nbsp;・&nbsp;</span>
                 <span>{format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
                 <span>&nbsp;&nbsp;&nbsp;</span>
+                <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
                 <span>
-                  <span className={`material-icons ${styles.icon}`}>group</span>
                   {/* 참여중인 사람 수 받아오기 */}
                   {challenge.joined_users}/{challenge.limit}명
                 </span>

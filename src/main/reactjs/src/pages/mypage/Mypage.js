@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Mypage.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Mypage = () => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [created, setCreated] = useState([]);
   const [joined, setJoined] = useState([]);
@@ -29,11 +32,21 @@ const Mypage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>마이페이지</h1>
-
-      <div className={styles.nickname}>{user.nickname}</div>
-      <div>자기소개</div>
+    <div className={styles.wrap}>
+      <div className={styles.profile_box}>
+        <div className={styles.photo}>
+          <span className={`material-icons ${styles.photo_icon}`}>person</span>
+        </div>
+        <div className={styles.info_box}>
+          <div className={styles.nickname_wrap}>
+            <span className={styles.nickname}>{user.nickname}</span>
+            <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span>
+          </div>
+          <div className={styles.bio}>
+            {user.bio}
+          </div>
+        </div>
+      </div>
       
       <hr/>
       <div className={styles.subtitle}>
@@ -50,7 +63,7 @@ const Mypage = () => {
       </div>
       <hr/>
       <div className={styles.subtitle}>
-        내가 참여한 챌린지(진행중, 완료)
+        내가 참여한 챌린지(진행중+완료)
       </div>
       <div>
         {

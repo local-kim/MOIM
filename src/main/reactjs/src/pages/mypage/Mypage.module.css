@@ -1,6 +1,47 @@
+.wrap{
+  padding: 20px;
+}
+
+.profile_box{
+  display: flex;
+  padding: 10px;
+}
+
+.photo{
+  width: 70px;
+  height: 70px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo_icon{
+  font-size: 45px;
+  color: white;
+}
+
+.info_box{
+  max-width: max-content;
+}
+
+.nickname_wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .nickname{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
+}
+
+.edit_btn{
+  font-size: 18px;
+  color: lightgray;
+  margin-left: 7px;
 }
 
 .subtitle{

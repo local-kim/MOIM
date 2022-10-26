@@ -26,8 +26,7 @@ public class User {
 	private int age;
 	private int goal;
 	private float height;
-	private String title;
-	private String content;
+	private String bio;
 
 	// User : Challenges = 1 : N
 	@OneToMany(mappedBy = "leader")
@@ -50,4 +49,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private Set<Weight> weights = new HashSet<>();
+
+	@OneToOne(mappedBy = "user")
+	private PhotoUser photoUser;
 }

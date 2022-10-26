@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Challenge.module.css';
 
 const Challenge = () => {
+  const navigate = useNavigate();
   const {challengeId} = useParams();
   const [challenge, setChallenge] = useState({});
   const [users, setUsers] = useState([]);
@@ -109,7 +110,12 @@ const Challenge = () => {
 
   return (
     <div>
-      <h1>챌린지 상세</h1>
+      <div className={styles.title_box}>
+        <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
+        <div className={styles.title}>챌린지</div>
+        <div style={{width:'24px'}}></div>
+      </div>
+
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
         }}>
@@ -123,7 +129,7 @@ const Challenge = () => {
         }
         
       </div>
-      <div className={styles.title}>{challenge.title}</div>
+      <div className={styles.challenge_title}>{challenge.title}</div>
       <div>클럽장 {users[0] && users[0].nickname}</div>
       <div>
         <span className={`material-icons ${styles.icon}`}>group</span>

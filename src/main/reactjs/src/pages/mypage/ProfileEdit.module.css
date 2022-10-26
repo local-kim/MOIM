@@ -1,0 +1,70 @@
+.wrap{
+  margin: 20px 30px;
+}
+
+.title_box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.back_icon{
+  color: gray;
+}
+
+.photo_box{
+  /* margin: 0 auto; */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.photo{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  /* margin-right: 10px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.photo_icon{
+  font-size: 65px;
+  color: white;
+}
+
+.preview{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.hidden{
+  display: none;
+}
+
+.subtitle{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.bio_box{
+  margin-top: 20px;
+}
+
+.bio_box textarea{
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  border-radius: 8px;
+  resize: none;
+  margin-top: 5px;
+}

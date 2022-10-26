@@ -1,12 +1,29 @@
+.title_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 10px;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.back_icon{
+  color: gray;
+}
+
 .photo{
   height: 300px;
   /* background-color: lavender; */
   /* border: 1px solid black; */
   background-size: cover;
   background-position: center center;
+  padding: 10px;
 }
 
-.title{
+.challenge_title{
   font-size: 24px;
   font-weight: 600;
 }
@@ -23,10 +40,10 @@
 
 .like_off{
   cursor: pointer;
-  color: white;
+  color: rgba(240, 240, 240, 0.9);
 }
 
 .like_on{
   cursor: pointer;
-  color: red;
+  color: rgba(255, 0, 0, 0.85);
 }

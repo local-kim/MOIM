@@ -1,18 +1,31 @@
+.wrap{
+  /* padding: 20px; */
+  margin-bottom: 60px;
+}
+
 .maintitle{
   font-size: 25px;
   font-weight: 600;
-  padding: 10px;
+  padding: 20px;
 }
 
 .subtitle{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.subtitle_box{
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 20px;
+  /* margin-top: 10px; */
 }
 
 .box{
   width: 100%;
-  border: 1px solid lightgray;
+  height: 80px;
+  /* border: 1px solid lightgray; */
+  background-color: rgb(248, 248, 248);
   margin: 10px 0;
   /* border-radius: 10px; */
   display: flex;
@@ -26,8 +39,11 @@
   background-position: center center;
 }
 
-.wrap{
-  padding: 10px;
+.info_wrap{
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .title{
@@ -38,6 +54,8 @@
 .info{
   font-size: 15px;
   color: gray;
+  display: flex;
+  align-items: center;
 }
 
 .icon{
@@ -45,14 +63,18 @@
   color: gray;
 }
 
+.group_icon{
+  margin-right: 3px;
+}
+
 .like{
   cursor: pointer;
-  padding: 2px;
+  padding: 3px 2px;
   font-size: 18px;
 }
 
 .like_off{
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(240, 240, 240, 0.9);
 }
 
 .like_on{

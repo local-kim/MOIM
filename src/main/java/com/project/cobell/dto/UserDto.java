@@ -13,6 +13,5 @@ public class UserDto {
 	private int goal;
 	private float height;
 	private float weight;
-	private String title;
-	private String content;
+	private String bio;
 }
