@@ -55,7 +55,7 @@ public class MypageController {
 			@PathVariable Long userId, @RequestBody UpdateProfileDto updateProfileDto
 			){
 		// userId 받기
-		
+		mypageService.updateBio(userId, updateProfileDto.getBio());
 
 	}
 }

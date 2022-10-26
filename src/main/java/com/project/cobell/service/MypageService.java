@@ -94,4 +94,9 @@ public class MypageService {
 
 		photoUserRepository.save(photoUser);
 	}
+
+	@Transactional
+	public void updateBio(Long userId, String bio){
+		userRepository.updateBio(userId, bio);
+	}
 }
