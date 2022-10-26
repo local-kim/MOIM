@@ -111,7 +111,7 @@ const Challenge = () => {
     <div>
       <h1>챌린지 상세</h1>
       <div className={styles.photo} style={{
-        backgroundImage:`url(http://localhost:8080/resources/challenge_photo/${challenge.photo})`
+        backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
         }}>
         {/* 사진 */}
         {
