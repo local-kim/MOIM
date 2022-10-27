@@ -7,7 +7,6 @@ import ko from 'date-fns/locale/ko';
 
 const Report = () => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("user") ? true : false);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [bmi, setBmi] = useState();
   const [weights, setWeights] = useState();
@@ -28,7 +27,7 @@ const Report = () => {
   }
 
   useEffect(() => {
-    if(loggedIn){
+    if(user){
       axios.get(`/user/weight/${user.id}`)
       .then(res => {
         console.log(res.data);
@@ -44,7 +43,7 @@ const Report = () => {
       <div className={styles.title}>Report</div>
       
       {
-        loggedIn && 
+        user && 
         <div className={styles.health_box}>
           <div>
             <div className={styles.subtitle}>건강 점수</div>
@@ -81,7 +80,13 @@ const Report = () => {
           </div>
         </div>
       }
-      
+      {
+        !user &&
+        <div>
+          <button type='button' className={`btn btn-primary`} onClick={() => navigate('/login')}>로그인</button>
+          <button type='button' className={`btn btn-secondary`} onClick={() => navigate('/join')}>회원가입</button>
+        </div>
+      }
     </div>
   );
 };

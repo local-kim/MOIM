@@ -101,7 +101,7 @@ const ProfileEdit = () => {
 
       <div className={styles.bio_box}>
         <div className={styles.subtitle}>소개</div>
-        <textarea onChange={(e) => handleBio(e)}></textarea>
+        <textarea defaultValue={user.bio} onChange={(e) => handleBio(e)}></textarea>
       </div>
     </div>
   );

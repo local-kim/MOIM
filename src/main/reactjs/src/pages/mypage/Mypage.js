@@ -99,7 +99,13 @@ const Mypage = () => {
         </div>
         </div>
       }
-      
+      {
+        !user &&
+        <div>
+          <button type='button' className={`btn btn-primary`} onClick={() => navigate('/login')}>로그인</button>
+          <button type='button' className={`btn btn-secondary`} onClick={() => navigate('/join')}>회원가입</button>
+        </div>
+      }
     </div>
   );
 };
