@@ -11,13 +11,13 @@ const ProfileEdit = () => {
 
   const handleBio = (e) => {
     setBio(e.target.value);
-    console.log(bio);
+    // console.log(bio);
   }
 
   const insertChanges = () => {
     // 이미지가 변경되었으면
     if(imageSrc){
-      console.log("update image");
+      // console.log("update image");
 
       const form = new FormData();
       form.append("file", image);
@@ -32,7 +32,7 @@ const ProfileEdit = () => {
 
     // 소개가 변경되었으면
     if(bio){
-      console.log("update bio");
+      // console.log("update bio");
 
       axios.post(`/mypage/update/bio/${user.id}`, {
         bio: bio
@@ -41,6 +41,13 @@ const ProfileEdit = () => {
 
       }).catch(err => console.log(err));
     }
+
+    // 바뀐 유저 정보를 다시 받아와 localStorage에 저장
+    axios.get(`/user/reload/${user.id}`)
+    .then(res => {
+      localStorage.removeItem("user");
+      localStorage.setItem("user", JSON.stringify(res.data));
+    }).catch(err => console.log(err));
 
     navigate("/profile");
   }

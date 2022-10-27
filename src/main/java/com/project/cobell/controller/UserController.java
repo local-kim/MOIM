@@ -56,4 +56,11 @@ public class UserController {
 		weightService.insertWeight(weightDto);
 		return weightService.getWeightList(weightDto.getUserId());
 	}
+
+	@GetMapping("/reload/{userId}")
+	public UserDto getUser(
+			@PathVariable Long userId
+	){
+		return userService.getUser(userId);
+	}
 }

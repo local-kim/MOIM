@@ -8,6 +8,14 @@
   padding: 10px;
 }
 
+.photo{
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
 .no_photo{
   width: 70px;
   height: 70px;
@@ -24,20 +32,13 @@
   color: white;
 }
 
-.photo{
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
-  object-fit: cover;
-}
-
 .info_box{
   max-width: max-content;
 }
 
 .nickname_wrap{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 }
 
@@ -55,4 +56,10 @@
 .subtitle{
   font-size: 17px;
   font-weight: 600;
+}
+
+.bio{
+  font-family: inherit;
+  font-size: inherit;
+  margin-top: 3px;
 }

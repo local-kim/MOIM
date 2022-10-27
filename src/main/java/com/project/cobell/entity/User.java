@@ -3,6 +3,7 @@ package com.project.cobell.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Formula;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @DynamicInsert
+@ToString
 public class User {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment(기본 키 생성을 데이터베이스에 위임)

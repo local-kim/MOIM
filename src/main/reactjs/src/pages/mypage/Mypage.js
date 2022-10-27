@@ -52,13 +52,13 @@ const Mypage = () => {
               <span className={styles.nickname}>{user.nickname}</span>
               <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span>
             </div>
-            <div className={styles.bio}>
+            <pre className={styles.bio}>
               {user.bio}
-            </div>
+            </pre>
           </div>
         </div>
         
-        <hr/>
+        {/* <hr/> */}
         <div className={styles.subtitle}>
           내가 만든 챌린지
         </div>

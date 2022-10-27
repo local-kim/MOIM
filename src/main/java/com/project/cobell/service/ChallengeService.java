@@ -166,14 +166,27 @@ public class ChallengeService {
 
 	@Transactional
 	public List<UserDto> getUserList(Long challengeId) {
-//		System.out.println(joinChallengeRepository.findJoinedUsers(challengeId));
-
-//		return null;
 		ModelMapper modelMapper = new ModelMapper();
 
-		return joinChallengeRepository.findJoinedUsers(challengeId).stream()
-				.map(user -> modelMapper.map(user, UserDto.class))
-				.collect(Collectors.toList());
+		List<User> users = joinChallengeRepository.findJoinedUsers(challengeId);
+
+		List<UserDto> userDtos = new ArrayList<>();
+
+		for(User u : users){
+			UserDto userDto = modelMapper.map(u, UserDto.class);
+
+			if(u.getPhotoUser() != null) {
+				userDto.setPhoto(u.getPhotoUser().getFileName());  // error
+			}
+
+			userDtos.add(userDto);
+		}
+
+		return userDtos;
+
+//		return joinChallengeRepository.findJoinedUsers(challengeId).stream()
+//				.map(user -> modelMapper.map(user, UserDto.class))
+//				.collect(Collectors.toList());
 	}
 
 	@Transactional

@@ -18,22 +18,27 @@
   color: gray;
 }
 
-.photo{
+.challenge_photo{
   height: 300px;
   /* background-color: lavender; */
   /* border: 1px solid black; */
   background-size: cover;
   background-position: center center;
   padding: 10px;
-}
-
-.info_wrap{
-  padding: 20px;
+  display: flex;
+  align-content: stretch;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .challenge_title{
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
+  color: white;
+  text-align: right;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  /* padding-left: 90px; */
 }
 
 .icon{
@@ -56,6 +61,104 @@
   color: rgba(255, 0, 0, 0.85);
 }
 
+.profile_wrap{
+  display: flex;
+  align-items: flex-end;
+  margin-top: -35px;
+  margin-left: 20px;
+}
+
+.profile_wrap .photo{
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.profile_wrap .no_photo{
+  width: 70px;
+  height: 70px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_wrap .no_photo_icon{
+  font-size: 45px;
+  color: white;
+}
+
+.profile_wrap .nickname{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.info_wrap{
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.info_wrap span{
+  color: gray;
+}
+
+.content{
+  font-family: inherit;
+  font-size: 17px;
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.users_wrap{
+  display: flex;
+  padding: 10px 20px;
+}
+
+.users_wrap .user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.users_wrap .photo{
+  width: 40px;
+  height: 40px;
+  /* margin-right: 15px; */
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.users_wrap .no_photo{
+  width: 40px;
+  height: 40px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  /* margin-right: 15px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.users_wrap .no_photo_icon{
+  font-size: 25px;
+  color: white;
+}
+
+.users_wrap .nickname{
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.comment_wrap{
+  padding: 10px 20px;
+}
+
 .btn_box{
   position: fixed;
   bottom: 0;
@@ -65,13 +168,13 @@
 }
 
 .join_btn{
-  width: 70%;
-  height: 40px;
+  width: 100%;
+  height: 50px;
   border: none;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   font-weight: 600;
   font-size: 18px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .gray_btn{
@@ -80,5 +183,76 @@
 
 .green_btn{
   background-color: rgb(113, 213, 152);
+  color: white;
+}
+
+/* 댓글 창 */
+/* .input_wrap{
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 15px;
+} */
+
+.input_comment{
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 15px;
+  width: 90%;
+  margin: 10px 0;
+}
+
+.input_comment::placeholder{
+  font-size: 12px;
+  color: gray;
+  padding: 0 0 2px 8px;
+}
+
+.comment_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/* Comment.js */
+.comment{
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.comment .comment_wrap{
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_wrap .nickname{
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.comment_wrap .date{
+  color: gray;
+  font-size: 12px;
+}
+
+.comment .photo{
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.comment .no_photo{
+  width: 35px;
+  height: 35px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment .no_photo_icon{
+  font-size: 21px;
   color: white;
 }

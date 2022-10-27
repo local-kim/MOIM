@@ -25,7 +25,7 @@ const Login = () => {
         // console.log(JSON.parse(localStorage.getItem("user")));
         navigate("/lounge");
       }
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err));
   }
 
   return (

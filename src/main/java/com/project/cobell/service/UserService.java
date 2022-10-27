@@ -49,4 +49,19 @@ public class UserService {
 
 		return userDto;
 	}
+
+	@Transactional
+	public UserDto getUser(Long userId){
+		ModelMapper modelMapper = new ModelMapper();
+
+		User user = userRepository.findById(userId).get();
+		UserDto userDto = modelMapper.map(user, UserDto.class);
+
+		// 프로필 사진이 있는 유저만
+		if(user.getPhotoUser() != null){
+			userDto.setPhoto(user.getPhotoUser().getFileName());
+		}
+
+		return userDto;
+	}
 }
