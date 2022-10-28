@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
 import styles from './Challenge.module.css';
 import Comment from './Comment';
+import { MenuTitle } from '../../components';
 
 const Challenge = () => {
   const navigate = useNavigate();
@@ -114,12 +115,13 @@ const Challenge = () => {
 
   return (
     <div className={styles.wrap}>
-      {/* 상단 메뉴 타이틀 */}
-      <div className={styles.title_box}>
+      {/* 메뉴 타이틀 */}
+      {/* <div className={styles.title_box}>
         <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
         <div className={styles.title}>챌린지</div>
         <div style={{width:'24px'}}></div>
-      </div>
+      </div> */}
+      <MenuTitle title={"챌린지"} leftIcon={"arrow_back_ios"} history={"lounge"} visible={false} />
 
       {/* 사진 */}
       <div className={styles.challenge_photo} style={{
@@ -136,7 +138,7 @@ const Challenge = () => {
       <div className={styles.profile_wrap}>
         {
           users[0] && users[0].photo ? 
-          <img src={`/resources/user_photo/${users[0].photo}`} className={styles.photo} alt="프로필 사진" /> :
+          <img src={`/resources/user_photo/${users[0].photo}`} className={styles.photo} alt="" /> :
           <div className={styles.no_photo}>
             <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
           </div>
@@ -168,12 +170,12 @@ const Challenge = () => {
             <div key={index} className={styles.user}>
               {
                 user && user.photo ? 
-                <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" /> :
+                <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
                 <div className={styles.no_photo}>
                   <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
                 </div>
               }
-              {/* <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="참여한 유저" /> */}
+              {/* <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> */}
               {/* {index == 0 && <span>*</span>} */}
               <span className={styles.nickname}>{user.nickname}</span>
             </div>

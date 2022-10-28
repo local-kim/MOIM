@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import { Challenge, ChallengeList, Liked, NewChallenge } from "./pages/lounge";
 import { Login, Join } from "./pages/login";
 import { Report } from "./pages/report";
-import { Mypage, ProfileEdit } from "./pages/mypage";
-import "./App.css";
+import { Profile, ProfileEdit } from "./pages/mypage";
 import { Settings } from "./pages/settings";
 import { MenuBar } from "./components";
 
@@ -22,8 +22,8 @@ const RouteMain = () => {
         <Route path="/lounge/new" element={<NewChallenge/>} />
         <Route path="/lounge/like" element={<Liked/>} />
 
-        {/* 마이페이지 */}
-        <Route path="/profile" element={<Mypage/>} />
+        {/* 내 프로필 */}
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/profile/edit" element={<ProfileEdit/>} />
 
         {/* 로그인 */}

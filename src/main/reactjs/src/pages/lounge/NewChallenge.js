@@ -89,7 +89,7 @@ const NewChallenge = () => {
                   handleImage(e);
                 }} />
                 <div className={styles.preview}>
-                  {imageSrc && <img src={imageSrc} alt="미리보기" />}
+                  {imageSrc && <img src={imageSrc} alt="" />}
                 </div>
               </td>
             </tr>

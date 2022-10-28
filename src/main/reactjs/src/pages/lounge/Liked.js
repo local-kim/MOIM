@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Challenge.module.css';
 import axios from 'axios';
-import LikeItem from './LikeItem';
-import { MenuTitle } from '../../components';
+import { MenuTitle, LikeItem } from '../../components';
 
 const Liked = () => {
   const navigate = useNavigate();

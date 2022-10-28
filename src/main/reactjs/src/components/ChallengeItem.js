@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
-import styles from './ChallengeList.module.css';
+import styles from './Components.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const ChallengeListItem = ({index, challenge, likeList, getLikeList}) => {
+const ChallengeItem = ({challenge, likeList, getLikeList}) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -46,7 +46,7 @@ const ChallengeListItem = ({index, challenge, likeList, getLikeList}) => {
   }
 
   return (
-    <div key={index} className={styles.box}>
+    <div className={styles.challenge}>
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
       }}>
@@ -76,4 +76,4 @@ const ChallengeListItem = ({index, challenge, likeList, getLikeList}) => {
   );
 };
 
-export default ChallengeListItem;
+export default ChallengeItem;

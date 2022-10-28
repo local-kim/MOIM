@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
-import styles from './ChallengeList.module.css';
+import styles from './Components.module.css';
 
 const LikeItem = ({challenge, likeList, setLikeList}) => {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
   }
 
   return (
-    <div className={styles.box}>
+    <div className={styles.challenge}>
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
       }}>

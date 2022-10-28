@@ -37,35 +37,50 @@ public class MypageService {
 
 	@Transactional
 	public List<ChallengeDto> getMyChallengeList(Long userId){
-		ModelMapper modelMapper = new ModelMapper();
+//		ModelMapper modelMapper = new ModelMapper();
+//
+//		return challengeRepository.findByLeaderId(userId).stream()
+//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+//				.collect(Collectors.toList());
 
-		return challengeRepository.findByLeaderId(userId).stream()
-				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-				.collect(Collectors.toList());
+		ModelMapper modelMapper = new ModelMapper();
+		List<Challenge> challenges = challengeRepository.findByLeaderId(userId);
+		List<ChallengeDto> challengeDtos = new ArrayList<>();
+
+		for(Challenge challenge : challenges){
+			ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+			challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
+			challengeDtos.add(challengeDto);
+		}
+
+		return challengeDtos;
 	}
 
 	@Transactional
 	public List<ChallengeDto> getJoinedChallengeList(Long userId){
-		ModelMapper modelMapper = new ModelMapper();
+//		ModelMapper modelMapper = new ModelMapper();
+//
+//		return challengeRepository.findJoinedChallenges(userId).stream()
+//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+//				.collect(Collectors.toList());
 
-		return challengeRepository.findJoinedChallenges(userId).stream()
-				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-				.collect(Collectors.toList());
+		ModelMapper modelMapper = new ModelMapper();
+		List<Challenge> challenges = challengeRepository.findJoinedChallenges(userId);
+		List<ChallengeDto> challengeDtos = new ArrayList<>();
+
+		for(Challenge challenge : challenges){
+			ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+			challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
+			challengeDtos.add(challengeDto);
+		}
+
+		return challengeDtos;
 	}
 
 	@Transactional
 	public List<ChallengeDto> getLikedChallengeList(Long userId){
-//		ModelMapper modelMapper = new ModelMapper();
-//
-//		return challengeRepository.findLikedChallenges(userId).stream()
-//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-//				.collect(Collectors.toList());
-
-		List<Challenge> challenges = challengeRepository.findLikedChallenges(userId);
-//		System.out.println(challenges);
-
 		ModelMapper modelMapper = new ModelMapper();
-
+		List<Challenge> challenges = challengeRepository.findLikedChallenges(userId);
 		List<ChallengeDto> challengeDtos = new ArrayList<>();
 
 		for(Challenge challenge : challenges){

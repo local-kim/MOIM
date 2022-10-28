@@ -1,0 +1,100 @@
+.wrap{
+  /* padding: 20px; */
+  margin-bottom: 50px;
+}
+
+.profile_box{
+  display: flex;
+  padding: 30px 30px 10px 30px;
+}
+
+.photo{
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.no_photo{
+  width: 70px;
+  height: 70px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no_photo_icon{
+  font-size: 45px;
+  color: white;
+}
+
+.info_box{
+  max-width: max-content;
+}
+
+.nickname_wrap{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.nickname{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.edit_btn{
+  font-size: 18px;
+  color: lightgray;
+  margin-left: 7px;
+  cursor: pointer;
+}
+
+.subtitle{
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.bio{
+  font-family: inherit;
+  font-size: inherit;
+  /* margin-top: 3px; */
+  margin: 3px 0 0 0;
+}
+
+/* Tab */
+/* icon */
+/* .css-i4bv87-MuiSvgIcon-root{
+  color: rgb(255, 0, 0);
+}
+
+.tabs span.MuiTabs-indicator.css-11yukd5-MuiTabs-indicator{
+  background-color: #17b285 !important;
+} */
+/* .tabs button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.MuiTab-fullWidth.Mui-selected.css-y0fr9s-MuiButtonBase-root-MuiTab-root{
+  color: #0b813f;
+} */
+
+/* .css-y0fr9s-MuiButtonBase-root-MuiTab-root{
+  color: lightgray;
+} */
+
+/* #main > div.Profile_wrap__mYQ5V > div > div.Profile_tabs__Rpv-v > div > div > div > button:nth-child(2){
+  color: #ddd;
+} */
+
+.tabs{
+  margin-bottom: 2px;
+}
+
+.tabs button.css-1ujykiq-MuiButtonBase-root-MuiTab-root.Mui-selected .icon{
+  color: gray !important;
+}
+
+.tabs .icon{
+  color: rgb(170, 170, 170);
+}

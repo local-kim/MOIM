@@ -76,14 +76,14 @@ const ProfileEdit = () => {
 
   return (
     <div>
-      <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"}/>
+      <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"} handleSubmit={insertChanges}/>
 
       <div className={styles.wrap}>
         <div className={styles.photo_box}>
           <label for="upload">
             {
               !imageSrc && user.photo &&
-              <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" />
+              <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" />
             }
             {
               !imageSrc && !user.photo &&
@@ -93,7 +93,7 @@ const ProfileEdit = () => {
             }
             {
               // 이미지 업로드 후 미리보기
-              imageSrc && <img src={imageSrc} className={styles.preview} alt="미리보기" />
+              imageSrc && <img src={imageSrc} className={styles.preview} alt="" />
             }
           </label>
           

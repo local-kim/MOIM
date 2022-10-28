@@ -4,7 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
 import styles from './ChallengeList.module.css';
-import ChallengeListItem from './ChallengeListItem';
+import { ChallengeItem } from '../../components';
 
 const ChallengeList = () => {
   const navigate = useNavigate();
@@ -43,6 +43,7 @@ const ChallengeList = () => {
 
   return (
     <div className={styles.wrap}>
+      {/* 메뉴 타이틀 */}
       <div className={styles.maintitle_box}>
         <div className={styles.maintitle}>Lounge</div>
         <div>
@@ -52,14 +53,13 @@ const ChallengeList = () => {
         </div>
       </div>
       
-
       <div className={styles.subtitle_box}>
         <span className={styles.subtitle}>진행중인 챌린지</span>
       </div>
       
       {
         challenges && challenges.map((challenge, index) => (
-          <ChallengeListItem key={index} challenge={challenge} getLikeList={getLikeList} likeList={likeList}/>
+          <ChallengeItem key={index} challenge={challenge} getLikeList={getLikeList} likeList={likeList}/>
         ))
       }
     </div>

@@ -10,7 +10,7 @@ const Comment = ({index, comment}) => {
     <div className={styles.comment}>
       {
         user && user.photo ? 
-        <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" /> :
+        <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
         <div className={styles.no_photo}>
           <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
         </div>
