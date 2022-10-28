@@ -4,6 +4,9 @@ import styles from './Report.module.css';
 import axios from 'axios';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
+import RechartsGraph from './RechartsGraph';
+import NivoGraph from './NivoGraph';
+import VisGraph from './VisGraph';
 
 const Report = () => {
   const navigate = useNavigate();
@@ -31,7 +34,18 @@ const Report = () => {
       axios.get(`/user/weight/${user.id}`)
       .then(res => {
         console.log(res.data);
-        setWeights(res.data);
+        
+        // 그래프용 data로 가공
+        setWeights(
+          res.data.map(d => {
+            return {
+              date: format(new Date(d.created_at), "MM/dd", {locale: ko}),
+              weight: d.weight
+            }
+          })
+        );
+
+        // setWeights(res.data);
         setBmi((res.data[res.data.length - 1].weight / ((user.height / 100) * (user.height / 100))).toFixed(2));
       }).catch(err => console.log(err));
     }
@@ -65,7 +79,7 @@ const Report = () => {
           
           <div className={styles.weight_box}>
             <div className={styles.subtitle}>몸무게 변화</div>
-            {
+            {/* {
               weights && weights.map((weight, index) => (
                 <div key={index}>
                   <span>{weight.weight}kg</span>
@@ -74,7 +88,12 @@ const Report = () => {
                   )
                 </div>
               ))
-            }
+            } */}
+            <RechartsGraph data={weights}/>
+            {/* <div style={{height:'300px'}}><NivoGraph data={weights} /></div> */}
+            {/* <VisGraph data={weights} /> */}
+
+
             <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
             <button type='button' onClick={addWeight}>몸무게 추가</button>
           </div>
