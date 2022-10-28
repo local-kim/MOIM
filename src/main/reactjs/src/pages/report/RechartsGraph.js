@@ -49,18 +49,18 @@ export default function RechartsGraph({data}) {
         data={data}
         margin={{
           top: 20,
-          right: 15,
-          left: -30,
+          right: 20,
+          left: 20,
           bottom: 5
         }}
       >
         {/* 안내 그리드 선 */}
         <CartesianGrid stroke="#eeeeee" strokeDasharray="5 5" />
         <XAxis dataKey="date" fontSize={11} />
-        <YAxis fontSize={11} domain={['dataMin - 1', 'dataMax + 1']} />
+        <YAxis hide={true} domain={['dataMin - 1', 'dataMax + 1']} />
         <Tooltip />
         {/* <Legend /> */}
-        <Line type="linear" dataKey="weight" stroke="#86c97f" activeDot={{ r: 8 }} >
+        <Line type="linear" dataKey="weight" stroke="#86c97f" dot={{stroke: '#86c97f', strokeWidth: '2'}} >
           <LabelList content={<CustomizedLabel />} />
         </Line>
       </LineChart>
