@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProfileEdit.module.css';
 import axios from 'axios';
+import { MenuTitle } from '../../components';
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
@@ -74,41 +75,39 @@ const ProfileEdit = () => {
   }
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.title_box}>
-        <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/profile')}>arrow_back_ios</span>
-        <div className={styles.title}>프로필 편집</div>
-        <div onClick={insertChanges}>완료</div>
-      </div>
+    <div>
+      <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"}/>
 
-      <div className={styles.photo_box}>
-        <label for="upload">
-          {
-            !imageSrc && user.photo &&
-            <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" />
-          }
-          {
-            !imageSrc && !user.photo &&
-            <div className={styles.photo}>
-              <span className={`material-icons ${styles.photo_icon}`}>person</span>
-            </div>
-          }
-          {
-            // 이미지 업로드 후 미리보기
-            imageSrc && <img src={imageSrc} className={styles.preview} alt="미리보기" />
-          }
-        </label>
-        
-        {/* 숨겨진 태그 */}
-        <input type='file' name='photo' id='upload' className={styles.hidden} onChange={(e) => {
-          encodeFileToBase64(e.target.files[0]);
-          handleImage(e);
-        }}/>
-      </div>
+      <div className={styles.wrap}>
+        <div className={styles.photo_box}>
+          <label for="upload">
+            {
+              !imageSrc && user.photo &&
+              <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="프로필 사진" />
+            }
+            {
+              !imageSrc && !user.photo &&
+              <div className={styles.photo}>
+                <span className={`material-icons ${styles.photo_icon}`}>person</span>
+              </div>
+            }
+            {
+              // 이미지 업로드 후 미리보기
+              imageSrc && <img src={imageSrc} className={styles.preview} alt="미리보기" />
+            }
+          </label>
+          
+          {/* 숨겨진 태그 */}
+          <input type='file' name='photo' id='upload' className={styles.hidden} onChange={(e) => {
+            encodeFileToBase64(e.target.files[0]);
+            handleImage(e);
+          }}/>
+        </div>
 
-      <div className={styles.bio_box}>
-        <div className={styles.subtitle}>소개</div>
-        <textarea defaultValue={user.bio} onChange={(e) => handleBio(e)}></textarea>
+        <div className={styles.bio_box}>
+          <div className={styles.subtitle}>소개</div>
+          <textarea defaultValue={user.bio} onChange={(e) => handleBio(e)}></textarea>
+        </div>
       </div>
     </div>
   );

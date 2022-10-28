@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Challenge, ChallengeList, NewChallenge } from "./pages/lounge";
+import { Challenge, ChallengeList, Liked, NewChallenge } from "./pages/lounge";
 import { Login, Join } from "./pages/login";
 import { Report } from "./pages/report";
 import { Mypage, ProfileEdit } from "./pages/mypage";
@@ -20,6 +20,7 @@ const RouteMain = () => {
         <Route path="/lounge" element={<ChallengeList/>} />
         <Route path="/lounge/:challengeId" element={<Challenge/>} />
         <Route path="/lounge/new" element={<NewChallenge/>} />
+        <Route path="/lounge/like" element={<Liked/>} />
 
         {/* 마이페이지 */}
         <Route path="/profile" element={<Mypage/>} />

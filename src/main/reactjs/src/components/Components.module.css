@@ -1,3 +1,4 @@
+/* MenuBar.js */
 .menu{
   display: flex;
   position: fixed;
@@ -13,4 +14,33 @@
   cursor: pointer;
   font-size: 14px;
   line-height: 40px;
+}
+
+/* MenuTitle.js */
+.title_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.left_icon{
+  color: gray;
+  cursor: pointer;
+}
+
+.hidden{
+  visibility: hidden;
+  width: 24px;
+}
+
+.submit_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0;
 }

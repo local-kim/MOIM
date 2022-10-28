@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewChallenge.module.css';
+import { MenuTitle } from '../../components';
 
 const NewChallenge = () => {
   const navigate = useNavigate();
@@ -70,12 +71,13 @@ const NewChallenge = () => {
   return (
     <div className={styles.wrap}>
       <form onSubmit={createChallenge}>
-        <div className={styles.title_box}>
+        {/* <div className={styles.title_box}>
           <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
           <div className={styles.title}>챌린지 개설</div>
-          {/* <div>완료</div> */}
           <button type="submit" className={styles.submit_btn}>완료</button>
-        </div>
+        </div> */}
+
+        <MenuTitle title={"챌린지 개설"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"lounge"}/>
 
         <table>
           <tbody>

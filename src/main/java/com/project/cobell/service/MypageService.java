@@ -2,6 +2,7 @@ package com.project.cobell.service;
 
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.CommentChallengeDto;
+import com.project.cobell.entity.Challenge;
 import com.project.cobell.entity.PhotoChallenge;
 import com.project.cobell.entity.PhotoUser;
 import com.project.cobell.repository.ChallengeRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,11 +55,26 @@ public class MypageService {
 
 	@Transactional
 	public List<ChallengeDto> getLikedChallengeList(Long userId){
+//		ModelMapper modelMapper = new ModelMapper();
+//
+//		return challengeRepository.findLikedChallenges(userId).stream()
+//				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
+//				.collect(Collectors.toList());
+
+		List<Challenge> challenges = challengeRepository.findLikedChallenges(userId);
+//		System.out.println(challenges);
+
 		ModelMapper modelMapper = new ModelMapper();
 
-		return challengeRepository.findLikedChallenges(userId).stream()
-				.map(challenge -> modelMapper.map(challenge, ChallengeDto.class))
-				.collect(Collectors.toList());
+		List<ChallengeDto> challengeDtos = new ArrayList<>();
+
+		for(Challenge challenge : challenges){
+			ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);
+			challengeDto.setPhoto(challenge.getPhotoChallenge().getFileName());
+			challengeDtos.add(challengeDto);
+		}
+
+		return challengeDtos;
 	}
 
 	// 업로드 경로

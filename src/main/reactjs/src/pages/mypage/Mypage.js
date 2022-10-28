@@ -84,19 +84,6 @@ const Mypage = () => {
             ))
           }
         </div>
-        <hr/>
-        <div className={styles.subtitle}>
-          좋아요 누른 챌린지
-        </div>
-        <div>
-          {
-            liked && liked.map((challenge, index) => (
-              <div key={index}>
-                {challenge.title}
-              </div>
-            ))
-          }
-        </div>
         </div>
       }
       {
