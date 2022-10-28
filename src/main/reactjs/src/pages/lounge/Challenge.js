@@ -135,6 +135,7 @@ const Challenge = () => {
         <div className={styles.challenge_title}>{challenge.title}</div>
       </div>
 
+      {/* 리더 프로필 */}
       <div className={styles.profile_wrap}>
         {
           users[0] && users[0].photo ? 
