@@ -7,7 +7,7 @@ const MenuTitle = ({title, leftIcon, rightButton, history, visible, handleSubmit
 
   return (
     <div className={styles.menu_title}>
-      <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(`/${history}`)}>{leftIcon}</span>
+      <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>{leftIcon}</span>
       <div className={styles.title}>{title}</div>
       {
         visible ? <button type="submit" className={styles.submit_btn} onClick={handleSubmit}>{rightButton}</button> : <button className={styles.hidden}></button>

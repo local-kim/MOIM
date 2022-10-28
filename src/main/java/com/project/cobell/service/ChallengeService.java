@@ -209,11 +209,28 @@ public class ChallengeService {
 
 	@Transactional
 	public List<CommentChallengeDto> getCommentList(Long challengeId){
+//		ModelMapper modelMapper = new ModelMapper();
+//
+////		System.out.println(commentChallengeRepository.findByChallengeId(challengeId).get(0).getUser());
+//
+//		return commentChallengeRepository.findByChallengeId(challengeId).stream()
+//				.map(comment -> modelMapper.map(comment, CommentChallengeDto.class))
+//				.collect(Collectors.toList());
+
 		ModelMapper modelMapper = new ModelMapper();
 
-		return commentChallengeRepository.findByChallengeId(challengeId).stream()
-				.map(comment -> modelMapper.map(comment, CommentChallengeDto.class))
-				.collect(Collectors.toList());
+		List<CommentChallenge> commentChallenges = commentChallengeRepository.findByChallengeId(challengeId);
+		List<CommentChallengeDto> commentChallengeDtos = new ArrayList<>();
+
+		for(CommentChallenge commentChallenge : commentChallenges){
+			CommentChallengeDto commentChallengeDto = modelMapper.map(commentChallenge, CommentChallengeDto.class);
+			commentChallengeDto.setNickname(commentChallenge.getUser().getNickname());
+			if(commentChallenge.getUser().getPhotoUser() != null)
+				commentChallengeDto.setPhoto(commentChallenge.getUser().getPhotoUser().getFileName());
+			commentChallengeDtos.add(commentChallengeDto);
+		}
+
+		return commentChallengeDtos;
 	}
 
 	@Transactional

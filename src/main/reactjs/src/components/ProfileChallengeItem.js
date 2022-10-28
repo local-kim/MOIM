@@ -16,7 +16,7 @@ const ProfileChallengeItem = ({challenge}) => {
         {/* 사진 */}
       </div>
       <div className={styles.info_wrap}>
-        <div className={styles.title} onClick={() => navigate(`${challenge.id}`)}>{challenge.title}</div>
+        <div className={styles.title} onClick={() => navigate(`/lounge/${challenge.id}`)}>{challenge.title}</div>
         <div className={styles.info}>
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
           <span>{challenge.area}</span>

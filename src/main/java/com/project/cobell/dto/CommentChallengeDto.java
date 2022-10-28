@@ -18,4 +18,8 @@ public class CommentChallengeDto {
 	private Long userId;
 	private String content;
 	private Timestamp createdAt;
+
+	// User & Comment join
+	private String nickname;
+	private String photo;
 }
