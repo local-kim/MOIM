@@ -79,6 +79,12 @@
 .challenge .title{
   font-weight: 600;
   cursor: pointer;
+
+  /* 텍스트 라인 수 제한(2) */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .challenge .info{

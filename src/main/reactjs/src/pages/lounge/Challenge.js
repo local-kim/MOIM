@@ -192,7 +192,7 @@ const Challenge = () => {
 
         <div className={styles.input_wrap}>
           <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
-          <button type='button' className={styles.comment_btn} onClick={insertComment}>+</button>
+          <button type='button' className={styles.comment_btn} onClick={insertComment}>Post</button>
         </div>
 
         {

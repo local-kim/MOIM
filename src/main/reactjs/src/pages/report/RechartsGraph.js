@@ -16,7 +16,7 @@ const CustomizedLabel: FunctionComponent<any> = (props: any) => {
 
   return (
     <text x={x} y={y} dy={-8} fill={stroke} fontSize={12} fontWeight={600} textAnchor="middle">
-      {value}kg
+      {value}
     </text>
   );
 };

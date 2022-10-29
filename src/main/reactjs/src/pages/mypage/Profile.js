@@ -101,10 +101,10 @@ const Profile = () => {
           {/* <MuiThemeProvider theme={theme}> */}
           {/* 탭 */}
           <Tabs className={styles.tabs} value={value} onChange={handleChange} variant="fullWidth" TabIndicatorProps={{style: {background: "#17b285"}}}>
-            <Tab label={
+            <Tab disableFocusRipple={true} disableRipple={true} label={
               <span className={`material-icons ${styles.icon}`}>menu</span>
             } />
-            <Tab label={
+            <Tab disableFocusRipple={true} disableRipple={true} label={
               <span className={`material-icons ${styles.icon}`}>notifications</span>
             } />
           </Tabs>

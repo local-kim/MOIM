@@ -79,7 +79,7 @@ const Report = () => {
           </div>
           
           <div className={styles.weight_box}>
-            <div className={styles.subtitle}>몸무게 변화</div>
+            <div className={styles.subtitle}>몸무게 변화(kg)</div>
             {/* {
               weights && weights.map((weight, index) => (
                 <div key={index}>
