@@ -2,7 +2,9 @@ package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.UpdateProfileDto;
+import com.project.cobell.dto.UserDto;
 import com.project.cobell.service.MypageService;
+import com.project.cobell.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,16 @@ public class MypageController {
 
 	@Autowired
 	private MypageService mypageService;
+
+	@Autowired
+	private UserService userService;
+
+	@GetMapping("/user/{userId}")
+	public UserDto getUser(
+			@PathVariable Long userId
+	){
+		return userService.getUser(userId);
+	}
 
 	@GetMapping("/created/{userId}")
 	public List<ChallengeDto> getMyChallengeList(

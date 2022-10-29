@@ -148,15 +148,15 @@ const Challenge = () => {
       </div>
 
       <div className={styles.info_wrap}>
-        <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>event</span>
-        <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
-        &nbsp;・&nbsp;
         <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
         <span>
           {
             challenge.area ? challenge.area : "온라인"
           }
         </span>
+        &nbsp;・&nbsp;
+        <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>event</span>
+        <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
         &nbsp;・&nbsp;
         <span>
           {

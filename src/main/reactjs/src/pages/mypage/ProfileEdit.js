@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProfileEdit.module.css';
 import axios from 'axios';
@@ -8,7 +8,18 @@ const ProfileEdit = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
+  const [userInfo, setUserInfo] = useState({});
   const [bio, setBio] = useState();
+
+  useEffect(() => {
+    if(user){
+      axios.get(`/mypage/user/${user.id}`)
+      .then(res => {
+        console.log(res.data);
+        setUserInfo(res.data);
+      }).catch(err => console.log(err));
+    }
+  }, []);
 
   const handleBio = (e) => {
     setBio(e.target.value);
@@ -82,11 +93,11 @@ const ProfileEdit = () => {
         <div className={styles.photo_box}>
           <label for="upload">
             {
-              !imageSrc && user.photo &&
-              <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" />
+              !imageSrc && userInfo.photo &&
+              <img src={`/resources/user_photo/${userInfo.photo}`} className={styles.photo} alt="" />
             }
             {
-              !imageSrc && !user.photo &&
+              !imageSrc && !userInfo.photo &&
               <div className={styles.photo}>
                 <span className={`material-icons ${styles.photo_icon}`}>person</span>
               </div>
@@ -106,7 +117,7 @@ const ProfileEdit = () => {
 
         <div className={styles.bio_box}>
           <div className={styles.subtitle}>소개</div>
-          <textarea defaultValue={user.bio} onChange={(e) => handleBio(e)}></textarea>
+          <textarea defaultValue={userInfo.bio} onChange={(e) => handleBio(e)}></textarea>
         </div>
       </div>
     </div>

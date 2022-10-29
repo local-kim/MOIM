@@ -40,9 +40,9 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [userInfo, setUserInfo] = useState({});
   const [created, setCreated] = useState([]);
   const [joined, setJoined] = useState([]);
-  const [liked, setLiked] = useState([]);
 
   // 탭
   const [value, setValue] = React.useState(0);
@@ -53,6 +53,12 @@ const Profile = () => {
 
   useEffect(() => {
     if(user){
+      axios.get(`/mypage/user/${user.id}`)
+      .then(res => {
+        console.log(res.data);
+        setUserInfo(res.data);
+      }).catch(err => console.log(err));
+
       axios.get(`/mypage/created/${user.id}`)
       .then(res => {
         console.log(res.data);
@@ -64,12 +70,6 @@ const Profile = () => {
         console.log(res.data);
         setJoined(res.data);
       }).catch(err => console.log(err));
-
-      axios.get(`/mypage/liked/${user.id}`)
-      .then(res => {
-        console.log(res.data);
-        setLiked(res.data);
-      }).catch(err => console.log(err));
     }
   }, []);
 
@@ -80,8 +80,8 @@ const Profile = () => {
         <div>
           <div className={styles.profile_box}>
             {
-              user.photo ? 
-              <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
+              userInfo.photo ? 
+              <img src={`/resources/user_photo/${userInfo.photo}`} className={styles.photo} alt="" /> :
               <div className={styles.no_photo}>
                 <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
               </div>
@@ -92,9 +92,12 @@ const Profile = () => {
                 <span className={styles.nickname}>{user.nickname}</span>
                 <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span>
               </div>
-              <pre className={styles.bio}>
-                {user.bio}
-              </pre>
+              {
+                userInfo.bio &&
+                <pre className={styles.bio}>
+                  {userInfo.bio}
+                </pre>
+              }
             </div>
           </div>
           
