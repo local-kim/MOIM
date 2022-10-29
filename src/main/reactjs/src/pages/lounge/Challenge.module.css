@@ -119,6 +119,7 @@ pre.content{
   font-size: 17px;
   margin: 0;
   padding: 10px 20px;
+  white-space: pre-wrap;
 }
 
 .users_wrap{
