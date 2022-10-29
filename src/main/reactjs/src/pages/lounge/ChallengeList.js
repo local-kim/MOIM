@@ -46,7 +46,7 @@ const ChallengeList = () => {
       {/* 메뉴 타이틀 */}
       <div className={styles.maintitle_box}>
         <div className={styles.maintitle}>Lounge</div>
-        <div>
+        <div className={styles.btn_wrap}>
           <span className={`material-icons ${styles.liked_btn}`} onClick={() => navigate('/lounge/like')}>favorite_border</span>
           <span className={`material-icons ${styles.add_btn}`} onClick={() => navigate('/lounge/new')}>add</span>
           <span className={`material-icons ${styles.search_btn}`}>search</span>

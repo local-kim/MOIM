@@ -152,36 +152,58 @@ const Challenge = () => {
         <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
         &nbsp;・&nbsp;
         <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
-        <span>{challenge.area}</span>
+        <span>
+          {
+            challenge.area ? challenge.area : "온라인"
+          }
+        </span>
         &nbsp;・&nbsp;
-        <span className={`material-icons ${styles.icon}`}>group</span>
-        {/* 챌린지에 참여한 유저수 */}
-        <span>{users.length}/{challenge.limit}명</span>
-        &nbsp;・&nbsp;
-        <span>{challenge.age}대</span>
+        <span>
+          {
+            challenge.age ? `${challenge.age}대` : "연령 무관"
+          }
+        </span>
+        &nbsp;
+        <span>
+          {
+            challenge.gender == 0 ? "혼성" : challenge.gender == 1 ? "남성" : "여성"
+          }
+        </span>
       </div>
 
       {/* 챌린지 내용 */}
       <pre className={styles.content}>{challenge.content}</pre>
 
+      {/* 챌린지에 참여한 유저수 */}
+      
+
       {/* 챌린지에 참여한 유저 목록 */}
-      <div className={styles.users_wrap}>
-        {
-          users && users.map((user, index) => (
-            <div key={index} className={styles.user}>
-              {
-                user && user.photo ? 
-                <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
-                <div className={styles.no_photo}>
-                  <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
-                </div>
-              }
-              {/* <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> */}
-              {/* {index == 0 && <span>*</span>} */}
-              <span className={styles.nickname}>{user.nickname}</span>
-            </div>
-          ))
-        }
+      <div className={styles.joined_user}>
+        <div className={styles.subtitle_wrap}>
+          <span className={styles.subtitle}>참여한 유저</span>
+          <span className={styles.count_wrap}>
+            <span className={`material-icons ${styles.icon}`}>group</span>
+            <span className={styles.count}>{users.length}/{challenge.limit}명</span>
+          </span>
+        </div>
+        <div className={styles.users_wrap}>
+          {
+            users && users.map((user, index) => (
+              <div key={index} className={styles.user}>
+                {
+                  user && user.photo ? 
+                  <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
+                  <div className={styles.no_photo}>
+                    <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
+                  </div>
+                }
+                {/* <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> */}
+                {/* {index == 0 && <span>*</span>} */}
+                <span className={styles.nickname}>{user.nickname}</span>
+              </div>
+            ))
+          }
+        </div>
       </div>
 
       {/* 댓글 */}

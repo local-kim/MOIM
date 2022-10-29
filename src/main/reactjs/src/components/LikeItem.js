@@ -64,7 +64,11 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
         <div className={styles.title} onClick={() => navigate(`${challenge.id}`)}>{challenge.title}</div>
         <div className={styles.info}>
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
-          <span>{challenge.area}</span>
+          <span>
+            {
+              challenge.area ? challenge.area : "온라인"
+            }
+          </span>
           <span>&nbsp;・&nbsp;</span>
           <span>{format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>

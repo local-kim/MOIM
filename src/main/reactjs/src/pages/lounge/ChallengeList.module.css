@@ -15,13 +15,19 @@
   font-weight: 600;
 }
 
-.maintitle_box > div > span{
+.btn_wrap{
+  display: flex;
+  align-items: center;
+}
+
+.maintitle_box > .btn_wrap > span{
   margin-left: 10px;
   cursor: pointer;
+  font-size: 24px;
 }
 
 .add_btn{
-  font-size: 26px;
+  font-size: 28px !important;
 }
 
 .subtitle_box{
@@ -37,3 +43,7 @@
 }
 
 
+/* Liked.js */
+.liked_wrap{
+  margin-top: 60px;
+}

@@ -75,7 +75,7 @@ const ProfileEdit = () => {
   }
 
   return (
-    <div>
+    <div className={styles.profile_edit_wrap}>
       <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"} handleSubmit={insertChanges}/>
 
       <div className={styles.wrap}>

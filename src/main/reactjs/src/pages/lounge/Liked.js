@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Challenge.module.css';
+import styles from './ChallengeList.module.css';
 import axios from 'axios';
 import { MenuTitle, LikeItem } from '../../components';
 
@@ -23,7 +23,7 @@ const Liked = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.liked_wrap}>
       {/* 상단 메뉴 타이틀 */}
       <MenuTitle title={"저장한 챌린지"} leftIcon={"arrow_back_ios"} rightButton={""} history={"lounge"}/>
 
