@@ -19,6 +19,10 @@
   justify-content: flex-end;
 }
 
+.next_btn_wrap span{
+  cursor: pointer;
+}
+
 .next_btn{
   font-weight: 600;
   /* margin-right: 5px; */
@@ -67,7 +71,7 @@
   justify-content: center;
   align-items: center;
   /* color: white; */
-  box-shadow: 0 5px 15px rgba(134, 219, 203, 0.3);
+  box-shadow: 0 5px 15px rgba(134, 219, 203, 0.5);
   border-radius: 8px;
   margin-left: 8px;
   font-size: 15px;
@@ -93,7 +97,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 30px;
   width: 190px;
 }
 

@@ -29,11 +29,24 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h1>로그인</h1>
+    <div className={styles.login_wrap}>
+      <div className={styles.title}>COBELL</div>
 
       <form onSubmit={login}>
-        <table>
+        <div className={styles.wrap}>
+          <div className={styles.subtitle}>이메일</div>
+          <input className={styles.input} type='email' name='email' required onChange={(e) => setEmail(e.target.value)}/>
+        </div>
+
+        <div className={styles.wrap}>
+          <div className={styles.subtitle}>비밀번호</div>
+          <input className={styles.input} type='password' name="password" required onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+        
+        <div className={styles.btn_box}><button type="submit" className={styles.login_btn}>로그인</button></div>
+      </form>
+      
+        {/* <table>
           <tbody>
             <tr>
               <th>email</th>
@@ -51,12 +64,12 @@ const Login = () => {
             </tr>
             <tr>
               <td colSpan='2'>
-                <button type="submit">Login</button>
+                
               </td>
             </tr>
           </tbody>
-        </table>
-      </form>
+        </table> */}
+      
     </div>
   );
 };
