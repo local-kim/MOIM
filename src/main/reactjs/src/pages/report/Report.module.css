@@ -14,9 +14,19 @@
 }
 
 .health_box{
+  margin-top: 30px;
+}
+
+.chart_wrap{
+  text-align: center;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
 .weight_box{
-  margin-top: 20px;
+  margin-top: 50px;
+}
+
+.graph_wrap{
+  margin-top: 20px ;
 }

@@ -7,6 +7,7 @@ import ko from 'date-fns/locale/ko';
 import RechartsGraph from './RechartsGraph';
 import NivoGraph from './NivoGraph';
 import VisGraph from './VisGraph';
+import Chart from './Chart';
 
 const Report = () => {
   const navigate = useNavigate();
@@ -62,8 +63,8 @@ const Report = () => {
         <div className={styles.health_box}>
           <div>
             <div className={styles.subtitle}>건강 점수</div>
-            <div></div>
-            <div>{user.height}cm, {weights && weights[weights.length - 1].weight}kg</div>
+            <div className={styles.chart_wrap}><Chart bmi={bmi} /></div>
+            {/* <div>{user.height}cm, {weights && weights[weights.length - 1].weight}kg</div>
             <div>BMI {bmi}</div>
             {
               bmi <= 18.5 ? (
@@ -75,7 +76,8 @@ const Report = () => {
               ) : (
                 <div>비만</div>
               )
-            }
+            } */}
+            
           </div>
           
           <div className={styles.weight_box}>
@@ -90,7 +92,8 @@ const Report = () => {
                 </div>
               ))
             } */}
-            <RechartsGraph data={weights}/>
+            <div className={styles.graph_wrap}><RechartsGraph data={weights}/></div>
+            
             {/* <div style={{height:'300px'}}><NivoGraph data={weights} /></div> */}
             {/* <VisGraph data={weights} /> */}
 
