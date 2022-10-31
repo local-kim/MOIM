@@ -21,6 +21,15 @@
   text-align: center;
   margin: 0 auto;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.chart_wrap > div{
+  /* margin: 0;
+  width: 100%; */
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .weight_box{
