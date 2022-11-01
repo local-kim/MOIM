@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Profile.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -74,10 +74,10 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className={styles.wrap}>
-      {
-        user &&
-        <div>
+    <div>
+      { !user && <Navigate to="/login" replace={true} /> }
+      { user &&
+        <div className={styles.wrap}>
           <div className={styles.profile_box}>
             {
               userInfo.photo ? 
@@ -115,13 +115,6 @@ const Profile = () => {
           {
             value === 0 ? <CreatedChallenge created={created} /> : <JoinedChallenge joined={joined} />
           }
-        </div>
-      }
-      {
-        !user &&
-        <div>
-          <button type='button' className={`btn btn-primary`} onClick={() => navigate('/login')}>로그인</button>
-          <button type='button' className={`btn btn-secondary`} onClick={() => navigate('/join')}>회원가입</button>
         </div>
       }
     </div>

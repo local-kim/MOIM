@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './Report.module.css';
 import axios from 'axios';
 import { format } from 'date-fns'
@@ -55,13 +55,14 @@ const Report = () => {
   }, []);
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.title}>Report</div>
-      
-      {
-        user && 
-        <div className={styles.health_box}>
-          <div>
+    <div>
+      { !user && <Navigate to="/login" replace={true} /> }
+      { user &&
+        <div className={styles.wrap}>
+          <div className={styles.title}>Report</div>
+          
+          {/* 건강 점수 */}
+          <div className={styles.health_box}>
             <div className={styles.subtitle}>건강 점수</div>
             <div className={styles.chart_wrap}><Chart bmi={bmi} /></div>
             {/* <div>{user.height}cm, {weights && weights[weights.length - 1].weight}kg</div>
@@ -77,9 +78,9 @@ const Report = () => {
                 <div>비만</div>
               )
             } */}
-            
           </div>
-          
+            
+          {/* 몸무게 변화 */}
           <div className={styles.weight_box}>
             <div className={styles.subtitle}>몸무게 변화(kg)</div>
             {/* {
@@ -97,17 +98,9 @@ const Report = () => {
             {/* <div style={{height:'300px'}}><NivoGraph data={weights} /></div> */}
             {/* <VisGraph data={weights} /> */}
 
-
             <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
             <button type='button' onClick={addWeight}>몸무게 추가</button>
           </div>
-        </div>
-      }
-      {
-        !user &&
-        <div>
-          <button type='button' className={`btn btn-primary`} onClick={() => navigate('/login')}>로그인</button>
-          <button type='button' className={`btn btn-secondary`} onClick={() => navigate('/join')}>회원가입</button>
         </div>
       }
     </div>
