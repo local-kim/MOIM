@@ -12,10 +12,19 @@ const Settings = () => {
       { user &&
         <div className={styles.wrap}>
           <div className={styles.title}>Settings</div>
-          <button type='button' className={`btn btn-secondary`} onClick={() => {
-            localStorage.removeItem("user");
-            setUser(null);
-          }}>로그아웃</button>
+
+          <div className={styles.btn_wrap}>
+            <div className={styles.btn_item} onClick={() => {
+              localStorage.removeItem("user");
+              setUser(null);
+            }}>로그아웃</div>
+
+            <div className={styles.btn_item} onClick={() => {}}>공지사항</div>
+
+            <div className={styles.btn_item} onClick={() => {}}>개발자 피드백</div>
+
+            <div className={styles.btn_item} onClick={() => {}}>버전 정보</div>
+          </div>
         </div>
       }
     </div>
