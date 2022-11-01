@@ -9,7 +9,7 @@
   color: #86dbcb;
 }
 
-form{
+.login_wrap > form{
   padding: 30px;
 }
 
@@ -53,4 +53,16 @@ form{
   margin: 0 10px;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* Home.js */
+.home_logo{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 800;
 }
