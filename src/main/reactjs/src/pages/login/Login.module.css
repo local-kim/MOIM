@@ -43,3 +43,14 @@ form{
   color: white;
   font-weight: 600;
 }
+
+.btn_wrap{
+  display: flex;
+  justify-content: center;
+}
+
+.btn_wrap > div{
+  margin: 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+}

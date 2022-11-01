@@ -28,8 +28,7 @@
 .chart_wrap > div{
   /* margin: 0;
   width: 100%; */
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 5px 40px 40px 40px;
 }
 
 .weight_box{
