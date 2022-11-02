@@ -23,7 +23,7 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(res.data));
         // user 정보를 다시 객체로
         // console.log(JSON.parse(localStorage.getItem("user")));
-        navigate("/lounge");
+        navigate("/lounge", {replace: true});
       }
     }).catch(err => console.log(err));
   }

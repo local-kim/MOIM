@@ -57,7 +57,7 @@ const NewChallenge = () => {
     })
     .then(res => {
       // console.log("challenge id: " + res.data);
-      navigate(`/lounge/${res.data}`);
+      navigate(`/lounge/${res.data}`, {replace: true});
     }).catch(err => console.log(err));
   }
 
