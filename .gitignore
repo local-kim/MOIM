@@ -39,4 +39,11 @@ out/
 
 .DS_Store
 
+/resources
+/resources/
 /resources/**
+resources/
+resources/**
+resources/challenge_photo/**
+resources/user_photo/**
+src/main/resources/application.yml
