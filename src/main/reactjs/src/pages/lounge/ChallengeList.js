@@ -13,8 +13,6 @@ const ChallengeList = () => {
   const [challenges, setChallenges] = useState();
   const [likeList, setLikeList] = useState([]);
 
-  
-
   const getLikeList = () => {
     axios.get(`/challenge/like/list/${user.id}`)
     .then(res => {
@@ -52,7 +50,13 @@ const ChallengeList = () => {
             <div className={styles.btn_wrap}>
               <span className={`material-icons ${styles.liked_btn}`} onClick={() => navigate('/lounge/like')}>favorite_border</span>
               <span className={`material-icons ${styles.add_btn}`} onClick={() => navigate('/lounge/new')}>add</span>
-              <span className={`material-icons ${styles.search_btn}`}>search</span>
+              <span className={`material-icons ${styles.search_btn}`} onClick={() => navigate('/lounge/search', {state: {
+                challenges, likeList
+                // , getLikeList
+                // challenges: challenges,
+                // likeList: likeList,
+                // getLikeList: getLikeList
+              }})}>search</span>
             </div>
           </div>
           

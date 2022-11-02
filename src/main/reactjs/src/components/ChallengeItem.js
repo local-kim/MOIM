@@ -58,7 +58,7 @@ const ChallengeItem = ({challenge, likeList, getLikeList}) => {
         }
       </div>
       <div className={styles.info_wrap}>
-        <div className={styles.title} onClick={() => navigate(`${challenge.id}`)}>{challenge.title}</div>
+        <div className={styles.title} onClick={() => navigate(`/lounge/${challenge.id}`)}>{challenge.title}</div>
         <div className={styles.info}>
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
           <span>
