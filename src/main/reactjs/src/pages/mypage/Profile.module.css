@@ -69,6 +69,13 @@
   white-space: pre-wrap;
 }
 
+.noti_btn{
+  position: fixed;
+  top: 25px;
+  right: 20px;
+  cursor: pointer;
+}
+
 /* Tab */
 /* icon */
 /* .css-i4bv87-MuiSvgIcon-root{

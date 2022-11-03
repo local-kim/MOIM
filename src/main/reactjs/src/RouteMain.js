@@ -4,7 +4,7 @@ import "./App.css";
 import { Challenge, ChallengeList, Liked, NewChallenge, Search } from "./pages/lounge";
 import { Login, Join, Home } from "./pages/login";
 import { Report } from "./pages/report";
-import { Profile, ProfileEdit } from "./pages/mypage";
+import { Notification, Profile, ProfileEdit } from "./pages/mypage";
 import { Settings } from "./pages/settings";
 import { MenuBar } from "./components";
 
@@ -29,6 +29,8 @@ const RouteMain = () => {
         {/* 내 프로필 */}
         <Route path="/profile" element={<Profile/>} />
         <Route path="/profile/edit" element={<ProfileEdit/>} />
+
+        <Route path="/notification" element={<Notification/>} />
 
         {/* 로그인 */}
         <Route path="/join" element={<Join/>} />

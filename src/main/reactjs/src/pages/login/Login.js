@@ -48,7 +48,7 @@ const Login = () => {
 
       <div className={styles.btn_wrap}>
         <div onClick={() => navigate('/join')}>회원가입</div>
-        <div onClick={() => navigate('/find')}>아이디/비밀번호 찾기</div>
+        <div onClick={() => {}}>비밀번호 찾기</div>
       </div>
 
         {/* <table>

@@ -100,6 +100,9 @@ const Profile = () => {
               }
             </div>
           </div>
+          <div>
+            <span className={`material-icons-outlined ${styles.noti_btn}`} onClick={() => navigate('/notification')}>notifications</span>
+          </div>
           
           {/* <MuiThemeProvider theme={theme}> */}
           {/* 탭 */}
