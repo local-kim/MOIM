@@ -57,6 +57,12 @@ public class User {
 //	@JsonIgnore
 	private PhotoUser photoUser;
 
+	@OneToMany(mappedBy = "user")
+	private Set<Notification> notifications = new HashSet<>();
+
+	@OneToMany(mappedBy = "targetUser")
+	private Set<Notification> targetNotifications = new HashSet<>();
+
 //	@Formula("(select fileName from photo_user pu where pu.user_id=id)")
 //	private String fileName;
 }

@@ -76,7 +76,11 @@ public class ChallengeController {
 	public List<UserDto> joinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
+		// join 테이블에 insert
 		challengeService.joinChallenge(challengeId, userId);
+
+		// notification 테이블에 참여 알림 insert
+		challengeService.insertJoinNotification(userId, challengeId);
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);

@@ -108,3 +108,18 @@
 .tabs .icon{
   color: rgb(170, 170, 170);
 }
+
+/* Notification.js */
+.noti_wrap{
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.noti_box{
+  height: 60px;
+  /* padding: 20px; */
+}
+
+.noti_box:not(:last-child){
+  border-bottom: 1px solid #eee;
+}

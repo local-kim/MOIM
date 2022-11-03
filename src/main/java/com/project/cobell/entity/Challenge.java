@@ -59,6 +59,9 @@ public class Challenge {
 //	@JoinColumn(name = "id")
 	private PhotoChallenge photoChallenge;
 
+	@OneToMany(mappedBy = "challenge")
+	private Set<Notification> notifications = new HashSet<>();
+
 //	@Transient
 	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
 	private int joinedUsers;

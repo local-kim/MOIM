@@ -41,6 +41,9 @@ public class ChallengeService {
 	@Autowired
 	private PhotoChallengeRepository photoChallengeRepository;
 
+	@Autowired
+	private NotificationRepository notificationRepository;
+
 	@Transactional
 	public Long createChallenge(ChallengeDto challengeDto){
 		// DTO to Entity
@@ -126,6 +129,19 @@ public class ChallengeService {
 		joinChallenge.setUser(user);
 
 		joinChallengeRepository.save(joinChallenge);
+	}
+
+	@Transactional
+	public void insertJoinNotification(Long targetUserId, Long challengeId){
+		Notification notification = new Notification();
+
+		notification.setType(0);
+		Long leaderId = challengeRepository.findById(challengeId).get().getLeader().getId();
+		notification.setUser(userRepository.findById(leaderId).get());
+		notification.setTargetUser(userRepository.findById(targetUserId).get());
+		notification.setChallenge(challengeRepository.findById(challengeId).get());
+
+		notificationRepository.save(notification);
 	}
 
 	@Transactional
