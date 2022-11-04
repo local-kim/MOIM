@@ -24,7 +24,7 @@ const Challenge = () => {
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
-      isJoined(true);
+      setIsJoined(true);
     }).catch(err => console.log(err));
   }
 
@@ -227,6 +227,13 @@ const Challenge = () => {
       {/* 참여 버튼 */}
       <div className={styles.btn_box}>
         {
+          new Date(challenge.planned_at) <= new Date() ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>종료</button> :
+          isJoined ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button> :
+          users.length == challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>모집완료</button> :
+          users.length < challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.green_btn}`} onClick={joinUser}>참여하기</button> :
+          <button style={{display: 'none'}}></button>
+        }
+        {/* {
           users.length == challenge.limit && !isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>모집완료</button>
         }
         {
@@ -237,7 +244,7 @@ const Challenge = () => {
         }
         {
           users.length < challenge.limit && isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button>
-        }
+        } */}
       </div>
     </div>
   );

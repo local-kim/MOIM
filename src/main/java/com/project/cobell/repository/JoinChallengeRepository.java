@@ -14,7 +14,7 @@ import java.util.List;
 public interface JoinChallengeRepository extends JpaRepository<JoinChallenge, JoinChallengeId> {
 //	@Query(value = "select count(*) from join_challenge where challenge_id=1")
 //	public int countUser();
-	@Query(value = "select u from JoinChallenge jc , User u where u.id=jc.user.id and jc.challenge.id=:challengeId")
+	@Query(value = "select u from JoinChallenge jc , User u where u.id=jc.user.id and jc.challenge.id=:challengeId order by jc.createdAt")
 	List<User> findJoinedUsers(@Param("challengeId") Long challengeId);
 
 	// Query Method

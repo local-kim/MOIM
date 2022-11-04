@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -21,6 +22,8 @@ public class JoinChallenge {
 	@ManyToOne  // JoinChallenge : User = N : 1
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	private Timestamp createdAt;
 
 //	private int status;
 }
