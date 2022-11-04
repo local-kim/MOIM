@@ -185,17 +185,24 @@ const Challenge = () => {
         <span className={`material-icons ${styles.icon} ${styles.place_icon}`} style={{marginRight: '3px'}}>event</span>
         <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
         &nbsp;・&nbsp;
-        <span>
-          {
-            challenge.age ? `${challenge.age}대` : "연령 무관"
-          }
-        </span>
-        &nbsp;
-        <span>
-          {
-            challenge.gender == 0 ? "혼성" : challenge.gender == 1 ? "남성" : "여성"
-          }
-        </span>
+        {
+          challenge.age == 0 && challenge.gender == 0 ?
+          <span>누구나</span> :
+          <span>
+            <span>
+              {
+                challenge.age ? `${challenge.age}대` : ""
+              }
+            </span>
+            &nbsp;
+            <span>
+              {
+                challenge.gender == 1 ? "남자만" : challenge.gender == 2 ? "여자만" : ""
+              }
+            </span>
+          </span>
+        }
+        
       </div>
 
       {/* 챌린지 내용 */}
