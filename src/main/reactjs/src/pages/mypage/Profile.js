@@ -111,7 +111,7 @@ const Profile = () => {
               <span className={`material-icons ${styles.icon}`}>menu</span>
             } />
             <Tab disableFocusRipple={true} disableRipple={true} label={
-              <span className={`material-icons ${styles.icon}`}>notifications</span>
+              <span className={`material-icons ${styles.icon}`}>diversity_3</span>
             } />
           </Tabs>
           {/* </MuiThemeProvider> */}

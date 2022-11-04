@@ -5,11 +5,11 @@ import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
 import styles from './Components.module.css';
 
-const ProfileChallengeItem = ({challenge}) => {
+const MyChallengeItem = ({challenge}) => {
   const navigate = useNavigate();
   
   return (
-    <div className={styles.challenge}>
+    <div className={styles.profile_challenge}>
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
       }}>
@@ -33,9 +33,14 @@ const ProfileChallengeItem = ({challenge}) => {
             {challenge.joined_users}/{challenge.limit}명
           </span>
         </div>
+        <div>
+          {
+            new Date(challenge.planned_at) <= new Date() ? <span className={`${styles.status} ${styles.gray}`}>종료</span> : challenge.joined_users == challenge.limit ? <button type='button' className={`${styles.status} ${styles.gray}`}>모집완료</button>: <span className={`${styles.status} ${styles.activate}`}>모집중</span>
+          }
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProfileChallengeItem;
+export default MyChallengeItem;

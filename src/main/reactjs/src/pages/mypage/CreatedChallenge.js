@@ -1,7 +1,5 @@
 import React from 'react';
-import { ChallengeItem } from '../../components';
-import ProfileChallengeItem from '../../components/ProfileChallengeItem';
-import styles from './Profile.module.css';
+import { ChallengeItem, MyChallengeItem } from '../../components';
 
 const CreatedChallenge = ({created}) => {
   return (
@@ -9,7 +7,7 @@ const CreatedChallenge = ({created}) => {
       {/* 내가 만든 챌린지 */}
       {
         created && created.map((challenge, index) => (
-          <ProfileChallengeItem key={index} challenge={challenge}/>
+          <MyChallengeItem key={index} challenge={challenge}/>
         ))
       }
     </div>

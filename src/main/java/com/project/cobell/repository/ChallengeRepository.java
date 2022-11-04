@@ -20,10 +20,10 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
 //	List<Challenge> getCountedList();
 
 	// 내가 만든 챌린지
-	List<Challenge> findByLeaderId(Long userId);
+	List<Challenge> findByLeaderIdOrderByCreatedAtDesc(Long userId);
 
 	// 내가 참여한 챌린지
-	@Query(value = "select c from JoinChallenge jc , Challenge c where c.id=jc.challenge.id and jc.user.id=:userId")
+	@Query(value = "select c from JoinChallenge jc , Challenge c where c.id=jc.challenge.id and jc.user.id=:userId order by c.plannedAt desc")
 	List<Challenge> findJoinedChallenges(@Param("userId") Long userId);
 
 	// 내가 좋아요 누른 챌린지

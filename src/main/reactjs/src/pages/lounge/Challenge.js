@@ -228,8 +228,8 @@ const Challenge = () => {
       <div className={styles.btn_box}>
         {
           new Date(challenge.planned_at) <= new Date() ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>종료</button> :
-          isJoined ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button> :
-          users.length == challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>모집완료</button> :
+          isJoined ? <button type='button' className={`${styles.join_btn} ${styles.light_gray_btn}`}>참여중</button> :
+          users.length == challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.light_gray_btn}`}>모집완료</button> :
           users.length < challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.green_btn}`} onClick={joinUser}>참여하기</button> :
           <button style={{display: 'none'}}></button>
         }

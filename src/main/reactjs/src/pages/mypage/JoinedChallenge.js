@@ -1,6 +1,5 @@
 import React from 'react';
-import { ChallengeItem } from '../../components';
-import ProfileChallengeItem from '../../components/ProfileChallengeItem';
+import { ChallengeItem, JoinedChallengeItem } from '../../components';
 import styles from './Profile.module.css';
 
 const JoinedChallenge = ({joined}) => {
@@ -9,7 +8,7 @@ const JoinedChallenge = ({joined}) => {
       {/* 내가 참여한 챌린지(진행중+완료) */}
       {
         joined && joined.map((challenge, index) => (
-          <ProfileChallengeItem key={index} challenge={challenge}/>
+          <JoinedChallengeItem key={index} challenge={challenge}/>
         ))
       }
     </div>

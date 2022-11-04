@@ -44,7 +44,7 @@ public class MypageService {
 //				.collect(Collectors.toList());
 
 		ModelMapper modelMapper = new ModelMapper();
-		List<Challenge> challenges = challengeRepository.findByLeaderId(userId);
+		List<Challenge> challenges = challengeRepository.findByLeaderIdOrderByCreatedAtDesc(userId);
 		List<ChallengeDto> challengeDtos = new ArrayList<>();
 
 		for(Challenge challenge : challenges){

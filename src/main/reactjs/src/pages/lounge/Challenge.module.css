@@ -210,12 +210,17 @@ pre.content{
   /* margin-bottom: 10px; */
 }
 
-.gray_btn{
+.light_gray_btn{
   background-color: rgb(240, 240, 240);
 }
 
+.gray_btn{
+  background-color: rgb(130, 130, 130);
+  color: white;
+}
+
 .green_btn{
-  background-color: rgb(113, 213, 152);
+  background-color: #86dbcb;
   color: white;
 }
 
