@@ -62,6 +62,20 @@ public class NotificationService {
 	}
 
 	@Transactional
+	public void insertUnjoinNotification(Long challengeId, Long targetUserId){
+		Notification notification = new Notification();
+
+		notification.setType(1);    // 참여 취소 알림
+//		Long leaderId = challengeRepository.findById(challengeId).get().getLeader().getId();
+		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
+		notification.setUser(targetChallenge.getLeader());
+		notification.setTargetUser(userRepository.findById(targetUserId).get());
+		notification.setChallenge(targetChallenge);
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
 	public void insertCommentNotification(CommentChallengeDto commentChallengeDto){
 		Notification notification = new Notification();
 

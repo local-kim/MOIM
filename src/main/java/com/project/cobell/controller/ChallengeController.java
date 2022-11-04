@@ -98,7 +98,7 @@ public class ChallengeController {
 		challengeService.deleteJoinedUser(challengeId, userId);
 
 		// notification 테이블에 참여 알림 insert
-//		notificationService.insertJoinNotification(challengeId, userId);
+		notificationService.insertUnjoinNotification(challengeId, userId);
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);

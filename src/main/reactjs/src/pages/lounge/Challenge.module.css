@@ -275,6 +275,7 @@ input:focus{
   color: #999999;
   /* font-weight: 500; */
   padding: 0 10px;
+  cursor: pointer;
 }
 
 /* Comment.js */
