@@ -124,6 +124,15 @@ public class ChallengeController {
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}
 
+	@DeleteMapping("/comment/delete")
+	public List<CommentChallengeDto> deleteComment(
+			@RequestBody CommentChallengeDto commentChallengeDto
+	){
+		challengeService.deleteComment(commentChallengeDto.getId());
+
+		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
+	}
+
 	@GetMapping("/comment/list/{challengeId}")
 	public List<CommentChallengeDto> getCommentList(
 			@PathVariable Long challengeId

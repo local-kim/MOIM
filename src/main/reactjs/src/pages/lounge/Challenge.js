@@ -18,7 +18,7 @@ const Challenge = () => {
   const [isLiked, setIsLiked] = useState();
 
   const [comment, setComment] = useState();
-  const [commentList, setCommmentList] = useState();
+  const [commentList, setCommentList] = useState();
 
   const joinUser = () => {
     axios.get(`/challenge/join/${challengeId}/${user.id}`)
@@ -75,7 +75,14 @@ const Challenge = () => {
     })
     .then(res => {
       console.log(res.data);
-      setCommmentList(res.data);
+      setCommentList(res.data);
+    }).catch(err => console.log(err));
+  }
+
+  const deleteComment = () => {
+    axios.delete(`/challenge/comment/delete`, {data: comment})
+    .then(res => {
+      setCommentList(res.data);
     }).catch(err => console.log(err));
   }
 
@@ -108,7 +115,7 @@ const Challenge = () => {
     axios.get(`/challenge/comment/list/${challengeId}`)
     .then(res => {
       console.log(res.data);
-      setCommmentList(res.data);
+      setCommentList(res.data);
     }).catch(err => console.log(err));
 
     // 좋아요 여부
@@ -175,7 +182,7 @@ const Challenge = () => {
           }
         </span>
         &nbsp;・&nbsp;
-        <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>event</span>
+        <span className={`material-icons ${styles.icon} ${styles.place_icon}`} style={{marginRight: '3px'}}>event</span>
         <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
         &nbsp;・&nbsp;
         <span>
@@ -226,7 +233,7 @@ const Challenge = () => {
       </div>
 
       {/* 댓글 */}
-      <div className={styles.comment_wrap}>
+      <div className={styles.comment_list}>
         <div className={styles.subtitle}>
           댓글 {commentList && commentList.length}
         </div>
@@ -238,7 +245,7 @@ const Challenge = () => {
 
         {
           commentList && commentList.map((comment, index) => (
-            <Comment comment={comment} key={index}/>
+            <Comment comment={comment} user={user} setCommentList={setCommentList} key={index}/>
           ))
         }
       </div>

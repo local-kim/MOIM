@@ -139,6 +139,7 @@ pre.content{
 .count_wrap .icon{
   font-size: 16px;
   color: rgb(150, 150, 150);
+  margin-right: 3px;
 }
 
 .count_wrap .count{
@@ -192,7 +193,7 @@ pre.content{
   margin-top: 3px;
 }
 
-.comment_wrap{
+.comment_list{
   padding: 10px 20px;
 }
 
@@ -279,20 +280,31 @@ input:focus{
 }
 
 /* Comment.js */
-.comment{
+.comment_wrap{
   display: flex;
-  align-items: center;
-  margin: 5px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
-.comment .comment_wrap{
+.comment_wrap .delete_btn{
+  color: rgb(200, 200, 200);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.comment_wrap .comment{
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+
+.comment_wrap .info_wrap{
+  display: flex;
 }
 
 .comment_wrap .nickname{
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   margin-right: 5px;
 }
 
@@ -301,7 +313,7 @@ input:focus{
   font-size: 11px;
 }
 
-.comment .photo{
+.comment_wrap .comment .photo{
   width: 35px;
   height: 35px;
   margin-right: 10px;
@@ -309,7 +321,7 @@ input:focus{
   object-fit: cover;
 }
 
-.comment .no_photo{
+.comment_wrap .comment .no_photo{
   width: 35px;
   height: 35px;
   background-color: rgb(230, 230, 230);
@@ -320,12 +332,12 @@ input:focus{
   align-items: center;
 }
 
-.comment .no_photo_icon{
+.comment_wrap .comment .no_photo_icon{
   font-size: 21px;
   color: white;
 }
 
-.comment .content{
+.comment_wrap .comment .content{
   font-size: 15px;
 }
 

@@ -230,6 +230,11 @@ public class ChallengeService {
 	}
 
 	@Transactional
+	public void deleteComment(Long commentId){
+		commentChallengeRepository.deleteById(commentId);
+	}
+
+	@Transactional
 	public List<CommentChallengeDto> getCommentList(Long challengeId){
 //		ModelMapper modelMapper = new ModelMapper();
 //
