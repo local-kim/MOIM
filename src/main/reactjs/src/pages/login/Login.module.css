@@ -62,6 +62,10 @@
 .home_logo{
   width: 100vw;
   height: 100vh;
+  @supports (-webkit-touch-callout: none) { 
+    height: -webkit-fill-available;
+  }
+
   display: flex;
   justify-content: center;
   justify-items: center;

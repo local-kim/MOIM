@@ -90,7 +90,8 @@ const Profile = () => {
             <div className={styles.info_box}>
               <div className={styles.nickname_wrap}>
                 <span className={styles.nickname}>{user.nickname}</span>
-                <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span>
+                {/* <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span> */}
+                <span className={`material-icons ${styles.edit_btn}`}>settings</span>
               </div>
               {
                 userInfo.bio &&
@@ -108,7 +109,8 @@ const Profile = () => {
           {/* 탭 */}
           <Tabs className={styles.tabs} value={value} onChange={handleChange} variant="fullWidth" TabIndicatorProps={{style: {background: "#86dbcb"}}}>
             <Tab disableFocusRipple={true} disableRipple={true} label={
-              <span className={`material-icons ${styles.icon}`}>menu</span>
+              // <span className={`material-icons ${styles.icon}`}>menu</span>
+              <span className={`material-symbols-outlined ${styles.icon}`}>edit_square</span>
             } />
             <Tab disableFocusRipple={true} disableRipple={true} label={
               <span className={`material-icons ${styles.icon}`}>diversity_3</span>

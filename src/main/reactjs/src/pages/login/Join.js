@@ -41,8 +41,8 @@ const Join = () => {
     
     axios.post('/user/join', user)
     .then(res => {
-      console.log('회원가입 성공');
-      navigate("/login");
+      // console.log('회원가입 성공');
+      navigate("/login", {replace: true});
     }).catch(err => console.log(err));
   }
 

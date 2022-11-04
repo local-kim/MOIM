@@ -289,7 +289,7 @@ input:focus{
 
 .comment_wrap .delete_btn{
   color: rgb(200, 200, 200);
-  font-size: 17px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -374,6 +374,12 @@ input:focus{
   padding: 0;
 }
 
+/* ChallengeMenu.js */
+.menu_wrap .delete_btn{
+  font-size: 20px;
+  color: gray;
+}
+
 .menu_wrap > button#long-button.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
   padding: 0 !important;
 }
@@ -381,3 +387,4 @@ input:focus{
 .menu_wrap > button#long-button{
   padding: 0 !important;
 }
+

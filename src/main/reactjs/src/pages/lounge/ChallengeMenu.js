@@ -62,11 +62,12 @@ const ChallengeMenu = ({challenge, user}) => {
         //     width: '20ch',
         //   },
         // }}
-        sx={{paddingTop: '0', paddingBottom: '0'}}
+        sx={{paddingTop: '0', paddingBottom: '0', boxShadow: 'none'}}
         size={'small'}
       >
-        <MenuItem onClick={deleteChallenge} size={'small'} sx={{minHeight: '25px', fontSize:'15px', padding: '0 10px 0 10px'}}>
-          삭제하기
+        <MenuItem onClick={deleteChallenge} size={'small'} sx={{minHeight: '25px', fontSize:'15px', padding: '0 13px 0 10px'}}>
+          <span className={`material-icons ${styles.delete_btn}`} style={{fontSize: '20px', marginRight: '5px', color: '#212529'}}>delete_outline</span>
+          <span style={{lineHeight: '20px'}}>삭제</span>
         </MenuItem>
       </Menu>
     </div>
