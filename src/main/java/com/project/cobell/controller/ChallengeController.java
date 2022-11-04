@@ -5,6 +5,7 @@ import com.project.cobell.dto.CommentChallengeDto;
 import com.project.cobell.dto.LikeChallengeDto;
 import com.project.cobell.dto.UserDto;
 import com.project.cobell.service.ChallengeService;
+import com.project.cobell.service.NotificationService;
 import com.project.cobell.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class ChallengeController {
 
 	@Autowired
 	private ChallengeService challengeService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@PostMapping("/new")
 	public Long createChallenge(
@@ -80,7 +84,7 @@ public class ChallengeController {
 		challengeService.joinChallenge(challengeId, userId);
 
 		// notification 테이블에 참여 알림 insert
-		challengeService.insertJoinNotification(userId, challengeId);
+		notificationService.insertJoinNotification(challengeId, userId);
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);
@@ -92,6 +96,9 @@ public class ChallengeController {
 			){
 //		System.out.println(commentChallengeDto.toString());
 		challengeService.createComment(commentChallengeDto);
+
+		// notification 테이블에 댓글 알림 insert
+		notificationService.insertCommentNotification(commentChallengeDto);
 
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}

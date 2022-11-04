@@ -132,19 +132,6 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void insertJoinNotification(Long targetUserId, Long challengeId){
-		Notification notification = new Notification();
-
-		notification.setType(0);
-		Long leaderId = challengeRepository.findById(challengeId).get().getLeader().getId();
-		notification.setUser(userRepository.findById(leaderId).get());
-		notification.setTargetUser(userRepository.findById(targetUserId).get());
-		notification.setChallenge(challengeRepository.findById(challengeId).get());
-
-		notificationRepository.save(notification);
-	}
-
-	@Transactional
 	public ChallengeDto getChallenge(Long challengeId){
 		Challenge challenge = challengeRepository.findById(challengeId).get();
 
