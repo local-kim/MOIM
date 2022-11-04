@@ -47,6 +47,13 @@ public class ChallengeController {
 		return challengeId;
 	}
 
+	@DeleteMapping("/delete/{challengeId}")
+	public void deleteChallenge(
+			@PathVariable Long challengeId
+	){
+		challengeService.deleteChallenge(challengeId);
+	}
+
 	@GetMapping("/list")
 	public List<ChallengeDto> getList(){
 //		List<ChallengeDto> l = challengeService.getCountedList();

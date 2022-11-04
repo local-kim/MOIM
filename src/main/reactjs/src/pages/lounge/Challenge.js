@@ -6,6 +6,7 @@ import ko from 'date-fns/locale/ko';
 import styles from './Challenge.module.css';
 import Comment from './Comment';
 import { MenuTitle } from '../../components';
+import { ChallengeMenu } from '.';
 
 const Challenge = () => {
   const navigate = useNavigate();
@@ -130,7 +131,17 @@ const Challenge = () => {
         <div className={styles.title}>챌린지</div>
         <div style={{width:'24px'}}></div>
       </div> */}
-      <MenuTitle title={"챌린지"} leftIcon={"arrow_back_ios"} history={"lounge"} visible={false} />
+      <div className={styles.menu_title}>
+        <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
+        <div className={styles.title}>챌린지</div>
+        {
+          // 개설한 유저에게만 보이는 메뉴
+          challenge.leader_id == user.id ? 
+          <ChallengeMenu challenge={challenge} user={user}/> :
+          <button className={styles.hidden}></button>
+        }
+      </div>
+      {/* <MenuTitle title={"챌린지"} leftIcon={"arrow_back_ios"} history={"lounge"} visible={false} /> */}
 
       {/* 사진 */}
       <div className={styles.challenge_photo} style={{

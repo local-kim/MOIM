@@ -98,6 +98,11 @@ public class ChallengeService {
 	}
 
 	@Transactional
+	public void deleteChallenge(Long challengeId){
+		challengeRepository.deleteById(challengeId);
+	}
+
+	@Transactional
 	public List<ChallengeDto> getChallengeList(){
 		List<Challenge> challenges = challengeRepository.findAll();
 //		System.out.println(challenges);
