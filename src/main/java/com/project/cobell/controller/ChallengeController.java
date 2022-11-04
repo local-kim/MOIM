@@ -81,10 +81,24 @@ public class ChallengeController {
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
 		// join 테이블에 insert
-		challengeService.joinChallenge(challengeId, userId);
+		challengeService.insertJoinedUser(challengeId, userId);
 
 		// notification 테이블에 참여 알림 insert
 		notificationService.insertJoinNotification(challengeId, userId);
+
+		// 새로운 참여중 유저 리스트 반환
+		return challengeService.getUserList(challengeId);
+	}
+
+	@GetMapping("/unjoin/{challengeId}/{userId}")
+	public List<UserDto> unjoinUser(
+			@PathVariable Long challengeId, @PathVariable Long userId
+	){
+		// join 테이블에서 delete
+		challengeService.deleteJoinedUser(challengeId, userId);
+
+		// notification 테이블에 참여 알림 insert
+//		notificationService.insertJoinNotification(challengeId, userId);
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);

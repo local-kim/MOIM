@@ -59,7 +59,7 @@ public class ChallengeService {
 
 		// 챌린지 만든 유저를 join_challenge 테이블에 insert
 		Long insertedId = challengeRepository.getInsertedId();
-		joinChallenge(insertedId, challengeDto.getLeaderId());
+		insertJoinedUser(insertedId, challengeDto.getLeaderId());
 
 		// 만들어진 챌린지 id를 반환
 		return insertedId;
@@ -120,7 +120,7 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void joinChallenge(Long challengeId, Long userId){
+	public void insertJoinedUser(Long challengeId, Long userId){
 		Challenge challenge = challengeRepository.findById(challengeId).get();
 		User user = userRepository.findById(userId).get();
 
@@ -129,6 +129,20 @@ public class ChallengeService {
 		joinChallenge.setUser(user);
 
 		joinChallengeRepository.save(joinChallenge);
+	}
+
+	@Transactional
+	public void deleteJoinedUser(Long challengeId, Long userId){
+//		Challenge challenge = challengeRepository.findById(challengeId).get();
+//		User user = userRepository.findById(userId).get();
+//
+//		JoinChallenge joinChallenge = new JoinChallenge();
+//		joinChallenge.setChallenge(challenge);
+//		joinChallenge.setUser(user);
+//
+//		joinChallengeRepository.save(joinChallenge);
+		JoinChallengeId joinChallengeId = new JoinChallengeId(challengeId, userId);
+		joinChallengeRepository.deleteById(joinChallengeId);
 	}
 
 	@Transactional

@@ -12,7 +12,7 @@ const Challenge = () => {
   const {challengeId} = useParams();
   const [challenge, setChallenge] = useState({});
   const [users, setUsers] = useState([]);
-  const loggedId = JSON.parse(localStorage.getItem("user")).id;
+  const user = JSON.parse(localStorage.getItem("user"));
   const [isJoined, setIsJoined] = useState();
   const [isLiked, setIsLiked] = useState();
 
@@ -20,11 +20,20 @@ const Challenge = () => {
   const [commentList, setCommmentList] = useState();
 
   const joinUser = () => {
-    axios.get(`/challenge/join/${challengeId}/${loggedId}`)
+    axios.get(`/challenge/join/${challengeId}/${user.id}`)
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
       setIsJoined(true);
+    }).catch(err => console.log(err));
+  }
+
+  const unjoinUser = () => {
+    axios.get(`/challenge/unjoin/${challengeId}/${user.id}`)
+    .then(res => {
+      // 챌린지에 참여 중인 유저 정보 다시 받아오기
+      setUsers(res.data);
+      setIsJoined(false);
     }).catch(err => console.log(err));
   }
 
@@ -34,7 +43,7 @@ const Challenge = () => {
       axios.delete(`/challenge/like/delete`, {
         data: {
           challenge_id: challengeId,
-          user_id: loggedId
+          user_id: user.id
         }
       })
       .then(res => {
@@ -47,7 +56,7 @@ const Challenge = () => {
       // 좋아요 안눌린 상태: insert
       axios.post(`/challenge/like/insert`, {
         challenge_id: challengeId,
-        user_id: loggedId
+        user_id: user.id
       })
       .then(res => {
         console.log(res.data);
@@ -60,7 +69,7 @@ const Challenge = () => {
     setComment('');
     axios.post(`/challenge/comment/new`, {
       challenge_id: challengeId,
-      user_id: loggedId,
+      user_id: user.id,
       content: comment
     })
     .then(res => {
@@ -85,7 +94,7 @@ const Challenge = () => {
     }).catch(err => console.log(err));
 
     // 로그인한 유저의 챌린지 참여 여부
-    axios.get(`/challenge/joined/${challengeId}/${loggedId}`)
+    axios.get(`/challenge/joined/${challengeId}/${user.id}`)
     .then(res => {
       console.log(res.data);
       if(res.data == 0)
@@ -102,7 +111,7 @@ const Challenge = () => {
     }).catch(err => console.log(err));
 
     // 좋아요 여부
-    axios.get(`/challenge/like/${challengeId}/${loggedId}`)
+    axios.get(`/challenge/like/${challengeId}/${user.id}`)
     .then(res => {
       console.log(res.data);
       if(res.data == 0)
@@ -174,13 +183,12 @@ const Challenge = () => {
       {/* 챌린지 내용 */}
       <pre className={styles.content}>{challenge.content}</pre>
 
-      {/* 챌린지에 참여한 유저수 */}
-      
-
       {/* 챌린지에 참여한 유저 목록 */}
       <div className={styles.joined_user}>
         <div className={styles.subtitle_wrap}>
           <span className={styles.subtitle}>참여한 유저</span>
+
+          {/* 챌린지에 참여한 유저수 */}
           <span className={styles.count_wrap}>
             <span className={`material-icons ${styles.icon}`}>group</span>
             <span className={styles.count}>{users.length}/{challenge.limit}명</span>
@@ -214,7 +222,7 @@ const Challenge = () => {
 
         <div className={styles.input_wrap}>
           <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
-          <button type='button' className={styles.comment_btn} onClick={insertComment}>Post</button>
+          <span className={`material-icons ${styles.comment_btn}`} onClick={insertComment}>reply</span>
         </div>
 
         {
@@ -227,24 +235,20 @@ const Challenge = () => {
       {/* 참여 버튼 */}
       <div className={styles.btn_box}>
         {
-          new Date(challenge.planned_at) <= new Date() ? <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>종료</button> :
-          isJoined ? <button type='button' className={`${styles.join_btn} ${styles.light_gray_btn}`}>참여중</button> :
-          users.length == challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.light_gray_btn}`}>모집완료</button> :
-          users.length < challenge.limit ? <button type='button' className={`${styles.join_btn} ${styles.green_btn}`} onClick={joinUser}>참여하기</button> :
-          <button style={{display: 'none'}}></button>
+          // 챌린지 날짜 지남
+          new Date(challenge.planned_at) <= new Date() ? <div className={`${styles.join_btn} ${styles.dark_btn}`}>종료</div> : 
+          // 리더일 경우, 인원 안 참
+          challenge.leader_id == user.id && users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.mint_btn}`} onClick={joinUser}>모집중</div> : 
+          // 리더일 경우, 인원 참
+          challenge.leader_id == user.id && users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`} onClick={joinUser}>모집완료</div> : 
+          // 참여자일 경우, 참여 중
+          isJoined ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={unjoinUser}>참여중</div> : 
+          // 참여자일 경우, 인원 참
+          users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
+          // 참여자일 경우, 인원 안 참
+          users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={joinUser}>참여하기</div> : 
+          <div style={{display: 'none'}}></div>
         }
-        {/* {
-          users.length == challenge.limit && !isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>모집완료</button>
-        }
-        {
-          users.length == challenge.limit && isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button>
-        }
-        {
-          users.length < challenge.limit && !isJoined && <button type='button' className={`${styles.join_btn} ${styles.green_btn}`} onClick={joinUser}>참여하기</button>
-        }
-        {
-          users.length < challenge.limit && isJoined && <button type='button' className={`${styles.join_btn} ${styles.gray_btn}`}>참여중</button>
-        } */}
       </div>
     </div>
   );

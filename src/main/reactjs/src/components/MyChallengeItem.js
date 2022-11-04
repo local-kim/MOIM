@@ -35,7 +35,7 @@ const MyChallengeItem = ({challenge}) => {
         </div>
         <div>
           {
-            new Date(challenge.planned_at) <= new Date() ? <span className={`${styles.status} ${styles.gray}`}>종료</span> : challenge.joined_users == challenge.limit ? <button type='button' className={`${styles.status} ${styles.gray}`}>모집완료</button>: <span className={`${styles.status} ${styles.activate}`}>모집중</span>
+            new Date(challenge.planned_at) <= new Date() ? <span className={`${styles.status} ${styles.gray}`}>종료</span> : challenge.joined_users == challenge.limit ? <span className={`${styles.status} ${styles.gray}`}>모집완료</span>: <span className={`${styles.status} ${styles.activate}`}>모집중</span>
           }
         </div>
       </div>

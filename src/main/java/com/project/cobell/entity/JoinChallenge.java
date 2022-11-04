@@ -3,6 +3,7 @@ package com.project.cobell.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @IdClass(JoinChallengeId.class)
+@DynamicInsert
 //@AllArgsConstructor
 //@NoArgsConstructor
 public class JoinChallenge {
