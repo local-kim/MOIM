@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class WeightService {
 		Weight w = new Weight();
 		w.setWeight(weight);
 		w.setUser(userRepository.findById(userId).get());
+		w.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
 		weightRepository.save(w);
 	}

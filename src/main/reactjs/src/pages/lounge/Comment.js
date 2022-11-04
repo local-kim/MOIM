@@ -6,10 +6,12 @@ import styles from './Challenge.module.css';
 
 const Comment = ({comment, setCommentList, user}) => {
   const deleteComment = () => {
-    axios.delete(`/challenge/comment/delete`, {data: comment})
-    .then(res => {
-      setCommentList(res.data);
-    }).catch(err => console.log(err));
+    if(window.confirm("댓글을 삭제하시겠습니까?")){
+      axios.delete(`/challenge/comment/delete`, {data: comment})
+      .then(res => {
+        setCommentList(res.data);
+      }).catch(err => console.log(err));
+    }
   }
 
   return (

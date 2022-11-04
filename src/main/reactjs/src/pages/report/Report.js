@@ -27,7 +27,7 @@ const Report = () => {
     .then(res => {
       console.log(res.data);
       setWeights(res.data);
-      window.location.reload();
+      // window.location.reload();
     })
   }
 

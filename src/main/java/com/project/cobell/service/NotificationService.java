@@ -79,7 +79,7 @@ public class NotificationService {
 	public void insertCommentNotification(CommentChallengeDto commentChallengeDto){
 		Notification notification = new Notification();
 
-		notification.setType(1);    // 댓글 등록 알림
+		notification.setType(2);    // 댓글 등록 알림
 //		Long leaderId = challengeRepository.findById(commentChallengeDto.getChallengeId()).get().getLeader().getId();
 		Challenge targetChallenge = challengeRepository.findById(commentChallengeDto.getChallengeId()).get();
 		notification.setUser(targetChallenge.getLeader());

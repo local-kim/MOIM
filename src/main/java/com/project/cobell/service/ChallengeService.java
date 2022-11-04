@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -223,6 +225,7 @@ public class ChallengeService {
 		CommentChallenge commentChallenge = modelMapper.map(commentChallengeDto, CommentChallenge.class);
 		commentChallenge.setChallenge(challengeRepository.findById(commentChallengeDto.getChallengeId()).get());
 		commentChallenge.setUser(userRepository.findById(commentChallengeDto.getUserId()).get());
+		commentChallenge.setCreatedAt(new Timestamp(System.currentTimeMillis()));   // DB에서 default값 대신에 현재 시각 구해서 넣어주기
 
 //		System.out.println(commentChallenge.toString());
 

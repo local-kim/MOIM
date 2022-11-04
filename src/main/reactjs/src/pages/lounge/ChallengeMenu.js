@@ -26,11 +26,13 @@ const ChallengeMenu = ({challenge, user}) => {
   };
 
   const deleteChallenge = () => {
-    axios.delete(`/challenge/delete/${challenge.id}`)
-    .then(res => {
-      console.log(res);
-      navigate('/lounge');
-    }).catch(err => console.log(err));
+    if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
+      axios.delete(`/challenge/delete/${challenge.id}`)
+      .then(res => {
+        console.log(res);
+        navigate('/lounge');
+      }).catch(err => console.log(err));
+    }
   }
 
   return (
