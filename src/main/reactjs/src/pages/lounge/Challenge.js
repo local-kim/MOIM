@@ -238,9 +238,9 @@ const Challenge = () => {
           // 챌린지 날짜 지남
           new Date(challenge.planned_at) <= new Date() ? <div className={`${styles.join_btn} ${styles.dark_btn}`}>종료</div> : 
           // 리더일 경우, 인원 안 참
-          challenge.leader_id == user.id && users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.mint_btn}`} onClick={joinUser}>모집중</div> : 
+          challenge.leader_id == user.id && users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.mint_btn}`}>모집중</div> : 
           // 리더일 경우, 인원 참
-          challenge.leader_id == user.id && users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`} onClick={joinUser}>모집완료</div> : 
+          challenge.leader_id == user.id && users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
           // 참여자일 경우, 참여 중
           isJoined ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={unjoinUser}>참여중</div> : 
           // 참여자일 경우, 인원 참
