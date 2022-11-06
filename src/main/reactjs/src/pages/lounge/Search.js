@@ -23,6 +23,11 @@ const Search = () => {
     }).catch(err => console.log(err));
   }
 
+  const handleEnter = (e) => {
+    if(e.key === 'Enter')
+      handleSearch();
+  }
+
   useEffect(() => {
     axios.get("/challenge/list")
     .then(res => {
@@ -43,7 +48,7 @@ const Search = () => {
       {/* 검색창 */}
       <div className={styles.search_bar}>
         <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
-        <input type='text' autoFocus onChange={(e) => setKeyword(e.target.value)}/>
+        <input type='text' autoFocus onChange={(e) => setKeyword(e.target.value)} onKeyUp={handleEnter}/>
         <span className={`material-icons ${styles.search_btn}`} onClick={handleSearch}>search</span>
       </div>
 

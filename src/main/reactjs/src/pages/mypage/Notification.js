@@ -21,7 +21,7 @@ const Notification = () => {
     <div>
       <MenuTitle title={"알림"} leftIcon={"arrow_back_ios"} visible={false}/>
 
-      <div className={styles.noti_wrap}>
+      <div className={styles.noti_list}>
         {
           notis && notis.map(noti => (
             <NotificationItem noti={noti}/>

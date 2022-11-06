@@ -12,7 +12,9 @@ const NotificationItem = ({noti}) => {
     noti.type == 0 ? 
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
       <span className={styles.noti}>
-        <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'에 참여했습니다.
+        <span className={styles.noti_wrap}>
+          <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'에 참여했습니다.
+        </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
     </div> : 
@@ -20,14 +22,18 @@ const NotificationItem = ({noti}) => {
     noti.type == 1 ? 
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
       <span className={styles.noti}>
-        <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'의 참여를 취소했습니다.
+        <span className={styles.noti_wrap}>
+          <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'의 참여를 취소했습니다.
+        </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
     </div> : 
     // 댓글 등록 알림
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
       <span className={styles.noti}>
-        <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'에 댓글을 남겼습니다.
+        <span className={styles.noti_wrap}>
+          <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.challenge_title}</span>'에 댓글을 남겼습니다.
+        </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
     </div>

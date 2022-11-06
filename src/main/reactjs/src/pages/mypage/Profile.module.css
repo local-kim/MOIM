@@ -110,14 +110,14 @@
 }
 
 /* Notification.js */
-.noti_wrap{
+.noti_list{
   margin-top: 60px;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
 .noti_box{
   /* height: 60px; */
-  padding: 15px 10px;
+  padding: 10px 10px;
 }
 
 .noti_box:not(:last-child){
@@ -126,6 +126,12 @@
 
 .noti{
   cursor: pointer;
+  word-break: break-all;
+}
+
+.noti_wrap{
+  /* white-space: pre; */
+  margin-right: 6px;
 }
 
 .bold{
@@ -135,5 +141,5 @@
 .time{
   font-size: 13px;
   color: rgb(160, 160, 160);
-  margin-left: 6px;
+  word-break: break-word;
 }

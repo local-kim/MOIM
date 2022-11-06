@@ -30,7 +30,7 @@ const ChallengeMenu = ({challenge, user}) => {
       axios.delete(`/challenge/delete/${challenge.id}`)
       .then(res => {
         console.log(res);
-        navigate('/lounge');
+        navigate(-1, {replace: true});
       }).catch(err => console.log(err));
     }
   }
