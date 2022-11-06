@@ -43,7 +43,7 @@ const NewChallenge = () => {
   // };
 
   const createChallenge = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const form = new FormData();
     form.append("file", image);
@@ -84,14 +84,20 @@ const NewChallenge = () => {
 
   return (
     <div className={styles.wrap}>
-      <form onSubmit={createChallenge}>
+      {/* <form onSubmit={createChallenge}> */}
         {/* <div className={styles.title_box}>
           <span className={`material-icons ${styles.back_icon}`} onClick={() => navigate('/lounge')}>arrow_back_ios</span>
           <div className={styles.title}>챌린지 개설</div>
           <button type="submit" className={styles.submit_btn}>완료</button>
         </div> */}
 
-        <MenuTitle title={"챌린지 개설"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"lounge"}/>
+        {/* <MenuTitle title={"챌린지 개설"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"lounge"}/> */}
+
+        <div className={styles.menu_title}>
+          <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
+          <div className={styles.title}>챌린지 개설</div>
+          <button type="button" className={styles.submit_btn} onClick={createChallenge}>완료</button>
+        </div>
 
         {/* 사진 */}
         <div>
@@ -241,7 +247,7 @@ const NewChallenge = () => {
             </select>
           </div>
         </div>
-      </form>
+      {/* </form> */}
     </div>
   );
 };

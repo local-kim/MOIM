@@ -87,7 +87,13 @@ const ProfileEdit = () => {
 
   return (
     <div className={styles.profile_edit_wrap}>
-      <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"} handleSubmit={insertChanges}/>
+      {/* <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"} handleSubmit={insertChanges}/> */}
+
+      <div className={styles.menu_title}>
+        <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
+        <div className={styles.title}>프로필 편집</div>
+        <button type="button" className={styles.submit_btn} onClick={insertChanges}>완료</button>
+      </div>
 
       <div className={styles.wrap}>
         <div className={styles.photo_box}>

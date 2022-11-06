@@ -77,3 +77,36 @@ input:focus, textarea{
   resize: none;
   margin-top: 5px;
 }
+
+/* MenuTitle.js */
+.menu_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.menu_title .title{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.menu_title .left_icon{
+  color: gray;
+  cursor: pointer;
+}
+
+.menu_title .hidden{
+  visibility: hidden;
+  width: 24px;
+}
+
+.menu_title .submit_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0;
+}

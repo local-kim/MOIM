@@ -91,7 +91,7 @@ const Profile = () => {
               <div className={styles.nickname_wrap}>
                 <span className={styles.nickname}>{user.nickname}</span>
                 {/* <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span> */}
-                <span className={`material-icons ${styles.edit_btn}`}>settings</span>
+                <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>settings</span>
               </div>
               {
                 userInfo.bio &&
