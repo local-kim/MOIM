@@ -94,7 +94,7 @@ const NewChallenge = () => {
         {/* <MenuTitle title={"챌린지 개설"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"lounge"}/> */}
 
         <div className={styles.menu_title}>
-          <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
+          <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>close</span>
           <div className={styles.title}>챌린지 개설</div>
           <button type="button" className={styles.submit_btn} onClick={createChallenge}>완료</button>
         </div>

@@ -165,7 +165,8 @@ public class ChallengeService {
 
 	@Transactional
 	public List<ChallengeDto> getCountedList(){
-		List<Challenge> challenges = challengeRepository.findAll();
+//		List<Challenge> challenges = challengeRepository.findAll();
+		List<Challenge> challenges = challengeRepository.findAllOrderByCreatedAtDesc();
 //		System.out.println(challenges);
 
 		ModelMapper modelMapper = new ModelMapper();

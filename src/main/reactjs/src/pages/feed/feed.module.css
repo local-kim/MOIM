@@ -1,0 +1,127 @@
+/* NewFeed.js */
+
+/* 상단바 */
+.menu_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.menu_title .title{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.menu_title .left_icon{
+  color: gray;
+  cursor: pointer;
+}
+
+.menu_title .hidden{
+  visibility: hidden;
+  width: 24px;
+}
+
+.menu_title .submit_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0;
+}
+
+/* 메인화면 */
+.wrap{
+  margin-top: 60px;
+  padding: 0 30px 30px 30px;
+}
+
+.photo_wrap{
+  display: flex;
+  overflow-x: scroll;
+  /* overflow-y: visible; */
+  height: 70px;
+  align-items: flex-end;
+}
+
+.add_photo_box{
+  background-color: rgb(245, 245, 245);
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo_btn{
+  color: rgb(210, 210, 210);
+  font-size: 25px;
+}
+
+.hidden{
+  display: none;
+}
+
+.preview{
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(220, 220, 220, 0.5);
+  margin-left: 10px;
+  object-fit: cover;
+  background-size: cover;
+}
+
+.delete_btn{
+  position: relative;
+  top: -6px;
+  right: -46px;
+  color: rgb(130, 130, 130);
+  font-size: 18px;
+  /* padding: 3px; */
+  background-color: white;
+  border-radius: 100%;
+}
+
+.content{
+  width: 100%;
+  height: -webkit-fill-available;
+  margin-top: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(245, 245, 245);
+  resize: none;
+  padding: 10px;
+}
+
+.content::placeholder{
+  font-size: 15px;
+}
+
+.new_feed .subtitle{
+  font-weight: 600;
+
+}
+
+.new_feed .input_wrap{
+  border-bottom: 1px solid #86dbcb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  width: 100px;
+}
+
+.new_feed .narrow_input{
+  /* width: -webkit-fill-available; */
+  text-align: right;
+  border: none;
+  width: 100%;
+  padding: 10px;
+}

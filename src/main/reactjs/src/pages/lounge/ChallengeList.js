@@ -16,7 +16,7 @@ const ChallengeList = () => {
   const getLikeList = () => {
     axios.get(`/challenge/like/list/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setLikeList(res.data);
     }).catch(err => console.log(err));
   }
@@ -24,19 +24,11 @@ const ChallengeList = () => {
   useEffect(() => {
     axios.get("/challenge/list")
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setChallenges(res.data);
     }).catch(err => console.log(err));
 
-    // 로그인한 상태에서만
-    if(user){
-      // axios.get(`/challenge/like/list/${user.id}`)
-      // .then(res => {
-      //   console.log(res.data);
-      //   setLikeList(res.data);
-      // }).catch(err => console.log(err));
-      getLikeList();
-    }
+    getLikeList();
   }, []);
 
   return (
@@ -50,13 +42,15 @@ const ChallengeList = () => {
             <div className={styles.btn_wrap}>
               <span className={`material-icons ${styles.liked_btn}`} onClick={() => navigate('/lounge/like')}>favorite_border</span>
               <span className={`material-icons ${styles.add_btn}`} onClick={() => navigate('/lounge/new')}>add</span>
-              <span className={`material-icons ${styles.search_btn}`} onClick={() => navigate('/lounge/search', {state: {
-                challenges, likeList
-                // , getLikeList
-                // challenges: challenges,
-                // likeList: likeList,
-                // getLikeList: getLikeList
-              }})}>search</span>
+              <span className={`material-icons ${styles.search_btn}`} onClick={() => navigate('/lounge/search'
+              // , {state: {
+              //   challenges, likeList
+              //   // , getLikeList
+              //   // challenges: challenges,
+              //   // likeList: likeList,
+              //   // getLikeList: getLikeList
+              // }}
+              )}>search</span>
             </div>
           </div>
           

@@ -30,7 +30,7 @@ const Chart = ({bmi}) => {
     ) : (
       idx = 0
     )
-    console.log(bmi);
+    // console.log(bmi);
   }, [bmi]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Chart = ({bmi}) => {
       // text: "BMI",
       color: "#dddddd"
     }]);
-    console.log(idx);
+    // console.log(idx);
 
   }, [idx, bmi]);
 

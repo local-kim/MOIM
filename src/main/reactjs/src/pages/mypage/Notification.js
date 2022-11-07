@@ -12,7 +12,7 @@ const Notification = () => {
   useEffect(() => {
     axios.get(`/noti/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setNotis(res.data);
     }).catch(err => console.log(err));
   }, []);
@@ -24,7 +24,7 @@ const Notification = () => {
       <div className={styles.noti_list}>
         {
           notis && notis.map(noti => (
-            <NotificationItem noti={noti}/>
+            <NotificationItem noti={noti} key={noti.id}/>
           ))
         }
       </div>

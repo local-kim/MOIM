@@ -48,7 +48,7 @@ const Challenge = () => {
         }
       })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsLiked(false);
       })
       .catch(err => console.log(err));
@@ -60,23 +60,26 @@ const Challenge = () => {
         user_id: user.id
       })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsLiked(true);
       }).catch(err => console.log(err));
     }
   }
 
   const insertComment = () => {
-    setComment('');
-    axios.post(`/challenge/comment/new`, {
-      challenge_id: challengeId,
-      user_id: user.id,
-      content: comment
-    })
-    .then(res => {
-      console.log(res.data);
-      setCommentList(res.data);
-    }).catch(err => console.log(err));
+    if(comment && comment != ''){
+      setComment('');
+
+      axios.post(`/challenge/comment/new`, {
+        challenge_id: challengeId,
+        user_id: user.id,
+        content: comment
+      })
+      .then(res => {
+        // console.log(res.data);
+        setCommentList(res.data);
+      }).catch(err => console.log(err));
+    }
   }
 
   const deleteComment = () => {
@@ -90,21 +93,21 @@ const Challenge = () => {
     // 챌린지 정보
     axios.get(`/challenge/${challengeId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setChallenge(res.data);
     }).catch(err => console.log(err));
 
     // 챌린지에 참여 중인 유저 리스트
     axios.get(`/challenge/users/${challengeId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setUsers(res.data);
     }).catch(err => console.log(err));
 
     // 로그인한 유저의 챌린지 참여 여부
     axios.get(`/challenge/joined/${challengeId}/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data == 0)
         setIsJoined(false);
       else
@@ -114,14 +117,14 @@ const Challenge = () => {
     // 댓글 리스트
     axios.get(`/challenge/comment/list/${challengeId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setCommentList(res.data);
     }).catch(err => console.log(err));
 
     // 좋아요 여부
     axios.get(`/challenge/like/${challengeId}/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data == 0)
         setIsLiked(false);
       else

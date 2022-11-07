@@ -7,6 +7,7 @@ import { Report } from "./pages/report";
 import { Notification, Profile, ProfileEdit } from "./pages/mypage";
 import { Settings } from "./pages/settings";
 import { MenuBar } from "./components";
+import { NewFeed } from "./pages/feed";
 
 const RouteMain = () => {
  
@@ -29,8 +30,10 @@ const RouteMain = () => {
         {/* 내 프로필 */}
         <Route path="/profile" element={<Profile/>} />
         <Route path="/profile/edit" element={<ProfileEdit/>} />
-
         <Route path="/notification" element={<Notification/>} />
+
+        {/* 피드 */}
+        <Route path="/feed/new" element={<NewFeed/>} />
 
         {/* 로그인 */}
         <Route path="/join" element={<Join/>} />

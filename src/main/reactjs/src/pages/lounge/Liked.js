@@ -15,7 +15,7 @@ const Liked = () => {
     if(user){
       axios.get(`/mypage/liked/${user.id}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setLiked(res.data);
         setLikeList(res.data.map(c => c.id));
       }).catch(err => console.log(err));

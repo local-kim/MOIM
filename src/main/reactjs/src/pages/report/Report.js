@@ -18,40 +18,43 @@ const Report = () => {
   const [newWeight, setNewWeight] = useState();
 
   const addWeight = () => {
-    setNewWeight('');
+    if(newWeight && newWeight != 0){
+      setNewWeight('');
 
-    axios.post(`/user/weight/new`, {
-      weight: newWeight,
-      user_id: user.id
-    })
-    .then(res => {
-      console.log(res.data);
-      setWeights(res.data);
-      // window.location.reload();
-    })
+      axios.post(`/user/weight/new`, {
+        weight: newWeight,
+        user_id: user.id
+      })
+      .then(res => {
+        // console.log(res.data);
+        setWeights(res.data.map(d => {
+          return {
+            date: format(new Date(d.created_at), "MM/dd", {locale: ko}),
+            weight: d.weight
+          }
+        }));
+      }).catch(err => console.log(err));
+    }
   }
 
   useEffect(() => {
-    if(user){
-      axios.get(`/user/weight/${user.id}`)
-      .then(res => {
-        console.log(res.data);
-        
-        // 그래프용 data로 가공
-        setWeights(
-          res.data.map(d => {
-            return {
-              date: format(new Date(d.created_at), "MM/dd", {locale: ko}),
-              weight: d.weight
-            }
-          })
-        );
+    axios.get(`/user/weight/${user.id}`)
+    .then(res => {
+      // console.log(res.data);
+      
+      // 그래프용 data로 가공
+      setWeights(
+        res.data.map(d => {
+          return {
+            date: format(new Date(d.created_at), "MM/dd", {locale: ko}),
+            weight: d.weight
+          }
+        })
+      );
 
-        // setWeights(res.data);
-        setBmi((res.data[res.data.length - 1].weight / ((user.height / 100) * (user.height / 100))).toFixed(2));
-      }).catch(err => console.log(err));
-    }
-    
+      // setWeights(res.data);
+      setBmi((res.data[res.data.length - 1].weight / ((user.height / 100) * (user.height / 100))).toFixed(10));
+    }).catch(err => console.log(err));
   }, []);
 
   return (

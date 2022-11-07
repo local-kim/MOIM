@@ -55,19 +55,19 @@ const Profile = () => {
     if(user){
       axios.get(`/mypage/user/${user.id}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setUserInfo(res.data);
       }).catch(err => console.log(err));
 
       axios.get(`/mypage/created/${user.id}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setCreated(res.data);
       }).catch(err => console.log(err));
 
       axios.get(`/mypage/joined/${user.id}`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setJoined(res.data);
       }).catch(err => console.log(err));
     }
@@ -101,7 +101,8 @@ const Profile = () => {
               }
             </div>
           </div>
-          <div>
+          <div className={styles.btn_wrap}>
+            <span className={`material-icons-outlined ${styles.add_btn}`} onClick={() => navigate('/feed/new')}>add_box</span>
             <span className={`material-icons-outlined ${styles.noti_btn}`} onClick={() => navigate('/notification')}>notifications</span>
           </div>
           
