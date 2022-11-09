@@ -57,7 +57,6 @@ const NewFeed = () => {
 
   // 이미지 업로드
   const [images, setImages] = useState();
-
   const [previewImgs, setPreviewImgs] = useState();
 
   const handleImageUpload = (e) => {
@@ -82,6 +81,14 @@ const NewFeed = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  // 사진 삭제
+  const removeImage = (idx) => {
+    console.log(idx);
+    // 미리보기와 업로드 파일에서 모두 제거
+    setPreviewImgs(previewImgs.filter((_, i) => i != idx));
+    setImages([...images].filter((_, i) => i != idx));
+  }
 
   // textarea 크기 자동 조절
   const textRef = useRef();
@@ -114,9 +121,9 @@ const NewFeed = () => {
           {
             // 이미지 업로드 후 미리보기
             previewImgs && previewImgs.map((img, idx) => 
-              <div className={styles.preview} style={{backgroundImage: `url(${img})`}}>
+              <div className={styles.preview} style={{backgroundImage: `url(${img})`}} key={idx}>
                 {/* <img src={img} alt="" /> */}
-                <span className={`material-icons ${styles.delete_btn}`}>cancel</span>
+                <span className={`material-icons ${styles.delete_btn}`} onClick={() => removeImage(idx)}>cancel</span>
               </div>
             )
           }
