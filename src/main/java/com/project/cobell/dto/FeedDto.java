@@ -18,4 +18,6 @@ public class FeedDto {
 	private String content;
 	private List<String> tags;
 	private float weight;
+
+	private List<String> fileNames;
 }

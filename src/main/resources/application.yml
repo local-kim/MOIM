@@ -10,7 +10,7 @@ spring:
   jpa:
     showSql: true # 실행한 SQL을 보여줌
     hibernate:
-      ddlAuto: update # DDL(create/update/create-drop/validate/none)
+      ddlAuto: none # DDL(create/update/create-drop/validate/none)
     properties:
       hibernate:
         globally_quoted_identifiers: true # query의 식별자(테이블명, 필드명 등)을 `로 감싸줌

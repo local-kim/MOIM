@@ -5,10 +5,7 @@ import com.project.cobell.dto.FeedDto;
 import com.project.cobell.service.FeedService;
 import com.project.cobell.service.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -51,5 +48,12 @@ public class FeedController {
 
 		// 피드 id 반환
 		return feedId;
+	}
+
+	@GetMapping("/{feedId}")
+	public FeedDto getFeed(
+			@PathVariable Long feedId
+	){
+		return feedService.getFeed(feedId);
 	}
 }

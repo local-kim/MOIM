@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FeedService {
@@ -90,5 +91,17 @@ public class FeedService {
 		photoFeed.setFileName(fileName);
 
 		photoFeedRepository.save(photoFeed);
+	}
+
+	@Transactional
+	public FeedDto getFeed(Long feedId){
+		Feed feed = feedRepository.findById(feedId).get();
+
+		ModelMapper modelMapper = new ModelMapper();
+		FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
+		feedDto.setTags(feed.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
+		feedDto.setFileNames(feed.getPhotoFeeds().stream().map(photoFeed -> photoFeed.getFileName()).collect(Collectors.toList()));
+
+		return feedDto;
 	}
 }
