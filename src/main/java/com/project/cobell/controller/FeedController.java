@@ -28,22 +28,25 @@ public class FeedController {
 			@RequestPart("data") FeedDto feedDto,
 			@RequestPart List<MultipartFile> files
 	){
-		System.out.println(feedDto.toString());
+//		System.out.println(feedDto.toString());
 
 		// 피드 insert(content) 후 feedId 반환
 		Long feedId = feedService.insertFeed(feedDto);
 
-		// 태그 insert
+		// 태그 insert(optional)
 		if(feedDto.getTags().size() > 0)
 			feedService.insertTags(feedDto.getTags(), feedId);
 
-		// 몸무게 insert
+		// 몸무게 insert(optional)
 		if(feedDto.getWeight() != 0)
 			weightService.insertWeight(feedDto.getWeight(), feedDto.getUserId());
 
-		// 사진 업로드, 파일명 insert
 		for(MultipartFile file : files){
+			// 사진 업로드
+			String fileName = feedService.uploadImage(file);
 
+			// 파일명 insert
+			feedService.insertFileName(feedId, fileName);
 		}
 
 		// 피드 id 반환

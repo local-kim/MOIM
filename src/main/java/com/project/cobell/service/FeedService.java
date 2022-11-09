@@ -2,8 +2,11 @@ package com.project.cobell.service;
 
 import com.project.cobell.dto.FeedDto;
 import com.project.cobell.entity.Feed;
+import com.project.cobell.entity.PhotoChallenge;
+import com.project.cobell.entity.PhotoFeed;
 import com.project.cobell.entity.Tag;
 import com.project.cobell.repository.FeedRepository;
+import com.project.cobell.repository.PhotoFeedRepository;
 import com.project.cobell.repository.TagRepository;
 import com.project.cobell.repository.UserRepository;
 import com.project.cobell.util.FileUtil;
@@ -29,6 +32,9 @@ public class FeedService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private PhotoFeedRepository photoFeedRepository;
 
 	@Transactional
 	public Long insertFeed(FeedDto feedDto){
@@ -56,22 +62,33 @@ public class FeedService {
 	@Value("${custom.path.uploadImage}")
 	private String uploadPath;
 
-//	@Transactional
-//	public void uploadImage(MultipartFile file){
-//		// 파일명 변환
-//		String fileName = FileUtil.convertFileName(file.getOriginalFilename());
-//
-//		// 업로드할 폴더 위치
-////		String path = request.getServletContext().getRealPath("/save");
-//		String path = uploadPath + "feed_photo" + File.separator;
-//
-//		// save 폴더에 업로드
-//		try {
-//			file.transferTo(new File(path + fileName));
-//		} catch (IllegalStateException | IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		return fileName;
-//	}
+	@Transactional
+	public String uploadImage(MultipartFile file){
+		// 파일명 변환
+		String fileName = FileUtil.convertFileName(file.getOriginalFilename());
+
+		// 업로드할 폴더 위치
+		String path = uploadPath + "feed_photo" + File.separator;
+
+		// save 폴더에 업로드
+		try {
+			file.transferTo(new File(path + fileName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+
+//		// DB에 insert
+//		this.insertFileName(feedId, fileName);
+
+		return fileName;
+	}
+
+	@Transactional
+	public void insertFileName(Long feedId, String fileName){
+		PhotoFeed photoFeed = new PhotoFeed();
+		photoFeed.setFeed(feedRepository.findById(feedId).get());
+		photoFeed.setFileName(fileName);
+
+		photoFeedRepository.save(photoFeed);
+	}
 }

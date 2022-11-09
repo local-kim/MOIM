@@ -50,31 +50,13 @@ const NewFeed = () => {
       headers: {'Content-Type' : 'multipart/form-data'}
     })
     .then(res => {
-      // console.log("challenge id: " + res.data);
+      console.log("feed id: " + res.data);
       // navigate(`/lounge/${res.data}`, {replace: true});
     }).catch(err => console.log(err));
   }
 
-  // 이미지 미리보기
-  // const [imageSrc, setImageSrc] = useState('');
-
-  // const encodeFileToBase64 = (fileBlob) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(fileBlob);
-
-  //   return new Promise((resolve) => {
-  //     reader.onload = () => {
-  //       setImageSrc(reader.result);
-  //       resolve();
-  //     };
-  //   });
-  // };
-
   // 이미지 업로드
   const [images, setImages] = useState();
-  // const handleImage = (e) => {
-  //   setImages(e.target.files[0]);
-  // }
 
   const [previewImgs, setPreviewImgs] = useState();
 
@@ -108,9 +90,6 @@ const NewFeed = () => {
     textRef.current.style.height = '44px';
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   }, []);
-
-  const handleContent = (e) => {
-  }
 
   return (
     <div className={styles.new_feed}>
