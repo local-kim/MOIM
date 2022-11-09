@@ -42,9 +42,7 @@ const NewChallenge = () => {
   //   });
   // };
 
-  const createChallenge = (e) => {
-    // e.preventDefault();
-
+  const createChallenge = () => {
     const form = new FormData();
     form.append("file", image);
     form.append("data", new Blob([JSON.stringify(challenge)], {
