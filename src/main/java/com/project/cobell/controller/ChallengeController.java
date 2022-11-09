@@ -29,8 +29,8 @@ public class ChallengeController {
 	@PostMapping("/new")
 	public Long createChallenge(
 //			@RequestBody ChallengeDto challengeDto
-			@RequestPart("data") ChallengeDto challengeDto, @RequestPart MultipartFile file,
-			HttpServletRequest request
+			@RequestPart("data") ChallengeDto challengeDto, @RequestPart MultipartFile file
+//			HttpServletRequest request
 			){
 		System.out.println(challengeDto);
 

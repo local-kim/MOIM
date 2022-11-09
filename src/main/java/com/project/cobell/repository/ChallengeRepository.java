@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
-	@Query(value = "select max(id) from challenge ", nativeQuery = true)
+	@Query(value = "select max(id) from challenge", nativeQuery = true)
 	Long getInsertedId();
 
 	@Query(value = "select c from Challenge c order by c.createdAt desc")

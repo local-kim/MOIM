@@ -55,11 +55,11 @@ const ProfileEdit = () => {
     }
 
     // 바뀐 유저 정보를 다시 받아와 localStorage에 저장
-    axios.get(`/user/reload/${user.id}`)
-    .then(res => {
-      localStorage.removeItem("user");
-      localStorage.setItem("user", JSON.stringify(res.data));
-    }).catch(err => console.log(err));
+    // axios.get(`/user/reload/${user.id}`)
+    // .then(res => {
+    //   localStorage.removeItem("user");
+    //   localStorage.setItem("user", JSON.stringify(res.data));
+    // }).catch(err => console.log(err));
 
     navigate("/profile");
   }

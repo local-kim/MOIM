@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const NewFeed = () => {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [content, setContent] = useState();
   const [tags, setTags] = useState([]);
@@ -25,20 +26,25 @@ const NewFeed = () => {
   // }
 
   const createFeed = () => {
-    console.log(images);
-    console.log(content);
-    console.log(tags.map((tag, idx) => tag.value));
-    console.log(weight);
+    // console.log(images);
+    // console.log(content);
+    // console.log(tags.map((tag, idx) => tag.value));
+    // console.log(weight);
 
     const form = new FormData();
-    form.append("file", images);
-    // form.append("data", new Blob([JSON.stringify({
-    //   content: content,
-    //   tags: tags.map((tag, idx) => tag.value),
-    //   weight: weight
-    // })], {
-    //   type: "application/json"
-    // }));
+
+    for(let i = 0; i < images.length; i++){
+      form.append("files", images[i]);
+    }
+    
+    form.append("data", new Blob([JSON.stringify({
+      user_id: user.id,
+      content: content,
+      tags: tags.map(tag => tag.value),
+      weight: weight
+    })], {
+      type: "application/json"
+    }));
 
     axios.post('/feed/new', form, {
       headers: {'Content-Type' : 'multipart/form-data'}
@@ -87,7 +93,7 @@ const NewFeed = () => {
     
       let reader = new FileReader();
       reader.onload = () => {
-        console.log(reader.result);
+        // console.log(reader.result);
         fileURLs[i] = reader.result;
         setPreviewImgs([...fileURLs]);
       };

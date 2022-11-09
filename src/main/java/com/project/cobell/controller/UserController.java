@@ -57,10 +57,10 @@ public class UserController {
 		return weightService.getWeightList(weightDto.getUserId());
 	}
 
-	@GetMapping("/reload/{userId}")
-	public UserDto getUser(
-			@PathVariable Long userId
-	){
-		return userService.getUser(userId);
-	}
+//	@GetMapping("/reload/{userId}")
+//	public UserDto getUser(
+//			@PathVariable Long userId
+//	){
+//		return userService.getUser(userId);
+//	}
 }
