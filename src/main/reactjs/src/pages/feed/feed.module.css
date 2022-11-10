@@ -34,12 +34,12 @@
 }
 
 /* 메인화면 */
-.wrap{
+.new_feed .wrap{
   margin-top: 60px;
   padding: 0 30px 30px 30px;
 }
 
-.photo_wrap{
+.new_feed .photo_wrap{
   display: flex;
   overflow-x: scroll;
   /* overflow-y: visible; */
@@ -47,11 +47,11 @@
   align-items: center;
 }
 
-.photo_wrap::-webkit-scrollbar{
+.new_feed .photo_wrap::-webkit-scrollbar{
   display: none;
 }
 
-.add_photo_box{
+.new_feed .add_photo_box{
   background-color: rgb(245, 245, 245);
   width: 70px;
   height: 70px;
@@ -62,16 +62,16 @@
   align-items: center;
 }
 
-.photo_btn{
+.new_feed .photo_btn{
   color: rgb(210, 210, 210);
   font-size: 25px;
 }
 
-.hidden{
+.new_feed .hidden{
   display: none;
 }
 
-.preview{
+.new_feed .preview{
   width: 70px;
   min-width: 70px;
   height: 70px;
@@ -82,7 +82,7 @@
   background-size: cover;
 }
 
-.delete_btn{
+.new_feed .delete_btn{
   position: relative;
   top: -5px;
   right: -57px;
@@ -93,7 +93,7 @@
   border-radius: 100%;
 }
 
-.content{
+.new_feed .content{
   width: 100%;
   height: 44px;
   margin-top: 30px;
@@ -104,7 +104,7 @@
   padding: 10px;
 }
 
-.content::placeholder{
+.new_feed .content::placeholder{
   font-size: 15px;
 }
 
@@ -112,20 +112,20 @@
   font-weight: 600;
 }
 
-.tag_box{
+.new_feed .tag_box{
   margin-top: 20px;
 }
 
-.tag_box .subtitle{
+.new_feed .tag_box .subtitle{
   margin-bottom: 10px;
 }
 
-.tag_wrap{
+.new_feed .tag_wrap{
   display: flex;
   overflow-x: scroll;
 }
 
-.tag_input_wrap{
+.new_feed .tag_input_wrap{
   border: 1px solid rgb(230, 230, 230);
   background-color: transparent;
   border-radius: 10px;
@@ -135,7 +135,7 @@
   white-space: nowrap;
 }
 
-.tag_input{
+.new_feed .tag_input{
   border: white;
   background-color: transparent;
   width: 53px;
@@ -155,14 +155,14 @@
   align-items: center
 }
 
-.weight_wrap{
+.new_feed .weight_wrap{
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.weight_wrap .subtitle{
+.new_feed .weight_wrap .subtitle{
   /* margin-right: -webkit-fill-available; */
 }
 
@@ -181,4 +181,54 @@
   border: none;
   width: 100%;
   padding: 10px;
+}
+
+/* FeedDetail.js */
+.feed_detail .wrap{
+  margin-top: 60px;
+}
+
+.feed_detail .user_wrap{
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.feed_detail .user_photo{
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.feed_detail .user_name{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.feed_detail .photo{
+  width: 100%;
+  max-height: 100vw;
+}
+
+.feed_detail .content_wrap{
+  padding: 0 30px;
+}
+
+.feed_detail .content{
+  margin: 20px 0;
+}
+
+.feed_detail .tag_wrap{
+  display: flex;
+}
+
+.feed_detail .tag{
+  padding: 2px 7px;
+  background-color: rgb(245, 245, 245);
+  border-radius: 11px;
+}
+
+.feed_detail .tag:not(:last-child){
+  margin-right: 5px;
 }

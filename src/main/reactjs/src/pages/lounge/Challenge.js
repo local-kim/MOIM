@@ -5,8 +5,7 @@ import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
 import styles from './Challenge.module.css';
 import Comment from './Comment';
-import { MenuTitle } from '../../components';
-import { ChallengeMenu } from '.';
+import { MenuTitle, WriterMenu } from '../../components';
 
 const Challenge = () => {
   const navigate = useNavigate();
@@ -133,6 +132,16 @@ const Challenge = () => {
 
   }, []);
 
+  const deleteChallenge = () => {
+    if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
+      axios.delete(`/challenge/delete/${challenge.id}`)
+      .then(res => {
+        console.log(res);
+        navigate(-1, {replace: true});
+      }).catch(err => console.log(err));
+    }
+  }
+
   return (
     <div className={styles.wrap}>
       {/* 메뉴 타이틀 */}
@@ -147,7 +156,7 @@ const Challenge = () => {
         {
           // 개설한 유저에게만 보이는 메뉴
           challenge.leader_id == user.id ? 
-          <ChallengeMenu challenge={challenge} user={user}/> :
+          <WriterMenu challenge={challenge} user={user} handleDelete={deleteChallenge} /> :
           <button className={styles.hidden}></button>
         }
       </div>

@@ -5,7 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios';
-import styles from './Challenge.module.css';
+import styles from '../pages/lounge/Challenge.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const options = [
@@ -13,7 +13,7 @@ const options = [
   // '어쩌고저쩌고 쏼라쏼라 기라라ㅣ어ㅏ러ㅏ',
 ];
 
-const ChallengeMenu = ({challenge, user}) => {
+const WriterMenu = ({challenge, handleDelete}) => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,15 +25,15 @@ const ChallengeMenu = ({challenge, user}) => {
     setAnchorEl(null);
   };
 
-  const deleteChallenge = () => {
-    if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
-      axios.delete(`/challenge/delete/${challenge.id}`)
-      .then(res => {
-        console.log(res);
-        navigate(-1, {replace: true});
-      }).catch(err => console.log(err));
-    }
-  }
+  // const deleteChallenge = () => {
+  //   if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
+  //     axios.delete(`/challenge/delete/${challenge.id}`)
+  //     .then(res => {
+  //       console.log(res);
+  //       navigate(-1, {replace: true});
+  //     }).catch(err => console.log(err));
+  //   }
+  // }
 
   return (
     <div className={styles.menu_wrap}>
@@ -65,7 +65,7 @@ const ChallengeMenu = ({challenge, user}) => {
         sx={{paddingTop: '0', paddingBottom: '0', boxShadow: 'none'}}
         size={'small'}
       >
-        <MenuItem onClick={deleteChallenge} size={'small'} sx={{minHeight: '25px', fontSize:'15px', padding: '0 13px 0 10px'}}>
+        <MenuItem onClick={handleDelete} size={'small'} sx={{minHeight: '25px', fontSize:'15px', padding: '0 13px 0 10px'}}>
           <span className={`material-icons ${styles.delete_btn}`} style={{fontSize: '20px', marginRight: '5px', color: '#212529d9'}}>delete_outline</span>
           <span style={{lineHeight: '20px'}}>삭제</span>
         </MenuItem>
@@ -74,4 +74,4 @@ const ChallengeMenu = ({challenge, user}) => {
   );
 };
 
-export default ChallengeMenu;
+export default WriterMenu;

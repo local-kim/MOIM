@@ -15,6 +15,8 @@ import java.util.List;
 public class FeedDto {
 	private Long id;
 	private Long userId;
+	private String userName;
+	private String userPhoto;
 	private String content;
 	private List<String> tags;
 	private float weight;

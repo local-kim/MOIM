@@ -101,6 +101,8 @@ public class FeedService {
 		FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
 		feedDto.setTags(feed.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
 		feedDto.setFileNames(feed.getPhotoFeeds().stream().map(photoFeed -> photoFeed.getFileName()).collect(Collectors.toList()));
+		feedDto.setUserPhoto(feed.getUser().getPhotoUser().getFileName());
+		feedDto.setUserName(feed.getUser().getNickname());
 
 		return feedDto;
 	}
