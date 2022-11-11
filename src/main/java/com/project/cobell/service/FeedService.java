@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,5 +106,23 @@ public class FeedService {
 		feedDto.setUserName(feed.getUser().getNickname());
 
 		return feedDto;
+	}
+
+	@Transactional
+	public List<FeedDto> getFeedList(Long userId){
+		List<Feed> feeds = feedRepository.findByUserId(userId);
+
+//		System.out.println(feeds);
+
+		ModelMapper modelMapper = new ModelMapper();
+		List<FeedDto> feedDtos = new ArrayList<>();
+
+		for(Feed feed : feeds){
+			FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
+			feedDto.setFileNames(feed.getPhotoFeeds().stream().map(photoFeed -> photoFeed.getFileName()).collect(Collectors.toList()));
+			feedDtos.add(feedDto);
+		}
+
+		return feedDtos;
 	}
 }

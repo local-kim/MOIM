@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import CreatedChallenge from './CreatedChallenge';
 import JoinedChallenge from './JoinedChallenge';
+import FeedList from './FeedList';
 // import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // const theme = createMuiTheme({
@@ -43,6 +44,7 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState({});
   const [created, setCreated] = useState([]);
   const [joined, setJoined] = useState([]);
+  const [feedList, setFeedList] = useState([]);
 
   // 탭
   const [value, setValue] = React.useState(0);
@@ -52,25 +54,29 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if(user){
-      axios.get(`/mypage/user/${user.id}`)
-      .then(res => {
-        // console.log(res.data);
-        setUserInfo(res.data);
-      }).catch(err => console.log(err));
+    axios.get(`/feed/list/${user.id}`)
+    .then(res => {
+      console.log(res.data);
+      setFeedList(res.data);
+    }).catch(err => console.log(err));
 
-      axios.get(`/mypage/created/${user.id}`)
-      .then(res => {
-        // console.log(res.data);
-        setCreated(res.data);
-      }).catch(err => console.log(err));
+    axios.get(`/mypage/user/${user.id}`)
+    .then(res => {
+      // console.log(res.data);
+      setUserInfo(res.data);
+    }).catch(err => console.log(err));
 
-      axios.get(`/mypage/joined/${user.id}`)
-      .then(res => {
-        // console.log(res.data);
-        setJoined(res.data);
-      }).catch(err => console.log(err));
-    }
+    axios.get(`/mypage/created/${user.id}`)
+    .then(res => {
+      // console.log(res.data);
+      setCreated(res.data);
+    }).catch(err => console.log(err));
+
+    axios.get(`/mypage/joined/${user.id}`)
+    .then(res => {
+      // console.log(res.data);
+      setJoined(res.data);
+    }).catch(err => console.log(err));
   }, []);
 
   return (
@@ -110,6 +116,10 @@ const Profile = () => {
           {/* 탭 */}
           <Tabs className={styles.tabs} value={value} onChange={handleChange} variant="fullWidth" TabIndicatorProps={{style: {background: "#86dbcb"}}}>
             <Tab disableFocusRipple={true} disableRipple={true} label={
+              <span className={`material-icons ${styles.icon}`} style={{fontSize
+              : '22px', marginBottom: '-1px'}}>grid_on</span>
+            } />
+            <Tab disableFocusRipple={true} disableRipple={true} label={
               // <span className={`material-icons ${styles.icon}`}>menu</span>
               <span className={`material-symbols-outlined ${styles.icon}`}>edit_square</span>
             } />
@@ -119,7 +129,9 @@ const Profile = () => {
           </Tabs>
           {/* </MuiThemeProvider> */}
           {
-            value === 0 ? <CreatedChallenge created={created} /> : <JoinedChallenge joined={joined} />
+            value === 0 ? <FeedList feedList={feedList} /> : 
+            value === 1 ? <CreatedChallenge created={created} /> : 
+            <JoinedChallenge joined={joined} />
           }
         </div>
       }

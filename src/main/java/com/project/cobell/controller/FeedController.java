@@ -2,6 +2,7 @@ package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.FeedDto;
+import com.project.cobell.entity.Feed;
 import com.project.cobell.service.FeedService;
 import com.project.cobell.service.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,12 @@ public class FeedController {
 			@PathVariable Long feedId
 	){
 		return feedService.getFeed(feedId);
+	}
+
+	@GetMapping("/list/{userId}")
+	public List<FeedDto> getFeedList(
+			@PathVariable Long userId
+	){
+		return feedService.getFeedList(userId);
 	}
 }
