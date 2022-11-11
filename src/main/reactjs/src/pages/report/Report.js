@@ -101,8 +101,8 @@ const Report = () => {
             {/* <div style={{height:'300px'}}><NivoGraph data={weights} /></div> */}
             {/* <VisGraph data={weights} /> */}
 
-            <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
-            <button type='button' onClick={addWeight}>몸무게 추가</button>
+            {/* <input type='number' value={newWeight} onChange={(e) => setNewWeight(e.target.value)}/>
+            <button type='button' onClick={addWeight}>몸무게 추가</button> */}
           </div>
         </div>
       }
