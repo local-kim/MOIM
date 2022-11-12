@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import axios from 'axios';
-import styles from './Challenge.module.css';
+import styles from './Comment.module.css';
 
 const Comment = ({comment, setCommentList, user}) => {
   const deleteComment = () => {

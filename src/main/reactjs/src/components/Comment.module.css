@@ -1,0 +1,102 @@
+/* CommentInput.js */
+.input_wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 100px;
+  height: 30px;
+  margin: 10px 0;
+}
+
+.input_comment{
+  border: 0px solid rgb(230, 230, 230);
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  width: -webkit-fill-available;  /* 너비가 다른 요소에 영향 없을 만큼만 최대로 늘어나게 */
+  font-size: 14px;
+  padding: 0px 2px 0 11px;
+}
+
+input:focus{
+  outline:none;
+}
+
+.input_comment::placeholder{
+  font-size: 12px;
+  color: gray;
+  /* padding: 0 0 2px 8px; */
+}
+
+.comment_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+
+  font-size: 20px;
+  color: #999999;
+  /* font-weight: 500; */
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+/* Comment.js */
+.comment_wrap{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.comment_wrap .delete_btn{
+  color: rgb(200, 200, 200);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.comment_wrap .comment{
+  display: flex;
+  align-items: center;
+}
+
+.comment_wrap .info_wrap{
+  display: flex;
+}
+
+.comment_wrap .nickname{
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.comment_wrap .date{
+  color: gray;
+  font-size: 11px;
+}
+
+.comment_wrap .comment .photo{
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.comment_wrap .comment .no_photo{
+  width: 35px;
+  height: 35px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment_wrap .comment .no_photo_icon{
+  font-size: 21px;
+  color: white;
+}
+
+.comment_wrap .comment .content{
+  font-size: 15px;
+}

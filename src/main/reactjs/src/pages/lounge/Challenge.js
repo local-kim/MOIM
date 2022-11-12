@@ -4,8 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
 import styles from './Challenge.module.css';
-import Comment from './Comment';
-import { MenuTitle, WriterMenu } from '../../components';
+import { CommentInput, Comment, MenuTitle, WriterMenu } from '../../components';
 
 const Challenge = () => {
   const navigate = useNavigate();
@@ -257,10 +256,12 @@ const Challenge = () => {
           댓글 {commentList && commentList.length}
         </div>
 
-        <div className={styles.input_wrap}>
+        {/* <div className={styles.input_wrap}>
           <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
           <span className={`material-icons ${styles.comment_btn}`} onClick={insertComment}>reply</span>
-        </div>
+        </div> */}
+
+        <CommentInput comment={comment} setComment={setComment} insertComment={insertComment}/>
 
         {
           commentList && commentList.map((comment, index) => (

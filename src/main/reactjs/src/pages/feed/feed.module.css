@@ -214,23 +214,34 @@
 
 .feed_detail .photo{
   width: 100%;
-  max-height: 100vw;
+  /* max-height: 100vw; */
 }
 
 .feed_detail .content_wrap{
-  padding: 10px 20px;
+  padding: 12px 20px;
 }
 
 .feed_detail .btn_wrap{
-
+  display: flex;
+  align-items: flex-end;
 }
 
 .feed_detail .btn_wrap .like_off{
 
 }
 
+.feed_detail .btn_wrap .comment_btn{
+  font-size: 23px;
+  margin-left: 18px;
+}
+
+.feed_detail .btn_wrap .share_btn{
+  /* font-size: 23px; */
+  margin-left: 18px;
+}
+
 .feed_detail .content{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .feed_detail .tag_wrap{
@@ -247,4 +258,12 @@
 
 .feed_detail .tag:not(:last-child){
   margin-right: 8px;
+}
+
+.feed_detail .comment_list{
+  margin-top: 20px;
+}
+
+.subtitle{
+  font-weight: 600;
 }
