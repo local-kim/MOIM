@@ -279,7 +279,7 @@ const Challenge = () => {
           // 리더일 경우, 인원 참
           challenge.leader_id == user.id && users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
           // 참여자일 경우, 참여 중
-          isJoined ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={unjoinUser}>참여중</div> : 
+          isJoined ? <div className={`${styles.join_btn} ${styles.unjoin_btn}`} onClick={unjoinUser}>참여중</div> : 
           // 참여자일 경우, 인원 참
           users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
           // 참여자일 경우, 인원 안 참

@@ -218,6 +218,12 @@ pre.content{
   /* margin-bottom: 10px; */
 }
 
+.unjoin_btn{
+  background-color: #b3e1d8;
+  color: white;
+  cursor: pointer;
+}
+
 .light_btn{
   background-color: rgb(240, 240, 240);
 }
