@@ -12,7 +12,7 @@ public class FileUtil {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat();
 		
-		format.applyPattern("yyyyMMddHHmmss");
+		format.applyPattern("yyyyMMddHHmmssSSS");
 		
 		return format.format(cal.getTime()) + ext;
 	}

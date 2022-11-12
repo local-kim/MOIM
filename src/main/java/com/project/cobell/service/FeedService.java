@@ -53,6 +53,8 @@ public class FeedService {
 	public void insertTags(List<String> tags, Long feedId){
 		for(String t : tags){
 			Tag tag = new Tag();
+
+			tag.setId(null);
 			tag.setFeed(feedRepository.findById(feedId).get());
 			tag.setTag(t);
 
@@ -110,7 +112,7 @@ public class FeedService {
 
 	@Transactional
 	public List<FeedDto> getFeedList(Long userId){
-		List<Feed> feeds = feedRepository.findByUserId(userId);
+		List<Feed> feeds = feedRepository.findByUserIdOrderByCreatedAtDesc(userId);
 
 //		System.out.println(feeds);
 

@@ -117,7 +117,7 @@ const Profile = () => {
           <Tabs className={styles.tabs} value={value} onChange={handleChange} variant="fullWidth" TabIndicatorProps={{style: {background: "#86dbcb"}}}>
             <Tab disableFocusRipple={true} disableRipple={true} label={
               <span className={`material-icons ${styles.icon}`} style={{fontSize
-              : '22px', marginBottom: '-1px'}}>grid_on</span>
+              : '22px', marginBottom: '-5px'}}>grid_on</span>
             } />
             <Tab disableFocusRipple={true} disableRipple={true} label={
               // <span className={`material-icons ${styles.icon}`}>menu</span>

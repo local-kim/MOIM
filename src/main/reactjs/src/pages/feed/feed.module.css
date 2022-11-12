@@ -10,6 +10,9 @@
   top: 0;
   width: 100%;
   background-color: white;
+}
+
+.feed_detail .menu_title{
   box-shadow: 0px 0px 10px 0px rgb(245 245 245 / 90%);
 }
 
@@ -57,6 +60,7 @@
   width: 70px;
   height: 70px;
   border-radius: 8px;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
@@ -92,6 +96,7 @@
   /* padding: 3px; */
   background-color: white;
   border-radius: 100%;
+  cursor: pointer;
 }
 
 .new_feed .content{
@@ -192,12 +197,12 @@
 .feed_detail .user_wrap{
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  padding: 8px 12px;
 }
 
 .feed_detail .user_photo{
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   margin-right: 10px;
 }
@@ -213,23 +218,33 @@
 }
 
 .feed_detail .content_wrap{
-  padding: 0 30px;
+  padding: 10px 20px;
+}
+
+.feed_detail .btn_wrap{
+
+}
+
+.feed_detail .btn_wrap .like_off{
+
 }
 
 .feed_detail .content{
-  margin: 20px 0;
+  margin-top: 10px;
 }
 
 .feed_detail .tag_wrap{
   display: flex;
+  margin-top: 20px;
 }
 
 .feed_detail .tag{
-  padding: 2px 7px;
+  padding: 3px 8px;
   background-color: rgb(245, 245, 245);
   border-radius: 11px;
+  font-size: 14px;
 }
 
 .feed_detail .tag:not(:last-child){
-  margin-right: 5px;
+  margin-right: 8px;
 }

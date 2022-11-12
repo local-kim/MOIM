@@ -50,8 +50,8 @@ const NewFeed = () => {
       headers: {'Content-Type' : 'multipart/form-data'}
     })
     .then(res => {
-      console.log("feed id: " + res.data);
-      // navigate(`/lounge/${res.data}`, {replace: true});
+      // console.log("feed id: " + res.data);
+      navigate(`/feed/${res.data}`, {replace: true});
     }).catch(err => console.log(err));
   }
 

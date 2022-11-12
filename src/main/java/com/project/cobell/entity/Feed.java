@@ -28,13 +28,16 @@ public class Feed {
 	private String content;
 	private Timestamp createdAt;
 
-	@OneToMany
-//	@JsonIgnore
-	@JoinColumn(name = "feed_id")
-	private Set<Tag> tags = new HashSet<>();
+	@OneToMany(mappedBy = "feed")
+	@OrderBy("id asc")
+	@JsonIgnore
+//	@JoinColumn(name = "feed_id")
+//	private Set<Tag> tags = new HashSet<>();
+	private Set<Tag> tags;
 
-	@OneToMany
-//	@JsonIgnore
-	@JoinColumn(name = "feed_id")
+	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OrderBy("id asc")
+	@JsonIgnore
+//	@JoinColumn(name = "feed_id")
 	private Set<PhotoFeed> photoFeeds = new HashSet<>();
 }

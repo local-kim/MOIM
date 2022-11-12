@@ -10,6 +10,7 @@ const FeedDetail = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [feed, setFeed] = useState({});
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     axios.get(`/feed/${feedId}`)
@@ -20,6 +21,10 @@ const FeedDetail = () => {
   }, []);
 
   const deleteFeed = () => {
+
+  }
+
+  const handleLike = () => {
 
   }
 
@@ -49,9 +54,18 @@ const FeedDetail = () => {
           <div className={styles.user_name}>{feed.user_name}</div>
         </div>
 
-        <img src={`/resources/feed_photo/${feed.file_names}`} className={styles.photo} alt=''/>
+        {
+          feed.file_names && <img src={`/resources/feed_photo/${feed.file_names[0]}`} className={styles.photo} alt=''/>
+        }
 
         <div className={styles.content_wrap}>
+          {/* <div className={styles.btn_wrap}>
+            {
+              isLiked ? 
+              <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
+              <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
+            }
+          </div> */}
 
           <div className={styles.content}>{feed.content}</div>
 
