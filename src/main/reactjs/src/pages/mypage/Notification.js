@@ -10,7 +10,7 @@ const Notification = () => {
   const [notis, setNotis] = useState([]);
 
   useEffect(() => {
-    axios.get(`/noti/${user.id}`)
+    axios.get(`/api/noti/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setNotis(res.data);

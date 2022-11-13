@@ -11,7 +11,7 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
 
-    axios.post("/user/login", {email, password})
+    axios.post("/api/user/login", {email, password})
     .then(res => {
       if(res.data == null){
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");

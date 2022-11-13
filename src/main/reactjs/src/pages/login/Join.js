@@ -39,7 +39,7 @@ const Join = () => {
   const joinUser = (e) => {
     // e.preventDefault();
     
-    axios.post('/user/join', user)
+    axios.post('/api/user/join', user)
     .then(res => {
       // console.log('회원가입 성공');
       navigate("/login", {replace: true});

@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mypage")
+@RequestMapping("/api/mypage")
 public class MypageController {
 
 	@Autowired

@@ -54,25 +54,25 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    axios.get(`/feed/list/${user.id}`)
+    axios.get(`/api/feed/list/${user.id}`)
     .then(res => {
       console.log(res.data);
       setFeedList(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/mypage/user/${user.id}`)
+    axios.get(`/api/mypage/user/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setUserInfo(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/mypage/created/${user.id}`)
+    axios.get(`/api/mypage/created/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setCreated(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/mypage/joined/${user.id}`)
+    axios.get(`/api/mypage/joined/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setJoined(res.data);

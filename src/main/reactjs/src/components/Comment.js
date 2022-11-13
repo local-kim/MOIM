@@ -7,7 +7,7 @@ import styles from './Comment.module.css';
 const Comment = ({comment, setCommentList, user}) => {
   const deleteComment = () => {
     if(window.confirm("댓글을 삭제하시겠습니까?")){
-      axios.delete(`/challenge/comment/delete`, {data: comment})
+      axios.delete(`/api/challenge/comment/delete`, {data: comment})
       .then(res => {
         setCommentList(res.data);
       }).catch(err => console.log(err));

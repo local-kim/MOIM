@@ -20,13 +20,13 @@ const FeedDetail = () => {
   const [commentList, setCommentList] = useState();
 
   useEffect(() => {
-    axios.get(`/feed/${feedId}`)
+    axios.get(`/api/feed/${feedId}`)
     .then(res => {
       console.log(res.data);
       setFeed(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/feed/like/${feedId}/${user.id}`)
+    axios.get(`/api/feed/like/${feedId}/${user.id}`)
     .then(res => {
       // console.log(res.data);
       if(res.data == 0)
@@ -42,7 +42,7 @@ const FeedDetail = () => {
 
   const handleLike = () => {
     if(isLiked){
-      axios.delete(`/feed/like/delete`, {
+      axios.delete(`/api/feed/like/delete`, {
         data: {
           feed_id: feedId,
           user_id: user.id
@@ -53,7 +53,7 @@ const FeedDetail = () => {
       }).catch(err => console.log(err));
     }
     else{
-      axios.post(`/feed/like/insert`, {
+      axios.post(`/api/feed/like/insert`, {
         feed_id: feedId,
         user_id: user.id
       })
@@ -67,7 +67,7 @@ const FeedDetail = () => {
     // if(comment && comment != ''){
     //   setComment('');
 
-    //   axios.post(`/challenge/comment/new`, {
+    //   axios.post(`/api/challenge/comment/new`, {
     //     challenge_id: challengeId,
     //     user_id: user.id,
     //     content: comment

@@ -27,7 +27,7 @@ const WriterMenu = ({challenge, handleDelete}) => {
 
   // const deleteChallenge = () => {
   //   if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
-  //     axios.delete(`/challenge/delete/${challenge.id}`)
+  //     axios.delete(`/api/challenge/delete/${challenge.id}`)
   //     .then(res => {
   //       console.log(res);
   //       navigate(-1, {replace: true});

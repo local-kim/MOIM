@@ -46,7 +46,7 @@ const NewFeed = () => {
       type: "application/json"
     }));
 
-    axios.post('/feed/new', form, {
+    axios.post('/api/feed/new', form, {
       headers: {'Content-Type' : 'multipart/form-data'}
     })
     .then(res => {

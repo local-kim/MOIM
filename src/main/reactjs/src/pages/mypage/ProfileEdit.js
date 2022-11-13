@@ -13,7 +13,7 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     if(user){
-      axios.get(`/mypage/user/${user.id}`)
+      axios.get(`/api/mypage/user/${user.id}`)
       .then(res => {
         console.log(res.data);
         setUserInfo(res.data);
@@ -34,7 +34,7 @@ const ProfileEdit = () => {
       const form = new FormData();
       form.append("file", image);
 
-      axios.post(`/mypage/update/photo/${user.id}`, form, {
+      axios.post(`/api/mypage/update/photo/${user.id}`, form, {
         headers: {'Content-Type' : 'multipart/form-data'}
       })
       .then(res => {
@@ -46,7 +46,7 @@ const ProfileEdit = () => {
     if(bio){
       // console.log("update bio");
 
-      axios.post(`/mypage/update/bio/${user.id}`, {
+      axios.post(`/api/mypage/update/bio/${user.id}`, {
         bio: bio
       })
       .then(res => {
@@ -55,7 +55,7 @@ const ProfileEdit = () => {
     }
 
     // 바뀐 유저 정보를 다시 받아와 localStorage에 저장
-    // axios.get(`/user/reload/${user.id}`)
+    // axios.get(`/api/user/reload/${user.id}`)
     // .then(res => {
     //   localStorage.removeItem("user");
     //   localStorage.setItem("user", JSON.stringify(res.data));
