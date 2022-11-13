@@ -1,19 +1,16 @@
 package com.project.cobell.service;
 
 import com.project.cobell.dto.FeedDto;
-import com.project.cobell.entity.Feed;
-import com.project.cobell.entity.PhotoChallenge;
-import com.project.cobell.entity.PhotoFeed;
-import com.project.cobell.entity.Tag;
-import com.project.cobell.repository.FeedRepository;
-import com.project.cobell.repository.PhotoFeedRepository;
-import com.project.cobell.repository.TagRepository;
-import com.project.cobell.repository.UserRepository;
+import com.project.cobell.dto.LikeFeedDto;
+import com.project.cobell.entity.*;
+import com.project.cobell.repository.*;
 import com.project.cobell.util.FileUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
@@ -37,6 +34,9 @@ public class FeedService {
 
 	@Autowired
 	private PhotoFeedRepository photoFeedRepository;
+
+	@Autowired
+	private LikeFeedRepository likeFeedRepository;
 
 	@Transactional
 	public Long insertFeed(FeedDto feedDto){
@@ -102,9 +102,13 @@ public class FeedService {
 
 		ModelMapper modelMapper = new ModelMapper();
 		FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
-		feedDto.setTags(feed.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
+//		tag: optional
+		if(feed.getTags() != null)
+			feedDto.setTags(feed.getTags().stream().map(tag -> tag.getTag()).collect(Collectors.toList()));
 		feedDto.setFileNames(feed.getPhotoFeeds().stream().map(photoFeed -> photoFeed.getFileName()).collect(Collectors.toList()));
-		feedDto.setUserPhoto(feed.getUser().getPhotoUser().getFileName());
+//		user photo: optional
+		if(feed.getUser().getPhotoUser() != null)
+			feedDto.setUserPhoto(feed.getUser().getPhotoUser().getFileName());
 		feedDto.setUserName(feed.getUser().getNickname());
 
 		return feedDto;
@@ -126,5 +130,22 @@ public class FeedService {
 		}
 
 		return feedDtos;
+	}
+
+	@Transactional
+	public int getLike(Long feedId, Long userId){
+		return likeFeedRepository.countByFeedIdAndUserId(feedId, userId);
+	}
+
+	@Transactional
+	public void insertLike(LikeFeedDto likeFeedDto){
+		ModelMapper modelMapper = new ModelMapper();
+		LikeFeed likeFeed = modelMapper.map(likeFeedDto, LikeFeed.class);
+		likeFeedRepository.save(likeFeed);
+	}
+
+	@Transactional
+	public void deleteLike(LikeFeedDto likeFeedDto){
+		likeFeedRepository.deleteByFeedIdAndUserId(likeFeedDto.getFeedId(), likeFeedDto.getUserId());
 	}
 }

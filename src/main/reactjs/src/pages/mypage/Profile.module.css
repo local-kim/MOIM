@@ -168,6 +168,7 @@
   height: 129px; /* 임시 */
   position: relative;
   background-size: cover;
+  background-position: center;
 }
 
 .feed_photo::after{

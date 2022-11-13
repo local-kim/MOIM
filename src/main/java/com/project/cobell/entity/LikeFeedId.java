@@ -9,7 +9,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class LikeChallengeId implements Serializable {
-	public Long challenge;
+public class LikeFeedId implements Serializable {
+	public Long feed;
 	public Long user;
 }

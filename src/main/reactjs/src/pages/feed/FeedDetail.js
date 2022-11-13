@@ -20,17 +20,45 @@ const FeedDetail = () => {
   useEffect(() => {
     axios.get(`/feed/${feedId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setFeed(res.data);
+    }).catch(err => console.log(err));
+
+    axios.get(`/feed/like/${feedId}/${user.id}`)
+    .then(res => {
+      console.log(res.data);
+      if(res.data == 0)
+        setIsLiked(false);
+      else
+        setIsLiked(true);
     }).catch(err => console.log(err));
   }, []);
 
   const deleteFeed = () => {
-
+    
   }
 
   const handleLike = () => {
-
+    if(isLiked){
+      axios.delete(`/feed/like/delete`, {
+        data: {
+          feed_id: feedId,
+          user_id: user.id
+        }
+      })
+      .then(res => {
+        setIsLiked(false);
+      }).catch(err => console.log(err));
+    }
+    else{
+      axios.post(`/feed/like/insert`, {
+        feed_id: feedId,
+        user_id: user.id
+      })
+      .then(res => {
+        setIsLiked(true);
+      }).catch(err => console.log(err));
+    }
   }
 
   const insertComment = () => {
@@ -100,11 +128,14 @@ const FeedDetail = () => {
 
           <div className={styles.content}>{feed.content}</div>
 
-          <div className={styles.tag_wrap}>
-            {
-              feed.tags && feed.tags.map(tag => <div className={styles.tag}>{tag}</div>)
-            }
-          </div>
+          {
+            feed.tags && feed.tags.length > 0 && 
+            <div className={styles.tag_wrap}>
+              {
+                feed.tags.map(tag => <div className={styles.tag}>{tag}</div>)
+              }
+            </div>
+          }
 
           <div className={styles.comment_list}>
             <div className={styles.subtitle}>
