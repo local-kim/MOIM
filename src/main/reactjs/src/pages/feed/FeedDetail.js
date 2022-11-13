@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './feed.module.css';
 import { CommentInput, Comment, WriterMenu } from '../../components';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const FeedDetail = () => {
   const {feedId} = useParams();
@@ -73,9 +75,15 @@ const FeedDetail = () => {
           <div className={styles.user_name}>{feed.user_name}</div>
         </div>
 
-        {
-          feed.file_names && <img src={`/resources/feed_photo/${feed.file_names[0]}`} className={styles.photo} alt=''/>
-        }
+        <Carousel showIndicators={feed.file_names && feed.file_names.length > 1 ? true : false} showArrows={false} showStatus={false} showThumbs={false} swipeScrollTolerance={100}>
+          {
+            feed.file_names && feed.file_names.map((image, idx) => (
+              <div>
+                <img src={`/resources/feed_photo/${image}`} className={styles.photo} alt=''/>
+              </div>
+            ))
+          }
+        </Carousel>
 
         <div className={styles.content_wrap}>
           <div className={styles.btn_wrap}>
