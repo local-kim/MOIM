@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -18,8 +19,10 @@ public class FeedDto {
 	private String userName;
 	private String userPhoto;
 	private String content;
+	private Timestamp createdAt;
 	private List<String> tags;
 	private float weight;
 
 	private List<String> fileNames;
+	private int likes;
 }

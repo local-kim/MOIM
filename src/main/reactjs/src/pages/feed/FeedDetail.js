@@ -5,6 +5,8 @@ import styles from './feed.module.css';
 import { CommentInput, Comment, WriterMenu } from '../../components';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { format } from 'date-fns';
+import ko from 'date-fns/locale/ko';
 
 const FeedDetail = () => {
   const {feedId} = useParams();
@@ -20,13 +22,13 @@ const FeedDetail = () => {
   useEffect(() => {
     axios.get(`/feed/${feedId}`)
     .then(res => {
-      // console.log(res.data);
+      console.log(res.data);
       setFeed(res.data);
     }).catch(err => console.log(err));
 
     axios.get(`/feed/like/${feedId}/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data == 0)
         setIsLiked(false);
       else
@@ -100,7 +102,11 @@ const FeedDetail = () => {
               <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
             </div>
           }
-          <div className={styles.user_name}>{feed.user_name}</div>
+
+          <div>
+            <div className={styles.user_name}>{feed.user_name}</div>
+            <div className={styles.time}>{feed.created_at && format(new Date(feed.created_at), "yyyy년 MM월 dd일 HH:mm", {locale: ko})}</div>
+          </div>
         </div>
 
         <Carousel showIndicators={feed.file_names && feed.file_names.length > 1 ? true : false} showArrows={false} showStatus={false} showThumbs={false} swipeScrollTolerance={100}>
@@ -125,6 +131,11 @@ const FeedDetail = () => {
 
             <span className={`material-icons-outlined ${styles.share_btn}`}>share</span>
           </div>
+
+          {
+            feed.likes > 0 && 
+            <div className={styles.likes_count}>좋아요 {feed.likes}</div>
+          }
 
           <div className={styles.content}>{feed.content}</div>
 

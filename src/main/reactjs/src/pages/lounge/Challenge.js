@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import styles from './Challenge.module.css';
 import { CommentInput, Comment, MenuTitle, WriterMenu } from '../../components';

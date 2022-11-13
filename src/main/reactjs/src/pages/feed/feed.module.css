@@ -229,11 +229,20 @@
   font-weight: 600;
 }
 
+.feed_detail .time{
+  font-size: 11px;
+  color: #555555;
+}
+
 .feed_detail .photo{
   width: 100%;
   height: 100vw;
   object-fit: cover;
   /* max-height: 100vw; */
+}
+
+.carousel .control-dots .dot{
+  margin: 0 5px;
 }
 
 .feed_detail .content_wrap{
@@ -264,6 +273,13 @@
   /* font-size: 23px; */
   margin-left: 18px;
   cursor: pointer;
+}
+
+.feed_detail .likes_count{
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: -5px;
 }
 
 .feed_detail .content{
