@@ -112,7 +112,7 @@ const FeedDetail = () => {
         <Carousel showIndicators={feed.file_names && feed.file_names.length > 1 ? true : false} showArrows={false} showStatus={false} showThumbs={false} swipeScrollTolerance={100}>
           {
             feed.file_names && feed.file_names.map((image, idx) => (
-              <div>
+              <div key={idx}>
                 <img src={`/resources/feed_photo/${image}`} className={styles.photo} alt=''/>
               </div>
             ))
@@ -137,13 +137,13 @@ const FeedDetail = () => {
             <div className={styles.likes_count}>좋아요 {feed.likes}</div>
           }
 
-          <div className={styles.content}>{feed.content}</div>
+          <pre className={styles.content}>{feed.content}</pre>
 
           {
             feed.tags && feed.tags.length > 0 && 
             <div className={styles.tag_wrap}>
               {
-                feed.tags.map(tag => <div className={styles.tag}>{tag}</div>)
+                feed.tags.map((tag, idx) => <div className={styles.tag} key={idx}>{tag}</div>)
               }
             </div>
           }

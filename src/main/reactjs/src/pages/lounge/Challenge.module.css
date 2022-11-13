@@ -16,7 +16,7 @@
   justify-content: space-between;
 
   position: relative;
-  z-index: -2;
+  /* z-index: -2; */
 }
 
 .challenge_photo::before{
@@ -31,7 +31,8 @@
     rgba(20, 20, 20, 0) 60%,
     rgba(20, 20, 20, 0.4) 100%
   );
-  z-index: -1;
+  /* z-index: -1; */
+  z-index: 1;
 }
 
 .challenge_title{
@@ -45,7 +46,7 @@
   word-break: keep-all;
   overflow-wrap: break-word;  /* 띄어쓰기 없는 긴 텍스트 줄바꿈 */
 
-  z-index: 1;
+  z-index: 2;
 }
 
 .subtitle{
@@ -56,11 +57,13 @@
 .like_off{
   cursor: pointer;
   color: rgba(240, 240, 240, 1);
+  z-index: 2;
 }
 
 .like_on{
   cursor: pointer;
   color: rgba(255, 0, 0, 0.8);
+  z-index: 2;
 }
 
 .profile_wrap{
@@ -76,6 +79,7 @@
   margin-right: 15px;
   border-radius: 100%;
   object-fit: cover;
+  z-index: 2;
 }
 
 .profile_wrap .no_photo{
@@ -87,11 +91,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .profile_wrap .no_photo_icon{
   font-size: 45px;
   color: white;
+  z-index: 2;
 }
 
 .profile_wrap .nickname{

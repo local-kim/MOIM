@@ -1,6 +1,6 @@
 .carousel .control-dots .dot{
   box-shadow: 0px 0px 2px rgb(0 0 0 / 90%) !important;
-  width: 5px !important;
-  height: 5px !important;
+  width: 6px !important;
+  height: 6px !important;
   margin: 0 5px !important;
 }

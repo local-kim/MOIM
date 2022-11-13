@@ -162,16 +162,19 @@ const Challenge = () => {
       {/* <MenuTitle title={"챌린지"} leftIcon={"arrow_back_ios"} history={"lounge"} visible={false} /> */}
 
       {/* 사진 */}
-      <div className={styles.challenge_photo} style={{
-        backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
-      }}>
-        {
-          isLiked ? 
-          <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
-          <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
-        }
-        <div className={styles.challenge_title}>{challenge.title}</div>
-      </div>
+      {
+        challenge.photo && 
+        <div className={styles.challenge_photo} style={{
+          backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
+        }}>
+          {
+            isLiked ? 
+            <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
+            <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
+          }
+          <div className={styles.challenge_title}>{challenge.title}</div>
+        </div>
+      }
 
       {/* 리더 프로필 */}
       <div className={styles.profile_wrap}>
