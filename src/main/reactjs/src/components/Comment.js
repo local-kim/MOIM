@@ -3,8 +3,11 @@ import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import axios from 'axios';
 import styles from './Comment.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Comment = ({comment, setCommentList, user}) => {
+  const navigate = useNavigate();
+
   const deleteComment = () => {
     if(window.confirm("댓글을 삭제하시겠습니까?")){
       axios.delete(`/api/challenge/comment/delete`, {data: comment})
@@ -19,15 +22,15 @@ const Comment = ({comment, setCommentList, user}) => {
       <div className={styles.comment}>
         {
           comment.photo ? 
-          <img src={`/resources/user_photo/${comment.photo}`} className={styles.photo} alt="" /> :
-          <div className={styles.no_photo}>
+          <img src={`/resources/user_photo/${comment.photo}`} className={styles.photo} alt="" onClick={() => navigate(`/user/${comment.user_id}`)} /> :
+          <div className={styles.no_photo} onClick={() => navigate(`/user/${comment.user_id}`)}>
             <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
           </div>
         }
 
         <div className={styles.content_wrap}>
           <div style={{display: 'flex'}}>
-            <div className={styles.nickname}>{comment.nickname}</div>
+            <div className={styles.nickname} onClick={() => navigate(`/user/${comment.user_id}`)}>{comment.nickname}</div>
             <div className={styles.date}>
               {comment.created_at && format(new Date(comment.created_at), "MM/dd HH:mm", {locale: ko})}
             </div>

@@ -8,6 +8,7 @@ import { Notification, Profile, ProfileEdit } from "./pages/mypage";
 import { Settings } from "./pages/settings";
 import { MenuBar } from "./components";
 import { FeedDetail, NewFeed } from "./pages/feed";
+import UserProfile from "./pages/user/UserProfile";
 
 const RouteMain = () => {
  
@@ -31,6 +32,9 @@ const RouteMain = () => {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/profile/edit" element={<ProfileEdit/>} />
         <Route path="/notification" element={<Notification/>} />
+
+        {/* 유저 프로필 */}
+        <Route path="/user/:userId" element={<UserProfile/>} />
 
         {/* 피드 */}
         <Route path="/feed/new" element={<NewFeed/>} />

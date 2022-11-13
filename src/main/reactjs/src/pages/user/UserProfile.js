@@ -1,50 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import styles from './Profile.module.css';
-import { Navigate, useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import CreatedChallenge from './CreatedChallenge';
-import JoinedChallenge from './JoinedChallenge';
-import FeedList from './FeedList';
-// import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import styles from './user.module.css';
+import { CreatedChallenge, FeedList, JoinedChallenge } from '../mypage';
 
-// const theme = createMuiTheme({
-//   overrides: {
-//     // MuiTabs: {
-//     //   indicator: {
-//     //     backgroundColor: orange[700]
-//     //   }
-//     // },
-//     MuiTab: {
-//       root: {
-//         "&:hover": {
-//           // backgroundColor: pink[100],
-//           color: '#00ff00'
-//         }
-//       },
-//       selected: {
-//         // backgroundColor: orange[100],
-//         color: '#ff0000',
-//         "&:hover": {
-//           // backgroundColor: green[100],
-//           color: '#ffff00'
-//         }
-//       }
-//     }
-//   }
-// });
-
-const Profile = () => {
+const UserProfile = () => {
   const navigate = useNavigate();
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [userInfo, setUserInfo] = useState({});
-  const [created, setCreated] = useState([]);
-  const [joined, setJoined] = useState([]);
-  const [feedList, setFeedList] = useState([]);
+  const {userId} = useParams();
 
   // 탭
   const [value, setValue] = React.useState(0);
@@ -53,37 +17,46 @@ const Profile = () => {
     setValue(newValue);
   };
 
+  const [userInfo, setUserInfo] = useState({});
+  const [created, setCreated] = useState([]);
+  const [joined, setJoined] = useState([]);
+  const [feedList, setFeedList] = useState([]);
+
   useEffect(() => {
-    axios.get(`/api/feed/list/${user.id}`)
+    axios.get(`/api/feed/list/${userId}`)
     .then(res => {
       // console.log(res.data);
       setFeedList(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/user/${user.id}`)
+    axios.get(`/api/mypage/user/${userId}`)
     .then(res => {
       // console.log(res.data);
       setUserInfo(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/created/${user.id}`)
+    axios.get(`/api/mypage/created/${userId}`)
     .then(res => {
       // console.log(res.data);
       setCreated(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/joined/${user.id}`)
+    axios.get(`/api/mypage/joined/${userId}`)
     .then(res => {
       // console.log(res.data);
       setJoined(res.data);
     }).catch(err => console.log(err));
   }, []);
-
+  
   return (
     <div>
-      { !user && <Navigate to="/login" replace={true} /> }
-      { user &&
-        <div className={styles.wrap}>
+      <div className={styles.menu_title}>
+        <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
+        <div className={styles.title}>프로필</div>
+        <button className={styles.hidden}></button>
+      </div>
+
+      <div className={styles.wrap}>
           <div className={styles.profile_box}>
             {
               userInfo.photo ? 
@@ -95,9 +68,7 @@ const Profile = () => {
             
             <div className={styles.info_box}>
               <div className={styles.nickname_wrap}>
-                <span className={styles.nickname}>{user.nickname}</span>
-                {/* <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span> */}
-                <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>settings</span>
+                <span className={styles.nickname}>{userInfo.nickname}</span>
               </div>
               {
                 userInfo.bio &&
@@ -108,8 +79,6 @@ const Profile = () => {
             </div>
           </div>
           <div className={styles.btn_wrap}>
-            <span className={`material-icons-outlined ${styles.add_btn}`} onClick={() => navigate('/feed/new')}>add_box</span>
-            <span className={`material-icons-outlined ${styles.noti_btn}`} onClick={() => navigate('/notification')}>notifications</span>
           </div>
           
           {/* <MuiThemeProvider theme={theme}> */}
@@ -134,9 +103,8 @@ const Profile = () => {
             <JoinedChallenge joined={joined} />
           }
         </div>
-      }
     </div>
   );
 };
 
-export default Profile;
+export default UserProfile;

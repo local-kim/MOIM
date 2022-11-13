@@ -177,12 +177,12 @@ const Challenge = () => {
       <div className={styles.profile_wrap}>
         {
           users[0] && users[0].photo ? 
-          <img src={`/resources/user_photo/${users[0].photo}`} className={styles.photo} alt="" /> :
-          <div className={styles.no_photo}>
+          <img src={`/resources/user_photo/${users[0].photo}`} className={styles.photo} alt=""  onClick={() => navigate(`/user/${challenge.leader_id}`)}/> :
+          <div className={styles.no_photo} onClick={() => navigate(`/user/${challenge.leader_id}`)}>
             <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
           </div>
         }
-        <div className={styles.nickname}>{users[0] && users[0].nickname}</div>
+        <div className={styles.nickname} onClick={() => navigate(`/user/${challenge.leader_id}`)}>{users[0] && users[0].nickname}</div>
       </div>
 
       <div className={styles.info_wrap}>
@@ -236,14 +236,14 @@ const Challenge = () => {
               <div key={index} className={styles.user}>
                 {
                   user && user.photo ? 
-                  <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> :
-                  <div className={styles.no_photo}>
+                  <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" onClick={() => navigate(`/user/${user.id}`)} /> :
+                  <div className={styles.no_photo} onClick={() => navigate(`/user/${user.id}`)}>
                     <span className={`material-icons ${styles.no_photo_icon}`}>person</span>
                   </div>
                 }
                 {/* <img src={`/resources/user_photo/${user.photo}`} className={styles.photo} alt="" /> */}
                 {/* {index == 0 && <span>*</span>} */}
-                <span className={styles.nickname}>{user.nickname}</span>
+                <span className={styles.nickname} onClick={() => navigate(`/user/${user.id}`)}>{user.nickname}</span>
               </div>
             ))
           }

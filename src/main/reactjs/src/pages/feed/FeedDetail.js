@@ -22,7 +22,7 @@ const FeedDetail = () => {
   useEffect(() => {
     axios.get(`/api/feed/${feedId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setFeed(res.data);
     }).catch(err => console.log(err));
 
