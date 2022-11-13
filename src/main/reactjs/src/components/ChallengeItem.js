@@ -21,7 +21,7 @@ const ChallengeItem = ({challenge, likeList, getLikeList}) => {
           }
         })
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           // setIsLiked(false);
           // 좋아요 목록에서 삭제
           // setLikeList(likeList.filter(id => id != challengeId));
@@ -36,7 +36,7 @@ const ChallengeItem = ({challenge, likeList, getLikeList}) => {
           user_id: user.id
         })
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           // setIsLiked(true);
           // likeList.push(challengeId);
           getLikeList();

@@ -8,14 +8,16 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@IdClass(LikeChallengeId.class)
+//@IdClass(LikeChallengeId.class)
 public class LikeChallenge {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@ManyToOne  // JoinChallenge : Challenge = N : 1
 	@JoinColumn(name = "challenge_id")  // 실제 fk 컬럼명
 	private Challenge challenge;
 
-	@Id
 	@ManyToOne  // JoinChallenge : User = N : 1
 	@JoinColumn(name = "user_id")
 	private User user;

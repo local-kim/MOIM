@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LikeChallengeRepository extends JpaRepository<LikeChallenge, LikeChallengeId> {
+public interface LikeChallengeRepository extends JpaRepository<LikeChallenge, Long> {
 //	@Query(value = "")
 	int countByChallengeIdAndUserId(Long challengeId, Long userId);
 	int deleteByChallengeIdAndUserId(Long challengeId, Long userId);
 
-	@Query(value = "select lc.challenge.id from LikeChallenge lc where lc.user.id=:userId")
+	@Query(value = "select lc.challenge.id from LikeChallenge lc where lc.user.id=:userId order by lc.id desc")
 	List<Long> findChallengeIdByUserId(@Param("userId") Long userId);
 }
