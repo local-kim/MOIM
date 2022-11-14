@@ -1,5 +1,5 @@
 .wrap{
-  margin-top: 60px;
+  margin-top: 51px;
   margin-bottom: 50px;
 }
 
@@ -62,7 +62,7 @@
 
 .like_on{
   cursor: pointer;
-  color: rgba(255, 0, 0, 0.8);
+  color: rgba(255, 0, 0, 0.9);
   z-index: 2;
 }
 
@@ -76,7 +76,7 @@
 .profile_wrap .photo{
   width: 70px;
   height: 70px;
-  margin-right: 15px;
+  margin-right: 12px;
   border-radius: 100%;
   object-fit: cover;
   z-index: 2;
@@ -87,7 +87,7 @@
   height: 70px;
   background-color: rgb(230, 230, 230);
   border-radius: 100%;
-  margin-right: 15px;
+  margin-right: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +101,7 @@
 }
 
 .profile_wrap .nickname{
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
 }
 
@@ -119,7 +119,7 @@
 
 pre.content{
   font-family: inherit;
-  font-size: 17px;
+  font-size: 16px;
   margin: 0;
   padding: 10px 20px;
   white-space: pre-wrap;
@@ -358,11 +358,12 @@ input:focus{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 12px 20px;
   position: fixed;
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 3;
 }
 
 .menu_title .title{

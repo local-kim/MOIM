@@ -1,5 +1,6 @@
 package com.project.cobell.service;
 
+import com.project.cobell.dto.CommentFeedDto;
 import com.project.cobell.dto.FeedDto;
 import com.project.cobell.dto.LikeFeedDto;
 import com.project.cobell.entity.*;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +39,9 @@ public class FeedService {
 
 	@Autowired
 	private LikeFeedRepository likeFeedRepository;
+
+	@Autowired
+	private CommentFeedRepository commentFeedRepository;
 
 	@Transactional
 	public Long insertFeed(FeedDto feedDto){
@@ -147,5 +152,32 @@ public class FeedService {
 	@Transactional
 	public void deleteLike(LikeFeedDto likeFeedDto){
 		likeFeedRepository.deleteByFeedIdAndUserId(likeFeedDto.getFeedId(), likeFeedDto.getUserId());
+	}
+
+	@Transactional
+	public List<CommentFeedDto> getCommentList(Long feedId){
+		List<CommentFeed> commentFeeds = commentFeedRepository.findByFeedId(feedId);
+		List<CommentFeedDto> commentFeedDtos = new ArrayList<>();
+		ModelMapper modelMapper = new ModelMapper();
+
+		for(CommentFeed commentFeed : commentFeeds){
+			CommentFeedDto commentFeedDto = modelMapper.map(commentFeed, CommentFeedDto.class);
+			commentFeedDto.setNickname(commentFeed.getUser().getNickname());
+			if(commentFeed.getUser().getPhotoUser() != null)
+				commentFeedDto.setPhoto(commentFeed.getUser().getPhotoUser().getFileName());
+			commentFeedDtos.add(commentFeedDto);
+		}
+
+		return commentFeedDtos;
+	}
+
+	@Transactional
+	public void insertComment(CommentFeedDto commentFeedDto){
+		ModelMapper modelMapper = new ModelMapper();
+		CommentFeed commentFeed = modelMapper.map(commentFeedDto, CommentFeed.class);
+		commentFeed.setUser(userRepository.findById(commentFeedDto.getUserId()).get());
+		commentFeed.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+		commentFeedRepository.save(commentFeed);
 	}
 }

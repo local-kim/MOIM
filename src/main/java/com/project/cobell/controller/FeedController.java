@@ -1,6 +1,7 @@
 package com.project.cobell.controller;
 
 import com.project.cobell.dto.ChallengeDto;
+import com.project.cobell.dto.CommentFeedDto;
 import com.project.cobell.dto.FeedDto;
 import com.project.cobell.dto.LikeFeedDto;
 import com.project.cobell.entity.Feed;
@@ -85,5 +86,21 @@ public class FeedController {
 			@RequestBody LikeFeedDto likeFeedDto
 	){
 		feedService.deleteLike(likeFeedDto);
+	}
+
+	@GetMapping("/comment/list/{feedId}")
+	public List<CommentFeedDto> getCommentList(
+			@PathVariable Long feedId
+	){
+		return feedService.getCommentList(feedId);
+	}
+
+	@PostMapping("/comment/insert")
+	public List<CommentFeedDto> insertComment(
+			@RequestBody CommentFeedDto commentFeedDto
+			){
+		feedService.insertComment(commentFeedDto);
+
+		return feedService.getCommentList(commentFeedDto.getFeedId());
 	}
 }

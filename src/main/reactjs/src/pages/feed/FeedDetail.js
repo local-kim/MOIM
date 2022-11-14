@@ -34,6 +34,12 @@ const FeedDetail = () => {
       else
         setIsLiked(true);
     }).catch(err => console.log(err));
+
+    axios.get(`/api/feed/comment/list/${feedId}`)
+    .then(res => {
+      console.log(res.data);
+      setCommentList(res.data);
+    }).catch(err => console.log(err));
   }, []);
 
   const deleteFeed = () => {
@@ -64,19 +70,19 @@ const FeedDetail = () => {
   }
 
   const insertComment = () => {
-    // if(comment && comment != ''){
-    //   setComment('');
+    if(comment && comment != ''){
+      setComment('');
 
-    //   axios.post(`/api/challenge/comment/new`, {
-    //     challenge_id: challengeId,
-    //     user_id: user.id,
-    //     content: comment
-    //   })
-    //   .then(res => {
-    //     // console.log(res.data);
-    //     setCommentList(res.data);
-    //   }).catch(err => console.log(err));
-    // }
+      axios.post(`/api/feed/comment/insert`, {
+        feed_id: feedId,
+        user_id: user.id,
+        content: comment
+      })
+      .then(res => {
+        console.log(res.data);
+        setCommentList(res.data);
+      }).catch(err => console.log(err));
+    }
   }
 
   return (

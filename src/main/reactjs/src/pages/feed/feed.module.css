@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 12px 20px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -13,8 +13,12 @@
   z-index: 1;
 }
 
+.new_feed .menu_title{
+  padding: 15px 20px !important;
+}
+
 .feed_detail .menu_title{
-  box-shadow: 0px 0px 15px 0px rgb(245 245 245 / 50%);
+  box-shadow: 0px 0px 15px 0px rgb(245 245 245 / 80%);
 }
 
 .menu_title .title{
@@ -193,7 +197,7 @@
 
 /* FeedDetail.js */
 .feed_detail .wrap{
-  margin-top: 60px;
+  margin-top: 51px;
 }
 
 .feed_detail .user_wrap{
