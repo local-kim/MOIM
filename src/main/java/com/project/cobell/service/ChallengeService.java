@@ -220,7 +220,7 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void createComment(CommentChallengeDto commentChallengeDto){
+	public Long createComment(CommentChallengeDto commentChallengeDto){
 		ModelMapper modelMapper = new ModelMapper();
 
 		CommentChallenge commentChallenge = modelMapper.map(commentChallengeDto, CommentChallenge.class);
@@ -231,6 +231,8 @@ public class ChallengeService {
 //		System.out.println(commentChallenge.toString());
 
 		commentChallengeRepository.save(commentChallenge);
+
+		return commentChallengeRepository.getInsertedId();
 	}
 
 	@Transactional

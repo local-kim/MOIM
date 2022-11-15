@@ -29,9 +29,11 @@ public class Notification {
 	@JoinColumn(name = "target_user_id")
 	private User targetUser;
 
-	@ManyToOne
-	@JoinColumn(name = "challenge_id")
-	private Challenge challenge;
+//	@ManyToOne
+//	@JoinColumn(name = "challenge_id")
+//	private Challenge challenge;
+	private Long targetPostId;
+	private Long targetCommentId;
 
 	private String content;
 	private int read;

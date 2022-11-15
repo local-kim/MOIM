@@ -6,6 +6,7 @@ import com.project.cobell.dto.FeedDto;
 import com.project.cobell.dto.LikeFeedDto;
 import com.project.cobell.entity.Feed;
 import com.project.cobell.service.FeedService;
+import com.project.cobell.service.NotificationService;
 import com.project.cobell.service.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class FeedController {
 
 	@Autowired
 	private WeightService weightService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@PostMapping("/new")
 	public Long insertFeed(
@@ -86,6 +90,8 @@ public class FeedController {
 			@RequestBody LikeFeedDto likeFeedDto
 	){
 		feedService.insertLike(likeFeedDto);
+
+		notificationService.insertFeedLikeNotification(likeFeedDto);
 	}
 
 	@DeleteMapping("/like/delete")
@@ -106,7 +112,10 @@ public class FeedController {
 	public List<CommentFeedDto> insertComment(
 			@RequestBody CommentFeedDto commentFeedDto
 	){
-		feedService.insertComment(commentFeedDto);
+		Long commentId = feedService.insertComment(commentFeedDto);
+
+		commentFeedDto.setId(commentId);
+		notificationService.insertFeedCommentNotification(commentFeedDto);
 
 		return feedService.getCommentList(commentFeedDto.getFeedId());
 	}

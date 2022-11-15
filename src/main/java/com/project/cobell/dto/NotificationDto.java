@@ -20,10 +20,11 @@ public class NotificationDto {
 	private Long id;
 	private int type;
 	private Long userId;
+	private Long targetUserId;
 	private String targetUserNickname;
-	private Long challengeId;
-	private String challengeTitle;
-	private String content;
+	private Long targetPostId;
+	private String targetChallengeTitle;    // 챌린지만 제목 있음
+	private String targetCommentContent;    // 댓글만 내용 있음
 	private int read;
 	private Timestamp createdAt;
 }

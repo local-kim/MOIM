@@ -177,13 +177,15 @@ public class FeedService {
 	}
 
 	@Transactional
-	public void insertComment(CommentFeedDto commentFeedDto){
+	public Long insertComment(CommentFeedDto commentFeedDto){
 		ModelMapper modelMapper = new ModelMapper();
 		CommentFeed commentFeed = modelMapper.map(commentFeedDto, CommentFeed.class);
 		commentFeed.setUser(userRepository.findById(commentFeedDto.getUserId()).get());
 		commentFeed.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
 		commentFeedRepository.save(commentFeed);
+
+		return commentFeedRepository.getInsertedId();
 	}
 
 	@Transactional

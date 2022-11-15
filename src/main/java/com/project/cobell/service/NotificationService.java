@@ -1,12 +1,13 @@
 package com.project.cobell.service;
 
 import com.project.cobell.dto.CommentChallengeDto;
+import com.project.cobell.dto.CommentFeedDto;
+import com.project.cobell.dto.LikeFeedDto;
 import com.project.cobell.dto.NotificationDto;
 import com.project.cobell.entity.Challenge;
+import com.project.cobell.entity.Feed;
 import com.project.cobell.entity.Notification;
-import com.project.cobell.repository.ChallengeRepository;
-import com.project.cobell.repository.NotificationRepository;
-import com.project.cobell.repository.UserRepository;
+import com.project.cobell.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,15 @@ public class NotificationService {
 	@Autowired
 	private ChallengeRepository challengeRepository;
 
+	@Autowired
+	private FeedRepository feedRepository;
+
+	@Autowired
+	private CommentChallengeRepository commentChallengeRepository;
+
+	@Autowired
+	private CommentFeedRepository commentFeedRepository;
+
 	@Transactional
 	public List<NotificationDto> getNotiList(Long userId){
 		List<Notification> notifications = notificationRepository.findByUserIdOrderByCreatedAtDesc(userId);
@@ -38,8 +48,17 @@ public class NotificationService {
 			NotificationDto notificationDto = modelMapper.map(n, NotificationDto.class);
 			notificationDto.setUserId(n.getUser().getId());
 			notificationDto.setTargetUserNickname(n.getTargetUser().getNickname());
-			notificationDto.setChallengeId(n.getChallenge().getId());
-			notificationDto.setChallengeTitle(n.getChallenge().getTitle());
+			notificationDto.setTargetPostId(n.getTargetPostId());
+
+			// 챌린지 관련 알림일 경우만
+			if(n.getType() == 0 || n.getType() == 1 || n.getType() == 2)
+				notificationDto.setTargetChallengeTitle(challengeRepository.findById(n.getTargetPostId()).get().getTitle());
+
+			// 댓글 알림일 경우만
+			if(n.getType() == 2 && n.getTargetCommentId() != null)
+				notificationDto.setTargetCommentContent(commentChallengeRepository.findById(n.getTargetCommentId()).get().getContent());
+			else if(n.getType() == 4 && n.getTargetCommentId() != null)
+				notificationDto.setTargetCommentContent(commentFeedRepository.findById(n.getTargetCommentId()).get().getContent());
 
 			notificationDtos.add(notificationDto);
 		}
@@ -56,7 +75,8 @@ public class NotificationService {
 		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
 		notification.setUser(targetChallenge.getLeader());
 		notification.setTargetUser(userRepository.findById(targetUserId).get());
-		notification.setChallenge(targetChallenge);
+//		notification.setChallenge(targetChallenge);
+		notification.setTargetPostId(challengeId);
 
 		notificationRepository.save(notification);
 	}
@@ -70,21 +90,52 @@ public class NotificationService {
 		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
 		notification.setUser(targetChallenge.getLeader());
 		notification.setTargetUser(userRepository.findById(targetUserId).get());
-		notification.setChallenge(targetChallenge);
+//		notification.setChallenge(targetChallenge);
+		notification.setTargetPostId(challengeId);
 
 		notificationRepository.save(notification);
 	}
 
 	@Transactional
-	public void insertCommentNotification(CommentChallengeDto commentChallengeDto){
+	public void insertChallengeCommentNotification(CommentChallengeDto commentChallengeDto){
 		Notification notification = new Notification();
 
-		notification.setType(2);    // 댓글 등록 알림
+		notification.setType(2);    // 챌린지 댓글 등록 알림
 //		Long leaderId = challengeRepository.findById(commentChallengeDto.getChallengeId()).get().getLeader().getId();
 		Challenge targetChallenge = challengeRepository.findById(commentChallengeDto.getChallengeId()).get();
 		notification.setUser(targetChallenge.getLeader());
 		notification.setTargetUser(userRepository.findById(commentChallengeDto.getUserId()).get());
-		notification.setChallenge(targetChallenge);
+//		notification.setChallenge(targetChallenge);
+		notification.setTargetPostId(commentChallengeDto.getChallengeId());
+		notification.setTargetCommentId(commentChallengeDto.getId());
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
+	public void insertFeedLikeNotification(LikeFeedDto likeFeedDto){
+		Notification notification = new Notification();
+
+		notification.setType(3);    // 피드 좋아요 알림
+		Feed targetFeed = feedRepository.findById(likeFeedDto.getFeedId()).get();
+		notification.setUser(targetFeed.getUser());
+		notification.setTargetUser(userRepository.findById(likeFeedDto.getUserId()).get());
+		notification.setTargetPostId(likeFeedDto.getFeedId());
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
+	public void insertFeedCommentNotification(CommentFeedDto commentFeedDto){
+		Notification notification = new Notification();
+
+		notification.setType(4);    // 피드 댓글 등록 알림
+//		Long leaderId = challengeRepository.findById(commentChallengeDto.getChallengeId()).get().getLeader().getId();
+		Feed targetFeed = feedRepository.findById(commentFeedDto.getFeedId()).get();
+		notification.setUser(targetFeed.getUser());
+		notification.setTargetUser(userRepository.findById(commentFeedDto.getUserId()).get());
+		notification.setTargetPostId(commentFeedDto.getFeedId());
+		notification.setTargetCommentId(commentFeedDto.getId());
 
 		notificationRepository.save(notification);
 	}

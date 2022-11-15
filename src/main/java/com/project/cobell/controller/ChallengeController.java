@@ -116,10 +116,11 @@ public class ChallengeController {
 			@RequestBody CommentChallengeDto commentChallengeDto
 			){
 //		System.out.println(commentChallengeDto.toString());
-		challengeService.createComment(commentChallengeDto);
+		Long commentId = challengeService.createComment(commentChallengeDto);
 
 		// notification 테이블에 댓글 알림 insert
-		notificationService.insertCommentNotification(commentChallengeDto);
+		commentChallengeDto.setId(commentId);
+		notificationService.insertChallengeCommentNotification(commentChallengeDto);
 
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}
