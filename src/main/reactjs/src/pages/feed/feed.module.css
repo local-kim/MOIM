@@ -141,7 +141,7 @@
   border: 1px solid rgb(230, 230, 230);
   background-color: transparent;
   border-radius: 10px;
-  font-size: 14px;
+  /* font-size: 14px; */
   padding: 0 8px;
   margin-left: 5px;
   white-space: nowrap;
@@ -152,7 +152,7 @@
   background-color: transparent;
   width: 53px;
   min-width: 53px;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 .new_feed .tag{
