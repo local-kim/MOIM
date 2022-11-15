@@ -38,9 +38,18 @@ public class UserService {
 	@Transactional
 	public UserDto login(LoginDto loginDto){
 //		return userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
+
+		Optional<User> u = userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
+
+		if(!u.isPresent())
+			return null;
+
 		ModelMapper modelMapper = new ModelMapper();
-		User user = userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword()).get();
+
+		User user = u.get();
+
 		UserDto userDto = modelMapper.map(user, UserDto.class);
+		userDto.setPassword(null);
 
 		// 프로필 사진이 있는 유저만
 		if(user.getPhotoUser() != null){

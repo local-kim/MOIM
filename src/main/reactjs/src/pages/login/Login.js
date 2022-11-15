@@ -13,7 +13,8 @@ const Login = () => {
 
     axios.post("/api/user/login", {email, password})
     .then(res => {
-      if(res.data == null){
+      // console.log(res.data);
+      if(res.data == null || res.data == undefined || res.data == 0){
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
       else{
