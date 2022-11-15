@@ -12,6 +12,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	@Query(value = "select count(*) from user where email = :email", nativeQuery = true)
+	int countByEmail(@Param("email") String email);
+
 	@Query(value = "select * from user where email = :email and password = :password", nativeQuery = true)
 	Optional<User> findByIdAndPassword(@Param("email") String email, @Param("password") String password);
 

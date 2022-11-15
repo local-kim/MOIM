@@ -19,7 +19,9 @@ const Join = () => {
     // weight: '',
     // title: '',
     // content: ''
-  })
+  });
+
+  const [usedEmail, setUsedEmail] = useState(false);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -33,7 +35,21 @@ const Join = () => {
       [name]: value
     });
 
-    console.log(user);
+    // 이메일 중복체크
+    if(name == 'email'){
+      axios.post(`/api/user/check-email`, {email: value})
+      .then(res => {
+        console.log(res.data);
+        if(res.data == 1){
+          setUsedEmail(true);
+        }
+        else{
+          setUsedEmail(false);
+        }
+      }).catch(err => console.log(err));
+    }
+
+    // console.log(user);
   }
 
   const joinUser = (e) => {
@@ -52,7 +68,7 @@ const Join = () => {
     <div className={styles.join_wrap}>
       <div className={styles.title}>COBELL</div>
 
-      { page == 1 ? <FirstJoin user={user} handleChange={handleChange} setPage={setPage} /> : <SecondJoin user={user} handleChange={handleChange} setUser={setUser} joinUser={joinUser} /> }
+      { page == 1 ? <FirstJoin user={user} handleChange={handleChange} setPage={setPage} usedEmail={usedEmail} /> : <SecondJoin user={user} handleChange={handleChange} setUser={setUser} joinUser={joinUser} /> }
       
     </div>
   );

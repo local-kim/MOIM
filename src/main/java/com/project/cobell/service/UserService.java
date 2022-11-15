@@ -36,6 +36,11 @@ public class UserService {
 	}
 
 	@Transactional
+	public int checkEmail(String email){
+		return userRepository.countByEmail(email);
+	}
+
+	@Transactional
 	public UserDto login(LoginDto loginDto){
 //		return userRepository.findByIdAndPassword(loginDto.getEmail(), loginDto.getPassword());
 

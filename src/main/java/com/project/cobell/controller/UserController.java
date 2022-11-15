@@ -26,16 +26,26 @@ public class UserController {
 	@PostMapping("/join")
 	public void join(
 			@RequestBody UserDto user
-			){
+	){
 //		System.out.println(user);
 
 		userService.join(user);
 	}
 
+	@PostMapping("/check-email")
+	public int checkEmail(
+			@RequestBody LoginDto login
+	){
+//		System.out.println(login.getEmail());
+//		System.out.println(userService.checkEmail(login.getEmail()));
+
+		return userService.checkEmail(login.getEmail());
+	}
+
 	@PostMapping("/login")
 	public UserDto login(
 			@RequestBody LoginDto login
-			){
+	){
 //		System.out.println(login);
 //		System.out.println(userService.login(login));
 		return userService.login(login);
