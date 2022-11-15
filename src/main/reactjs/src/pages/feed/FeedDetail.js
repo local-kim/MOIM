@@ -43,7 +43,13 @@ const FeedDetail = () => {
   }, []);
 
   const deleteFeed = () => {
-    
+    if(window.confirm("정말 피드를 삭제하시겠습니까?")){
+      axios.delete(`/api/feed/delete/${feed.id}`)
+      .then(res => {
+        console.log(res);
+        navigate(-1, {replace: true});
+      }).catch(err => console.log(err));
+    }
   }
 
   const handleLike = () => {

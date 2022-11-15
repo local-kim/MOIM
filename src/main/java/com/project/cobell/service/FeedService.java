@@ -102,6 +102,11 @@ public class FeedService {
 	}
 
 	@Transactional
+	public void deleteFeed(Long feedId){
+		feedRepository.deleteById(feedId);
+	}
+
+	@Transactional
 	public FeedDto getFeed(Long feedId){
 		Feed feed = feedRepository.findById(feedId).get();
 
@@ -181,6 +186,7 @@ public class FeedService {
 		commentFeedRepository.save(commentFeed);
 	}
 
+	@Transactional
 	public void deleteComment(Long commentId){
 		commentFeedRepository.deleteById(commentId);
 	}

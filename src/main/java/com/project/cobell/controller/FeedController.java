@@ -53,6 +53,13 @@ public class FeedController {
 		return feedId;
 	}
 
+	@DeleteMapping("/delete/{feedId}")
+	public void deleteFeed(
+			@PathVariable Long feedId
+	){
+		feedService.deleteFeed(feedId);
+	}
+
 	@GetMapping("/{feedId}")
 	public FeedDto getFeed(
 			@PathVariable Long feedId
