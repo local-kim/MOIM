@@ -85,6 +85,15 @@ const FeedDetail = () => {
     }
   }
 
+  const deleteComment = (c) => {
+    if(window.confirm("댓글을 삭제하시겠습니까?")){
+      axios.delete(`/api/feed/comment/delete`, {data: c})
+      .then(res => {
+        setCommentList(res.data);
+      }).catch(err => console.log(err));
+    }
+  }
+
   return (
     <div className={styles.feed_detail}>
       <div className={styles.menu_title}>
@@ -167,7 +176,7 @@ const FeedDetail = () => {
 
             {
               commentList && commentList.map((comment, index) => (
-                <Comment comment={comment} user={user} setCommentList={setCommentList} key={index}/>
+                <Comment comment={comment} user={user} setCommentList={setCommentList} deleteComment={deleteComment} key={index}/>
               ))
             }
           </div>

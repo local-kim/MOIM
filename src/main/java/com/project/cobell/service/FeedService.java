@@ -180,4 +180,8 @@ public class FeedService {
 
 		commentFeedRepository.save(commentFeed);
 	}
+
+	public void deleteComment(Long commentId){
+		commentFeedRepository.deleteById(commentId);
+	}
 }

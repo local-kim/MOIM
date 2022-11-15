@@ -80,11 +80,13 @@ const Challenge = () => {
     }
   }
 
-  const deleteComment = () => {
-    axios.delete(`/api/challenge/comment/delete`, {data: comment})
-    .then(res => {
-      setCommentList(res.data);
-    }).catch(err => console.log(err));
+  const deleteComment = (c) => {
+    if(window.confirm("댓글을 삭제하시겠습니까?")){
+      axios.delete(`/api/challenge/comment/delete`, {data: c})
+      .then(res => {
+        setCommentList(res.data);
+      }).catch(err => console.log(err));
+    }
   }
 
   useEffect(() => {
@@ -268,7 +270,7 @@ const Challenge = () => {
 
         {
           commentList && commentList.map((comment, index) => (
-            <Comment comment={comment} user={user} setCommentList={setCommentList} key={index}/>
+            <Comment comment={comment} user={user} setCommentList={setCommentList} deleteComment={deleteComment} key={index}/>
           ))
         }
       </div>

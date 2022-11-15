@@ -5,17 +5,8 @@ import axios from 'axios';
 import styles from './Comment.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const Comment = ({comment, setCommentList, user}) => {
+const Comment = ({comment, setCommentList, user, deleteComment}) => {
   const navigate = useNavigate();
-
-  const deleteComment = () => {
-    if(window.confirm("댓글을 삭제하시겠습니까?")){
-      axios.delete(`/api/challenge/comment/delete`, {data: comment})
-      .then(res => {
-        setCommentList(res.data);
-      }).catch(err => console.log(err));
-    }
-  }
 
   return (
     <div className={styles.comment_wrap}>
@@ -41,7 +32,7 @@ const Comment = ({comment, setCommentList, user}) => {
 
       {
         comment.user_id == user.id &&
-        <span className={`material-icons ${styles.delete_btn}`} onClick={deleteComment}>clear</span>
+        <span className={`material-icons ${styles.delete_btn}`} onClick={() => deleteComment(comment)}>clear</span>
       }
     </div>
   );

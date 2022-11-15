@@ -98,8 +98,17 @@ public class FeedController {
 	@PostMapping("/comment/insert")
 	public List<CommentFeedDto> insertComment(
 			@RequestBody CommentFeedDto commentFeedDto
-			){
+	){
 		feedService.insertComment(commentFeedDto);
+
+		return feedService.getCommentList(commentFeedDto.getFeedId());
+	}
+
+	@DeleteMapping("/comment/delete")
+	public List<CommentFeedDto> deleteComment(
+			@RequestBody CommentFeedDto commentFeedDto
+	){
+		feedService.deleteComment(commentFeedDto.getId());
 
 		return feedService.getCommentList(commentFeedDto.getFeedId());
 	}
