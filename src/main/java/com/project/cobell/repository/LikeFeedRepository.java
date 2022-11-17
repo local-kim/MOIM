@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface LikeFeedRepository extends JpaRepository<LikeFeed, LikeFeedId> {
 	int countByFeedIdAndUserId(Long feedId, Long userId);
 	int deleteByFeedIdAndUserId(Long feedId, Long userId);
+	int countByFeedId(Long feedId);
 }

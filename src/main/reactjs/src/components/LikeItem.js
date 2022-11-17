@@ -75,7 +75,7 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
           <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
           <span>
             {/* 참여중인 사람 수 받아오기 */}
-            {challenge.joined_users}/{challenge.limit}명
+            {challenge.joined_users}/{challenge.limit}
           </span>
         </div>
       </div>

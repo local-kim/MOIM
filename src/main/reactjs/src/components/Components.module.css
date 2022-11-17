@@ -92,14 +92,42 @@
 }
 
 .challenge .info{
-  font-size: 15px;
+  font-size: 14px;
   color: gray;
   display: flex;
   align-items: center;
+
+  /* display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden; */
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  /* display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -webkit-box-flex: inherit;
+  -webkit-box-align: center;
+  -webkit-box-direction: normal;
+  overflow: hidden; */
 }
 
+.challenge .info div{
+  
+}
+
+.challenge .info span{
+  flex-shrink: 0;
+}
+
+/* .challenge .info span{
+  word-wrap: ;
+} */
+
 .challenge .icon{
-  font-size: 15px;
+  font-size: 14px;
   color: gray;
 }
 
@@ -168,14 +196,14 @@
 }
 
 .profile_challenge .info{
-  font-size: 15px;
+  font-size: 14px;
   color: gray;
   display: flex;
   align-items: center;
 }
 
 .profile_challenge .icon{
-  font-size: 15px;
+  font-size: 14px;
   color: gray;
 }
 

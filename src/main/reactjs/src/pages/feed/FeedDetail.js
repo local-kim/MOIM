@@ -61,6 +61,10 @@ const FeedDetail = () => {
         }
       })
       .then(res => {
+        setFeed({
+          ...feed,
+          likes: res.data
+        });
         setIsLiked(false);
       }).catch(err => console.log(err));
     }
@@ -70,6 +74,10 @@ const FeedDetail = () => {
         user_id: user.id
       })
       .then(res => {
+        setFeed({
+          ...feed,
+          likes: res.data
+        });
         setIsLiked(true);
       }).catch(err => console.log(err));
     }
@@ -130,7 +138,7 @@ const FeedDetail = () => {
           </div>
         </div>
 
-        <Carousel showIndicators={feed.file_names && feed.file_names.length > 1 ? true : false} showArrows={false} showStatus={false} showThumbs={false} swipeScrollTolerance={100}>
+        <Carousel showIndicators={feed.file_names && feed.file_names.length > 1 ? true : false} showArrows={false} showStatus={false} showThumbs={false} swipeScrollTolerance={50}>
           {
             feed.file_names && feed.file_names.map((image, idx) => (
               <div key={idx}>
@@ -155,7 +163,7 @@ const FeedDetail = () => {
 
           {
             feed.likes > 0 && 
-            <div className={styles.likes_count}>좋아요 {feed.likes}</div>
+            <div className={styles.likes_count}>좋아요 {feed.likes}개</div>
           }
 
           <pre className={styles.content}>{feed.content}</pre>

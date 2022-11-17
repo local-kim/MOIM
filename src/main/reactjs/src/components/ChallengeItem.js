@@ -60,6 +60,20 @@ const ChallengeItem = ({challenge, likeList, getLikeList}) => {
       <div className={styles.info_wrap}>
         <div className={styles.title} onClick={() => navigate(`/lounge/${challenge.id}`)}>{challenge.title}</div>
         <div className={styles.info}>
+          {/* <div className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</div>
+          <div>
+            {
+              challenge.area ? challenge.area : "온라인"
+            }
+          </div>
+          <div>&nbsp;・&nbsp;</div>
+          <div>{format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</div>
+          <div>&nbsp;&nbsp;&nbsp;</div>
+          <div className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</div>
+          <div>
+            {challenge.joined_users}/{challenge.limit}
+          </div> */}
+          
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
           <span>
             {
@@ -71,9 +85,20 @@ const ChallengeItem = ({challenge, likeList, getLikeList}) => {
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
           <span>
-            {/* 참여중인 사람 수 받아오기 */}
-            {challenge.joined_users}/{challenge.limit}명
+            {challenge.joined_users}/{challenge.limit}
           </span>
+
+          {/* <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
+          {
+              challenge.area ? challenge.area : "온라인"
+            }
+          &nbsp;・&nbsp;
+          {format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}
+          &nbsp;&nbsp;&nbsp;
+          <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
+          
+          {challenge.joined_users}/{challenge.limit} */}
+          
         </div>
       </div>
     </div>

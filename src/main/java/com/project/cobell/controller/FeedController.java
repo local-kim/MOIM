@@ -86,19 +86,23 @@ public class FeedController {
 	}
 
 	@PostMapping("/like/insert")
-	public void insertLike(
+	public int insertLike(
 			@RequestBody LikeFeedDto likeFeedDto
 	){
 		feedService.insertLike(likeFeedDto);
 
 		notificationService.insertFeedLikeNotification(likeFeedDto);
+
+		return feedService.getLikeCount(likeFeedDto.getFeedId());
 	}
 
 	@DeleteMapping("/like/delete")
-	public void deleteLike(
+	public int deleteLike(
 			@RequestBody LikeFeedDto likeFeedDto
 	){
 		feedService.deleteLike(likeFeedDto);
+
+		return feedService.getLikeCount(likeFeedDto.getFeedId());
 	}
 
 	@GetMapping("/comment/list/{feedId}")

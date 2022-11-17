@@ -160,6 +160,11 @@ public class FeedService {
 	}
 
 	@Transactional
+	public int getLikeCount(Long feedId){
+		return likeFeedRepository.countByFeedId(feedId);
+	}
+
+	@Transactional
 	public List<CommentFeedDto> getCommentList(Long feedId){
 		List<CommentFeed> commentFeeds = commentFeedRepository.findByFeedId(feedId);
 		List<CommentFeedDto> commentFeedDtos = new ArrayList<>();
