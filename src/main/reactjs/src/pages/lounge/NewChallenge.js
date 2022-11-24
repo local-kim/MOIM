@@ -31,7 +31,15 @@ const NewChallenge = () => {
       [name]: value
     });
 
-    console.log(challenge);
+    // console.log(challenge);
+
+    // 제출 가능 여부 확인
+    if(image && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+      setSubmit(true);
+    }
+    else{
+      setSubmit(false);
+    }
   }
 
   // const handleGenderChange = (e) => {
@@ -41,6 +49,8 @@ const NewChallenge = () => {
   //     gender: e.target.value
   //   });
   // };
+
+  const [submit, setSubmit] = useState(false);
 
   const createChallenge = () => {
     const form = new FormData();
@@ -78,6 +88,14 @@ const NewChallenge = () => {
   const [image, setImage] = useState();
   const handleImage = (e) => {
     setImage(e.target.files[0]);
+
+    // 제출 가능 여부 확인
+    if(challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+      setSubmit(true);
+    }
+    else{
+      setSubmit(false);
+    }
   }
 
   return (
@@ -94,7 +112,10 @@ const NewChallenge = () => {
         <div className={styles.menu_title}>
           <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>close</span>
           <div className={styles.title}>챌린지 개설</div>
-          <button type="button" className={styles.submit_btn} onClick={createChallenge}>완료</button>
+          {
+            submit ? <button type="button" className={styles.submit_btn} onClick={createChallenge}>완료</button> : <button type="button" className={styles.disabled_submit_btn}>완료</button>
+          }
+          
         </div>
 
         {/* 사진 */}
