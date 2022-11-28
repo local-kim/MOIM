@@ -108,6 +108,7 @@ const Challenge = () => {
     axios.get(`/api/challenge/joined/${challengeId}/${user.id}`)
     .then(res => {
       // console.log(res.data);
+      // 참여x, 참여함, 대기중
       if(res.data == 0)
         setIsJoined(false);
       else
@@ -217,6 +218,10 @@ const Challenge = () => {
               }
             </span>
           </span>
+        }
+        &nbsp;・&nbsp;
+        {
+          challenge.type == 0 ? <span>선착순</span> : <span>승인제</span>
         }
         
       </div>

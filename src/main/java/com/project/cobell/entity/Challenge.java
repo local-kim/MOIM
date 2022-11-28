@@ -30,6 +30,7 @@ public class Challenge {
 	private User leader;
 //	private Long leaderId;
 
+	private int type;
 	private String title;
 	private String content;
 //	@Column(name = "planned_at")    // TODO: 나중에 Camel -> snake 자동 변환되게

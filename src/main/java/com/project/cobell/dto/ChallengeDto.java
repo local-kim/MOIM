@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 public class ChallengeDto {
 	private Long id;
 	private Long leaderId;
+	private int type;
 	private String title;
 	private String content;
 	@JsonFormat(timezone="Asia/Seoul")

@@ -34,7 +34,7 @@ const NewChallenge = () => {
     // console.log(challenge);
 
     // 제출 가능 여부 확인
-    if(image && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);
     }
     else{
@@ -90,7 +90,7 @@ const NewChallenge = () => {
     setImage(e.target.files[0]);
 
     // 제출 가능 여부 확인
-    if(challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    if(challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);
     }
     else{
@@ -151,12 +151,30 @@ const NewChallenge = () => {
             <textarea name='content' onChange={handleChange}></textarea>
           </div>
 
+          {/* 유형(선착순, 승인제) */}
+          <div className={styles.area_wrap}>
+            <span className={styles.subtitle}>유형</span>
+
+            <div>
+              <div className={styles.btn_wrap}>
+                <label className={`form-check-label`}>
+                  <input className={`form-check-input`} type='radio' name="type" value='0' required onChange={handleChange}/>
+                  <span>선착순</span>
+                </label>
+                <label className={`form-check-label`} style={{marginLeft:'26px'}}>
+                  <input className={`form-check-input`} type='radio' name="type" value='1' required onChange={handleChange}/>
+                  <span>승인제</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
           {/* 인원 */}
           <div className={styles.limit_wrap}>
             <span className={styles.subtitle}>인원</span>
             <div className={styles.btn_wrap}>
               {
-                challenge.limit == 2 ? 
+                challenge.limit <= 2 ? 
                 <span className={`material-icons ${styles.limit_btn_disable}`}>remove_circle_outline</span> : 
                 <span className={`material-icons ${styles.limit_btn}`} onClick={() => {
                   if(challenge.limit > 2){
@@ -169,10 +187,10 @@ const NewChallenge = () => {
               }
               <span className={styles.count}>{challenge.limit}명</span>
               {
-                challenge.limit == 99 ? 
+                challenge.limit >= 99 ? 
                 <span className={`material-icons ${styles.limit_btn_disable}`}>add_circle_outline</span> : 
                 <span className={`material-icons ${styles.limit_btn}`} onClick={() => {
-                  if(challenge.limit < 100){
+                  if(challenge.limit < 99){
                     setChallenge({
                       ...challenge,
                       limit: challenge.limit + 1
