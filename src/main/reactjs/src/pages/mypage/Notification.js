@@ -7,13 +7,13 @@ import NotificationItem from './NotificationItem';
 const Notification = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  const [notis, setNotis] = useState([]);
+  const [notiList, setNotiList] = useState([]);
 
   useEffect(() => {
     axios.get(`/api/noti/${user.id}`)
     .then(res => {
-      // console.log(res.data);
-      setNotis(res.data);
+      console.log(res.data);
+      setNotiList(res.data);
     }).catch(err => console.log(err));
   }, []);
 
@@ -23,8 +23,8 @@ const Notification = () => {
 
       <div className={styles.noti_list}>
         {
-          notis && notis.map(noti => (
-            <NotificationItem noti={noti} key={noti.id}/>
+          notiList && notiList.map(noti => (
+            <NotificationItem noti={noti} setNotiList={setNotiList} key={noti.id}/>
           ))
         }
       </div>

@@ -155,6 +155,16 @@ public class ChallengeService {
 	}
 
 	@Transactional
+	public void updateJoinStatus(Long challengeId, Long userId, int status){
+		JoinChallenge joinChallenge = joinChallengeRepository.findById(new JoinChallengeId(challengeId, userId)).get();
+		joinChallenge.setStatus(status);
+
+		joinChallengeRepository.save(joinChallenge);
+
+//		joinChallengeRepository.updateStatus(challengeId, userId, status);
+	}
+
+	@Transactional
 	public ChallengeDto getChallenge(Long challengeId){
 		Challenge challenge = challengeRepository.findById(challengeId).get();
 

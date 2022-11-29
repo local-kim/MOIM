@@ -20,4 +20,7 @@ public interface JoinChallengeRepository extends JpaRepository<JoinChallenge, Jo
 
 	// Query Method
 	int countByChallengeIdAndUserId(Long challengeId, Long userId);
+
+	@Query(value = "update JoinChallenge jc set jc.status = :status where jc.challenge.id = :challengeId and jc.user.id = :userId")
+	void updateStatus(Long challengeId, Long userId, int status);
 }

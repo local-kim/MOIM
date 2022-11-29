@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 @Data
 @IdClass(JoinChallengeId.class)
 @DynamicInsert
+@DynamicUpdate
 //@AllArgsConstructor
 //@NoArgsConstructor
 public class JoinChallenge {

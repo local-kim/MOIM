@@ -1,9 +1,6 @@
 package com.project.cobell.controller;
 
-import com.project.cobell.dto.ChallengeDto;
-import com.project.cobell.dto.CommentChallengeDto;
-import com.project.cobell.dto.LikeChallengeDto;
-import com.project.cobell.dto.UserDto;
+import com.project.cobell.dto.*;
 import com.project.cobell.service.ChallengeService;
 import com.project.cobell.service.NotificationService;
 import com.project.cobell.util.FileUtil;
@@ -111,6 +108,27 @@ public class ChallengeController {
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);
+	}
+
+	@PostMapping("/approve")
+	public List<NotificationDto> approveUser(
+			@RequestBody NotificationDto notificationDto
+	){
+		System.out.println(notificationDto);
+
+		// join_challenge 테이블의 status 변경
+		challengeService.updateJoinStatus(notificationDto.getTargetPostId(), notificationDto.getTargetUserId(), 1);
+
+		// 작성자의 신청 알림 삭제
+		notificationService.deleteNotification(notificationDto.getId());
+
+		// 작성자에 참여 알림 추가
+		notificationService.insertJoinNotification(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
+
+		// 신청자에 승인 알림 추가
+		notificationService.insertApprovedNotification(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
+
+		return notificationService.getNotiList(notificationDto.getUserId());
 	}
 
 	@GetMapping("/unjoin/{challengeId}/{userId}")

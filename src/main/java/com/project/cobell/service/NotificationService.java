@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,8 @@ public class NotificationService {
 		for(Notification n: notifications){
 			NotificationDto notificationDto = modelMapper.map(n, NotificationDto.class);
 			notificationDto.setUserId(n.getUser().getId());
-			notificationDto.setTargetUserNickname(n.getTargetUser().getNickname());
+			if(n.getTargetUser() != null)
+				notificationDto.setTargetUserNickname(n.getTargetUser().getNickname());
 			notificationDto.setTargetPostId(n.getTargetPostId());
 
 			// 챌린지 관련 알림일 경우만
@@ -57,7 +59,7 @@ public class NotificationService {
 			// 댓글 알림일 경우만
 			if(n.getType() == 2 && n.getTargetCommentId() != null)
 				notificationDto.setTargetCommentContent(commentChallengeRepository.findById(n.getTargetCommentId()).get().getContent());
-			else if(n.getType() == 4 && n.getTargetCommentId() != null)
+			else if(n.getType() == 21 && n.getTargetCommentId() != null)
 				notificationDto.setTargetCommentContent(commentFeedRepository.findById(n.getTargetCommentId()).get().getContent());
 
 			notificationDtos.add(notificationDto);
@@ -77,6 +79,7 @@ public class NotificationService {
 		notification.setTargetUser(userRepository.findById(targetUserId).get());
 //		notification.setChallenge(targetChallenge);
 		notification.setTargetPostId(challengeId);
+		notification.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
 		notificationRepository.save(notification);
 	}
@@ -177,5 +180,10 @@ public class NotificationService {
 		notification.setTargetCommentId(commentFeedDto.getId());
 
 		notificationRepository.save(notification);
+	}
+
+	@Transactional
+	public void deleteNotification(Long notificationId){
+		notificationRepository.deleteById(notificationId);
 	}
 }
