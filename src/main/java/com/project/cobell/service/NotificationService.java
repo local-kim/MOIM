@@ -51,7 +51,7 @@ public class NotificationService {
 			notificationDto.setTargetPostId(n.getTargetPostId());
 
 			// 챌린지 관련 알림일 경우만
-			if(n.getType() == 0 || n.getType() == 1 || n.getType() == 2)
+			if(n.getType() < 20)
 				notificationDto.setTargetChallengeTitle(challengeRepository.findById(n.getTargetPostId()).get().getTitle());
 
 			// 댓글 알림일 경우만
@@ -113,10 +113,49 @@ public class NotificationService {
 	}
 
 	@Transactional
+	public void insertApplyNotification(Long challengeId, Long targetUserId){
+		Notification notification = new Notification();
+
+		notification.setType(3);    // 챌린지 참여 신청 알림(작성자에게)
+		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
+		notification.setUser(targetChallenge.getLeader());
+		notification.setTargetUser(userRepository.findById(targetUserId).get());
+		notification.setTargetPostId(challengeId);
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
+	public void insertApprovedNotification(Long challengeId, Long targetUserId){
+		Notification notification = new Notification();
+
+		notification.setType(4);    // 챌린지 참여 승인 알림(신청자에게)
+//		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
+		notification.setUser(userRepository.findById(targetUserId).get());
+//		notification.setTargetUser(userRepository.findById(targetUserId).get());
+		notification.setTargetPostId(challengeId);
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
+	public void insertRefusedNotification(Long challengeId, Long targetUserId){
+		Notification notification = new Notification();
+
+		notification.setType(5);    // 챌린지 참여 거절 알림(신청자에게)
+//		Challenge targetChallenge = challengeRepository.findById(challengeId).get();
+		notification.setUser(userRepository.findById(targetUserId).get());
+//		notification.setTargetUser(userRepository.findById(targetUserId).get());
+		notification.setTargetPostId(challengeId);
+
+		notificationRepository.save(notification);
+	}
+
+	@Transactional
 	public void insertFeedLikeNotification(LikeFeedDto likeFeedDto){
 		Notification notification = new Notification();
 
-		notification.setType(3);    // 피드 좋아요 알림
+		notification.setType(20);    // 피드 좋아요 알림
 		Feed targetFeed = feedRepository.findById(likeFeedDto.getFeedId()).get();
 		notification.setUser(targetFeed.getUser());
 		notification.setTargetUser(userRepository.findById(likeFeedDto.getUserId()).get());
@@ -129,7 +168,7 @@ public class NotificationService {
 	public void insertFeedCommentNotification(CommentFeedDto commentFeedDto){
 		Notification notification = new Notification();
 
-		notification.setType(4);    // 피드 댓글 등록 알림
+		notification.setType(21);    // 피드 댓글 등록 알림
 //		Long leaderId = challengeRepository.findById(commentChallengeDto.getChallengeId()).get().getLeader().getId();
 		Feed targetFeed = feedRepository.findById(commentFeedDto.getFeedId()).get();
 		notification.setUser(targetFeed.getUser());

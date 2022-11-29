@@ -28,7 +28,7 @@ const NotificationItem = ({noti}) => {
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
     </div> : 
-    // 댓글 등록 알림
+    // 챌린지 댓글 등록 알림
     noti.type == 2 ?
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
       <span className={styles.noti}>
@@ -38,8 +38,39 @@ const NotificationItem = ({noti}) => {
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
     </div> : 
+    // 챌린지 참여 신청 알림
+    noti.type == 3 ?
+    <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
+      <span className={styles.noti}>
+        <span className={styles.noti_wrap}>
+          <span className={styles.bold}>{noti.target_user_nickname}</span>님이 '<span className={styles.bold}>{noti.target_challenge_title}</span>'에 참여를 신청했습니다.
+        </span>
+        <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
+      </span>
+      <div>승인/거절 버튼</div>
+    </div> : 
+    // 챌린지 참여 승인 알림
+    noti.type == 4 ?
+    <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
+      <span className={styles.noti}>
+        <span className={styles.noti_wrap}>
+          '<span className={styles.bold}>{noti.target_challenge_title}</span>'에 참여 승인되었습니다.
+        </span>
+        <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
+      </span>
+    </div> : 
+    // 챌린지 참여 거절 알림
+    noti.type == 5 ?
+    <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
+      <span className={styles.noti}>
+        <span className={styles.noti_wrap}>
+          '<span className={styles.bold}>{noti.target_challenge_title}</span>'에 참여 거절되었습니다.
+        </span>
+        <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
+      </span>
+    </div> : 
     // 피드 좋아요 알림
-    noti.type == 3 ? 
+    noti.type == 20 ? 
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.challenge_id}`)}>
       <span className={styles.noti}>
         <span className={styles.noti_wrap}>

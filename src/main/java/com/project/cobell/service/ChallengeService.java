@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,7 +62,7 @@ public class ChallengeService {
 
 		// 챌린지 만든 유저를 join_challenge 테이블에 insert
 		Long insertedId = challengeRepository.getInsertedId();
-		insertJoinedUser(insertedId, challengeDto.getLeaderId());
+		insertJoinedUser(insertedId, challengeDto.getLeaderId(), 1);
 
 		// 만들어진 챌린지 id를 반환
 		return insertedId;
@@ -127,13 +128,14 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void insertJoinedUser(Long challengeId, Long userId){
+	public void insertJoinedUser(Long challengeId, Long userId, int status){
 		Challenge challenge = challengeRepository.findById(challengeId).get();
 		User user = userRepository.findById(userId).get();
 
 		JoinChallenge joinChallenge = new JoinChallenge();
 		joinChallenge.setChallenge(challenge);
 		joinChallenge.setUser(user);
+		joinChallenge.setStatus(status);
 
 		joinChallengeRepository.save(joinChallenge);
 	}
@@ -216,7 +218,17 @@ public class ChallengeService {
 
 	@Transactional
 	public int isJoined(Long challengeId, Long userId){
-		return joinChallengeRepository.countByChallengeIdAndUserId(challengeId, userId);
+		JoinChallengeId joinChallengeId = new JoinChallengeId(challengeId, userId);
+
+		Optional<JoinChallenge> j = joinChallengeRepository.findById(joinChallengeId);
+		if(j.isEmpty()){
+			return 0;
+		}
+		else{
+			return j.get().getStatus();
+		}
+
+//		return joinChallengeRepository.countByChallengeIdAndUserId(challengeId, userId);
 	}
 
 	@Transactional

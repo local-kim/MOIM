@@ -19,12 +19,23 @@ const Challenge = () => {
   const [commentList, setCommentList] = useState();
 
   const joinUser = () => {
-    axios.get(`/api/challenge/join/${challengeId}/${user.id}`)
-    .then(res => {
-      // 챌린지에 참여 중인 유저 정보 다시 받아오기
-      setUsers(res.data);
-      setIsJoined(true);
-    }).catch(err => console.log(err));
+    // 선착순
+    if(challenge.type == 0){
+      axios.get(`/api/challenge/join/${challengeId}/${user.id}`)
+      .then(res => {
+        // 챌린지에 참여 중인 유저 정보 다시 받아오기
+        setUsers(res.data);
+        setIsJoined(1);
+      }).catch(err => console.log(err));
+    }
+    else{
+      axios.get(`/api/challenge/apply/${challengeId}/${user.id}`)
+      .then(res => {
+        // 챌린지에 참여 중인 유저 정보 다시 받아오기
+        setUsers(res.data);
+        setIsJoined(2);
+      }).catch(err => console.log(err));
+    }
   }
 
   const unjoinUser = () => {
@@ -32,7 +43,7 @@ const Challenge = () => {
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
-      setIsJoined(false);
+      setIsJoined(0);
     }).catch(err => console.log(err));
   }
 
@@ -105,14 +116,20 @@ const Challenge = () => {
     }).catch(err => console.log(err));
 
     // 로그인한 유저의 챌린지 참여 여부
-    axios.get(`/api/challenge/joined/${challengeId}/${user.id}`)
+    axios.get(`/api/challenge/isJoined/${challengeId}/${user.id}`)
     .then(res => {
       // console.log(res.data);
-      // 참여x, 참여함, 대기중
-      if(res.data == 0)
-        setIsJoined(false);
-      else
-        setIsJoined(true);
+      setIsJoined(res.data);  // 0(미참여), 1(참여), 2(대기)
+      // if(res.data == 0)
+      //   setIsJoined(0);
+      // else if(res.data == 1){
+      //   // 참여함
+      //   setIsJoined(1);
+      // }
+      // else if(res.data == 2){
+      //   // 대기중
+      //   setIsJoined(2);
+      // }
     }).catch(err => console.log(err));
 
     // 댓글 리스트
@@ -290,11 +307,14 @@ const Challenge = () => {
           // 리더일 경우, 인원 참
           challenge.leader_id == user.id && users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
           // 참여자일 경우, 참여 중
-          isJoined ? <div className={`${styles.join_btn} ${styles.unjoin_btn}`} onClick={unjoinUser}>참여중</div> : 
+          isJoined == 1 ? <div className={`${styles.join_btn} ${styles.unjoin_btn}`} onClick={unjoinUser}>참여중</div> : 
+          isJoined == 2 ? <div className={`${styles.join_btn} ${styles.unjoin_btn}`} onClick={unjoinUser}>승인 대기 중</div> : 
+          // isJoined == 3 ? <div className={`${styles.join_btn} ${styles.unjoin_btn}`} onClick={unjoinUser}>참여 거절됨</div> : 
           // 참여자일 경우, 인원 참
           users.length == challenge.limit ? <div className={`${styles.join_btn} ${styles.light_btn}`}>모집완료</div> : 
           // 참여자일 경우, 인원 안 참
-          users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={joinUser}>참여하기</div> : 
+          challenge.type == 0 && users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={joinUser}>참여하기</div> : 
+          challenge.type == 1 && users.length < challenge.limit ? <div className={`${styles.join_btn} ${styles.click_btn}`} onClick={joinUser}>참여 신청</div> : 
           <div style={{display: 'none'}}></div>
         }
       </div>

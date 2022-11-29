@@ -76,7 +76,7 @@ public class ChallengeController {
 		return challengeService.getUserList(challengeId);
 	}
 
-	@GetMapping("/joined/{challengeId}/{userId}")
+	@GetMapping("/isJoined/{challengeId}/{userId}")
 	public int isJoined(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
@@ -87,11 +87,27 @@ public class ChallengeController {
 	public List<UserDto> joinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
-		// join 테이블에 insert
-		challengeService.insertJoinedUser(challengeId, userId);
+		// 선착순
+		// join 테이블에 승인으로 insert
+		challengeService.insertJoinedUser(challengeId, userId, 1);
 
 		// notification 테이블에 참여 알림 insert
 		notificationService.insertJoinNotification(challengeId, userId);
+
+		// 새로운 참여중 유저 리스트 반환
+		return challengeService.getUserList(challengeId);
+	}
+
+	@GetMapping("/apply/{challengeId}/{userId}")
+	public List<UserDto> applyUser(
+			@PathVariable Long challengeId, @PathVariable Long userId
+	){
+		// 승인제
+		// join 테이블에 대기중으로 insert
+		challengeService.insertJoinedUser(challengeId, userId, 2);
+
+		// notification 테이블에 참여 요청 알림 insert
+		notificationService.insertApplyNotification(challengeId, userId);
 
 		// 새로운 참여중 유저 리스트 반환
 		return challengeService.getUserList(challengeId);

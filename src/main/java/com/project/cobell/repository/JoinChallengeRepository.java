@@ -9,12 +9,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface JoinChallengeRepository extends JpaRepository<JoinChallenge, JoinChallengeId> {
 //	@Query(value = "select count(*) from join_challenge where challenge_id=1")
 //	public int countUser();
-	@Query(value = "select u from JoinChallenge jc , User u where u.id=jc.user.id and jc.challenge.id=:challengeId order by jc.createdAt")
+	@Query(value = "select u from JoinChallenge jc , User u where u.id=jc.user.id and jc.challenge.id=:challengeId and jc.status = 1 order by jc.createdAt")
 	List<User> findJoinedUsers(@Param("challengeId") Long challengeId);
 
 	// Query Method
