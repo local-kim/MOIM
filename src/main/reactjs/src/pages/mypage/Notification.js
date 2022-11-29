@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MenuTitle } from '../../components';
 import axios from 'axios';
-import styles from './Profile.module.css';
+import styles from './notification.module.css';
 import NotificationItem from './NotificationItem';
 
 const Notification = () => {

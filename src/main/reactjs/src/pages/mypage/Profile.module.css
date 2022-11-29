@@ -120,42 +120,6 @@
   color: rgb(120 120 120);
 }
 
-/* Notification.js */
-.noti_list{
-  margin-top: 57px;
-  padding: 0 15px;
-}
-
-.noti_box{
-  /* height: 60px; */
-  padding: 10px 10px;
-}
-
-.noti_box:not(:last-child){
-  border-bottom: 1px solid #eee;
-}
-
-.noti{
-  cursor: pointer;
-  word-break: break-all;
-  font-size: 15px;
-}
-
-.noti_wrap{
-  /* white-space: pre; */
-  margin-right: 6px;
-}
-
-.bold{
-  font-weight: 600;
-}
-
-.time{
-  font-size: 13px;
-  color: rgb(160, 160, 160);
-  word-break: break-word;
-}
-
 /* FeedList.js */
 .feed_wrap{
   display: grid;

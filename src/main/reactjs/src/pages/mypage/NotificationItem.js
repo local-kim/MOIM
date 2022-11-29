@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns'
 import ko from 'date-fns/locale/ko';
-import styles from './Profile.module.css';
+import styles from './notification.module.css';
 
 const NotificationItem = ({noti}) => {
   const navigate = useNavigate();
@@ -47,7 +47,10 @@ const NotificationItem = ({noti}) => {
         </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
-      <div>승인/거절 버튼</div>
+      <div className={styles.btn_wrap}>
+        <div className={styles.btn_approve}>승인</div>
+        <div className={styles.btn_refuse}>거절</div>
+      </div>
     </div> : 
     // 챌린지 참여 승인 알림
     noti.type == 4 ?
