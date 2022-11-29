@@ -131,6 +131,28 @@ public class ChallengeController {
 		return notificationService.getNotiList(notificationDto.getUserId());
 	}
 
+	@PostMapping("/refuse")
+	public List<NotificationDto> refuseUser(
+			@RequestBody NotificationDto notificationDto
+	){
+		System.out.println(notificationDto);
+
+		// join_challenge 테이블에서 삭제
+		challengeService.deleteJoinedUser(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
+//		challengeService.updateJoinStatus(notificationDto.getTargetPostId(), notificationDto.getTargetUserId(), 1);
+
+		// 작성자의 신청 알림 삭제
+		notificationService.deleteNotification(notificationDto.getId());
+
+		// 작성자에 참여 알림 추가
+//		notificationService.insertJoinNotification(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
+
+		// 신청자에 거절 알림 추가
+		notificationService.insertRefusedNotification(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
+
+		return notificationService.getNotiList(notificationDto.getUserId());
+	}
+
 	@GetMapping("/unjoin/{challengeId}/{userId}")
 	public List<UserDto> unjoinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId

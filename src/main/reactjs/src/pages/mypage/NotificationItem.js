@@ -16,7 +16,7 @@ const NotificationItem = ({noti, setNotiList}) => {
   }
 
   const refuseUser = () => {
-    axios.get(`/api/challenge/refuse`, noti)
+    axios.post(`/api/challenge/refuse`, noti)
     .then(res => {
       setNotiList(res.data);
     }).catch(err => console.log(err));
@@ -72,7 +72,7 @@ const NotificationItem = ({noti, setNotiList}) => {
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.target_post_id}`)}>
       <span className={styles.noti}>
         <span className={styles.noti_wrap}>
-          '<span className={styles.bold}>{noti.target_challenge_title}</span>'에 참여 승인되었습니다.
+          '<span className={styles.bold}>{noti.target_challenge_title}</span>'의 참여가 승인되었습니다.
         </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
@@ -82,7 +82,7 @@ const NotificationItem = ({noti, setNotiList}) => {
     <div className={styles.noti_box} onClick={() => navigate(`/lounge/${noti.target_post_id}`)}>
       <span className={styles.noti}>
         <span className={styles.noti_wrap}>
-          '<span className={styles.bold}>{noti.target_challenge_title}</span>'에 참여 거절되었습니다.
+          '<span className={styles.bold}>{noti.target_challenge_title}</span>'의 참여가 거절되었습니다.
         </span>
         <span className={styles.time}>{format(new Date(noti.created_at), "MM/dd HH:mm", {locale: ko})}</span>
       </span>
