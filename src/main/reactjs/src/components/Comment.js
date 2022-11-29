@@ -4,6 +4,7 @@ import ko from 'date-fns/locale/ko';
 import axios from 'axios';
 import styles from './Comment.module.css';
 import { useNavigate } from 'react-router-dom';
+import relativeTime from '../utils/relativeTime';
 
 const Comment = ({comment, setCommentList, user, deleteComment}) => {
   const navigate = useNavigate();
@@ -23,7 +24,8 @@ const Comment = ({comment, setCommentList, user, deleteComment}) => {
           <div style={{display: 'flex'}}>
             <div className={styles.nickname} onClick={() => navigate(`/user/${comment.user_id}`)}>{comment.nickname}</div>
             <div className={styles.date}>
-              {comment.created_at && format(new Date(comment.created_at), "MM/dd HH:mm", {locale: ko})}
+              {/* {comment.created_at && format(new Date(comment.created_at), "MM/dd HH:mm", {locale: ko})} */}
+              {comment.created_at && relativeTime(new Date(comment.created_at))}
             </div>
           </div>
           <div className={styles.content}>{comment.content}</div>
