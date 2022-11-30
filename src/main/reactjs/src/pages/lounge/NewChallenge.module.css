@@ -7,7 +7,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 }
 
 .wrap{
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
   margin-top: 57px;
 }
 
@@ -18,8 +18,8 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 /* 사진 */
 .no_image{
   width: 100vw;
-  height: 80vw;
-  max-height: 50vh;
+  height: 50vw;
+  max-height: 40vh;
   background-color: rgb(245, 245, 245);
   display: flex;
   justify-content: center;
@@ -28,24 +28,28 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 
 .no_image .add_icon{
   color: rgb(210, 210, 210);
-  font-size: 80px;
+  font-size: 60px;
 }
 
 .preview{
   width: 100vw;
-  height: 80vw;
+  max-height: 80vw;
   /* height: -webkit-fill-available; */
   object-fit: cover;
   object-position: center center;
 }
 
 .main>div{
-  margin: 20px 0;
+  margin-top: 23px;
 }
 
 .main .subtitle{
   font-size: 16px;
   font-weight: 500;
+}
+
+.main div:nth-child(-n+2) .subtitle{
+  margin-bottom: 3px;
 }
 
 .title_wrap input{
@@ -70,6 +74,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 30px;
 }
 
 .limit_wrap{
@@ -84,7 +89,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 }
 
 .limit_wrap .limit_btn{
-  color: rgb(80, 80, 80);
+  color: rgb(100, 100, 100);
   /* margin: 0 15px; */
   cursor: pointer;
 }
@@ -109,6 +114,8 @@ input:focus, textarea, select:focus, option:focus, button:focus{
   padding: 5px 10px;
   /* width: 220px; */
   color: #212529;
+
+  height: 30px;
 }
 
 /* Area, Gender radio button group */
@@ -122,7 +129,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 
 /* Area */
 .area_input{
-  width: 150px;
+  width: 165px;
   border: none;
   border-radius: 8px;
   background-color: rgb(245, 245, 245);
@@ -130,22 +137,23 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 }
 
 /* Age */
-.age_wrap select.form-select{
-}
-
 .age_wrap select.age_select{
-  color: #212529;
+  width: fit-content !important;
+  height: 30px;
+  background-position: right 0.5rem center !important;
   background-color: rgb(245, 245, 245);
+  font-size: 15px;
+  color: #212529;
   border: none;
   border-radius: 8px;
-  font-size: 15px;
-
-  width: fit-content !important;
-  background-position: right 0.5rem center !important;
   padding: 0.25rem 2rem 0.25rem 0.75rem;
   /* -webkit-appearance: none;
-  -moz-appearance: none; */
-  /* appearance: none; */
+  -moz-appearance: none;
+  appearance: none; */
+}
+
+.age_wrap select.age_select:focus{
+  outline: none;
 }
 
 /* MenuTitle.js */

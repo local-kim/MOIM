@@ -169,7 +169,7 @@ const NewChallenge = () => {
           <div className={styles.area_wrap}>
             <span className={styles.subtitle}>장소</span>
 
-            <div>
+            {/* <div> */}
               <div className={styles.btn_wrap}>
                 <label className={`form-check-label`}>
                   <input className={`form-check-input`} type='radio' name="online" value='0' required onChange={handleChange}/>
@@ -180,14 +180,14 @@ const NewChallenge = () => {
                   <span>온라인</span>
                 </label>
               </div>
-            </div>
+            {/* </div> */}
           </div>
 
           {/* 지역 */}
           {
             !challenge.online || challenge.online == '1' ? "" : 
-              <div>
-                <span className={styles.subtitle}>지역</span>
+              <div style={{marginTop: '10px'}}>
+                <span className={styles.subtitle}></span>
                 <input className={styles.area_input} type='text' name="area" required onChange={handleChange}/>
               </div>
           }

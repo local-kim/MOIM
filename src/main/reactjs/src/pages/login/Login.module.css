@@ -60,16 +60,20 @@
 
 /* Home.js */
 .home_logo{
-  width: 100vw;
-  height: 100vh;
-  @supports (-webkit-touch-callout: none) { 
-    height: -webkit-fill-available;
-  }
-
   display: flex;
   justify-content: center;
   justify-items: center;
   align-items: center;
   font-size: 30px;
   font-weight: 800;
+  width: 100vw;
+  /* height: 100dvh; */
+  height: 100vh;
+}
+
+/* dvh(dynamic viewport)를 지원하는 브라우저에서만 적용 */
+@supports (height: 100dvh) {
+  .home_logo{
+    height: 100dvh;
+  }
 }

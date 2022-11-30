@@ -4,8 +4,10 @@
 }
 
 .challenge_photo{
-  height: 90vw; /* 화면 가로 너비의 90% */
-  /* background-color: lavender; */
+  /* 화면 가로 너비의 90% */
+  height: 90vw;
+  max-height: 40vh;
+  /* min-height: 50vw; */
   /* border: 1px solid black; */
   background-size: cover;
   background-position: center;
