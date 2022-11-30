@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewChallenge.module.css';
@@ -11,8 +11,6 @@ import { format } from 'date-fns';
 
 const NewChallenge = () => {
   const navigate = useNavigate();
-
-  // const [isOnline, setIsOnline] = useState(1);
 
   // 현재 로그인한 사람을 챌린지 작성자로
   const [challenge, setChallenge] = useState({
@@ -80,6 +78,15 @@ const NewChallenge = () => {
   const handleImage = (e) => {
     setImage(e.target.files[0]);
   }
+
+  // textarea 크기 자동 조절
+  const textRef = useRef();
+  const handleResizeHeight = useCallback((e) => {
+    // setContent(e.target.value);
+    // handleChange(e);
+    textRef.current.style.height = '92px';
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, []);
       
   useEffect(() => {
     console.log(challenge);
@@ -142,7 +149,10 @@ const NewChallenge = () => {
           {/* 내용 */}
           <div className={styles.content_wrap}>
             <div className={styles.subtitle}>내용</div>
-            <textarea name='content' onChange={handleChange}></textarea>
+            <textarea name='content' onChange={(e) => {
+              handleChange(e);
+              handleResizeHeight(e);
+            }} ref={textRef} rows={3}></textarea>
           </div>
 
           {/* 날짜 */}

@@ -62,7 +62,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 
 .content_wrap textarea{
   width: 100%;
-  height: 93px;
+  /* height: 93px; */
   border: none;
   border-radius: 8px;
   background-color: rgb(245, 245, 245);
