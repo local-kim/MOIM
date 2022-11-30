@@ -33,3 +33,17 @@
 .list_wrap{
   margin-top: 75px;
 }
+
+.no_result{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: gray;
+}
+
+@supports (height: 100dvh) {
+  .no_result{
+    height: 100dvh;
+  }
+}

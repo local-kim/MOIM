@@ -43,8 +43,8 @@ const Search = () => {
 
       // query string이 있으면
       if(searchParams.get("keyword")){
-          setKeyword(searchParams.get("keyword"));
-          setSearchList(res.data.filter(challenge => challenge.title.includes(searchParams.get("keyword"))));
+        setKeyword(searchParams.get("keyword"));
+        setSearchList(res.data.filter(challenge => challenge.title.includes(searchParams.get("keyword"))));
       }
     }).catch(err => console.log(err));
     
@@ -73,13 +73,17 @@ const Search = () => {
       </div>
 
       {/* 결과창 */}
-      <div className={styles.list_wrap}>
-        {
-          searchList.map((challenge, index) => (
-            <ChallengeItem key={index} challenge={challenge} getLikeList={getLikeList} likeList={likeList}/>
-          ))
-        }
-      </div>
+      {
+        searchParams.get("keyword") && searchList.length == 0 ? 
+        <div className={styles.no_result}>검색 결과가 없습니다.</div> :
+        <div className={styles.list_wrap}>
+          {
+            searchList.map((challenge, index) => (
+              <ChallengeItem key={index} challenge={challenge} getLikeList={getLikeList} likeList={likeList}/>
+            ))
+          }
+        </div>
+      }
     </div>
   );
 };
