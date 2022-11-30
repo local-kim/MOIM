@@ -114,7 +114,7 @@ const NewFeed = () => {
     <div className={styles.new_feed}>
       <div className={styles.menu_title}>
         <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>close</span>
-        <div className={styles.title}>새 피드 작성</div>
+        <div className={styles.title}>피드 작성하기</div>
         {
           submit ? <button type="button" className={styles.submit_btn} onClick={createFeed}>완료</button> : <button type="button" className={styles.disabled_submit_btn}>완료</button>
         }

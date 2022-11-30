@@ -200,6 +200,13 @@
   color: gray;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+.profile_challenge .info > span{
+  flex-shrink: 0;
 }
 
 .profile_challenge .icon{

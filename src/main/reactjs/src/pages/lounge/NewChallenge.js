@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewChallenge.module.css';
 import { MenuTitle } from '../../components';
+import { format } from 'date-fns';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
@@ -16,37 +17,29 @@ const NewChallenge = () => {
   // 현재 로그인한 사람을 챌린지 작성자로
   const [challenge, setChallenge] = useState({
     leader_id: JSON.parse(localStorage.getItem("user")).id,
+    type: 0,
     age: 0,
-    // gender: 0,
     limit: 2
   });
 
   const handleChange = (e) => {
     const {name, value} = e.target;
 
-    setChallenge({
-      ...challenge,
-      [name]: value
-    });
-
+    if(name == 'type' && challenge.type == 1){
+      setChallenge({
+        ...challenge,
+        type: 0
+      });
+    }
+    else{
+      setChallenge({
+        ...challenge,
+        [name]: value
+      });
+    }
+    
     // console.log(challenge);
-
-    // // 제출 가능 여부 확인
-    // if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
-    //   setSubmit(true);
-    // }
-    // else{
-    //   setSubmit(false);
-    // }
   }
-  
-  // const handleGenderChange = (e) => {
-    //   // setValue(event.target.value);
-    //   setChallenge({
-  //     ...challenge,
-  //     gender: e.target.value
-  //   });
-  // };
 
   const [submit, setSubmit] = useState(false);
 
@@ -86,19 +79,13 @@ const NewChallenge = () => {
   const [image, setImage] = useState();
   const handleImage = (e) => {
     setImage(e.target.files[0]);
-    
-    // // 제출 가능 여부 확인
-    // if(challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
-    //   setSubmit(true);
-    // }
-    // else{
-    //   setSubmit(false);
-    // }
   }
       
   useEffect(() => {
+    console.log(challenge);
+    console.log(image);
     // 제출 가능 여부 확인
-    if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    if(image && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);
     }
     else{
@@ -119,11 +106,10 @@ const NewChallenge = () => {
 
         <div className={styles.menu_title}>
           <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>close</span>
-          <div className={styles.title}>챌린지 개설</div>
+          <div className={styles.title}>챌린지 만들기</div>
           {
             submit ? <button type="button" className={styles.submit_btn} onClick={createChallenge}>완료</button> : <button type="button" className={styles.disabled_submit_btn}>완료</button>
           }
-          
         </div>
 
         {/* 사진 */}
@@ -159,23 +145,52 @@ const NewChallenge = () => {
             <textarea name='content' onChange={handleChange}></textarea>
           </div>
 
-          {/* 유형(선착순, 승인제) */}
+          {/* 날짜 */}
+          <div className={styles.date_wrap}>
+            <span className={styles.subtitle}>날짜</span>
+            <input className={styles.date_picker} style={{width:'220px'}} type='datetime-local' name="planned_at" required onChange={handleChange} step='300' min={format(new Date(), "yyyy-MM-dd") + "T" + format(new Date(), "HH:mm")}/>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileDateTimePicker
+                label="For mobile"
+                value={challenge.planned_at}
+                onChange={(newValue) => {
+                  // setValue(newValue);
+                  setChallenge({
+                    ...challenge,
+                    planned_at: newValue
+                  });
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider> */}
+          </div>
+
+          {/* 장소 */}
           <div className={styles.area_wrap}>
-            <span className={styles.subtitle}>유형</span>
+            <span className={styles.subtitle}>장소</span>
 
             <div>
               <div className={styles.btn_wrap}>
                 <label className={`form-check-label`}>
-                  <input className={`form-check-input`} type='radio' name="type" value='0' required onChange={handleChange}/>
-                  <span>선착순</span>
+                  <input className={`form-check-input`} type='radio' name="online" value='0' required onChange={handleChange}/>
+                  <span>오프라인</span>
                 </label>
-                <label className={`form-check-label`} style={{marginLeft:'26px'}}>
-                  <input className={`form-check-input`} type='radio' name="type" value='1' required onChange={handleChange}/>
-                  <span>승인제</span>
+                <label className={`form-check-label`} style={{marginLeft:'25px'}}>
+                  <input className={`form-check-input`} type='radio' name="online" value='1' required onChange={handleChange}/>
+                  <span>온라인</span>
                 </label>
               </div>
             </div>
           </div>
+
+          {/* 지역 */}
+          {
+            !challenge.online || challenge.online == '1' ? "" : 
+              <div>
+                <span className={styles.subtitle}>지역</span>
+                <input className={styles.area_input} type='text' name="area" required onChange={handleChange}/>
+              </div>
+          }
 
           {/* 인원 */}
           <div className={styles.limit_wrap}>
@@ -208,53 +223,6 @@ const NewChallenge = () => {
             </div>
           </div>
 
-          {/* 날짜 */}
-          <div className={styles.date_wrap}>
-            <span className={styles.subtitle}>날짜</span>
-            <input className={styles.date_picker} style={{width:'220px'}} type='datetime-local' name="planned_at" required onChange={handleChange}/>
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <MobileDateTimePicker
-                label="For mobile"
-                value={challenge.planned_at}
-                onChange={(newValue) => {
-                  // setValue(newValue);
-                  setChallenge({
-                    ...challenge,
-                    planned_at: newValue
-                  });
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider> */}
-          </div>
-
-          {/* 장소 */}
-          <div className={styles.area_wrap}>
-            <span className={styles.subtitle}>장소</span>
-
-            <div>
-              <div className={styles.btn_wrap}>
-                <label className={`form-check-label`}>
-                  <input className={`form-check-input`} type='radio' name="online" value='0' required onChange={handleChange}/>
-                  <span>오프라인</span>
-                </label>
-                <label className={`form-check-label`} style={{marginLeft:'26px'}}>
-                  <input className={`form-check-input`} type='radio' name="online" value='1' required onChange={handleChange}/>
-                  <span>온라인</span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          {/* 지역 */}
-          {
-            !challenge.online || challenge.online == '1' ? "" : 
-              <div>
-                <span className={styles.subtitle}>지역</span>
-                <input className={styles.area_input} type='text' name="area" required onChange={handleChange}/>
-              </div>
-          }
-
           {/* 성별 */}
           <div className={styles.gender_wrap}>
             <span className={styles.subtitle}>성별</span>
@@ -262,15 +230,15 @@ const NewChallenge = () => {
             <div className={styles.btn_wrap}>
               <label className={`form-check-label`}>
                 <input className={`form-check-input`} type='radio' name="gender" value='0' required onChange={handleChange}/>
-                <span>혼성</span>
+                <span>누구나</span>
               </label>
               <label className={`form-check-label`}>
                 <input className={`form-check-input`} type='radio' name="gender" value='1' required onChange={handleChange}/>
-                <span>남성</span>
+                <span>남자만</span>
               </label>
               <label className={`form-check-label`}>
                 <input className={`form-check-input`} type='radio' name="gender" value='2' required onChange={handleChange}/>
-                <span>여성</span>
+                <span>여자만</span>
               </label>
             </div>
           </div>
@@ -279,8 +247,9 @@ const NewChallenge = () => {
           <div className={styles.age_wrap}>
             <span className={styles.subtitle}>나이</span>
 
-            <select className={`form-select form-select-sm`} style={{width:'90px'}} name='age' onChange={handleChange}>
-              <option value={'0'} defaultValue>무관</option>
+            <select className={`form-select ${styles.age_select}`} name='age' onChange={handleChange}>
+            {/* <select name='age' onChange={handleChange}> */}
+              <option value={'0'} defaultValue>누구나</option>
               <option value={'10'}>10대</option>
               <option value={'20'}>20대</option>
               <option value={'30'}>30대</option>
@@ -291,6 +260,25 @@ const NewChallenge = () => {
               <option value={'80'}>80대</option>
             </select>
           </div>
+
+          {/* 유형(선착순, 승인제) */}
+          <div className={styles.area_wrap}>
+            <span className={styles.subtitle}>승인 후 참여</span>
+
+            <div>
+              <div className={styles.btn_wrap}>
+                <label className={`form-check-label`}>
+                  <input className={`form-check-input`} type='checkbox' name="type" value='1' required onChange={handleChange}/>
+                  {/* <span>선착순</span> */}
+                </label>
+                {/* <label className={`form-check-label`} style={{marginLeft:'26px'}}>
+                  <input className={`form-check-input`} type='radio' name="type" value='1' required onChange={handleChange}/>
+                  <span>승인제</span>
+                </label> */}
+              </div>
+            </div>
+          </div>
+
         </div>
       {/* </form> */}
     </div>

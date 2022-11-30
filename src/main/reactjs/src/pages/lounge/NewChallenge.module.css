@@ -107,13 +107,13 @@ input:focus, textarea, select:focus, option:focus, button:focus{
   background-color: rgb(245, 245, 245);
   border-radius: 8px;
   padding: 5px 10px;
-  width: 220px;
+  /* width: 220px; */
   color: #212529;
 }
 
 /* Area, Gender radio button group */
 .btn_wrap label{
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .btn_wrap label span{
@@ -130,8 +130,22 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 }
 
 /* Age */
-.age_wrap select.form-select.form-select-sm{
-  width: 90px !important;
+.age_wrap select.form-select{
+}
+
+.age_wrap select.age_select{
+  color: #212529;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+
+  width: fit-content !important;
+  background-position: right 0.5rem center !important;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
+  /* appearance: none; */
 }
 
 /* MenuTitle.js */
