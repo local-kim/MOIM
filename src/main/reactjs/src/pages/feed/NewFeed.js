@@ -130,7 +130,7 @@ const NewFeed = () => {
             </div>
           </label>
 
-          <input type='file' name='photo' id='upload' className={styles.hidden} multiple required onChange={handleImageUpload} />
+          <input type='file' name='photo' id='upload' className={styles.hidden} accept="image/*" multiple required onChange={handleImageUpload} />
 
           {
             // 이미지 업로드 후 미리보기

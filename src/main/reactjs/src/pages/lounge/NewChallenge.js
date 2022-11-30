@@ -133,7 +133,7 @@ const NewChallenge = () => {
               imageSrc && <img src={imageSrc} className={styles.preview} alt="" />
             }
           </label>
-          <input type='file' name='photo' id='upload' className={styles.hidden} required onChange={(e) => {
+          <input type='file' name='photo' id='upload' className={styles.hidden} required accept="image/*" onChange={(e) => {
             encodeFileToBase64(e.target.files[0]);
             handleImage(e);
           }} />
