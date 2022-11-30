@@ -55,7 +55,8 @@ input:focus{
 
 .comment_wrap .comment{
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
 }
 
 .comment_wrap .info_wrap{
@@ -63,7 +64,7 @@ input:focus{
 }
 
 .comment_wrap .nickname{
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   margin-right: 5px;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewChallenge.module.css';
@@ -10,8 +10,6 @@ import { MenuTitle } from '../../components';
 
 const NewChallenge = () => {
   const navigate = useNavigate();
-
-  // TODO: 로그인한 유저만 챌린지 생성 가능
 
   // const [isOnline, setIsOnline] = useState(1);
 
@@ -33,18 +31,18 @@ const NewChallenge = () => {
 
     // console.log(challenge);
 
-    // 제출 가능 여부 확인
-    if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
-      setSubmit(true);
-    }
-    else{
-      setSubmit(false);
-    }
+    // // 제출 가능 여부 확인
+    // if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    //   setSubmit(true);
+    // }
+    // else{
+    //   setSubmit(false);
+    // }
   }
-
+  
   // const handleGenderChange = (e) => {
-  //   // setValue(event.target.value);
-  //   setChallenge({
+    //   // setValue(event.target.value);
+    //   setChallenge({
   //     ...challenge,
   //     gender: e.target.value
   //   });
@@ -71,11 +69,11 @@ const NewChallenge = () => {
 
   // 이미지 미리보기
   const [imageSrc, setImageSrc] = useState('');
-
+  
   const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
-
+    
     return new Promise((resolve) => {
       reader.onload = () => {
         setImageSrc(reader.result);
@@ -83,21 +81,31 @@ const NewChallenge = () => {
       };
     });
   };
-
+  
   // 이미지 업로드
   const [image, setImage] = useState();
   const handleImage = (e) => {
     setImage(e.target.files[0]);
-
+    
+    // // 제출 가능 여부 확인
+    // if(challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    //   setSubmit(true);
+    // }
+    // else{
+    //   setSubmit(false);
+    // }
+  }
+      
+  useEffect(() => {
     // 제출 가능 여부 확인
-    if(challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    if(image && challenge.title && challenge.content && challenge.type && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);
     }
     else{
       setSubmit(false);
     }
-  }
-
+  }, [challenge, image]);
+      
   return (
     <div className={styles.wrap}>
       {/* <form onSubmit={createChallenge}> */}

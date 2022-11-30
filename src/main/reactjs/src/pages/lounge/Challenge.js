@@ -217,7 +217,7 @@ const Challenge = () => {
         </span>
         &nbsp;・&nbsp;
         <span className={`material-icons ${styles.icon} ${styles.place_icon}`} style={{marginRight: '3px'}}>event</span>
-        <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) a hh:mm", {locale: ko})}</span>
+        <span>{challenge.planned_at && format(new Date(challenge.planned_at), "MM.dd(eee) HH:mm", {locale: ko})}</span>
         &nbsp;・&nbsp;
         {
           challenge.age == 0 && challenge.gender == 0 ?
@@ -236,10 +236,10 @@ const Challenge = () => {
             </span>
           </span>
         }
-        &nbsp;・&nbsp;
+        {/* &nbsp;・&nbsp;
         {
           challenge.type == 0 ? <span>선착순</span> : <span>승인제</span>
-        }
+        } */}
         
       </div>
 

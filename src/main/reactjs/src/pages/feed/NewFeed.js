@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './feed.module.css';
 import Hashtags from './Hashtags';
@@ -7,6 +7,8 @@ import axios from 'axios';
 const NewFeed = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const [submit, setSubmit] = useState(false);
 
   const [content, setContent] = useState();
   const [tags, setTags] = useState([]);
@@ -84,7 +86,7 @@ const NewFeed = () => {
 
   // 사진 삭제
   const removeImage = (idx) => {
-    console.log(idx);
+    // console.log(idx);
     // 미리보기와 업로드 파일에서 모두 제거
     setPreviewImgs(previewImgs.filter((_, i) => i != idx));
     setImages([...images].filter((_, i) => i != idx));
@@ -98,12 +100,24 @@ const NewFeed = () => {
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   }, []);
 
+  useEffect(() => {
+    // 제출 가능 여부 확인
+    if(images && images.length > 0 && content){
+      setSubmit(true);
+    }
+    else{
+      setSubmit(false);
+    }
+  }, [content, images]);
+
   return (
     <div className={styles.new_feed}>
       <div className={styles.menu_title}>
         <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>close</span>
         <div className={styles.title}>새 피드 작성</div>
-        <button type="button" className={styles.submit_btn} onClick={createFeed}>완료</button>
+        {
+          submit ? <button type="button" className={styles.submit_btn} onClick={createFeed}>완료</button> : <button type="button" className={styles.disabled_submit_btn}>완료</button>
+        }
       </div>
 
       <div className={styles.wrap}>

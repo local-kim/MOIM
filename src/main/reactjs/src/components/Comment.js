@@ -21,7 +21,7 @@ const Comment = ({comment, setCommentList, user, deleteComment}) => {
         }
 
         <div className={styles.content_wrap}>
-          <div style={{display: 'flex'}}>
+          <div style={{display: 'flex', alignItems: 'center'}}>
             <div className={styles.nickname} onClick={() => navigate(`/user/${comment.user_id}`)}>{comment.nickname}</div>
             <div className={styles.date}>
               {/* {comment.created_at && format(new Date(comment.created_at), "MM/dd HH:mm", {locale: ko})} */}
