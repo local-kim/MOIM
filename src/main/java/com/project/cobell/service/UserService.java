@@ -71,6 +71,8 @@ public class UserService {
 		User user = userRepository.findById(userId).get();
 		UserDto userDto = modelMapper.map(user, UserDto.class);
 
+		userDto.setPassword(null);
+
 		// 프로필 사진이 있는 유저만
 		if(user.getPhotoUser() != null){
 			userDto.setPhoto(user.getPhotoUser().getFileName());

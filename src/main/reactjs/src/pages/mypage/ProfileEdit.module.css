@@ -34,6 +34,12 @@ input:focus, textarea{
 .photo{
   width: 100px;
   height: 100px;
+  border-radius: 100%;
+}
+
+.no_photo{
+  width: 100px;
+  height: 100px;
   background-color: rgb(230, 230, 230);
   border-radius: 100%;
   /* margin-right: 10px; */
@@ -109,4 +115,14 @@ input:focus, textarea{
   border: none;
   background-color: rgba(255, 255, 255, 0);
   padding: 0;
+  font-weight: 600;
+  color: #4bc9b2;
+}
+
+.menu_title .disabled_submit_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0;
+  color: rgb(225, 225, 225);
+  font-weight: 600;
 }

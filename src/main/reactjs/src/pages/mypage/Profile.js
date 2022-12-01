@@ -95,7 +95,7 @@ const Profile = () => {
             
             <div className={styles.info_box}>
               <div className={styles.nickname_wrap}>
-                <span className={styles.nickname}>{user.nickname}</span>
+                <span className={styles.nickname}>{userInfo.nickname}</span>
                 {/* <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>edit</span> */}
                 <span className={`material-icons ${styles.edit_btn}`} onClick={() => navigate('/profile/edit')}>settings</span>
               </div>
@@ -107,6 +107,7 @@ const Profile = () => {
               }
             </div>
           </div>
+
           <div className={styles.btn_wrap}>
             <span className={`material-icons-outlined ${styles.add_btn}`} onClick={() => navigate('/feed/new')}>add_box</span>
             <span className={`material-icons-outlined ${styles.noti_btn}`} onClick={() => navigate('/notification')}>notifications</span>
@@ -128,6 +129,7 @@ const Profile = () => {
             } />
           </Tabs>
           {/* </MuiThemeProvider> */}
+
           {
             value === 0 ? <FeedList feedList={feedList} /> : 
             value === 1 ? <CreatedChallenge created={created} /> : 
