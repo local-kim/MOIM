@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Profile.module.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -39,6 +39,7 @@ import FeedList from './FeedList';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [userInfo, setUserInfo] = useState({});
@@ -47,10 +48,11 @@ const Profile = () => {
   const [feedList, setFeedList] = useState([]);
 
   // 탭
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(searchParams.get("tab") ? Number(searchParams.get("tab")) : 0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setSearchParams({tab: newValue}, {replace: true});
   };
 
   useEffect(() => {
