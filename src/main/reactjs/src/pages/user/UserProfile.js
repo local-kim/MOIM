@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,13 +8,15 @@ import { CreatedChallenge, FeedList, JoinedChallenge } from '../mypage';
 
 const UserProfile = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const {userId} = useParams();
 
   // 탭
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(searchParams.get("tab") ? Number(searchParams.get("tab")) : 0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setSearchParams({tab: newValue}, {replace: true});
   };
 
   const [userInfo, setUserInfo] = useState({});
