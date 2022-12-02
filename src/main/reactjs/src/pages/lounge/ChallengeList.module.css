@@ -45,5 +45,19 @@
 
 /* Liked.js */
 .liked_wrap{
-  margin-top: 57px;
+  margin-top: 59px;
+}
+
+.no_result{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: gray;
+}
+
+@supports (height: 100dvh) {
+  .no_result{
+    height: 100dvh;
+  }
 }

@@ -8,7 +8,7 @@ const Liked = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [liked, setLiked] = useState([]);
+  const [liked, setLiked] = useState();
   const [likeList, setLikeList] = useState([]);
 
   useEffect(() => {
@@ -23,18 +23,22 @@ const Liked = () => {
   }, []);
 
   return (
-    <div className={styles.liked_wrap}>
+    <div>
       {/* 상단 메뉴 타이틀 */}
       <MenuTitle title={"저장한 챌린지"} leftIcon={"arrow_back_ios"} rightButton={""} history={"lounge"}/>
 
       {/* 좋아요 목록 */}
-      <div>
-        {
-          liked && liked.map((challenge, index) => (
-            <LikeItem key={index} challenge={challenge} likeList={likeList} setLikeList={setLikeList} />
-          ))
-        }
-      </div>
+      {
+        liked && liked.length == 0 ? <div className={styles.no_result}>저장한 챌린지가 없습니다.</div> :
+        <div className={styles.liked_wrap}>
+          {
+            liked && liked.map((challenge, index) => (
+              <LikeItem key={index} challenge={challenge} likeList={likeList} setLikeList={setLikeList} />
+            ))
+          }
+        </div>
+      }
+      
     </div>
   );
 };
