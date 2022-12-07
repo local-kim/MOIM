@@ -19,11 +19,14 @@ const Settings = () => {
               setUser(null);
             }}>로그아웃</div>
 
-            <div className={styles.btn_item} onClick={() => {}}>공지사항</div>
+            {/* <div className={styles.btn_item} onClick={() => {}}>공지사항</div>
 
-            <div className={styles.btn_item} onClick={() => {}}>개발자 피드백</div>
+            <div className={styles.btn_item} onClick={() => {}}>개발자 피드백</div> */}
 
-            <div className={styles.btn_item} onClick={() => {}}>버전 정보</div>
+            <div className={styles.btn_item} onClick={() => {}}>
+              <div>버전 정보</div>
+              <div>1.0.0</div>
+            </div>
           </div>
         </div>
       }

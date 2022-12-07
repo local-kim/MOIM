@@ -18,3 +18,15 @@ input:-webkit-autofill:active {
 input:focus, textarea, select:focus, option:focus, button:focus{
   outline:none;
 }
+
+.DashCard-undefined{
+  background-color: transparent !important;
+}
+
+.DashCard-undefined{
+  margin-top: 0 !important;
+}
+
+.chart-skills-undefined{
+  margin-top: 0 !important;
+}

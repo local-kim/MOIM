@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { HalfPieChart } from "half-pie-chart";
 
 const Chart = ({bmi}) => {
+  // let bmi = 25.7;
   const colors = [
-    "#fa4b4b",
-    "#faa54b",
-    "#4cb38e",
-    "#328ed9"
+    "#328ed9",  // 파랑
+    "#4cb38e",  // 초록
+    "#FFCC61",  // 노랑
+    "#faa54b",  // 주황
+    "#fa4b4b",  // 빨강
   ];
 
   const texts = [
@@ -18,29 +20,33 @@ const Chart = ({bmi}) => {
 
   let idx;
 
-
-
   useEffect(() => {
-    bmi <= 18.5 ? (
-      idx = 3
+    bmi <= 17 ? (
+      idx = 2
+    ) : bmi <= 18.5 ? (
+      idx = 0
     ) : bmi <= 22.9 ? (
+      idx = 1
+    ) : bmi <= 23.9 ? (
       idx = 2
     ) : bmi <= 24.9 ? (
-      idx = 1
+      idx = 3
     ) : (
-      idx = 0
+      idx = 4
     )
     // console.log(bmi);
   }, [bmi]);
 
   useEffect(() => {
     setRight([{
-      value: 5,
+      value: 1000,
+      // value: 30,
       color: colors[idx]
     }]);
 
     setLeft([{
-      value: bmi * bmi / 100,
+      value: Math.sqrt((bmi - 17) * (bmi - 17)) * 100,
+      // value: bmi,
       // displayValue: bmi,
       // text: "BMI",
       color: "#dddddd"
@@ -54,7 +60,8 @@ const Chart = ({bmi}) => {
   const [left, setLeft] = useState([]);
 
   return (
-    bmi != undefined && bmi != null && <HalfPieChart
+    bmi != undefined && bmi != null && 
+    <HalfPieChart
       // name="BMI"
       right={right}
       left={left}
