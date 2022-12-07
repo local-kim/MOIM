@@ -128,8 +128,14 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void insertJoinedUser(Long challengeId, Long userId, int status){
+	public boolean insertJoinedUser(Long challengeId, Long userId, int status){
 		Challenge challenge = challengeRepository.findById(challengeId).get();
+
+		// 모집 인원이 다 찼는지 확인
+		if(challenge.getLimit() <= joinChallengeRepository.countJoinedUsers(challengeId)){
+			return false;
+		}
+
 		User user = userRepository.findById(userId).get();
 
 		JoinChallenge joinChallenge = new JoinChallenge();
@@ -138,6 +144,8 @@ public class ChallengeService {
 		joinChallenge.setStatus(status);
 
 		joinChallengeRepository.save(joinChallenge);
+
+		return true;
 	}
 
 	@Transactional
@@ -155,11 +163,18 @@ public class ChallengeService {
 	}
 
 	@Transactional
-	public void updateJoinStatus(Long challengeId, Long userId, int status){
+	public boolean updateJoinStatus(Long challengeId, Long userId, int status){
+		// 모집 인원이 다 찼는지 확인
+		if(challengeRepository.findById(challengeId).get().getLimit() <= joinChallengeRepository.countJoinedUsers(challengeId)){
+			return false;
+		}
+
 		JoinChallenge joinChallenge = joinChallengeRepository.findById(new JoinChallengeId(challengeId, userId)).get();
 		joinChallenge.setStatus(status);
 
 		joinChallengeRepository.save(joinChallenge);
+
+		return true;
 
 //		joinChallengeRepository.updateStatus(challengeId, userId, status);
 	}

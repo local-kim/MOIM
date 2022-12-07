@@ -13,7 +13,10 @@ const NotificationItem = ({noti, setNotiList}) => {
     axios.post(`/api/challenge/approve`, noti)
     .then(res => {
       setNotiList(res.data);
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+      alert("모집 완료된 챌린지입니다.");
+    });
   }
 
   const refuseUser = () => {

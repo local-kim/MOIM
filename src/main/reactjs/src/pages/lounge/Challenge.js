@@ -26,7 +26,11 @@ const Challenge = () => {
         // 챌린지에 참여 중인 유저 정보 다시 받아오기
         setUsers(res.data);
         setIsJoined(1);
-      }).catch(err => console.log(err));
+      }).catch(err => {
+        console.log(err);
+        setUsers(err.response.data);
+        alert("모집 완료된 챌린지입니다.");
+      });
     }
     else{
       axios.get(`/api/challenge/apply/${challengeId}/${user.id}`)

@@ -5,6 +5,8 @@ import com.project.cobell.service.ChallengeService;
 import com.project.cobell.service.NotificationService;
 import com.project.cobell.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,18 +83,23 @@ public class ChallengeController {
 	}
 
 	@GetMapping("/join/{challengeId}/{userId}")
-	public List<UserDto> joinUser(
+	public ResponseEntity<List<UserDto>> joinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
 		// 선착순
 		// join 테이블에 승인으로 insert
-		challengeService.insertJoinedUser(challengeId, userId, 1);
+		if(!challengeService.insertJoinedUser(challengeId, userId, 1)){
+			// 상태코드, 유저 리스트 반환
+			return ResponseEntity.internalServerError().body(challengeService.getUserList(challengeId));
+		}
 
 		// notification 테이블에 참여 알림 insert
 		notificationService.insertJoinNotification(challengeId, userId);
 
 		// 새로운 참여중 유저 리스트 반환
-		return challengeService.getUserList(challengeId);
+		// 상태코드와 바디 반환(두 표현 모두 사용 가능)
+		return ResponseEntity.ok(challengeService.getUserList(challengeId));
+//		return ResponseEntity.status(HttpStatus.OK).body(challengeService.getUserList(challengeId));
 	}
 
 	@GetMapping("/apply/{challengeId}/{userId}")
@@ -111,13 +118,17 @@ public class ChallengeController {
 	}
 
 	@PostMapping("/approve")
-	public List<NotificationDto> approveUser(
+	public ResponseEntity<List<NotificationDto>> approveUser(
 			@RequestBody NotificationDto notificationDto
 	){
-		System.out.println(notificationDto);
+//		System.out.println(notificationDto);
 
 		// join_challenge 테이블의 status 변경
-		challengeService.updateJoinStatus(notificationDto.getTargetPostId(), notificationDto.getTargetUserId(), 1);
+		if(!challengeService.updateJoinStatus(notificationDto.getTargetPostId(), notificationDto.getTargetUserId(), 1)){
+			// 모집 인원이 다 찼을 경우
+			// 상태코드만 반환
+			return ResponseEntity.internalServerError().build();
+		}
 
 		// 작성자의 신청 알림 삭제
 		notificationService.deleteNotification(notificationDto.getId());
@@ -128,14 +139,14 @@ public class ChallengeController {
 		// 신청자에 승인 알림 추가
 		notificationService.insertApprovedNotification(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());
 
-		return notificationService.getNotiList(notificationDto.getUserId());
+		return ResponseEntity.ok(notificationService.getNotiList(notificationDto.getUserId()));
 	}
 
 	@PostMapping("/refuse")
 	public List<NotificationDto> refuseUser(
 			@RequestBody NotificationDto notificationDto
 	){
-		System.out.println(notificationDto);
+//		System.out.println(notificationDto);
 
 		// join_challenge 테이블에서 삭제
 		challengeService.deleteJoinedUser(notificationDto.getTargetPostId(), notificationDto.getTargetUserId());

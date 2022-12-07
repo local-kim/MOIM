@@ -18,6 +18,9 @@ public interface JoinChallengeRepository extends JpaRepository<JoinChallenge, Jo
 	@Query(value = "select u from JoinChallenge jc , User u where u.id=jc.user.id and jc.challenge.id=:challengeId and jc.status = 1 order by jc.createdAt")
 	List<User> findJoinedUsers(@Param("challengeId") Long challengeId);
 
+	@Query(value = "select count(jc) from JoinChallenge jc where jc.challenge.id=:challengeId and jc.status = 1")
+	int countJoinedUsers(@Param("challengeId") Long challengeId);
+
 	// Query Method
 	int countByChallengeIdAndUserId(Long challengeId, Long userId);
 
