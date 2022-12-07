@@ -48,8 +48,9 @@ const Login = () => {
       </form>
 
       <div className={styles.btn_wrap}>
-        <div onClick={() => navigate('/join')}>회원가입</div>
-        <div onClick={() => {}}>비밀번호 찾기</div>
+        <span>아직 회원이 아니세요?&nbsp;&nbsp;</span>
+        <span className={styles.join_btn} onClick={() => navigate('/join')}>회원가입하기</span>
+        {/* <div onClick={() => {}}>비밀번호 찾기</div> */}
       </div>
 
         {/* <table>
