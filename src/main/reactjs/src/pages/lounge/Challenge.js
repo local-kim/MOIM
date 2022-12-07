@@ -124,16 +124,6 @@ const Challenge = () => {
     .then(res => {
       // console.log(res.data);
       setIsJoined(res.data);  // 0(미참여), 1(참여), 2(대기)
-      // if(res.data == 0)
-      //   setIsJoined(0);
-      // else if(res.data == 1){
-      //   // 참여함
-      //   setIsJoined(1);
-      // }
-      // else if(res.data == 2){
-      //   // 대기중
-      //   setIsJoined(2);
-      // }
     }).catch(err => console.log(err));
 
     // 댓글 리스트

@@ -64,7 +64,7 @@ public class Challenge {
 //	private Set<Notification> notifications = new HashSet<>();
 
 //	@Transient
-	@Formula("(select count(*) from join_challenge jc where jc.challenge_id=id)")
+	@Formula("(select count(*) from join_challenge jc where jc.challenge_id = id and jc.status = 1)")
 	private int joinedUsers;
 
 	// 로그인 유저의 좋아요 여부 -> user_id를 엔티티에 넘길 수 없음
