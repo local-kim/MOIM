@@ -148,23 +148,28 @@ const FeedDetail = () => {
           }
         </Carousel>
 
-        <div className={styles.content_wrap}>
-          <div className={styles.btn_wrap}>
+        <div className={styles.btn_wrap}>
+          <div>
             {
               isLiked ? 
               <span className={`material-icons ${styles.like_on}`} onClick={handleLike}>favorite</span> : 
               <span className={`material-icons ${styles.like_off}`} onClick={handleLike}>favorite_border</span>
             }
+            {feed.likes > 0 && <span className={styles.count}>{feed.likes}</span>}
 
             <span className={`material-icons-outlined ${styles.comment_btn}`}>mode_comment</span>
-
-            <span className={`material-icons-outlined ${styles.share_btn}`}>share</span>
+            {commentList && commentList.length > 0 && <span className={styles.count} style={{marginLeft: '8px'}}>{commentList.length}</span>}
           </div>
+          
+          <span className={`material-icons-outlined ${styles.share_btn}`}>share</span>
+          
+        </div>
 
-          {
+        {/* <div className={styles.content_wrap}> */}
+          {/* {
             feed.likes > 0 && 
             <div className={styles.likes_count}>좋아요 {feed.likes}개</div>
-          }
+          } */}
 
           <pre className={styles.content}>{feed.content}</pre>
 
@@ -176,26 +181,36 @@ const FeedDetail = () => {
               }
             </div>
           }
+          
+          {
+            commentList && commentList.length > 0 && <div className={styles.comment_list}>
+              {/* <div className={styles.subtitle}>
+                댓글 {commentList && commentList.length}
+              </div> */}
 
-          <div className={styles.comment_list}>
-            <div className={styles.subtitle}>
-              댓글 {commentList && commentList.length}
+              {/* <div className={styles.input_wrap}>
+                <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
+                <span className={`material-icons ${styles.comment_btn}`} onClick={insertComment}>reply</span>
+              </div> */}
+              
+              {
+                commentList.map((comment, index) => (
+                  <Comment comment={comment} user={user} setCommentList={setCommentList} deleteComment={deleteComment} key={index}/>
+                ))
+              }
             </div>
+          }
+        {/* </div> */}
 
-            {/* <div className={styles.input_wrap}>
-              <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
-              <span className={`material-icons ${styles.comment_btn}`} onClick={insertComment}>reply</span>
-            </div> */}
-            <CommentInput comment={comment} setComment={setComment} insertComment={insertComment}/>
+        {/* <CommentInput comment={comment} setComment={setComment} insertComment={insertComment}/> */}
+      </div>
 
-            {
-              commentList && commentList.map((comment, index) => (
-                <Comment comment={comment} user={user} setCommentList={setCommentList} deleteComment={deleteComment} key={index}/>
-              ))
-            }
-          </div>
+
+      <div className={styles.comment_box}>
+        <div className={styles.input_wrap}>
+          <input type='text' placeholder='댓글 달기...' className={styles.input_comment} value={comment} onChange={(e) => setComment(e.target.value)}/>
+          <span className={`material-icons ${styles.comment_btn}`} onClick={insertComment}>reply</span>
         </div>
-
       </div>
     </div>
   );

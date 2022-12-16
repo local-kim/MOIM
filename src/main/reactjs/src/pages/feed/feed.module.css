@@ -208,6 +208,7 @@
 /* FeedDetail.js */
 .feed_detail .wrap{
   margin-top: 51px;
+  margin-bottom: 55px;
 }
 
 .feed_detail .user_wrap{
@@ -256,11 +257,19 @@
   /* max-height: 100vw; */
 }
 
-.feed_detail .content_wrap{
+/* .feed_detail .content_wrap{
   padding: 12px 20px;
-}
+  margin-bottom: 47px;
+} */
 
 .feed_detail .btn_wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.feed_detail .btn_wrap div{
   display: flex;
   align-items: flex-end;
 }
@@ -276,7 +285,7 @@
 
 .feed_detail .btn_wrap .comment_btn{
   font-size: 23px;
-  margin-left: 18px;
+  margin-left: 25px;
   cursor: pointer;
 }
 
@@ -293,12 +302,18 @@
   margin-bottom: -5px;
 }
 
+.feed_detail .count{
+  margin-left: 7px;
+  font-weight: 500;
+  /* width: 10px; */
+}
+
 .feed_detail .content{
   font-family: inherit;
   font-size: 16px;
   margin: 0;
-  margin-top: 15px;
-  /* padding: 10px 20px; */
+  margin-top: 5px;
+  padding: 0 20px;
   white-space: pre-wrap;
 }
 
@@ -306,6 +321,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  padding: 0 15px;
 }
 
 .feed_detail .tag{
@@ -322,8 +338,57 @@
 
 .feed_detail .comment_list{
   margin-top: 20px;
+  padding: 0 15px;
 }
 
 .subtitle{
   font-weight: 600;
+}
+
+/* Comment Input */
+.comment_box{
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  /* height: 52px; */
+  width: 100%;
+  border-top: 1px solid rgb(249, 249, 249);
+}
+
+.feed_detail .comment_box .input_wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 100px;
+  height: 32px;
+  width: -webkit-fill-available;
+  margin: 7px 10px;
+  background-color: white;
+}
+
+.comment_box .input_comment{
+  border: 0px solid rgb(230, 230, 230);
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  width: -webkit-fill-available;  /* 너비가 다른 요소에 영향 없을 만큼만 최대로 늘어나게 */
+  /* font-size: 14px; */
+  padding: 0px 2px 0 11px;
+}
+
+.comment_box .input_comment::placeholder{
+  font-size: 12px;
+  color: gray;
+  /* padding: 0 0 2px 8px; */
+}
+
+.comment_box .comment_btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+
+  font-size: 20px;
+  color: #999999;
+  /* font-weight: 500; */
+  padding: 0 10px;
+  cursor: pointer;
 }

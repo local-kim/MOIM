@@ -1,4 +1,11 @@
 /* CommentInput.js */
+.feed_detail .input_wrap{
+  position: fixed;
+  bottom: 0;
+  width: -webkit-fill-available;
+  margin: 10px 10px;
+}
+
 .input_wrap{
   display: flex;
   justify-content: space-between;
@@ -44,7 +51,7 @@ input:focus{
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 12px 0;
+  margin-top: 12px;
 }
 
 .comment_wrap .delete_btn{
@@ -66,7 +73,7 @@ input:focus{
 .comment_wrap .nickname{
   font-size: 13px;
   font-weight: 600;
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .comment_wrap .date{
