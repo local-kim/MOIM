@@ -58,29 +58,26 @@ const NewFeed = () => {
   }
 
   // 이미지 업로드
-  const [images, setImages] = useState();
-  const [previewImgs, setPreviewImgs] = useState();
+  const [images, setImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
 
   const handleImageUpload = (e) => {
-    setImages(e.target.files);
+    if(images.length + e.target.files.length > 10){
+      alert("사진은 최대 10장까지 첨부 가능합니다.");
+    }
 
-    const fileArr = e.target.files;
+    setImages([...images, ...e.target.files].slice(0, 10));
 
     let fileURLs = [];
-   
-    let file;
-    let filesLength = fileArr.length > 10 ? 10 : fileArr.length;
 
-    for (let i = 0; i < filesLength; i++) {
-      file = fileArr[i];
-    
+    for (let i = 0; i < e.target.files.length; i++){
       let reader = new FileReader();
       reader.onload = () => {
         // console.log(reader.result);
         fileURLs[i] = reader.result;
-        setPreviewImgs([...fileURLs]);
+        setPreviews([...previews, ...fileURLs].slice(0, 10));
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(e.target.files[i]);
     }
   };
 
@@ -88,7 +85,7 @@ const NewFeed = () => {
   const removeImage = (idx) => {
     // console.log(idx);
     // 미리보기와 업로드 파일에서 모두 제거
-    setPreviewImgs(previewImgs.filter((_, i) => i != idx));
+    setPreviews(previews.filter((_, i) => i != idx));
     setImages([...images].filter((_, i) => i != idx));
   }
 
@@ -134,7 +131,7 @@ const NewFeed = () => {
 
           {
             // 이미지 업로드 후 미리보기
-            previewImgs && previewImgs.map((img, idx) => 
+            previews && previews.map((img, idx) => 
               <div className={styles.preview} style={{backgroundImage: `url(${img})`}} key={idx}>
                 {/* <img src={img} alt="" /> */}
                 <span className={`material-icons ${styles.delete_btn}`} onClick={() => removeImage(idx)}>cancel</span>
