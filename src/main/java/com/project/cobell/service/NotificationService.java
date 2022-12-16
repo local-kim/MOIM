@@ -108,6 +108,11 @@ public class NotificationService {
 		Challenge targetChallenge = challengeRepository.findById(commentChallengeDto.getChallengeId()).get();
 		notification.setUser(targetChallenge.getLeader());
 		notification.setTargetUser(userRepository.findById(commentChallengeDto.getUserId()).get());
+
+		// 자기 자신의 알림이면 insert하지 않음
+		if(notification.getUser().getId() == notification.getTargetUser().getId())
+			return;
+
 //		notification.setChallenge(targetChallenge);
 		notification.setTargetPostId(commentChallengeDto.getChallengeId());
 		notification.setTargetCommentId(commentChallengeDto.getId());
@@ -162,6 +167,11 @@ public class NotificationService {
 		Feed targetFeed = feedRepository.findById(likeFeedDto.getFeedId()).get();
 		notification.setUser(targetFeed.getUser());
 		notification.setTargetUser(userRepository.findById(likeFeedDto.getUserId()).get());
+
+		// 자기 자신의 알림이면 insert하지 않음
+		if(notification.getUser().getId() == notification.getTargetUser().getId())
+			return;
+
 		notification.setTargetPostId(likeFeedDto.getFeedId());
 
 		notificationRepository.save(notification);
@@ -176,6 +186,11 @@ public class NotificationService {
 		Feed targetFeed = feedRepository.findById(commentFeedDto.getFeedId()).get();
 		notification.setUser(targetFeed.getUser());
 		notification.setTargetUser(userRepository.findById(commentFeedDto.getUserId()).get());
+
+		// 자기 자신의 알림이면 insert하지 않음
+		if(notification.getUser().getId() == notification.getTargetUser().getId())
+			return;
+
 		notification.setTargetPostId(commentFeedDto.getFeedId());
 		notification.setTargetCommentId(commentFeedDto.getId());
 
