@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './feed.module.css';
 import { CommentInput, Comment, WriterMenu } from '../../components';
@@ -99,6 +99,48 @@ const FeedDetail = () => {
     }
   }
 
+  const copyLink = () => {
+    let url = window.document.location.href;
+
+    // 사파리에서 동작 안함
+    // navigator.clipboard.writeText(url)
+    // .then(() => {
+    //   alert("링크를 클립보드에 복사했습니다.");
+    // });
+
+    if (navigator.clipboard) {
+      // (IE는 사용 못하고, 크롬은 66버전 이상일때 사용 가능합니다.)
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          alert("링크를 클립보드에 복사했습니다.");
+        })
+        .catch(() => {
+          alert("복사를 다시 시도해주세요.");
+        });
+    } else {
+      if (!document.queryCommandSupported("copy")) {
+        return alert("복사하기가 지원되지 않는 브라우저입니다.");
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = url;
+      textarea.style.top = 0;
+      textarea.style.left = 0;
+      textarea.style.position = "fixed";
+
+      document.body.appendChild(textarea);
+      // focus() -> 사파리 브라우저 서포팅
+      textarea.focus();
+      // select() -> 사용자가 입력한 내용을 영역을 설정할 때 필요
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+
+      alert("링크를 클립보드에 복사했습니다.");
+    }
+  }
+
   const deleteComment = (c) => {
     if(window.confirm("댓글을 삭제하시겠습니까?")){
       axios.delete(`/api/feed/comment/delete`, {data: c})
@@ -161,7 +203,7 @@ const FeedDetail = () => {
             {commentList && commentList.length > 0 && <span className={styles.count} style={{marginLeft: '8px'}}>{commentList.length}</span>}
           </div>
           
-          <span className={`material-icons-outlined ${styles.share_btn}`}>share</span>
+          <span className={`material-icons-outlined ${styles.share_btn}`} onClick={copyLink}>share</span>
           
         </div>
 
