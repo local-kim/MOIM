@@ -20,7 +20,7 @@ spring:
   servlet:
     multipart:
       maxFileSize: 10MB
-      maxRequestSize: 20MB
+      maxRequestSize: 110MB
 
 # Spring Boot Application 실행시 콘솔에 뜨는 로그
 # logging.level.org.hibernate=debug
@@ -31,6 +31,6 @@ spring:
 # 이미지 외부 경로
 custom:
   path:
-    uploadImage: '/Users/hyunji/Documents/Cobell/resources/'
-#    uploadImage: '/home/ec2-user/resources/'
+#    uploadImage: '/Users/hyunji/Documents/Cobell/resources/'
+    uploadImage: '/home/ec2-user/resources/'
 
