@@ -13,7 +13,7 @@
 * 내 건강 관리에 도움을 주는 건강 점수와 코멘트
 
 ### Database
-<p align="center"><img width="70%" alt="" src="https://user-images.githubusercontent.com/63040140/218971038-e713f984-b9cc-40d1-a7ee-366f2fade5da.png"></p>
+<p align="center"><img width="100%" alt="" src="https://user-images.githubusercontent.com/63040140/218971038-e713f984-b9cc-40d1-a7ee-366f2fade5da.png"></p>
 
 ### Tools
 * Server<br>
