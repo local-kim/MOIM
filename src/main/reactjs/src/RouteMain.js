@@ -18,6 +18,10 @@ const RouteMain = () => {
         {/* 홈 */}
         <Route path="/" element={<Home/>} />
 
+        {/* 로그인 */}
+        <Route path="/join" element={<Join/>} />
+        <Route path="/login" element={<Login/>} />
+
         {/* 라운지 */}
         <Route path="/lounge" element={<ChallengeList/>} />
         <Route path="/lounge/:challengeId" element={<Challenge/>} />
@@ -39,10 +43,6 @@ const RouteMain = () => {
         {/* 피드 */}
         <Route path="/feed/new" element={<NewFeed/>} />
         <Route path="/feed/:feedId" element={<FeedDetail/>} />
-
-        {/* 로그인 */}
-        <Route path="/join" element={<Join/>} />
-        <Route path="/login" element={<Login/>} />
 
         {/* 설정 */}
         <Route path="/settings" element={<Settings/>} />

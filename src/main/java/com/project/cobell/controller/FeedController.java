@@ -62,6 +62,7 @@ public class FeedController {
 			@PathVariable Long feedId
 	){
 		feedService.deleteFeed(feedId);
+		notificationService.deleteFeedNotification(feedId);
 	}
 
 	@GetMapping("/{feedId}")
@@ -129,6 +130,7 @@ public class FeedController {
 			@RequestBody CommentFeedDto commentFeedDto
 	){
 		feedService.deleteComment(commentFeedDto.getId());
+		notificationService.deleteFeedCommentNotification(commentFeedDto.getId());
 
 		return feedService.getCommentList(commentFeedDto.getFeedId());
 	}

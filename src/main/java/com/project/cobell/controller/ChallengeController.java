@@ -51,6 +51,9 @@ public class ChallengeController {
 			@PathVariable Long challengeId
 	){
 		challengeService.deleteChallenge(challengeId);
+
+		// 알림 삭제
+		notificationService.deleteChallengeNotification(challengeId);
 	}
 
 	@GetMapping("/list")
@@ -197,6 +200,7 @@ public class ChallengeController {
 			@RequestBody CommentChallengeDto commentChallengeDto
 	){
 		challengeService.deleteComment(commentChallengeDto.getId());
+		notificationService.deleteChallengeCommentNotification(commentChallengeDto.getId());
 
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}

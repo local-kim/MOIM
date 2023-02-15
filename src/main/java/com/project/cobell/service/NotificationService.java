@@ -201,4 +201,24 @@ public class NotificationService {
 	public void deleteNotification(Long notificationId){
 		notificationRepository.deleteById(notificationId);
 	}
+
+	@Transactional
+	public void deleteChallengeNotification(Long challengeId){
+		notificationRepository.deleteAllByChallengeId(challengeId);
+	}
+
+	@Transactional
+	public void deleteChallengeCommentNotification(Long commentId){
+		notificationRepository.deleteAllByChallengeCommentId(commentId);
+	}
+
+	@Transactional
+	public void deleteFeedNotification(Long feedId){
+		notificationRepository.deleteAllByFeedId(feedId);
+	}
+
+	@Transactional
+	public void deleteFeedCommentNotification(Long commentId){
+		notificationRepository.deleteAllByFeedCommentId(commentId);
+	}
 }
