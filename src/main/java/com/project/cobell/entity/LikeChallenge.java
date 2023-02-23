@@ -14,11 +14,11 @@ public class LikeChallenge {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne  // JoinChallenge : Challenge = N : 1
+	@ManyToOne(fetch = FetchType.LAZY)  // JoinChallenge : Challenge = N : 1
 	@JoinColumn(name = "challenge_id")  // 실제 fk 컬럼명
 	private Challenge challenge;
 
-	@ManyToOne  // JoinChallenge : User = N : 1
+	@ManyToOne(fetch = FetchType.LAZY)  // JoinChallenge : User = N : 1
 	@JoinColumn(name = "user_id")
 	private User user;
 }

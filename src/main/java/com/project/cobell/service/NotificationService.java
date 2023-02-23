@@ -47,14 +47,14 @@ public class NotificationService {
 
 		for(Notification n: notifications){
 			NotificationDto notificationDto = modelMapper.map(n, NotificationDto.class);
-			notificationDto.setUserId(n.getUser().getId());
+			notificationDto.setUserId(userId);
 			if(n.getTargetUser() != null)
 				notificationDto.setTargetUserNickname(n.getTargetUser().getNickname());
 			notificationDto.setTargetPostId(n.getTargetPostId());
 
 			// 챌린지 관련 알림일 경우만
 			if(n.getType() < 20)
-				notificationDto.setTargetChallengeTitle(challengeRepository.findById(n.getTargetPostId()).get().getTitle());
+				notificationDto.setTargetChallengeTitle(challengeRepository.findByIdJoinFetch(n.getTargetPostId()).getTitle());
 
 			// 댓글 알림일 경우만
 			if(n.getType() == 2 && n.getTargetCommentId() != null)

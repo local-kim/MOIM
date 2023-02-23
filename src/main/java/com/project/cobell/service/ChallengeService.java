@@ -181,7 +181,7 @@ public class ChallengeService {
 
 	@Transactional
 	public ChallengeDto getChallenge(Long challengeId){
-		Challenge challenge = challengeRepository.findById(challengeId).get();
+		Challenge challenge = challengeRepository.findByIdJoinFetch(challengeId);
 
 		ModelMapper modelMapper = new ModelMapper();
 		ChallengeDto challengeDto = modelMapper.map(challenge, ChallengeDto.class);

@@ -22,10 +22,12 @@ const FeedDetail = () => {
   useEffect(() => {
     axios.get(`/api/feed/${feedId}`)
     .then(res => {
-      // console.log(res.data);
+      console.log(res.data);
       setFeed(res.data);
+      setCommentList(res.data.comments);
     }).catch(err => console.log(err));
 
+    // 로그인 유저의 좋아요 누른 여부
     axios.get(`/api/feed/like/${feedId}/${user.id}`)
     .then(res => {
       // console.log(res.data);
@@ -35,18 +37,18 @@ const FeedDetail = () => {
         setIsLiked(true);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/feed/comment/list/${feedId}`)
-    .then(res => {
-      console.log(res.data);
-      setCommentList(res.data);
-    }).catch(err => console.log(err));
+    // axios.get(`/api/feed/comment/list/${feedId}`)
+    // .then(res => {
+    //   console.log(res.data);
+    //   setCommentList(res.data);
+    // }).catch(err => console.log(err));
   }, []);
 
   const deleteFeed = () => {
     if(window.confirm("정말 피드를 삭제하시겠습니까?")){
       axios.delete(`/api/feed/delete/${feed.id}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         navigate(-1, {replace: true});
       }).catch(err => console.log(err));
     }

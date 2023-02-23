@@ -10,12 +10,12 @@ import javax.persistence.*;
 @IdClass(LikeFeedId.class)
 public class LikeFeed {
 	@Id
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "feed_id")
 	private Feed feed;
 
 	@Id
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 }

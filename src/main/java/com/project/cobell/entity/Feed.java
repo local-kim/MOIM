@@ -22,31 +22,28 @@ public class Feed {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	private String content;
 	private Timestamp createdAt;
 
-	@OneToMany(mappedBy = "feed")
-	@OrderBy("id asc")
+	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY)
+//	@OrderBy("id asc")
 	@JsonIgnore
-//	@JoinColumn(name = "feed_id")
-//	private Set<Tag> tags = new HashSet<>();
-	private Set<Tag> tags;
+	private Set<Tag> tags;  // = new HashSet<>();
 
 	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OrderBy("id asc")
+//	@OrderBy("id asc")
 	@JsonIgnore
-//	@JoinColumn(name = "feed_id")
 	private Set<PhotoFeed> photoFeeds = new HashSet<>();
 
-	@OneToMany(mappedBy = "feed")
+	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CommentFeed> commentFeeds = new HashSet<>();
 
-	@OneToMany(mappedBy = "feed")
+	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<LikeFeed> likeFeeds = new HashSet<>();
 

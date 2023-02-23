@@ -44,19 +44,19 @@ public class Challenge {
 	private Timestamp createdAt;
 
 	// Challenge : JoinChallenge = 1 : N
-	@OneToMany(mappedBy = "challenge")
+	@OneToMany(mappedBy = "challenge", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<JoinChallenge> joinChallenges = new HashSet<>();
 
-	@OneToMany(mappedBy = "challenge")
+	@OneToMany(mappedBy = "challenge", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CommentChallenge> commentChallenges = new HashSet<>();
 
-	@OneToMany(mappedBy = "challenge")
+	@OneToMany(mappedBy = "challenge", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<LikeChallenge> likeChallenges = new HashSet<>();
 
-	@OneToOne(mappedBy = "challenge")   // 1:1 연관 관계의 주인
+	@OneToOne(mappedBy = "challenge", fetch = FetchType.LAZY)   // 1:1 연관 관계의 주인
 //	@JoinColumn(name = "id")
 	private PhotoChallenge photoChallenge;
 

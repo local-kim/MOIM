@@ -108,7 +108,8 @@ public class FeedService {
 
 	@Transactional
 	public FeedDto getFeed(Long feedId){
-		Feed feed = feedRepository.findById(feedId).get();
+//		Feed feed = feedRepository.findById(feedId).get();
+		Feed feed = feedRepository.findByIdJoinFetch(feedId);
 
 		ModelMapper modelMapper = new ModelMapper();
 		FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
@@ -134,7 +135,9 @@ public class FeedService {
 		List<FeedDto> feedDtos = new ArrayList<>();
 
 		for(Feed feed : feeds){
-			FeedDto feedDto = modelMapper.map(feed, FeedDto.class);
+//			FeedDto feedDto = modelMapper.map(feed, FeedDto.class); // N+1 유발(tag 엔티티가 필요 없음에도 dto 변환 과정에서 사용되어 tag도 select함)
+			FeedDto feedDto = new FeedDto();
+			feedDto.setId(feed.getId());
 			feedDto.setFileNames(feed.getPhotoFeeds().stream().map(photoFeed -> photoFeed.getFileName()).collect(Collectors.toList()));
 			feedDtos.add(feedDto);
 		}
@@ -185,6 +188,7 @@ public class FeedService {
 	public Long insertComment(CommentFeedDto commentFeedDto){
 		ModelMapper modelMapper = new ModelMapper();
 		CommentFeed commentFeed = modelMapper.map(commentFeedDto, CommentFeed.class);
+//		commentFeed.setUser(userRepository.findById(commentFeedDto.getUserId()).get());
 		commentFeed.setUser(userRepository.findById(commentFeedDto.getUserId()).get());
 		commentFeed.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 

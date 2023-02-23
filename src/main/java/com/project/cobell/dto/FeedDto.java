@@ -25,4 +25,6 @@ public class FeedDto {
 
 	private List<String> fileNames;
 	private int likes;
+
+	private List<CommentFeedDto> comments;
 }

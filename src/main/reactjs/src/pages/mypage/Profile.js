@@ -58,7 +58,7 @@ const Profile = () => {
   useEffect(() => {
     axios.get(`/api/feed/list/${user.id}`)
     .then(res => {
-      // console.log(res.data);
+      console.log(res.data);
       setFeedList(res.data);
     }).catch(err => console.log(err));
 

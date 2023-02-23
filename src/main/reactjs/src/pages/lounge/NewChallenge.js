@@ -89,8 +89,8 @@ const NewChallenge = () => {
   }, []);
       
   useEffect(() => {
-    console.log(challenge);
-    console.log(image);
+    // console.log(challenge);
+    // console.log(image);
     // 제출 가능 여부 확인
     if(image && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);

@@ -13,7 +13,7 @@ public class PhotoChallenge {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "challenge_id")
 	private Challenge challenge;
 

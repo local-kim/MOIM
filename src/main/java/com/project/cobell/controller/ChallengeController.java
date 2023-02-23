@@ -31,7 +31,7 @@ public class ChallengeController {
 			@RequestPart("data") ChallengeDto challengeDto, @RequestPart MultipartFile file
 //			HttpServletRequest request
 			){
-		System.out.println(challengeDto);
+//		System.out.println(challengeDto);
 
 		// 사진 업로드
 		String fileName = challengeService.uploadImage(file);

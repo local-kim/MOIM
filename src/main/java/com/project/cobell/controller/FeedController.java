@@ -69,7 +69,11 @@ public class FeedController {
 	public FeedDto getFeed(
 			@PathVariable Long feedId
 	){
-		return feedService.getFeed(feedId);
+		FeedDto feedDto = feedService.getFeed(feedId);
+
+		feedDto.setComments(feedService.getCommentList(feedId));
+
+		return feedDto;
 	}
 
 	@GetMapping("/list/{userId}")

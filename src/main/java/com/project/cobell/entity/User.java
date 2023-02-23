@@ -32,35 +32,35 @@ public class User {
 	private String bio;
 
 	// User : Challenges = 1 : N
-	@OneToMany(mappedBy = "leader")
+	@OneToMany(mappedBy = "leader", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Challenge> challenges = new HashSet<>();
 
 	// User : JoinChallenge = 1 : N
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<JoinChallenge> joinChallenges = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CommentChallenge> commentChallenges = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<LikeChallenge> likeChallenges = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Weight> weights = new HashSet<>();
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
 //	@JsonIgnore
 	private PhotoUser photoUser;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Notification> notifications = new HashSet<>();
 
-	@OneToMany(mappedBy = "targetUser")
+	@OneToMany(mappedBy = "targetUser", fetch = FetchType.LAZY)
 	private Set<Notification> targetNotifications = new HashSet<>();
 
 //	@Formula("(select fileName from photo_user pu where pu.user_id=id)")

@@ -18,7 +18,7 @@ public class Weight {
 
 	private float weight;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 

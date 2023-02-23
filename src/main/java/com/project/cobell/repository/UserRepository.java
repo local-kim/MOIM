@@ -1,5 +1,6 @@
 package com.project.cobell.repository;
 
+import com.project.cobell.entity.Challenge;
 import com.project.cobell.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,6 +23,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "select max(u.id) from User u")
 	Long getInsertedId();
 //	public Long findTopById();
+
+	@Query(value = "select u from User u left outer join fetch u.photoUser where u.id = :userId")
+	User findByIdJoinFetch(@Param("userId") Long userId);
 
 	@Modifying
 	@Transactional

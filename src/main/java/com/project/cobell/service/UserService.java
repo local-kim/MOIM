@@ -68,7 +68,7 @@ public class UserService {
 	public UserDto getUser(Long userId){
 		ModelMapper modelMapper = new ModelMapper();
 
-		User user = userRepository.findById(userId).get();
+		User user = userRepository.findByIdJoinFetch(userId);
 		UserDto userDto = modelMapper.map(user, UserDto.class);
 
 		userDto.setPassword(null);
