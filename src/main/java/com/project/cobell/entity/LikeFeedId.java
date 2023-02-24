@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class LikeFeedId implements Serializable {
 	public Long feed;
 	public Long user;

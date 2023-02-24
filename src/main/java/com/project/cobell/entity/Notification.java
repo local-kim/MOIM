@@ -9,10 +9,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter @ToString
 @DynamicInsert
-@ToString
 public class Notification {
 
 	@Id

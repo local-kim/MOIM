@@ -7,8 +7,7 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @DynamicInsert
 public class Tag {
 

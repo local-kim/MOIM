@@ -1,8 +1,6 @@
 package com.project.cobell.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -10,12 +8,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Data
-@IdClass(JoinChallengeId.class)
-@DynamicInsert
-@DynamicUpdate
-//@AllArgsConstructor
-//@NoArgsConstructor
+@Getter @Setter
+@IdClass(JoinChallengeId.class) // Composite Key
+@DynamicInsert @DynamicUpdate
+//@AllArgsConstructor @NoArgsConstructor
 public class JoinChallenge {
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)  // JoinChallenge : Challenge = N : 1

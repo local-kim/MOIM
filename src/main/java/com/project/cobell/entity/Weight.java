@@ -8,8 +8,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @DynamicInsert
 public class Weight {
 	@Id

@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @DynamicInsert
 public class Feed {
 	@Id
@@ -30,12 +29,12 @@ public class Feed {
 	private Timestamp createdAt;
 
 	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY)
-//	@OrderBy("id asc")
+	@OrderBy("id asc")
 	@JsonIgnore
-	private Set<Tag> tags;  // = new HashSet<>();
+	private Set<Tag> tags = new HashSet<>();
 
-	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@OrderBy("id asc")
+	@OneToMany(mappedBy = "feed", fetch = FetchType.LAZY)
+	@OrderBy("id asc")
 	@JsonIgnore
 	private Set<PhotoFeed> photoFeeds = new HashSet<>();
 

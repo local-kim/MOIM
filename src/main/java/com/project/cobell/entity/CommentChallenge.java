@@ -7,11 +7,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Getter @Setter @ToString
+@AllArgsConstructor @NoArgsConstructor
 @DynamicInsert
 public class CommentChallenge {
 	@Id

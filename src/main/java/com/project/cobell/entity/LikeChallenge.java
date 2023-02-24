@@ -6,8 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 //@IdClass(LikeChallengeId.class)
 public class LikeChallenge {
 	@Id

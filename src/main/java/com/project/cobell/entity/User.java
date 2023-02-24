@@ -8,14 +8,14 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter @ToString
 @DynamicInsert
-@ToString
 public class User {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment(기본 키 생성을 데이터베이스에 위임)
@@ -34,35 +34,33 @@ public class User {
 	// User : Challenges = 1 : N
 	@OneToMany(mappedBy = "leader", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<Challenge> challenges = new HashSet<>();
+	private List<Challenge> challenges = new ArrayList<>();
 
 	// User : JoinChallenge = 1 : N
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<JoinChallenge> joinChallenges = new HashSet<>();
+	private List<JoinChallenge> joinChallenges = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<CommentChallenge> commentChallenges = new HashSet<>();
+	private List<CommentChallenge> commentChallenges = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<LikeChallenge> likeChallenges = new HashSet<>();
+	private List<LikeChallenge> likeChallenges = new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Set<Weight> weights = new HashSet<>();
+	private List<Weight> weights = new ArrayList<>();
 
 	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-//	@JsonIgnore
 	private PhotoUser photoUser;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private Set<Notification> notifications = new HashSet<>();
+	@JsonIgnore
+	private List<Notification> notifications = new ArrayList<>();
 
 	@OneToMany(mappedBy = "targetUser", fetch = FetchType.LAZY)
-	private Set<Notification> targetNotifications = new HashSet<>();
-
-//	@Formula("(select fileName from photo_user pu where pu.user_id=id)")
-//	private String fileName;
+	@JsonIgnore
+	private List<Notification> targetNotifications = new ArrayList<>();
 }
