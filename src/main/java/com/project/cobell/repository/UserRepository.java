@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Long getInsertedId();
 //	public Long findTopById();
 
-	@Query(value = "select u from User u left outer join fetch u.photoUser where u.id = :userId")
+	@Query(value = "select u from User u left outer join fetch u.photoUser left outer join fetch u.hobbies where u.id = :userId")
 	User findByIdJoinFetch(@Param("userId") Long userId);
 
 	@Modifying

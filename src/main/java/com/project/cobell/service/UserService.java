@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -77,6 +78,8 @@ public class UserService {
 		if(user.getPhotoUser() != null){
 			userDto.setPhoto(user.getPhotoUser().getFileName());
 		}
+
+		userDto.setHobbyCodes(user.getHobbies().stream().map(hobby -> hobby.getCode()).collect(Collectors.toSet()));
 
 		return userDto;
 	}

@@ -2,6 +2,9 @@ package com.project.cobell.dto;
 
 import lombok.Data;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 public class UserDto {
 	private Long id;
@@ -16,4 +19,6 @@ public class UserDto {
 	private String bio;
 
 	private String photo;
+
+	private Set<Integer> hobbyCodes;
 }

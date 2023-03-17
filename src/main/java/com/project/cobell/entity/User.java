@@ -63,4 +63,8 @@ public class User {
 	@OneToMany(mappedBy = "targetUser", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Notification> targetNotifications = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Hobby> hobbies = new ArrayList<>();
 }

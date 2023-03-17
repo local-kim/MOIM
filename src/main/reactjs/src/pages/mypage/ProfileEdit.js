@@ -5,6 +5,8 @@ import axios from 'axios';
 import { MenuTitle } from '../../components';
 
 const ProfileEdit = () => {
+  const hobbyList = ['러닝', '등산', '산책', '헬스', '클라이밍', '테니스', '배드민턴', '자전거', '요가', '볼링', '플로깅', '골프', '서핑', '농구', '보드', '스키', '축구', '수영'];
+
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
@@ -12,6 +14,7 @@ const ProfileEdit = () => {
 
   const [userInfo, setUserInfo] = useState({});
   const [bio, setBio] = useState();
+  const [hobbyCodes, setHobbyCodes] = useState(new Set());
 
   // textarea 크기 자동 조절
   const textRef = useRef();
@@ -28,7 +31,14 @@ const ProfileEdit = () => {
     axios.get(`/api/mypage/user/${user.id}`)
     .then(res => {
       // console.log(res.data);
-      setUserInfo(res.data);
+      setUserInfo(
+        {
+          ...res.data,
+          hobbyCodes: new Set(res.data.hobbyCodes)
+        }
+      );
+      setBio(res.data.bio);
+      setHobbyCodes(new Set(res.data.hobbyCodes));
     }).catch(err => console.log(err));
   }, []);
 
@@ -38,55 +48,54 @@ const ProfileEdit = () => {
   }, [userInfo]);
 
   const handleBio = (e) => {
-    setBio(e.target.value);
+    if(e.target.value){
+      setBio(e.target.value);
+    }
+    else{
+      setBio(null);
+    }
     // console.log(bio);
+  }
+
+  const handleHobby = (i, selected) => {
+    if(selected){
+      hobbyCodes.delete(i);
+      setHobbyCodes(new Set(hobbyCodes));
+    }
+    else{
+      hobbyCodes.add(i);
+      setHobbyCodes(new Set(hobbyCodes, i));
+    }
+    // console.log(hobbyCodes);
+    // console.log(userInfo.hobbyCodes);
   }
 
   const insertChanges = () => {
     return new Promise((resolve, reject) => {
-      if(imageSrc && userInfo.bio != bio){
         const form = new FormData();
-        form.append("file", image);
 
-        axios.post(`/api/mypage/update/photo/${user.id}`, form, {
-          headers: {'Content-Type' : 'multipart/form-data'}
-        })
-        .then(res => {
-          axios.post(`/api/mypage/update/bio/${user.id}`, {
-            bio: bio
-          })
-          .then(res => {
-            navigate("/profile");
-          }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
-      }
+        if(image){
+          form.append("file", image);
+        }
 
-      // 이미지가 변경되었으면
-      else if(imageSrc){
-        const form = new FormData();
-        form.append("file", image);
+        if(userInfo.bio != bio){
+          form.append("bio", new Blob([JSON.stringify(bio)], {
+            type: "application/json"
+          }));
+        }
 
-        axios.post(`/api/mypage/update/photo/${user.id}`, form, {
+        if(!compareSets(userInfo.hobbyCodes, hobbyCodes)){
+          form.append("hobbyCodes", new Blob([JSON.stringify([...hobbyCodes])], {
+            type: "application/json"
+          }));
+        }
+        
+        axios.post(`/api/mypage/update/profile/${user.id}`, form, {
           headers: {'Content-Type' : 'multipart/form-data'}
         })
         .then(res => {
           navigate("/profile");
         }).catch(err => console.log(err));
-      }
-
-      // 소개가 변경되었으면
-      else if(userInfo.bio != bio){
-        axios.post(`/api/mypage/update/bio/${user.id}`, {
-          bio: bio
-        })
-        .then(res => {
-          navigate("/profile");
-        }).catch(err => console.log(err));
-      }
-
-      else{
-        navigate("/profile");
-      }
     })
   }
 
@@ -111,24 +120,35 @@ const ProfileEdit = () => {
     setImage(e.target.files[0]);
   }
 
+  const compareSets = (s1, s2) => {
+    if(!s1 || !s2) 
+      return false; 
+
+    if(s1.size !== s2.size)
+      return false;
+
+    for(var a of s1)
+      if(!s2.has(a))
+        return false;
+
+    return true;
+  }
+
   useEffect(() => {
     // 제출 가능 여부 확인(변경 사항이 있을 때만)
-    if(imageSrc || userInfo.bio != bio){
+    if(imageSrc || userInfo.bio != bio || !compareSets(userInfo.hobbyCodes, hobbyCodes)){
       setSubmit(true);
     }
     else{
       setSubmit(false);
     }
-  }, [bio, imageSrc]);
+  }, [hobbyCodes, bio, imageSrc]);
 
   return (
     <div className={styles.profile_edit_wrap}>
-      {/* <MenuTitle title={"프로필 편집"} leftIcon={"arrow_back_ios"} rightButton={"완료"} visible={true} history={"profile"} handleSubmit={insertChanges}/> */}
-
       <div className={styles.menu_title}>
         <span className={`material-icons ${styles.left_icon}`} onClick={() => navigate(-1)}>arrow_back_ios</span>
         <div className={styles.title}>프로필 편집</div>
-        {/* <button type="button" className={styles.submit_btn} onClick={insertChanges}>완료</button> */}
         {
           submit ? <button type="button" className={styles.submit_btn} onClick={insertChanges}>완료</button> : <button type="button" className={styles.disabled_submit_btn}>완료</button>
         }
@@ -160,9 +180,24 @@ const ProfileEdit = () => {
           }}/>
         </div>
 
+        {/* 소개 */}
         <div className={styles.bio_box}>
           <div className={styles.subtitle}>소개</div>
           <textarea defaultValue={userInfo.bio} ref={textRef} onChange={handleResizeHeight}></textarea>
+        </div>
+
+        {/* 관심사 */}
+        <div className={styles.hobby_box}>
+          <div className={styles.subtitle}>관심사</div>
+          <div className={styles.hobby_btn_wrap}>
+            {
+              hobbyCodes && hobbyList.map((hobby, index) => (
+                hobbyCodes.has(index + 1) ?
+                <div className={`${styles.hobby_btn} ${styles.selected}`} onClick={() => handleHobby(index + 1, true)} key={index + 1}>{hobby}</div> :
+                <div className={`${styles.hobby_btn}`} onClick={() => handleHobby(index + 1, false)} key={index + 1}>{hobby}</div>
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>

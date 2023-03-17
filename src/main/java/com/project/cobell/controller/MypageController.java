@@ -49,25 +49,26 @@ public class MypageController {
 		return mypageService.getLikedChallengeList(userId);
 	}
 
-	@PostMapping("/update/photo/{userId}")
-	public void updatePhoto(
-			@PathVariable Long userId, @RequestParam MultipartFile file
+	@PostMapping("/update/profile/{userId}")
+	public void updateProfile(
+			@PathVariable Long userId, @RequestParam(required = false) MultipartFile file,
+			@RequestPart(value = "bio", required = false) String bio, @RequestPart(value = "hobbyCodes", required = false) List<Integer> hobbyCodes
 	){
-		// userId 받기
+		// 프로필 사진 업데이트
+		if(file != null) {
+			// 사진 업로드
+			String fileName = mypageService.uploadImage(file);
 
-		// 사진 업로드
-		String fileName = mypageService.uploadImage(file);
+			// 파일명 insert
+			mypageService.insertFileName(userId, fileName);
+		}
 
-		// 파일명 insert
-		mypageService.insertFileName(userId, fileName);
-	}
+		// 소개 업데이트
+		if(bio != null)
+			mypageService.updateBio(userId, bio);
 
-	@PostMapping("/update/bio/{userId}")
-	public void updateBio(
-			@PathVariable Long userId, @RequestBody UpdateProfileDto updateProfileDto
-			){
-		// userId 받기
-		mypageService.updateBio(userId, updateProfileDto.getBio());
-
+		// 관심사 업데이트
+		if(hobbyCodes != null)
+			mypageService.updateHobby(userId, hobbyCodes);
 	}
 }

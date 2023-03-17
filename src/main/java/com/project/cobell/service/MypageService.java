@@ -3,9 +3,11 @@ package com.project.cobell.service;
 import com.project.cobell.dto.ChallengeDto;
 import com.project.cobell.dto.CommentChallengeDto;
 import com.project.cobell.entity.Challenge;
+import com.project.cobell.entity.Hobby;
 import com.project.cobell.entity.PhotoChallenge;
 import com.project.cobell.entity.PhotoUser;
 import com.project.cobell.repository.ChallengeRepository;
+import com.project.cobell.repository.HobbyRepository;
 import com.project.cobell.repository.PhotoUserRepository;
 import com.project.cobell.repository.UserRepository;
 import com.project.cobell.util.FileUtil;
@@ -34,6 +36,9 @@ public class MypageService {
 
 	@Autowired
 	private PhotoUserRepository photoUserRepository;
+
+	@Autowired
+	private HobbyRepository hobbyRepository;
 
 	@Transactional
 	public List<ChallengeDto> getMyChallengeList(Long userId){
@@ -102,7 +107,6 @@ public class MypageService {
 		String fileName = FileUtil.convertFileName(file.getOriginalFilename());
 
 		// 업로드할 폴더 위치
-//		String path = request.getServletContext().getRealPath("/save");
 		String path = uploadPath + "user_photo" + File.separator;
 
 		// save 폴더에 업로드
@@ -130,5 +134,20 @@ public class MypageService {
 	@Transactional
 	public void updateBio(Long userId, String bio){
 		userRepository.updateBio(userId, bio);
+	}
+
+	@Transactional
+	public void updateHobby(Long userId, List<Integer> hobbyCodes){
+		// 기존 모든 관심사 삭제
+		hobbyRepository.deleteByUserId(userId);
+
+		// 새로운 관심사 생성
+		for(int code : hobbyCodes){
+			Hobby hobby = new Hobby();
+			hobby.setUser(userRepository.findById(userId).get());
+			hobby.setCode(code);
+
+			hobbyRepository.save(hobby);
+		}
 	}
 }
