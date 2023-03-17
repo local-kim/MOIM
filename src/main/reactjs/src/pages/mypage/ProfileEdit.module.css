@@ -106,7 +106,7 @@ input:focus, textarea{
   border: 1px solid lightgray;
   padding: 4px 10px;
   border-radius: 16px;
-  /* font-size: 15px; */
+  font-size: 15px;
   margin-right: 7px;
   margin-bottom: 8px;
 }

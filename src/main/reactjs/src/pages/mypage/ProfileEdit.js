@@ -79,9 +79,6 @@ const ProfileEdit = () => {
         }
 
         if(userInfo.bio != bio){
-          // form.append("bio", new Blob([JSON.stringify(bio)], {
-          //   type: "application/json"
-          // }));
           form.append("bio", bio);
         }
 

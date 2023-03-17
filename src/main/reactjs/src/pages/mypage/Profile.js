@@ -37,6 +37,8 @@ import FeedList from './FeedList';
 //   }
 // });
 
+const hobbyList = ['러닝', '등산', '산책', '헬스', '클라이밍', '테니스', '배드민턴', '자전거', '요가', '볼링', '플로깅', '골프', '서핑', '농구', '보드', '스키', '축구', '수영'];
+
 const Profile = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,7 +66,7 @@ const Profile = () => {
 
     axios.get(`/api/mypage/user/${user.id}`)
     .then(res => {
-      // console.log(res.data);
+      console.log(res.data);
       setUserInfo(res.data);
     }).catch(err => console.log(err));
 
@@ -108,6 +110,15 @@ const Profile = () => {
                 </pre>
               }
             </div>
+
+          </div>
+
+          <div className={styles.hobby_btn_wrap}>
+            {
+              userInfo.hobbyCodes && userInfo.hobbyCodes.map((code, index) => (
+                <div className={`${styles.hobby_btn}`} key={code}>{hobbyList[code - 1]}</div>
+              ))
+            }
           </div>
 
           <div className={styles.btn_wrap}>
