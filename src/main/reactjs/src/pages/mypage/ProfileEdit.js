@@ -54,7 +54,7 @@ const ProfileEdit = () => {
     else{
       setBio(null);
     }
-    // console.log(bio);
+    console.log(bio);
   }
 
   const handleHobby = (i, selected) => {
@@ -79,9 +79,10 @@ const ProfileEdit = () => {
         }
 
         if(userInfo.bio != bio){
-          form.append("bio", new Blob([JSON.stringify(bio)], {
-            type: "application/json"
-          }));
+          // form.append("bio", new Blob([JSON.stringify(bio)], {
+          //   type: "application/json"
+          // }));
+          form.append("bio", bio);
         }
 
         if(!compareSets(userInfo.hobbyCodes, hobbyCodes)){
