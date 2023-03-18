@@ -39,6 +39,7 @@ public class Challenge {
 	private int gender;
 	private int online;
 	private int status;
+	private int category;
 	private Timestamp createdAt;
 
 	// Challenge : JoinChallenge = 1 : N

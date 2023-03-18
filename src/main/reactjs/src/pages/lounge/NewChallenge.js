@@ -9,12 +9,15 @@ import { format } from 'date-fns';
 // import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 // import TextField from '@mui/material/TextField';
 
+const categoryList = ['러닝', '등산', '산책', '헬스', '수영', '테니스', '배드민턴', '자전거', '요가', '클라이밍', '볼링', '플로깅', '골프', '서핑', '농구', '축구', '보드', '스키'];
+
 const NewChallenge = () => {
   const navigate = useNavigate();
 
   // 현재 로그인한 사람을 챌린지 작성자로
   const [challenge, setChallenge] = useState({
     leader_id: JSON.parse(localStorage.getItem("user")).id,
+    category: 0,
     type: 0,
     age: 0,
     limit: 2
@@ -48,7 +51,6 @@ const NewChallenge = () => {
       type: "application/json"
     }));
 
-    // axios.post('/api/challenge/new', challenge)
     axios.post('/api/challenge/new', form, {
       headers: {'Content-Type' : 'multipart/form-data'}
     })
@@ -92,7 +94,7 @@ const NewChallenge = () => {
     // console.log(challenge);
     // console.log(image);
     // 제출 가능 여부 확인
-    if(image && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
+    if(image && challenge.category != 0 && challenge.title && challenge.content && challenge.planned_at && challenge.gender && (challenge.online == 1 || (challenge.online == 0 && challenge.area))){
       setSubmit(true);
     }
     else{
@@ -139,16 +141,32 @@ const NewChallenge = () => {
           }} />
         </div>
 
+        
+
         <div className={styles.main}>
+          {/* 카테고리 */}
+          <div className={`${styles.flex_box} ${styles.age_wrap}`}>
+            <span className={styles.subtitle}>카테고리</span>
+
+            <select className={`form-select ${styles.age_select}`} name='category' onChange={handleChange}>
+              <option value={0} defaultChecked>선택</option>
+              {
+                categoryList.map((category, index) => (
+                  <option value={index + 1}>{category}</option>
+                ))
+              }
+            </select>
+          </div>
+
           {/* 제목 */}
           <div className={styles.title_wrap}>
-            <div className={styles.subtitle}>제목</div>
+            <div className={styles.subtitle} style={{marginBottom: '5px'}}>제목</div>
             <input type='text' name="title" required onChange={handleChange}/>
           </div>
 
           {/* 내용 */}
           <div className={styles.content_wrap}>
-            <div className={styles.subtitle}>내용</div>
+            <div className={styles.subtitle} style={{marginBottom: '5px'}}>내용</div>
             <textarea name='content' onChange={(e) => {
               handleChange(e);
               handleResizeHeight(e);
@@ -156,7 +174,7 @@ const NewChallenge = () => {
           </div>
 
           {/* 날짜 */}
-          <div className={styles.date_wrap}>
+          <div className={styles.flex_box}>
             <span className={styles.subtitle}>날짜</span>
             <input className={styles.date_picker} style={{width:'220px'}} type='datetime-local' name="planned_at" required onChange={handleChange} step='300' min={format(new Date(), "yyyy-MM-dd") + "T" + format(new Date(), "HH:mm")}/>
             {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -176,7 +194,7 @@ const NewChallenge = () => {
           </div>
 
           {/* 장소 */}
-          <div className={styles.area_wrap}>
+          <div className={styles.flex_box}>
             <span className={styles.subtitle}>장소</span>
 
             {/* <div> */}
@@ -196,7 +214,7 @@ const NewChallenge = () => {
           {/* 지역 */}
           {
             !challenge.online || challenge.online == '1' ? "" : 
-              <div style={{marginTop: '10px'}}>
+              <div className={styles.flex_box} style={{marginTop: '10px'}}>
                 <span className={styles.subtitle}></span>
                 <input className={styles.area_input} type='text' name="area" required onChange={handleChange}/>
               </div>
@@ -234,7 +252,7 @@ const NewChallenge = () => {
           </div>
 
           {/* 성별 */}
-          <div className={styles.gender_wrap}>
+          <div className={styles.flex_box}>
             <span className={styles.subtitle}>성별</span>
 
             <div className={styles.btn_wrap}>
@@ -254,7 +272,7 @@ const NewChallenge = () => {
           </div>
 
           {/* 나이 */}
-          <div className={styles.age_wrap}>
+          <div className={`${styles.flex_box} ${styles.age_wrap}`}>
             <span className={styles.subtitle}>나이</span>
 
             <select className={`form-select ${styles.age_select}`} name='age' onChange={handleChange}>
@@ -272,7 +290,7 @@ const NewChallenge = () => {
           </div>
 
           {/* 유형(선착순, 승인제) */}
-          <div className={styles.area_wrap}>
+          <div className={styles.flex_box}>
             <span className={styles.subtitle}>승인 후 참여</span>
 
             <div>

@@ -54,9 +54,7 @@ public class ChallengeService {
 		Challenge challengeEntity = modelMapper.map(challengeDto, Challenge.class);
 //		System.out.println(challengeEntity.toString());
 
-//		Optional<User> user = userRepository.findById(challengeDto.getLeaderId());
 		challengeEntity.setLeader(userRepository.findById(challengeDto.getLeaderId()).get());
-//		user.get().getChallenges().add(challengeEntity);
 
 		challengeRepository.save(challengeEntity);
 

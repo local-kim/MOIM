@@ -24,6 +24,7 @@ public class ChallengeDto {
 	private int gender;
 	private int online;
 	private int status;
+	private int category;
 	private Timestamp createdAt;
 
 	private int joinedUsers;

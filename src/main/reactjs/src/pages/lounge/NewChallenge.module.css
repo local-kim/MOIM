@@ -18,7 +18,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 /* 사진 */
 .no_image{
   width: 100vw;
-  height: 50vw;
+  height: 70vw;
   max-height: 40vh;
   background-color: rgb(245, 245, 245);
   display: flex;
@@ -33,7 +33,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
 
 .preview{
   width: 100vw;
-  max-height: 80vw;
+  max-height: 100vw;
   /* height: -webkit-fill-available; */
   object-fit: cover;
   object-position: center center;
@@ -48,8 +48,8 @@ input:focus, textarea, select:focus, option:focus, button:focus{
   font-weight: 500;
 }
 
-.main div:nth-child(-n+2) .subtitle{
-  margin-bottom: 3px;
+.main div:nth-child(-n+3) .subtitle{
+  /* margin-bottom: 3px; */
 }
 
 .title_wrap input{
@@ -70,7 +70,7 @@ input:focus, textarea, select:focus, option:focus, button:focus{
   padding: 10px;
 }
 
-.main>div:nth-child(n + 3){ /* 3번째 ~ */
+.main>div.flex_box{ /* 3번째 ~ */
   display: flex;
   justify-content: space-between;
   align-items: center;
