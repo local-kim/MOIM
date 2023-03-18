@@ -11,6 +11,10 @@ const JoinedChallenge = ({joined}) => {
           <JoinedChallengeItem key={index} challenge={challenge}/>
         ))
       }
+      {
+        joined.length == 0 &&
+        <div className={styles.no_content}>참여한 챌린지가 없습니다.</div>
+      }
     </div>
   );
 };
