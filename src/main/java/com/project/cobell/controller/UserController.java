@@ -27,7 +27,7 @@ public class UserController {
 	public void join(
 			@RequestBody UserDto user
 	){
-//		System.out.println(user);
+		System.out.println(user);
 
 		userService.join(user);
 	}

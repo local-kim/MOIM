@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Join.module.css';
 
-const SecondJoin = ({user, handleChange, setUser, joinUser}) => {
+const SecondJoin = ({user, handleChange, setPage, setUser, joinUser}) => {
   return (
     <div className={styles.second_join_wrap}>
       <div className={styles.box}>
@@ -48,8 +48,8 @@ const SecondJoin = ({user, handleChange, setUser, joinUser}) => {
 
       {
         user.gender && user.age && user.height && user.weight ?
-        <div className={styles.next_btn_wrap} onClick={() => joinUser()}>
-          <span className={styles.next_btn}>가입하기</span>
+        <div className={styles.next_btn_wrap} onClick={() => setPage(3)}>
+          <span className={styles.next_btn}>다음</span>
           <span className={`material-icons ${styles.next_icon}`}>navigate_next</span>
         </div> : ""
       }

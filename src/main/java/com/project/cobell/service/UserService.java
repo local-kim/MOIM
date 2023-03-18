@@ -2,7 +2,9 @@ package com.project.cobell.service;
 
 import com.project.cobell.dto.LoginDto;
 import com.project.cobell.dto.UserDto;
+import com.project.cobell.entity.Hobby;
 import com.project.cobell.entity.User;
+import com.project.cobell.repository.HobbyRepository;
 import com.project.cobell.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -23,6 +25,9 @@ public class UserService {
 	@Autowired
 	private WeightService weightService;
 
+	@Autowired
+	private HobbyRepository hobbyRepository;
+
 	@Transactional
 	public void join(UserDto userDto){
 		// UserDto -> User entity
@@ -34,6 +39,15 @@ public class UserService {
 
 		// 생성된 user_id 이용하여 weight 인서트
 		weightService.insertWeight(userDto.getWeight(), userRepository.getInsertedId());
+
+		// 관심사 인서트
+		for(int code : userDto.getHobbyCodes()){
+			Hobby hobby = new Hobby();
+			hobby.setUser(userRepository.findById(userRepository.getInsertedId()).get());
+			hobby.setCode(code);
+
+			hobbyRepository.save(hobby);
+		}
 	}
 
 	@Transactional

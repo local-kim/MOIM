@@ -120,3 +120,41 @@
   width: 100%;
   padding: 10px;
 }
+
+/* 관심사 */
+.third_join_wrap{
+  padding: 5px;
+}
+
+.hobby_box{
+  margin-top: 20px;
+}
+
+.hobby_btn_wrap{
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.hobby_btn{
+  /* border: 1px solid lightgray;
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 15px;
+  margin-right: 6px;
+  margin-bottom: 6px; */
+  border: 1px solid lightgray;
+  padding: 5px 12px;
+  border-radius: 18px;
+  /* font-size: 15px; */
+  margin-right: 7px;
+  margin-bottom: 13px;
+}
+
+.selected{
+  border: 1px solid #86dbcb;
+  /* border: none; */
+  background-color: #86dbcb;
+  color: white;
+  font-weight: 600;
+}
