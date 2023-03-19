@@ -34,11 +34,46 @@
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  margin-bottom: 10px;
+  margin: 15px 0 10px 0;
 }
 
 .subtitle{
   font-size: 18px;
+  font-weight: 600;
+}
+
+/* 카테고리 */
+.category_box{
+  margin-top: 20px;
+}
+
+.category_btn_wrap{
+  display: flex;
+  margin: 0 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category_btn{
+  /* border: 1px solid lightgray;
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 15px;
+  margin-right: 6px;
+  margin-bottom: 6px; */
+  border: 1px solid lightgray;
+  padding: 3px 10px;
+  border-radius: 16px;
+  font-size: 15px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+}
+
+.selected{
+  border: 1px solid #86dbcb;
+  /* border: none; */
+  background-color: #86dbcb;
+  color: white;
   font-weight: 600;
 }
 

@@ -12,11 +12,11 @@ const JoinedChallengeItem = ({challenge}) => {
     <div className={styles.profile_challenge}>
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
-      }}>
+      }} onClick={() => navigate(`/lounge/${challenge.id}`)}>
         {/* 사진 */}
       </div>
-      <div className={styles.info_wrap}>
-        <div className={styles.title} onClick={() => navigate(`/lounge/${challenge.id}`)}>{challenge.title}</div>
+      <div className={styles.info_wrap} onClick={() => navigate(`/lounge/${challenge.id}`)}>
+        <div className={styles.title}>{challenge.title}</div>
         <div className={styles.info}>
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
           <span>
@@ -29,7 +29,6 @@ const JoinedChallengeItem = ({challenge}) => {
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
           <span>
-            {/* 참여중인 사람 수 받아오기 */}
             {challenge.joined_users}/{challenge.limit}
           </span>
         </div>

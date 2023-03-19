@@ -50,18 +50,21 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
 
   return (
     <div className={styles.challenge}>
+      {/* 사진 */}
       <div className={styles.photo} style={{
         backgroundImage:`url(/resources/challenge_photo/${challenge.photo})`
-      }}>
-        {/* 사진 */}
-        {
-          likeList.includes(challenge.id) ? 
-          <span className={`material-icons ${styles.like} ${styles.like_on}`} onClick={() => handleLike(challenge.id, true)}>favorite</span> : 
-          <span className={`material-icons ${styles.like} ${styles.like_off}`} onClick={() => handleLike(challenge.id, false)}>favorite_border</span>
-        }
+      }} onClick={() => navigate(`/lounge/${challenge.id}`)}>
       </div>
-      <div className={styles.info_wrap}>
-        <div className={styles.title} onClick={() => navigate(`/lounge/${challenge.id}`)}>{challenge.title}</div>
+
+      {/* 좋아요 버튼 */}
+      {
+        likeList.includes(challenge.id) ? 
+        <span className={`material-icons ${styles.like} ${styles.like_on}`} onClick={() => handleLike(challenge.id, true)}>favorite</span> : 
+        <span className={`material-icons ${styles.like} ${styles.like_off}`} onClick={() => handleLike(challenge.id, false)}>favorite_border</span>
+      }
+      
+      <div className={styles.info_wrap} onClick={() => navigate(`/lounge/${challenge.id}`)}>
+        <div className={styles.title}>{challenge.title}</div>
         <div className={styles.info}>
           <span className={`material-icons ${styles.icon} ${styles.place_icon}`}>place</span>
           <span>
@@ -74,7 +77,6 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span className={`material-icons ${styles.icon} ${styles.group_icon}`}>group</span>
           <span>
-            {/* 참여중인 사람 수 받아오기 */}
             {challenge.joined_users}/{challenge.limit}
           </span>
         </div>

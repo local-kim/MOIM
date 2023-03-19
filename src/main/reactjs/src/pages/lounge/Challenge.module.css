@@ -12,7 +12,7 @@
   background-size: cover;
   background-position: center;
   padding: 10px;
-  display: flex;
+  /* display: flex; */
   align-content: stretch;
   flex-direction: column;
   justify-content: space-between;
@@ -42,13 +42,17 @@
   font-weight: 700;
   color: white;
   text-align: right;
-  margin-bottom: 5px;
-  margin-right: 3px;
-  padding-left: 80px;
+  /* margin-bottom: 5px;
+  margin-right: 3px; */
+  padding-left: 90px;
   word-break: keep-all;
   overflow-wrap: break-word;  /* 띄어쓰기 없는 긴 텍스트 줄바꿈 */
 
   z-index: 2;
+
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
 }
 
 .subtitle{
@@ -60,12 +64,16 @@
   cursor: pointer;
   color: rgba(240, 240, 240, 1);
   z-index: 2;
+  font-size: 28px;
+  position: absolute;
 }
 
 .like_on{
   cursor: pointer;
   color: rgba(255, 0, 0, 0.9);
   z-index: 2;
+  font-size: 28px;
+  position: absolute;
 }
 
 .profile_wrap{
