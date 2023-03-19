@@ -26,6 +26,7 @@
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 1;
 }
 
 .menu_title .title{
@@ -139,7 +140,7 @@
   cursor: pointer;
   padding: 3px 2px;
   font-size: 20px;
-  z-index: 99;
+  /* z-index: 0; */
   position: absolute;
 }
 

@@ -60,7 +60,7 @@ export default function RechartsGraph({data}) {
         <YAxis hide={true} domain={['dataMin - 1', 'dataMax + 1']} />
         <Tooltip />
         {/* <Legend /> */}
-        <Line type="linear" dataKey="weight" stroke="#86dbcb" dot={{stroke: '#86dbcb', strokeWidth: '2'}} >
+        <Line type="linear" dataKey="체중" stroke="#86dbcb" dot={{stroke: '#86dbcb', strokeWidth: '2'}} >
           <LabelList content={<CustomizedLabel />} />
         </Line>
       </LineChart>

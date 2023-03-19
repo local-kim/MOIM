@@ -61,3 +61,18 @@
 .btn_refuse{
   background-color: rgb(220, 220, 220);
 }
+
+.no_content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* height: -webkit-fill-available; */
+  color: gray;
+}
+
+@supports (height: 100dvh) {
+  .no_content{
+    height: 100dvh;
+  }
+}

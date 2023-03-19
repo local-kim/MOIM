@@ -12,7 +12,7 @@ const Notification = () => {
   useEffect(() => {
     axios.get(`/api/noti/${user.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setNotiList(res.data);
     }).catch(err => console.log(err));
   }, []);
@@ -21,13 +21,17 @@ const Notification = () => {
     <div>
       <MenuTitle title={"알림"} leftIcon={"arrow_back_ios"} visible={false}/>
 
-      <div className={styles.noti_list}>
-        {
-          notiList && notiList.map(noti => (
-            <NotificationItem noti={noti} setNotiList={setNotiList} key={noti.id}/>
-          ))
-        }
-      </div>
+      {
+        notiList && notiList.length > 0 ?
+        <div className={styles.noti_list}>
+          {
+            notiList.map(noti => (
+              <NotificationItem noti={noti} setNotiList={setNotiList} key={noti.id}/>
+            ))
+          }
+        </div> :
+        <div className={styles.no_content}>받은 알림이 없습니다.</div>
+      }
     </div>
   );
 };

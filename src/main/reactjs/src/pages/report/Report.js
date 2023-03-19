@@ -47,7 +47,7 @@ const Report = () => {
         res.data.map(d => {
           return {
             date: format(new Date(d.created_at), "MM/dd", {locale: ko}),
-            weight: d.weight
+            체중: d.weight
           }
         })
       );
