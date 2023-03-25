@@ -8,7 +8,7 @@ const FeedList = ({feedList}) => {
   return (
     <div>
       {
-        feedList.length > 0 && 
+        feedList && feedList.length > 0 && 
         <div className={styles.feed_wrap}>
           {
             feedList.map((feed) => (
@@ -21,7 +21,7 @@ const FeedList = ({feedList}) => {
         </div>
       }
       {
-        feedList.length == 0 && 
+        feedList && feedList.length == 0 && 
         <div className={styles.no_content}>작성한 피드가 없습니다.</div>
       }
     </div>

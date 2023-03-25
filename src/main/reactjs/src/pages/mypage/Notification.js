@@ -7,7 +7,7 @@ import NotificationItem from './NotificationItem';
 const Notification = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  const [notiList, setNotiList] = useState([]);
+  const [notiList, setNotiList] = useState();
 
   useEffect(() => {
     axios.get(`/api/notis/user/${user.id}`)
@@ -18,11 +18,12 @@ const Notification = () => {
   }, []);
 
   return (
+    notiList && 
     <div>
       <MenuTitle title={"알림"} leftIcon={"arrow_back_ios"} visible={false}/>
 
       {
-        notiList && notiList.length > 0 ?
+         notiList.length > 0 ?
         <div className={styles.noti_list}>
           {
             notiList.map(noti => (

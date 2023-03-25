@@ -47,7 +47,7 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState({});
   const [created, setCreated] = useState([]);
   const [joined, setJoined] = useState([]);
-  const [feedList, setFeedList] = useState([]);
+  const [feedList, setFeedList] = useState();
 
   // 탭
   const [value, setValue] = React.useState(searchParams.get("tab") ? Number(searchParams.get("tab")) : 0);

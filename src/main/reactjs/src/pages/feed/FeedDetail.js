@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { format } from 'date-fns';
 import ko from 'date-fns/locale/ko';
+import relativeTime from '../../utils/relativeTime';
 
 const FeedDetail = () => {
   const {feedId} = useParams();
@@ -178,7 +179,7 @@ const FeedDetail = () => {
 
           <div>
             <div className={styles.user_name}>{feed.user_name}</div>
-            <div className={styles.time}>{feed.created_at && format(new Date(feed.created_at), "yyyy년 MM월 dd일 HH:mm", {locale: ko})}</div>
+            <div className={styles.time}>{feed.created_at && relativeTime(new Date(feed.created_at))}</div>
           </div>
         </div>
 
