@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-	@Query("select n from Notification n join fetch n.user as u left outer join fetch n.targetUser as tu left outer join fetch u.photoUser left outer join fetch tu.photoUser where n.user.id = :userId")
+	@Query("select n from Notification n join fetch n.user as u left outer join fetch n.targetUser as tu left outer join fetch u.photoUser left outer join fetch tu.photoUser where n.user.id = :userId order by n.createdAt desc")
 	List<Notification> findByUserIdOrderByCreatedAtDesc(@Param("userId") Long userId);
 
 	@Modifying
