@@ -51,7 +51,7 @@ const NewChallenge = () => {
       type: "application/json"
     }));
 
-    axios.post('/api/challenge/new', form, {
+    axios.post('/api/challenge', form, {
       headers: {'Content-Type' : 'multipart/form-data'}
     })
     .then(res => {

@@ -13,7 +13,7 @@ const Liked = () => {
 
   useEffect(() => {
     if(user){
-      axios.get(`/api/mypage/liked/${user.id}`)
+      axios.get(`/api/user/${user.id}/liked`)
       .then(res => {
         // console.log(res.data);
         setLiked(res.data);

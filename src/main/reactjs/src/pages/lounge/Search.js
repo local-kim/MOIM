@@ -18,7 +18,7 @@ const Search = () => {
   const [likeList, setLikeList] = useState([]);
 
   const getLikeList = () => {
-    axios.get(`/api/challenge/like/list/${user.id}`)
+    axios.get(`/api/challenge/user/${user.id}/likes`)
     .then(res => {
       // console.log(res.data);
       setLikeList(res.data);
@@ -31,7 +31,7 @@ const Search = () => {
   }
 
   useEffect(() => {
-    axios.get("/api/challenge/list")
+    axios.get("/api/challenges")
     .then(res => {
       // console.log(res.data);
       setChallenges(res.data);

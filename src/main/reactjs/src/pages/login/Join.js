@@ -44,7 +44,7 @@ const Join = () => {
     // e.preventDefault();
     console.log(user)
     
-    axios.post('/api/user/join', {
+    axios.post('/api/user', {
       ...user,
       hobbyCodes: [...user.hobbyCodes]
     })

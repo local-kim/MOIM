@@ -16,7 +16,7 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
     if(user){
       if(isLiked){
         // 좋아요 눌린 상태: delete
-        axios.delete(`/api/challenge/like/delete`, {
+        axios.delete(`/api/challenge/like`, {
           data: {
             challenge_id: challengeId,
             user_id: user.id
@@ -31,7 +31,7 @@ const LikeItem = ({challenge, likeList, setLikeList}) => {
       }
       else{
         // 좋아요 안눌린 상태: insert
-        axios.post(`/api/challenge/like/insert`, {
+        axios.post(`/api/challenge/like`, {
           challenge_id: challengeId,
           user_id: user.id
         })

@@ -17,7 +17,7 @@ const ChallengeList = () => {
   const [categoryCode, setCategoryCode] = useState(0);
 
   const getLikeList = () => {
-    axios.get(`/api/challenge/like/list/${user.id}`)
+    axios.get(`/api/challenge/user/${user.id}/likes`)
     .then(res => {
       // console.log(res.data);
       setLikeList(res.data);
@@ -25,7 +25,7 @@ const ChallengeList = () => {
   }
 
   useEffect(() => {
-    axios.get("/api/challenge/list")
+    axios.get("/api/challenges")
     .then(res => {
       // console.log(res.data);
       setChallenges(res.data);

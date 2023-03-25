@@ -6,6 +6,8 @@ import Tab from '@mui/material/Tab';
 import styles from './user.module.css';
 import { CreatedChallenge, FeedList, JoinedChallenge } from '../mypage';
 
+const hobbyList = ['러닝', '등산', '산책', '헬스', '수영', '테니스', '배드민턴', '자전거', '요가', '클라이밍', '볼링', '플로깅', '골프', '서핑', '농구', '축구', '보드'];
+
 const UserProfile = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,25 +27,25 @@ const UserProfile = () => {
   const [feedList, setFeedList] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/feed/list/${userId}`)
+    axios.get(`/api/feeds/user/${userId}`)
     .then(res => {
       // console.log(res.data);
       setFeedList(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/user/${userId}`)
+    axios.get(`/api/user/${userId}`)
     .then(res => {
       // console.log(res.data);
       setUserInfo(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/created/${userId}`)
+    axios.get(`/api/user/${userId}/created`)
     .then(res => {
       // console.log(res.data);
       setCreated(res.data);
     }).catch(err => console.log(err));
 
-    axios.get(`/api/mypage/joined/${userId}`)
+    axios.get(`/api/user/${userId}/joined`)
     .then(res => {
       // console.log(res.data);
       setJoined(res.data);
@@ -80,6 +82,15 @@ const UserProfile = () => {
               }
             </div>
           </div>
+
+          <div className={styles.hobby_btn_wrap}>
+            {
+              userInfo.hobbyCodes && userInfo.hobbyCodes.map((code, index) => (
+                <div className={`${styles.hobby_btn}`} key={code}>{hobbyList[code - 1]}</div>
+              ))
+            }
+          </div>
+
           <div className={styles.btn_wrap}>
           </div>
           

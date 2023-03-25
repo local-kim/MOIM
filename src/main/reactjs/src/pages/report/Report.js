@@ -21,7 +21,7 @@ const Report = () => {
     if(newWeight && newWeight != 0){
       setNewWeight('');
 
-      axios.post(`/api/user/weight/new`, {
+      axios.post(`/api/user/weight`, {
         weight: newWeight,
         user_id: user.id
       })
@@ -38,7 +38,7 @@ const Report = () => {
   }
 
   useEffect(() => {
-    axios.get(`/api/user/weight/${user.id}`)
+    axios.get(`/api/user/${user.id}/weights`)
     .then(res => {
       // console.log(res.data);
       

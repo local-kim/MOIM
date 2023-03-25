@@ -28,7 +28,7 @@ const ProfileEdit = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`/api/mypage/user/${user.id}`)
+    axios.get(`/api/user/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setUserInfo(
@@ -88,7 +88,7 @@ const ProfileEdit = () => {
           }));
         }
         
-        axios.post(`/api/mypage/update/profile/${user.id}`, form, {
+        axios.patch(`/api/user/${user.id}`, form, {
           headers: {'Content-Type' : 'multipart/form-data'}
         })
         .then(res => {

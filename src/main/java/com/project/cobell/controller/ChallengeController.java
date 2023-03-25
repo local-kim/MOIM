@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/challenge")
+@RequestMapping("/api")
 public class ChallengeController {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class ChallengeController {
 	@Autowired
 	private NotificationService notificationService;
 
-	@PostMapping("/new")
+	@PostMapping("/challenge")
 	public Long createChallenge(
 //			@RequestBody ChallengeDto challengeDto
 			@RequestPart("data") ChallengeDto challengeDto, @RequestPart MultipartFile file
@@ -46,7 +46,7 @@ public class ChallengeController {
 		return challengeId;
 	}
 
-	@DeleteMapping("/delete/{challengeId}")
+	@DeleteMapping("/challenge/{challengeId}")
 	public void deleteChallenge(
 			@PathVariable Long challengeId
 	){
@@ -56,7 +56,7 @@ public class ChallengeController {
 		notificationService.deleteChallengeNotification(challengeId);
 	}
 
-	@GetMapping("/list")
+	@GetMapping("/challenges")
 	public List<ChallengeDto> getList(){
 //		List<ChallengeDto> l = challengeService.getCountedList();
 //		System.out.println(l.get(0));
@@ -64,28 +64,28 @@ public class ChallengeController {
 //		return challengeService.getChallengeList();
 	}
 
-	@GetMapping("/{challengeId}")
+	@GetMapping("/challenge/{challengeId}")
 	public ChallengeDto getChallenge(
 			@PathVariable Long challengeId
 	){
 		return challengeService.getChallenge(challengeId);
 	}
 
-	@GetMapping("/users/{challengeId}")
+	@GetMapping("/challenge/{challengeId}/users")
 	public List<UserDto> getUserList(
 			@PathVariable Long challengeId
 	){
 		return challengeService.getUserList(challengeId);
 	}
 
-	@GetMapping("/isJoined/{challengeId}/{userId}")
+	@GetMapping("/challenge/{challengeId}/user/{userId}")
 	public int isJoined(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
 		return challengeService.isJoined(challengeId, userId);
 	}
 
-	@GetMapping("/join/{challengeId}/{userId}")
+	@PostMapping("/challenge/{challengeId}/user/{userId}")
 	public ResponseEntity<List<UserDto>> joinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
@@ -105,7 +105,7 @@ public class ChallengeController {
 //		return ResponseEntity.status(HttpStatus.OK).body(challengeService.getUserList(challengeId));
 	}
 
-	@GetMapping("/apply/{challengeId}/{userId}")
+	@PostMapping("/challenge/{challengeId}/apply/{userId}")
 	public List<UserDto> applyUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
@@ -120,7 +120,7 @@ public class ChallengeController {
 		return challengeService.getUserList(challengeId);
 	}
 
-	@PostMapping("/approve")
+	@PostMapping("/challenge/approve")
 	public ResponseEntity<List<NotificationDto>> approveUser(
 			@RequestBody NotificationDto notificationDto
 	){
@@ -145,7 +145,7 @@ public class ChallengeController {
 		return ResponseEntity.ok(notificationService.getNotiList(notificationDto.getUserId()));
 	}
 
-	@PostMapping("/refuse")
+	@PostMapping("/challenge/refuse")
 	public List<NotificationDto> refuseUser(
 			@RequestBody NotificationDto notificationDto
 	){
@@ -167,7 +167,7 @@ public class ChallengeController {
 		return notificationService.getNotiList(notificationDto.getUserId());
 	}
 
-	@GetMapping("/unjoin/{challengeId}/{userId}")
+	@DeleteMapping("/challenge/{challengeId}/user/{userId}")
 	public List<UserDto> unjoinUser(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
@@ -181,7 +181,7 @@ public class ChallengeController {
 		return challengeService.getUserList(challengeId);
 	}
 
-	@PostMapping("/comment/new")
+	@PostMapping("/challenge/comment")
 	public List<CommentChallengeDto> createComment(
 			@RequestBody CommentChallengeDto commentChallengeDto
 			){
@@ -195,7 +195,7 @@ public class ChallengeController {
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}
 
-	@DeleteMapping("/comment/delete")
+	@DeleteMapping("/challenge/comment")
 	public List<CommentChallengeDto> deleteComment(
 			@RequestBody CommentChallengeDto commentChallengeDto
 	){
@@ -205,21 +205,21 @@ public class ChallengeController {
 		return challengeService.getCommentList(commentChallengeDto.getChallengeId());
 	}
 
-	@GetMapping("/comment/list/{challengeId}")
+	@GetMapping("/challenge/{challengeId}/comments")
 	public List<CommentChallengeDto> getCommentList(
 			@PathVariable Long challengeId
 	){
 		return challengeService.getCommentList(challengeId);
 	}
 
-	@PostMapping("/like/insert")
+	@PostMapping("/challenge/like")
 	public void insertLike(
 			@RequestBody LikeChallengeDto likeChallengeDto
 			){
 		challengeService.insertLike(likeChallengeDto);
 	}
 
-	@GetMapping("/like/{challengeId}/{userId}")
+	@GetMapping("/challenge/{challengeId}/like/{userId}")
 	public int getLike(
 			@PathVariable Long challengeId, @PathVariable Long userId
 	){
@@ -227,14 +227,14 @@ public class ChallengeController {
 		return challengeService.getLike(challengeId, userId);
 	}
 
-	@DeleteMapping("/like/delete")
+	@DeleteMapping("/challenge/like")
 	public void deleteLike(
 			@RequestBody LikeChallengeDto likeChallengeDto
 	){
 		challengeService.deleteLike(likeChallengeDto);
 	}
 
-	@GetMapping("/like/list/{userId}")
+	@GetMapping("/challenge/user/{userId}/likes")
 	public List<Long> getLikeList(
 			@PathVariable Long userId
 	){

@@ -28,7 +28,7 @@ const FeedDetail = () => {
     }).catch(err => console.log(err));
 
     // 로그인 유저의 좋아요 누른 여부
-    axios.get(`/api/feed/like/${feedId}/${user.id}`)
+    axios.get(`/api/feed/${feedId}/like/${user.id}`)
     .then(res => {
       // console.log(res.data);
       if(res.data == 0)
@@ -37,7 +37,7 @@ const FeedDetail = () => {
         setIsLiked(true);
     }).catch(err => console.log(err));
 
-    // axios.get(`/api/feed/comment/list/${feedId}`)
+    // axios.get(`/api/feed/${feedId}/comments`)
     // .then(res => {
     //   console.log(res.data);
     //   setCommentList(res.data);
@@ -46,7 +46,7 @@ const FeedDetail = () => {
 
   const deleteFeed = () => {
     if(window.confirm("정말 피드를 삭제하시겠습니까?")){
-      axios.delete(`/api/feed/delete/${feed.id}`)
+      axios.delete(`/api/feed/${feed.id}`)
       .then(res => {
         // console.log(res);
         navigate(-1, {replace: true});
@@ -56,7 +56,7 @@ const FeedDetail = () => {
 
   const handleLike = () => {
     if(isLiked){
-      axios.delete(`/api/feed/like/delete`, {
+      axios.delete(`/api/feed/like`, {
         data: {
           feed_id: feedId,
           user_id: user.id
@@ -71,7 +71,7 @@ const FeedDetail = () => {
       }).catch(err => console.log(err));
     }
     else{
-      axios.post(`/api/feed/like/insert`, {
+      axios.post(`/api/feed/like`, {
         feed_id: feedId,
         user_id: user.id
       })
@@ -89,7 +89,7 @@ const FeedDetail = () => {
     if(comment && comment != ''){
       setComment('');
 
-      axios.post(`/api/feed/comment/insert`, {
+      axios.post(`/api/feed/comment`, {
         feed_id: feedId,
         user_id: user.id,
         content: comment
@@ -145,7 +145,7 @@ const FeedDetail = () => {
 
   const deleteComment = (c) => {
     if(window.confirm("댓글을 삭제하시겠습니까?")){
-      axios.delete(`/api/feed/comment/delete`, {data: c})
+      axios.delete(`/api/feed/comment`, {data: c})
       .then(res => {
         setCommentList(res.data);
       }).catch(err => console.log(err));

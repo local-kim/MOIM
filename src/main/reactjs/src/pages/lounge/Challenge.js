@@ -21,7 +21,7 @@ const Challenge = () => {
   const joinUser = () => {
     // 선착순
     if(challenge.type == 0){
-      axios.get(`/api/challenge/join/${challengeId}/${user.id}`)
+      axios.post(`/api/challenge/${challengeId}/user/${user.id}`)
       .then(res => {
         // 챌린지에 참여 중인 유저 정보 다시 받아오기
         setUsers(res.data);
@@ -33,7 +33,7 @@ const Challenge = () => {
       });
     }
     else{
-      axios.get(`/api/challenge/apply/${challengeId}/${user.id}`)
+      axios.post(`/api/challenge/${challengeId}/apply/${user.id}`)
       .then(res => {
         // 챌린지에 참여 중인 유저 정보 다시 받아오기
         setUsers(res.data);
@@ -43,7 +43,7 @@ const Challenge = () => {
   }
 
   const unjoinUser = () => {
-    axios.get(`/api/challenge/unjoin/${challengeId}/${user.id}`)
+    axios.delete(`/api/challenge/${challengeId}/user/${user.id}`)
     .then(res => {
       // 챌린지에 참여 중인 유저 정보 다시 받아오기
       setUsers(res.data);
@@ -54,7 +54,7 @@ const Challenge = () => {
   const handleLike = () => {
     if(isLiked){
       // 좋아요 눌린 상태: delete
-      axios.delete(`/api/challenge/like/delete`, {
+      axios.delete(`/api/challenge/like`, {
         data: {
           challenge_id: challengeId,
           user_id: user.id
@@ -68,7 +68,7 @@ const Challenge = () => {
     }
     else{
       // 좋아요 안눌린 상태: insert
-      axios.post(`/api/challenge/like/insert`, {
+      axios.post(`/api/challenge/like`, {
         challenge_id: challengeId,
         user_id: user.id
       })
@@ -83,7 +83,7 @@ const Challenge = () => {
     if(comment && comment != ''){
       setComment('');
 
-      axios.post(`/api/challenge/comment/new`, {
+      axios.post(`/api/challenge/comment`, {
         challenge_id: challengeId,
         user_id: user.id,
         content: comment
@@ -97,7 +97,7 @@ const Challenge = () => {
 
   const deleteComment = (c) => {
     if(window.confirm("댓글을 삭제하시겠습니까?")){
-      axios.delete(`/api/challenge/comment/delete`, {data: c})
+      axios.delete(`/api/challenge/comment`, {data: c})
       .then(res => {
         setCommentList(res.data);
       }).catch(err => console.log(err));
@@ -113,28 +113,28 @@ const Challenge = () => {
     }).catch(err => console.log(err));
 
     // 챌린지에 참여 중인 유저 리스트
-    axios.get(`/api/challenge/users/${challengeId}`)
+    axios.get(`/api/challenge/${challengeId}/users`)
     .then(res => {
       // console.log(res.data);
       setUsers(res.data);
     }).catch(err => console.log(err));
 
     // 로그인한 유저의 챌린지 참여 여부
-    axios.get(`/api/challenge/isJoined/${challengeId}/${user.id}`)
+    axios.get(`/api/challenge/${challengeId}/user/${user.id}`)
     .then(res => {
       // console.log(res.data);
       setIsJoined(res.data);  // 0(미참여), 1(참여), 2(대기)
     }).catch(err => console.log(err));
 
     // 댓글 리스트
-    axios.get(`/api/challenge/comment/list/${challengeId}`)
+    axios.get(`/api/challenge/${challengeId}/comments`)
     .then(res => {
       // console.log(res.data);
       setCommentList(res.data);
     }).catch(err => console.log(err));
 
     // 좋아요 여부
-    axios.get(`/api/challenge/like/${challengeId}/${user.id}`)
+    axios.get(`/api/challenge/${challengeId}/like/${user.id}`)
     .then(res => {
       // console.log(res.data);
       if(res.data == 0)
@@ -147,7 +147,7 @@ const Challenge = () => {
 
   const deleteChallenge = () => {
     if(window.confirm("정말 챌린지를 삭제하시겠습니까?")){
-      axios.delete(`/api/challenge/delete/${challenge.id}`)
+      axios.delete(`/api/challenge/${challenge.id}`)
       .then(res => {
         console.log(res);
         navigate(-1, {replace: true});

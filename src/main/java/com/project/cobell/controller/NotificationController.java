@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/noti")
+@RequestMapping("/api")
 public class NotificationController {
 
 	@Autowired
 	private NotificationService notificationService;
 
-	@GetMapping("/{userId}")
+	@GetMapping("/notis/user/{userId}")
 	public List<NotificationDto> getNotiList(
 			@PathVariable Long userId
 	){

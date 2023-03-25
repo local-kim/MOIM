@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/feed")
+@RequestMapping("/api")
 public class FeedController {
 
 	@Autowired
@@ -27,7 +27,7 @@ public class FeedController {
 	@Autowired
 	private NotificationService notificationService;
 
-	@PostMapping("/new")
+	@PostMapping("/feed")
 	public Long insertFeed(
 			@RequestPart("data") FeedDto feedDto,
 			@RequestPart List<MultipartFile> files
@@ -57,7 +57,7 @@ public class FeedController {
 		return feedId;
 	}
 
-	@DeleteMapping("/delete/{feedId}")
+	@DeleteMapping("/feed/{feedId}")
 	public void deleteFeed(
 			@PathVariable Long feedId
 	){
@@ -65,7 +65,7 @@ public class FeedController {
 		notificationService.deleteFeedNotification(feedId);
 	}
 
-	@GetMapping("/{feedId}")
+	@GetMapping("/feed/{feedId}")
 	public FeedDto getFeed(
 			@PathVariable Long feedId
 	){
@@ -76,21 +76,21 @@ public class FeedController {
 		return feedDto;
 	}
 
-	@GetMapping("/list/{userId}")
+	@GetMapping("/feeds/user/{userId}")
 	public List<FeedDto> getFeedList(
 			@PathVariable Long userId
 	){
 		return feedService.getFeedList(userId);
 	}
 
-	@GetMapping("/like/{feedId}/{userId}")
+	@GetMapping("/feed/{feedId}/like/{userId}")
 	public int getLike(
 			@PathVariable Long feedId, @PathVariable Long userId
 	){
 		return feedService.getLike(feedId, userId);
 	}
 
-	@PostMapping("/like/insert")
+	@PostMapping("/feed/like")
 	public int insertLike(
 			@RequestBody LikeFeedDto likeFeedDto
 	){
@@ -101,7 +101,7 @@ public class FeedController {
 		return feedService.getLikeCount(likeFeedDto.getFeedId());
 	}
 
-	@DeleteMapping("/like/delete")
+	@DeleteMapping("/feed/like")
 	public int deleteLike(
 			@RequestBody LikeFeedDto likeFeedDto
 	){
@@ -110,14 +110,14 @@ public class FeedController {
 		return feedService.getLikeCount(likeFeedDto.getFeedId());
 	}
 
-	@GetMapping("/comment/list/{feedId}")
+	@GetMapping("/feed/{feedId}/comments")
 	public List<CommentFeedDto> getCommentList(
 			@PathVariable Long feedId
 	){
 		return feedService.getCommentList(feedId);
 	}
 
-	@PostMapping("/comment/insert")
+	@PostMapping("/feed/comment")
 	public List<CommentFeedDto> insertComment(
 			@RequestBody CommentFeedDto commentFeedDto
 	){
@@ -129,7 +129,7 @@ public class FeedController {
 		return feedService.getCommentList(commentFeedDto.getFeedId());
 	}
 
-	@DeleteMapping("/comment/delete")
+	@DeleteMapping("/feed/comment")
 	public List<CommentFeedDto> deleteComment(
 			@RequestBody CommentFeedDto commentFeedDto
 	){
