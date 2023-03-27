@@ -5,6 +5,10 @@
 
 <br>
 
+### Website
+http://54.180.90.103:8080/
+ (모바일에 최적화 되어있습니다!)
+
 ### Features
 * 챌린지를 만들어 함께할 사람 모으기
 * 내가 관심 있는 챌린지를 검색하고, 저장하고, 참여하기
@@ -31,8 +35,40 @@
 <a href="" target="_blank"><img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"/></a>
 <a href="" target="_blank"><img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white"/></a>
 <a href="" target="_blank"><img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/></a>
+<br>
 
+## DEMO
+![1](https://user-images.githubusercontent.com/63040140/227863060-b5d74ecb-5f01-442d-b935-2f4ee05418ee.png)
+* 챌린지 목록
+* 운동 카테고리별 필터링
+* 저장한 챌린지 목록
+<br>
 
-### Website
-http://54.180.90.103:8080/
- (모바일에 최적화 되어있습니다!)
+![2](https://user-images.githubusercontent.com/63040140/227863078-f67298fe-b143-4316-85d2-94ed184abd33.png)
+* 키워드로 챌린지 검색
+* 챌린지 개설하기
+<br>
+
+![3 (1)](https://user-images.githubusercontent.com/63040140/227862922-b4bf3258-2a38-46e4-b51c-6b63aaae1536.png)
+* 챌린지 상세보기 : 정보, 참여 중인 유저, 댓글
+* 개설자 : 모집 중, 모집 완료, 종료 → 3가지 상태
+* 참여자 : 참여하기(선착순), 참여 신청(승인제), 승인 대기, 참여 중(참여 취소), 모집 완료, 종료 → 6가지 상태
+<br>
+
+![4](https://user-images.githubusercontent.com/63040140/227863106-d5017a30-9e4f-461b-ba33-33db254164be.png)
+* 프로필: 프로필 사진, 닉네임, 소개, 관심사
+* 피드 목록
+* 개설한 챌린지 : 모집 중, 모집 완료, 종료 → 3가지 상태
+* 참여한 챌린지 : 성공, 예정 → 2가지 상태
+<br>
+
+![5 (1)](https://user-images.githubusercontent.com/63040140/227862932-9e40863f-ac9d-45d0-887e-a4b30609dc65.png)
+* 피드 상세보기 : 좋아요, 댓글, 링크 공유
+* 피드 작성하기 : 사진, 태그, 몸무게 추가
+<br>
+
+![6 (1)](https://user-images.githubusercontent.com/63040140/227863161-66dba9a3-0d25-4b2b-9884-93de3e512939.png)
+* 프로필 편집
+* 알림 : 챌린지 관련 알림, 승인제 챌린지의 참여신청 수락/거절, 피드 관련 알림
+* 리포트 : 건강점수, 코멘트, 몸무게 변화 그래프
+
