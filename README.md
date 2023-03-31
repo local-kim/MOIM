@@ -17,7 +17,7 @@ http://54.180.90.103:8080/
 * 내 건강 관리에 도움을 주는 건강 점수와 코멘트
 
 ### Database
-<p align="center"><img width="100%" alt="" src="https://user-images.githubusercontent.com/63040140/218971038-e713f984-b9cc-40d1-a7ee-366f2fade5da.png"></p>
+<p align="center"><img width="100%" alt="" src="https://user-images.githubusercontent.com/63040140/229143677-d6c7290c-8205-4374-8955-36096cf7b842.png"></p>
 
 ### Tools
 * Server<br>
